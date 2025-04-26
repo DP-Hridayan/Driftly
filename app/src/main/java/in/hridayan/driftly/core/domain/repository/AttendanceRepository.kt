@@ -7,6 +7,7 @@ interface AttendanceRepository {
     suspend fun insertAttendance(attendance: AttendanceEntity)
     suspend fun updateAttendance(attendance: AttendanceEntity)
     suspend fun deleteAttendance(subjectId: Int, date: String)
+    suspend fun getAllAttendances(): List<AttendanceEntity>
     fun getAttendanceForSubject(subjectId: Int): Flow<List<AttendanceEntity>>
     fun getPresentCountForSubject(subjectId: Int): Flow<Int>
     fun getAbsentCountForSubject(subjectId: Int): Flow<Int>

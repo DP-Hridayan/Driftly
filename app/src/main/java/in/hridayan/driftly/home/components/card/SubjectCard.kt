@@ -18,21 +18,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.unit.dp
+import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedCircularProgressIndicator
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.navigateTo
-import `in`.hridayan.driftly.ui.theme.Shape
+import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 
 @SuppressLint("DefaultLocale")
 @Composable
 fun SubjectCard(modifier: Modifier = Modifier, subjectId: Int, subject: String, progress: Float) {
+
+    val progressText = "${String.format("%.0f", progress*100)}%"
 
     val progressColor = lerp(
         start = MaterialTheme.colorScheme.error,
         stop = MaterialTheme.colorScheme.primary,
         fraction = progress.coerceIn(0f, 1f)
     )
-
-    val progressText = "${String.format("%.0f", progress*100)}%"
 
     Card(
         modifier = modifier
@@ -61,13 +62,10 @@ fun SubjectCard(modifier: Modifier = Modifier, subjectId: Int, subject: String, 
             )
 
             Box(contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(
-                    progress = { progress },
-                    modifier = Modifier,
-                    color = progressColor,
-                    strokeWidth = 3.dp,
-                    trackColor = MaterialTheme.colorScheme.secondaryContainer,
-                    strokeCap = StrokeCap.Round,
+                AnimatedCircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center),
+                    progress = progress,
+                    animationDuration = 3000
                 )
 
                 Text(

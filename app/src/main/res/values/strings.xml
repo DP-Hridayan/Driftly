@@ -9,6 +9,7 @@
     <string name="cancel">Cancel</string>
     <string name="present">Present</string>
     <string name="absent">Absent</string>
+    <string name="total">Total</string>
     <string name="clear">Clear</string>
     <string name="calender">Calender</string>
 </resources>

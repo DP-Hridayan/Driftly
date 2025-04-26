@@ -21,7 +21,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
-import `in`.hridayan.driftly.ui.theme.Shape
+import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 
 
 @Composable

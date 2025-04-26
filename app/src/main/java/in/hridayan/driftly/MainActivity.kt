@@ -9,9 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
-import `in`.hridayan.driftly.home.presentation.screens.HomeScreen
 import `in`.hridayan.driftly.navigation.Navigation
-import `in`.hridayan.driftly.ui.theme.DriftlyTheme
+import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

@@ -24,6 +24,9 @@ class AttendanceRepositoryImpl @Inject constructor(
         dao.deleteBySubjectAndDate(subjectId, date)
     }
 
+    override suspend fun getAllAttendances(): List<AttendanceEntity> =
+        dao.getAllAttendances()
+
     override fun getAttendanceForSubject(subjectId: Int): Flow<List<AttendanceEntity>> =
         dao.getAttendanceForSubjectFlow(subjectId)
 

@@ -31,7 +31,7 @@ import `in`.hridayan.driftly.home.presentation.viewmodel.AttendanceCounts
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.NavControllerHolder
-import `in`.hridayan.driftly.ui.theme.Shape
+import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import kotlinx.coroutines.launch
 
 enum class AttendanceDataTabs(
