@@ -1,6 +1,7 @@
 package `in`.hridayan.driftly.calender.presentation.components.canvas
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -24,11 +25,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,6 +44,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import kotlin.random.Random
 
 @Composable
 fun CalendarCanvas(
@@ -78,6 +82,7 @@ fun CalendarCanvas(
             style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier
                 .align(Alignment.Start)
+                .animateContentSize()
                 .padding(horizontal = 20.dp)
         )
 
@@ -151,6 +156,25 @@ fun CalendarCanvas(
                         AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.errorContainer
                         AttendanceStatus.UNMARKED -> MaterialTheme.colorScheme.surface
                     }
+                    val animatedProgress = remember(dateString,status) { Animatable(0f) }
+                    val randomDelay = Random.nextInt(500, 2000)
+                    val animatedScale = when (status) {
+                        AttendanceStatus.UNMARKED -> 1f
+                        else -> animatedProgress.value
+                    }
+
+                    LaunchedEffect(dateString, status) {
+                        if (status != AttendanceStatus.UNMARKED) {
+                            animatedProgress.animateTo(
+                                targetValue = 1f.coerceIn(0f, 1f),
+                                animationSpec = tween(
+                                    durationMillis = randomDelay,
+                                    easing = FastOutSlowInEasing
+                                )
+                            )
+                        }
+                    }
+
                     val isToday =
                         today.year == year && today.monthValue == month && today.dayOfMonth == day
 
@@ -158,6 +182,7 @@ fun CalendarCanvas(
                         modifier = Modifier
                             .aspectRatio(1f)
                             .padding(4.dp)
+                            .scale(animatedScale)
                             .clip(CircleShape)
                             .background(bgColor)
                             .then(

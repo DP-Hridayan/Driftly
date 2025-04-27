@@ -1,5 +1,8 @@
 package `in`.hridayan.driftly.home.components.label
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -9,12 +12,16 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
+import kotlin.random.Random
 
 @Composable
 fun Label(
@@ -24,9 +31,21 @@ fun Label(
     strokeColor: Color,
     onClick: () -> Unit = {}
 ) {
+    val animatedScale = remember { Animatable(0f) }
+    val randomDelay = Random.nextInt(500, 2000)
+    LaunchedEffect(text) {
+        animatedScale.animateTo(
+            targetValue = 1f.coerceIn(0.3f, 1f),
+            animationSpec = tween(
+                durationMillis = randomDelay,
+                easing = FastOutSlowInEasing
+            )
+        )
+    }
     Box(
         modifier = modifier
             .wrapContentSize()
+            .scale(animatedScale.value)
             .clip(Shape.cardCornerLarge)
             .background(labelColor)
             .border(
