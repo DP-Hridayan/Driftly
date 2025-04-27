@@ -1,5 +1,8 @@
 package `in`.hridayan.driftly.calender.presentation.components.canvas
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -58,7 +61,14 @@ fun CalendarCanvas(
     )
 
     Column(
-        modifier = modifier.padding(horizontal = 10.dp),
+        modifier = modifier
+            .padding(horizontal = 10.dp)
+            .animateContentSize(
+                animationSpec = tween(
+                    durationMillis = 1000,
+                    easing = FastOutSlowInEasing
+                )
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {

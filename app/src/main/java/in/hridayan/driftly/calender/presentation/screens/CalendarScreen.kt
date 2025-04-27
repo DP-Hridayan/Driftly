@@ -100,7 +100,7 @@ fun CalendarScreen(
                     viewModel.updateMonthYear(newYear, newMonth)
                 })
 
-            AttendanceCardWithTabs()
+            AttendanceCardWithTabs(modifier = Modifier.weight(1f))
         }
 
     }

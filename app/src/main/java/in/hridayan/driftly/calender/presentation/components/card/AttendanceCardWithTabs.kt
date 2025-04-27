@@ -1,11 +1,17 @@
 package `in`.hridayan.driftly.calender.presentation.components.card
 
+import android.annotation.SuppressLint
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Card
@@ -23,15 +29,20 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.toRoute
+import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
+import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
+import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
+import `in`.hridayan.driftly.home.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.AttendanceCounts
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.NavControllerHolder
-import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import kotlinx.coroutines.launch
 
 enum class AttendanceDataTabs(
@@ -45,19 +56,9 @@ enum class AttendanceDataTabs(
 fun AllMonthsView(viewModel: HomeViewmodel = hiltViewModel(), subjectId: Int) {
     val counts by viewModel.getAttendanceCounts(subjectId)
         .collectAsState(initial = AttendanceCounts())
+    val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("All Months Data", style = MaterialTheme.typography.titleLarge)
-        Spacer(modifier = Modifier.height(16.dp))
-        Text("Present: ${counts.presentCount}")
-        Text("Absent: ${counts.absentCount}")
-        Text("Total: ${counts.totalCount}")
-    }
+    ProgressView(counts = counts, progress = progress)
 }
 
 @Composable
@@ -69,23 +70,79 @@ fun ThisMonthView(viewModel: CalendarViewModel = hiltViewModel(), subjectId: Int
         selectedMonthYear.month.value
     )
         .collectAsState(initial = AttendanceCounts())
+    val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
+
+    ProgressView(counts = counts, progress = progress)
+}
+
+@SuppressLint("DefaultLocale")
+@Composable
+fun ProgressView(
+    modifier: Modifier = Modifier,
+    counts: AttendanceCounts,
+    progress: Float,
+) {
+    val progressText = "${String.format("%.0f", progress * 100)}%"
+    val progressColor = lerp(
+        start = MaterialTheme.colorScheme.error,
+        stop = MaterialTheme.colorScheme.primary,
+        fraction = progress.coerceIn(0f, 1f)
+    )
+
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(25.dp)
     ) {
-        Text("This Month Data", style = MaterialTheme.typography.titleLarge)
-        Spacer(modifier = Modifier.height(16.dp))
-        Text("Present: ${counts.presentCount}")
-        Text("Absent: ${counts.absentCount}")
-        Text("Total: ${counts.totalCount}")
+        Box {
+            AnimatedHalfCircleProgress(
+                progress = progress,
+                modifier = Modifier
+                    .height(100.dp)
+                    .width(200.dp),
+                animationDuration = 3000
+            )
+
+            Text(
+                text = progressText,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.align(Alignment.BottomCenter),
+                color = progressColor
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Label(
+                text = "${stringResource(R.string.present)}: ${counts.presentCount}",
+                labelColor = MaterialTheme.colorScheme.primaryContainer,
+                strokeColor = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+            Label(
+                text = "${stringResource(R.string.absent)}: ${counts.absentCount}",
+                labelColor = MaterialTheme.colorScheme.errorContainer,
+                strokeColor = MaterialTheme.colorScheme.onErrorContainer
+            )
+
+            Label(
+                text = "${stringResource(R.string.total)}: ${counts.totalCount}",
+                labelColor = MaterialTheme.colorScheme.tertiaryContainer,
+                strokeColor = MaterialTheme.colorScheme.onTertiaryContainer
+            )
+        }
+
     }
 }
 
 @Composable
 fun AttendanceCardWithTabs(modifier: Modifier = Modifier) {
-    val tabs = listOf(AttendanceDataTabs.THIS_MONTH, AttendanceDataTabs.ALL_MONTHS)
     val pagerState = rememberPagerState(pageCount = { AttendanceDataTabs.entries.size })
     val coroutineScope = rememberCoroutineScope()
     val selectedTabIndex = remember { derivedStateOf { pagerState.currentPage } }
@@ -93,8 +150,13 @@ fun AttendanceCardWithTabs(modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 15.dp)
-            .clip(Shape.cardCornerLarge),
+            .clip(Shape.cardCornerLarge)
+            .animateContentSize(
+                animationSpec = tween(
+                    durationMillis = 500,
+                    easing = FastOutSlowInEasing
+                )
+            ),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer
         )
