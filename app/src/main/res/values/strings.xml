@@ -7,6 +7,10 @@
     <string name="add_subject">Add Subject</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="delete_subject">Delete Subject</string>
+    <string name="delete_confirmation">Are you sure you want to delete this?</string>
+    <string name="confirm">Confirm</string>
     <string name="present">Present</string>
     <string name="absent">Absent</string>
     <string name="total">Total</string>

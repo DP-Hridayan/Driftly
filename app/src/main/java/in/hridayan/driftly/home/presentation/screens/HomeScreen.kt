@@ -2,6 +2,7 @@ package `in`.hridayan.driftly.home.presentation.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -66,7 +67,9 @@ fun HomeScreen(
     }
 
     Scaffold(
-        modifier = modifier.fillMaxSize(), floatingActionButton = {
+        modifier = modifier
+            .fillMaxSize(),
+        floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.Companion,
                 containerColor = MaterialTheme.colorScheme.primaryContainer,

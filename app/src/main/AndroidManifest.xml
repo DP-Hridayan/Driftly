@@ -16,6 +16,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:enableOnBackInvokedCallback="true"
             android:theme="@style/Theme.Driftly">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

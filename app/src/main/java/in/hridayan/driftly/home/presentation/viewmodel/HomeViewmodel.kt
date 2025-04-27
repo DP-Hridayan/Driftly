@@ -85,6 +85,13 @@ class HomeViewmodel @Inject constructor(
         }
     }
 
+    fun deleteSubject(subjectId: Int, onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            subjectRepository.deleteSubject(subjectId)
+            onSuccess()
+        }
+    }
+
     fun getAttendanceCounts(subjectId: Int): Flow<AttendanceCounts> {
         val presentFlow = attendanceRepository.getPresentCountForSubject(subjectId)
         val absentFlow = attendanceRepository.getAbsentCountForSubject(subjectId)
