@@ -27,16 +27,17 @@ import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
 import `in`.hridayan.driftly.core.data.model.AttendanceStatus
 import `in`.hridayan.driftly.navigation.CalendarScreen
-import `in`.hridayan.driftly.navigation.NavControllerHolder
+import `in`.hridayan.driftly.navigation.LocalNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarScreen(
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
-    val args = NavControllerHolder.navController?.currentBackStackEntry?.toRoute<CalendarScreen>()
-    val subjectId = args?.subjectId?:0
-    val subject = args?.subject?:""
+    val navController = LocalNavController.current
+    val args = navController.currentBackStackEntry?.toRoute<CalendarScreen>()
+    val subjectId = args?.subjectId ?: 0
+    val subject = args?.subject ?: ""
 
     val attendanceEntries by viewModel.attendanceList.collectAsState()
 
@@ -72,9 +73,8 @@ fun CalendarScreen(
                     )
                 },
                 navigationIcon = {
-                    val navController = NavControllerHolder.navController
                     IconButton(onClick = {
-                        navController?.popBackStack()
+                        navController.popBackStack()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.arrow_back),
@@ -89,7 +89,6 @@ fun CalendarScreen(
         Column(
             modifier = Modifier.padding(it), verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-
             CalendarCanvas(
                 modifier = Modifier.padding(horizontal = 15.dp),
                 year = selectedMonthYear.year,
@@ -100,8 +99,7 @@ fun CalendarScreen(
                     viewModel.updateMonthYear(newYear, newMonth)
                 })
 
-            AttendanceCardWithTabs(modifier = Modifier.weight(1f))
+            AttendanceCardWithTabs(modifier = Modifier.weight(1f), subjectId = subjectId)
         }
-
     }
 }

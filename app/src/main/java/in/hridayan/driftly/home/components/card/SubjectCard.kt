@@ -34,13 +34,12 @@ import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDi
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedCircularProgressIndicator
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
-import `in`.hridayan.driftly.navigation.CalendarScreen
-import `in`.hridayan.driftly.navigation.navigateTo
 
 @SuppressLint("DefaultLocale")
 @Composable
 fun SubjectCard(
     modifier: Modifier = Modifier, subjectId: Int, subject: String, progress: Float,
+    navigate: () -> Unit = {},
     viewModel: HomeViewmodel = hiltViewModel()
 ) {
 
@@ -65,12 +64,7 @@ fun SubjectCard(
                     if (isLongCLicked) {
                         isLongCLicked = !isLongCLicked
                     } else {
-                        navigateTo(
-                            CalendarScreen(
-                                subjectId = subjectId,
-                                subject = subject,
-                            )
-                        )
+                       navigate()
                     }
 
                 },

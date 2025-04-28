@@ -2,7 +2,6 @@ package `in`.hridayan.driftly.home.presentation.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -41,12 +40,15 @@ import `in`.hridayan.driftly.home.components.dialog.AddSubjectDialog
 import `in`.hridayan.driftly.home.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.AttendanceCounts
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
+import `in`.hridayan.driftly.navigation.CalendarScreen
+import `in`.hridayan.driftly.navigation.LocalNavController
 
 @SuppressLint("DefaultLocale")
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier, viewModel: HomeViewmodel = hiltViewModel(),
 ) {
+    val navController = LocalNavController.current
     val subjects by viewModel.subjectList.collectAsState(initial = emptyList())
     var isDialogOpen by rememberSaveable { mutableStateOf(false) }
     val attendanceSummary by viewModel.attendanceSummary.collectAsState()
@@ -168,6 +170,14 @@ fun HomeScreen(
                     subjectId = subjects[index].id,
                     subject = subjects[index].subject,
                     progress = progress,
+                    navigate = {
+                        navController.navigate(
+                            CalendarScreen(
+                                subjectId = subjects[index].id,
+                                subject = subjects[index].subject
+                            )
+                        )
+                    }
                 )
             }
         }

@@ -33,7 +33,6 @@ import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.toRoute
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
@@ -41,8 +40,6 @@ import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.home.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.AttendanceCounts
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
-import `in`.hridayan.driftly.navigation.CalendarScreen
-import `in`.hridayan.driftly.navigation.NavControllerHolder
 import kotlinx.coroutines.launch
 
 enum class AttendanceDataTabs(
@@ -80,7 +77,7 @@ fun ThisMonthView(viewModel: CalendarViewModel = hiltViewModel(), subjectId: Int
 fun ProgressView(
     modifier: Modifier = Modifier,
     counts: AttendanceCounts,
-    progress: Float,
+    progress: Float
 ) {
     val progressText = "${String.format("%.0f", progress * 100)}%"
     val progressColor = lerp(
@@ -142,7 +139,7 @@ fun ProgressView(
 }
 
 @Composable
-fun AttendanceCardWithTabs(modifier: Modifier = Modifier) {
+fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
     val pagerState = rememberPagerState(pageCount = { AttendanceDataTabs.entries.size })
     val coroutineScope = rememberCoroutineScope()
     val selectedTabIndex = remember { derivedStateOf { pagerState.currentPage } }
@@ -188,9 +185,6 @@ fun AttendanceCardWithTabs(modifier: Modifier = Modifier) {
                 }
             }
 
-            val args =
-                NavControllerHolder.navController?.currentBackStackEntry?.toRoute<CalendarScreen>()
-            val subjectId = args?.subjectId ?: 0
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier

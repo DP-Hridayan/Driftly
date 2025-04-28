@@ -1,6 +1,7 @@
 package `in`.hridayan.driftly.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -10,9 +11,8 @@ import kotlinx.serialization.Serializable
 
 @Composable
 fun Navigation() {
-        val navController = rememberNavController()
-        NavControllerHolder.navController = navController
-
+    val navController = rememberNavController()
+    CompositionLocalProvider(LocalNavController provides navController) {
         NavHost(
             navController = navController, startDestination = HomeScreen
         ) {
@@ -24,6 +24,7 @@ fun Navigation() {
                 CalendarScreen()
             }
         }
+    }
 }
 
 @Serializable
@@ -31,6 +32,5 @@ object HomeScreen
 
 @Serializable
 data class CalendarScreen(
-    val subjectId: Int,
-    val subject: String
+    val subjectId: Int, val subject: String
 )

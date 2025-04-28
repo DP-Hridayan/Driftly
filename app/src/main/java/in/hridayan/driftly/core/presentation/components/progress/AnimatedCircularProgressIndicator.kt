@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.unit.dp
@@ -18,7 +17,6 @@ import androidx.compose.ui.unit.dp
 fun AnimatedCircularProgressIndicator(
     modifier: Modifier = Modifier,
     progress: Float ,
-    progressColor : Color = MaterialTheme.colorScheme.primary,
     animationDuration: Int = 1000
 ) {
     val animatedProgress = remember { Animatable(0f) }
@@ -42,7 +40,7 @@ fun AnimatedCircularProgressIndicator(
 
     CircularProgressIndicator(
         progress = { animatedProgress.value },
-        modifier = Modifier,
+        modifier = modifier,
         color = progressColor,
         strokeWidth = 3.dp,
         trackColor = MaterialTheme.colorScheme.secondaryContainer,
