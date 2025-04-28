@@ -10,14 +10,17 @@ import `in`.hridayan.driftly.core.data.model.AttendanceEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.YearMonth
@@ -26,29 +29,40 @@ import javax.inject.Inject
 @HiltViewModel
 class CalendarViewModel @Inject constructor(
     private val attendanceRepository: AttendanceRepository,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
-
     private val _subjectId = MutableStateFlow<Int?>(null)
 
     private val _selectedMonthYear = mutableStateOf(YearMonth.now())
     val selectedMonthYear: State<YearMonth> = _selectedMonthYear
 
+    private val _isLoaded = MutableStateFlow(false)
+    val isLoaded: StateFlow<Boolean> = _isLoaded
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val attendanceList: StateFlow<List<AttendanceEntity>> =
         _subjectId
             .filterNotNull()
-            .flatMapLatest { attendanceRepository.getAttendanceForSubject(it) }
+            .flatMapLatest { subjectId ->
+                attendanceRepository.getAttendanceForSubject(subjectId)
+                    .catch { e -> emit(emptyList()) }
+                    .flowOn(Dispatchers.IO)
+            }
             .stateIn(
                 scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5_000),
+                started = SharingStarted.Eagerly,
                 initialValue = emptyList()
             )
 
     init {
-        val subjectId = savedStateHandle.get<Int>("subjectId")
-        _subjectId.value = subjectId
+        viewModelScope.launch(Dispatchers.IO){
+            val subjectId = savedStateHandle.get<Int>("subjectId")
+            subjectId?.let {
+                _subjectId.value = it
+                loadAttendanceData(it)
+            }
+            _isLoaded.value = true
+        }
     }
 
     fun upsert(att: AttendanceEntity, newStatus: AttendanceStatus) {
@@ -81,5 +95,13 @@ class CalendarViewModel @Inject constructor(
 
     fun updateMonthYear(year: Int, month: Int) {
         _selectedMonthYear.value = YearMonth.of(year, month)
+    }
+
+    private fun loadAttendanceData(subjectId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            attendanceRepository.getAttendanceForSubject(subjectId)
+                .collect { attendanceList ->
+                }
+        }
     }
 }

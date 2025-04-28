@@ -34,8 +34,11 @@ class HomeViewmodel @Inject constructor(
     private val _totalAttendance = MutableStateFlow(TotalAttendance())
     val totalAttendance: StateFlow<TotalAttendance> = _totalAttendance
 
+    private val _isLoaded = MutableStateFlow(false)
+    val isLoaded: StateFlow<Boolean> = _isLoaded
+
     fun calculateTotalAttendance() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val summary = withContext (Dispatchers.IO) {
                 val allAttendances = attendanceRepository.getAllAttendances()
                 val totalPresent = allAttendances.count { it.status == AttendanceStatus.PRESENT }
@@ -49,6 +52,7 @@ class HomeViewmodel @Inject constructor(
                 )
             }
             _totalAttendance.value = summary
+            _isLoaded.value = true
         }
     }
 
@@ -59,7 +63,7 @@ class HomeViewmodel @Inject constructor(
 
     val subjectList: Flow<List<SubjectEntity>> = subjectRepository.getAllSubjects().stateIn(
         viewModelScope,
-        SharingStarted.Companion.Lazily, emptyList()
+        SharingStarted.Eagerly, emptyList()
     )
 
     fun addSubject(onSuccess: () -> Unit) {

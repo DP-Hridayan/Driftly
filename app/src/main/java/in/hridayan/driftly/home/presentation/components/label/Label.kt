@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
+import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 @Composable
@@ -32,12 +33,13 @@ fun Label(
     onClick: () -> Unit = {}
 ) {
     val animatedScale = remember { Animatable(0f) }
-    val randomDelay = Random.nextInt(500, 2000)
+    val randomDelay = remember { Random.nextInt(250, 750) }
     LaunchedEffect(text) {
+        delay(randomDelay.toLong())
         animatedScale.animateTo(
             targetValue = 1f.coerceIn(0.3f, 1f),
             animationSpec = tween(
-                durationMillis = randomDelay,
+                durationMillis = 600,
                 easing = FastOutSlowInEasing
             )
         )

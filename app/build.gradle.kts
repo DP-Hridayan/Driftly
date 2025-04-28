@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.navigation.compose)
+    implementation(libs.core.splashscreen)
 
     implementation(libs.material)
     implementation(libs.material3)

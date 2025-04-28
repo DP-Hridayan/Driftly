@@ -40,6 +40,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
+import kotlinx.coroutines.delay
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -158,7 +159,7 @@ fun CalendarCanvas(
                         AttendanceStatus.UNMARKED -> MaterialTheme.colorScheme.surface
                     }
                     val animatedProgress = remember(dateString,status) { Animatable(0f) }
-                    val randomDelay = Random.nextInt(500, 2000)
+                    val randomDuration  =  Random.nextInt(500, 1500)
                     val animatedScale = when (status) {
                         AttendanceStatus.UNMARKED -> 1f
                         else -> animatedProgress.value
@@ -167,9 +168,9 @@ fun CalendarCanvas(
                     LaunchedEffect(dateString, status) {
                         if (status != AttendanceStatus.UNMARKED) {
                             animatedProgress.animateTo(
-                                targetValue = 1f.coerceIn(0f, 1f),
+                                targetValue = 1f,
                                 animationSpec = tween(
-                                    durationMillis = randomDelay,
+                                    durationMillis = randomDuration,
                                     easing = FastOutSlowInEasing
                                 )
                             )
