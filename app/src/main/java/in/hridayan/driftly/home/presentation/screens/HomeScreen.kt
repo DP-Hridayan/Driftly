@@ -1,7 +1,9 @@
 package `in`.hridayan.driftly.home.presentation.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -64,6 +67,15 @@ fun HomeScreen(
         fraction = totalProgress.coerceIn(0f, 1f)
     )
 
+    var showAddButton by rememberSaveable { mutableStateOf(true) }
+    val fabScale by animateFloatAsState(
+        targetValue = if (showAddButton) 1f else 0f,
+        animationSpec = tween(
+            durationMillis = 300,
+            easing = FastOutSlowInEasing
+        )
+    )
+
     LaunchedEffect(Unit) {
         viewModel.calculateTotalAttendance()
     }
@@ -73,7 +85,7 @@ fun HomeScreen(
             .fillMaxSize(),
         floatingActionButton = {
             FloatingActionButton(
-                modifier = Modifier.Companion,
+                modifier = Modifier.Companion.scale(fabScale),
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 onClick = { isDialogOpen = true },
@@ -177,6 +189,12 @@ fun HomeScreen(
                                 subject = subjects[index].subject
                             )
                         )
+                    },
+                    onLongClicked = { isLongClicked ->
+                        showAddButton = !isLongClicked
+                    },
+                    onDeleteConfirmed = {
+                        showAddButton = true
                     }
                 )
             }

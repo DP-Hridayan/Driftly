@@ -39,11 +39,15 @@ import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
 @SuppressLint("DefaultLocale")
 @Composable
 fun SubjectCard(
-    modifier: Modifier = Modifier, subjectId: Int, subject: String, progress: Float,
+    modifier: Modifier = Modifier,
+    subjectId: Int,
+    subject: String,
+    progress: Float,
     navigate: () -> Unit = {},
+    onLongClicked: (Boolean) -> Unit = {},
+    onDeleteConfirmed: () -> Unit = {},
     viewModel: HomeViewmodel = hiltViewModel()
 ) {
-
     val progressText = "${String.format("%.0f", progress * 100)}%"
 
     val progressColor = lerp(
@@ -52,8 +56,30 @@ fun SubjectCard(
         fraction = progress.coerceIn(0f, 1f)
     )
 
-    var isLongCLicked by rememberSaveable { mutableStateOf(false) }
+    var isLongClicked by rememberSaveable { mutableStateOf(false) }
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
+
+    val handleLongClick = {
+        isLongClicked = !isLongClicked
+        onLongClicked(isLongClicked)
+    }
+
+    val handleClick = {
+        if (isLongClicked) {
+            handleLongClick()
+        } else {
+            navigate()
+        }
+    }
+
+    val handleDeleteConfirmation = {
+        viewModel.deleteSubject(subjectId, onSuccess = {
+            isLongClicked = false
+            onLongClicked(isLongClicked)
+            isDeleteDialogVisible = false
+            onDeleteConfirmed()  // Optional callback after delete
+        })
+    }
 
     Card(
         modifier = modifier
@@ -61,17 +87,8 @@ fun SubjectCard(
             .clip(Shape.cardCornerSmall)
             .combinedClickable(
                 enabled = true,
-                onClick = {
-                    if (isLongCLicked) {
-                        isLongCLicked = !isLongCLicked
-                    } else {
-                        navigate()
-                    }
-
-                },
-                onLongClick = {
-                    isLongCLicked = !isLongCLicked
-                }),
+                onClick = { handleClick() },
+                onLongClick = { handleLongClick() }),
         shape = Shape.cardCornerSmall,
     ) {
         Row(
@@ -80,45 +97,38 @@ fun SubjectCard(
                 .padding(horizontal = 15.dp, vertical = 10.dp)
                 .animateContentSize(
                     animationSpec = tween(
-                        durationMillis = 500,
-                        easing = FastOutSlowInEasing
+                        durationMillis = 500, easing = FastOutSlowInEasing
                     )
                 ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             Text(
-                text = subject,
-                modifier = Modifier
+                text = subject, modifier = Modifier
                     .weight(1f)
                     .animateContentSize(
                         animationSpec = tween(
-                            durationMillis = 500,
-                            easing = FastOutSlowInEasing
+                            durationMillis = 500, easing = FastOutSlowInEasing
                         )
-                    ),
-                style = MaterialTheme.typography.titleMedium
+                    ), style = MaterialTheme.typography.titleMedium
             )
 
-            if (isLongCLicked) {
+            if (isLongClicked) {
                 Image(
                     painter = painterResource(R.drawable.ic_delete),
                     colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
                     contentDescription = null,
-                    modifier = Modifier
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = null,
-                            onClick = {
-                                isDeleteDialogVisible = true
-                            }
-                        )
+                    modifier = Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = {
+                            isDeleteDialogVisible = true
+                        })
                 )
             } else {
                 Box(contentAlignment = Alignment.Center) {
                     AnimatedCircularProgressIndicator(
-                        progress = progress,
-                        animationDuration = 3000
+                        progress = progress, animationDuration = 3000
                     )
 
                     Text(
@@ -132,17 +142,10 @@ fun SubjectCard(
     }
 
     if (isDeleteDialogVisible) {
-        ConfirmDeleteDialog(
-            onDismiss = {
-                isDeleteDialogVisible = false
-            },
-            onConfirm = {
-                viewModel.deleteSubject(
-                    subjectId,
-                    onSuccess = {
-                        isLongCLicked = !isLongCLicked
-                        isDeleteDialogVisible = false
-                    })
-            })
+        ConfirmDeleteDialog(onDismiss = {
+            isDeleteDialogVisible = false
+        }, onConfirm = {
+            handleDeleteConfirmation()
+        })
     }
 }
