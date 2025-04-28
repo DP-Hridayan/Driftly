@@ -25,7 +25,7 @@ import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCan
 import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
-import `in`.hridayan.driftly.core.data.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
 

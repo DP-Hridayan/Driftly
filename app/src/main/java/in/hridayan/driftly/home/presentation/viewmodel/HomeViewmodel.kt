@@ -3,11 +3,12 @@ package `in`.hridayan.driftly.home.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import `in`.hridayan.driftly.core.data.model.AttendanceStatus
-import `in`.hridayan.driftly.core.data.model.AttendanceSummary
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.data.model.SubjectEntity
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
+import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,37 +25,30 @@ class HomeViewmodel @Inject constructor(
     private val subjectRepository: SubjectRepository,
     private val attendanceRepository: AttendanceRepository
 ) : ViewModel() {
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-        }
-    }
-
     private val _subject = MutableStateFlow("")
     val subject: StateFlow<String> = _subject
 
     private val _subjectError = MutableStateFlow(false)
     val subjectError: StateFlow<Boolean> = _subjectError
 
+    private val _totalAttendance = MutableStateFlow(TotalAttendance())
+    val totalAttendance: StateFlow<TotalAttendance> = _totalAttendance
 
-    private val _attendanceSummary = MutableStateFlow(AttendanceSummary())
-    val attendanceSummary: StateFlow<AttendanceSummary> = _attendanceSummary
-
-    fun calculateAttendanceSummary() {
+    fun calculateTotalAttendance() {
         viewModelScope.launch {
             val summary = withContext (Dispatchers.IO) {
                 val allAttendances = attendanceRepository.getAllAttendances()
-
                 val totalPresent = allAttendances.count { it.status == AttendanceStatus.PRESENT }
                 val totalAbsent = allAttendances.count { it.status == AttendanceStatus.ABSENT }
                 val totalCount = allAttendances.size
 
-                AttendanceSummary(
+                TotalAttendance(
                     totalPresent = totalPresent,
                     totalAbsent = totalAbsent,
                     totalCount = totalCount
                 )
             }
-            _attendanceSummary.value = summary
+            _totalAttendance.value = summary
         }
     }
 
@@ -92,24 +86,19 @@ class HomeViewmodel @Inject constructor(
         }
     }
 
-    fun getAttendanceCounts(subjectId: Int): Flow<AttendanceCounts> {
+    fun getAttendanceCounts(subjectId: Int): Flow<SubjectAttendance> {
         val presentFlow = attendanceRepository.getPresentCountForSubject(subjectId)
         val absentFlow = attendanceRepository.getAbsentCountForSubject(subjectId)
         val totalFlow = attendanceRepository.getTotalCountForSubject(subjectId)
 
         return combine(presentFlow, absentFlow, totalFlow) { present, absent, total ->
-            AttendanceCounts(
+            SubjectAttendance(
                 presentCount = present,
                 absentCount = absent,
                 totalCount = total
             )
         }
     }
-
 }
 
-data class AttendanceCounts(
-    val presentCount: Int = 0,
-    val absentCount: Int = 0,
-    val totalCount: Int = 0
-)
+

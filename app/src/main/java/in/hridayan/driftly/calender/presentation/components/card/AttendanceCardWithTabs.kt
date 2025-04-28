@@ -37,8 +37,8 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
-import `in`.hridayan.driftly.home.components.label.Label
-import `in`.hridayan.driftly.home.presentation.viewmodel.AttendanceCounts
+import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
+import `in`.hridayan.driftly.home.presentation.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
 import kotlinx.coroutines.launch
 
@@ -52,7 +52,7 @@ enum class AttendanceDataTabs(
 @Composable
 fun AllMonthsView(viewModel: HomeViewmodel = hiltViewModel(), subjectId: Int) {
     val counts by viewModel.getAttendanceCounts(subjectId)
-        .collectAsState(initial = AttendanceCounts())
+        .collectAsState(initial = SubjectAttendance())
     val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
     ProgressView(counts = counts, progress = progress)
@@ -66,7 +66,7 @@ fun ThisMonthView(viewModel: CalendarViewModel = hiltViewModel(), subjectId: Int
         selectedMonthYear.year,
         selectedMonthYear.month.value
     )
-        .collectAsState(initial = AttendanceCounts())
+        .collectAsState(initial = SubjectAttendance())
     val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
     ProgressView(counts = counts, progress = progress)
@@ -76,7 +76,7 @@ fun ThisMonthView(viewModel: CalendarViewModel = hiltViewModel(), subjectId: Int
 @Composable
 fun ProgressView(
     modifier: Modifier = Modifier,
-    counts: AttendanceCounts,
+    counts: SubjectAttendance,
     progress: Float
 ) {
     val progressText = "${String.format("%.0f", progress * 100)}%"

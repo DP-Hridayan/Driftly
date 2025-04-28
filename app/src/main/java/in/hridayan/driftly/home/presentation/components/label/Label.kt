@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.home.components.label
+package `in`.hridayan.driftly.home.presentation.components.label
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing

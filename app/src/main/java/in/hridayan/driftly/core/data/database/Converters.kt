@@ -1,7 +1,7 @@
 package `in`.hridayan.driftly.core.data.database
 
 import androidx.room.TypeConverter
-import `in`.hridayan.driftly.core.data.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 
 object Converters {
     @TypeConverter

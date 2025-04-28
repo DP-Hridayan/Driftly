@@ -1,6 +1,7 @@
 package `in`.hridayan.driftly.core.data.model
 
 import androidx.room.Entity
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 
 @Entity(
     tableName = "attendance",

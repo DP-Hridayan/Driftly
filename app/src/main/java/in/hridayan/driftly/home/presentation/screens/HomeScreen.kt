@@ -34,11 +34,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
-import `in`.hridayan.driftly.home.components.card.SubjectCard
-import `in`.hridayan.driftly.home.components.dialog.AddSubjectDialog
-import `in`.hridayan.driftly.home.components.label.Label
-import `in`.hridayan.driftly.home.presentation.viewmodel.AttendanceCounts
+import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
+import `in`.hridayan.driftly.home.presentation.components.dialog.AddSubjectDialog
+import `in`.hridayan.driftly.home.presentation.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
@@ -51,7 +51,7 @@ fun HomeScreen(
     val navController = LocalNavController.current
     val subjects by viewModel.subjectList.collectAsState(initial = emptyList())
     var isDialogOpen by rememberSaveable { mutableStateOf(false) }
-    val attendanceSummary by viewModel.attendanceSummary.collectAsState()
+    val attendanceSummary by viewModel.totalAttendance.collectAsState()
     val totalPresent = attendanceSummary.totalPresent
     val totalAbsent = attendanceSummary.totalAbsent
     val totalCount = attendanceSummary.totalCount
@@ -65,7 +65,7 @@ fun HomeScreen(
     )
 
     LaunchedEffect(Unit) {
-        viewModel.calculateAttendanceSummary()
+        viewModel.calculateTotalAttendance()
     }
 
     Scaffold(
@@ -158,7 +158,7 @@ fun HomeScreen(
             items(subjects.size, key = { index -> subjects[index].id }) { index ->
 
                 val counts by viewModel.getAttendanceCounts(subjects[index].id)
-                    .collectAsState(initial = AttendanceCounts())
+                    .collectAsState(initial = SubjectAttendance())
 
                 val progress = if (counts.totalCount != 0) {
                     counts.presentCount.toFloat() / counts.totalCount.toFloat()

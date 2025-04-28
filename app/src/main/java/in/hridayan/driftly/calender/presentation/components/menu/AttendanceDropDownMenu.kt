@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.data.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 
 @Composable
 fun AttendanceDropDownMenu(

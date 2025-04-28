@@ -38,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
-import `in`.hridayan.driftly.core.data.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
 import java.time.LocalDate
 import java.time.YearMonth
@@ -126,6 +126,7 @@ fun CalendarCanvas(
                 Text(
                     text = it,
                     style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.tertiary,
                     modifier = Modifier.weight(1f),
                     textAlign = TextAlign.Center
                 )

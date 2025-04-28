@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
-import `in`.hridayan.driftly.core.data.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
-import `in`.hridayan.driftly.home.presentation.viewmodel.AttendanceCounts
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -65,20 +65,19 @@ class CalendarViewModel @Inject constructor(
         subjectId: Int,
         year: Int,
         month: Int
-    ): Flow<AttendanceCounts> {
+    ): Flow<SubjectAttendance> {
         val presentFlow = attendanceRepository.getPresentCountForMonth(subjectId, year, month)
         val absentFlow = attendanceRepository.getAbsentCountForMonth(subjectId, year, month)
         val totalFlow = attendanceRepository.getTotalCountForMonth(subjectId, year, month)
 
         return combine(presentFlow, absentFlow, totalFlow) { present, absent, total ->
-            AttendanceCounts(
+            SubjectAttendance(
                 presentCount = present,
                 absentCount = absent,
                 totalCount = total
             )
         }
     }
-
 
     fun updateMonthYear(year: Int, month: Int) {
         _selectedMonthYear.value = YearMonth.of(year, month)

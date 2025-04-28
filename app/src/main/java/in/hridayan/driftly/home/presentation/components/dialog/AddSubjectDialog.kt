@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.home.components.dialog
+package `in`.hridayan.driftly.home.presentation.components.dialog
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
