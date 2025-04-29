@@ -4,10 +4,14 @@ import android.annotation.SuppressLint
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -33,6 +38,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -106,25 +112,47 @@ fun HomeScreen(
             ),
         ) {
             item {
-                Text(
-                    text = stringResource(R.string.app_name),
-                    style = MaterialTheme.typography.headlineLarge,
-                    modifier = Modifier.padding(top = 45.dp)
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 45.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = stringResource(R.string.app_name),
+                        style = MaterialTheme.typography.headlineLarge,
+                        modifier = Modifier.alpha(0.95f)
+                    )
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Image(
+                        painter = painterResource(R.drawable.ic_settings),
+                        contentDescription = null,
+                        modifier = Modifier.clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = null,
+                                onClick = {})
+                    )
+                }
             }
 
-            if (subjectCount == 0) {
+            if (subjectCount == 0 || totalCount == 0) {
                 item {
                     Box(
                         modifier
                             .fillMaxWidth()
-                            .height(400.dp),
-                        contentAlignment = Alignment.Center
+                            .then(
+                                if (subjectCount == 0) Modifier.height(400.dp)
+                                else Modifier.padding(vertical = 20.dp)
+                            ), contentAlignment = Alignment.Center
                     ) {
                         UndrawRelaxedReading()
                     }
                 }
+            }
 
+            if (subjectCount == 0) {
                 item {
                     Text(
                         modifier = Modifier
@@ -137,7 +165,7 @@ fun HomeScreen(
                 }
             }
 
-            if (subjectCount != 0) {
+            if (subjectCount != 0 && totalCount != 0) {
                 item {
                     Box(
                         modifier = Modifier
