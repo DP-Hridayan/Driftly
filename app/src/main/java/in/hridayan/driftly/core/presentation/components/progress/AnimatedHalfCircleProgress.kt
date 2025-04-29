@@ -2,15 +2,12 @@ package `in`.hridayan.driftly.core.presentation.components.progress
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -32,18 +29,22 @@ fun AnimatedHalfCircleProgress(
 ) {
     val safeTarget = progress.takeIf { !it.isNaN() }?.coerceIn(0f, 1f) ?: 0f
 
-    val animatedProgress by animateFloatAsState(
-        targetValue = safeTarget,
-        animationSpec = tween(
-            durationMillis = animationDuration,
-            easing = FastOutSlowInEasing
+    val animatedProgress = remember { Animatable(0f) }
+
+    LaunchedEffect(safeTarget) {
+        animatedProgress.animateTo(
+            targetValue = safeTarget,
+            animationSpec = tween(
+                durationMillis = animationDuration,
+                easing = FastOutSlowInEasing
+            )
         )
-    )
+    }
 
     val progressColor = lerp(
         start = MaterialTheme.colorScheme.error,
         stop = MaterialTheme.colorScheme.primary,
-        fraction = animatedProgress
+        fraction = animatedProgress.value
     )
 
     Canvas(modifier = modifier) {
@@ -78,7 +79,7 @@ fun AnimatedHalfCircleProgress(
         drawArc(
             color = progressColor,
             startAngle = 180f,
-            sweepAngle = 180f * animatedProgress,
+            sweepAngle = 180f * animatedProgress.value,
             useCenter = false,
             topLeft = arcRect.topLeft,
             size = arcRect.size,

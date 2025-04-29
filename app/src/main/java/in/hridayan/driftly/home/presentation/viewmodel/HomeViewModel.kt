@@ -63,6 +63,8 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    val subjectCount: Flow<Int> = subjectRepository.getSubjectCount()
+
     fun deleteAllAttendanceForSubject(subjectId: Int) {
         viewModelScope.launch {
             attendanceRepository.deleteAllAttendanceForSubject(subjectId)

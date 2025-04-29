@@ -29,10 +29,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
@@ -41,6 +43,7 @@ import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
 import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
 import `in`.hridayan.driftly.home.presentation.components.dialog.AddSubjectDialog
+import `in`.hridayan.driftly.home.presentation.components.image.UndrawRelaxedReading
 import `in`.hridayan.driftly.home.presentation.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import `in`.hridayan.driftly.navigation.CalendarScreen
@@ -53,6 +56,7 @@ fun HomeScreen(
 ) {
     val navController = LocalNavController.current
     val subjects by viewModel.subjectList.collectAsState(initial = emptyList())
+    val subjectCount by viewModel.subjectCount.collectAsState(initial = 0)
     var isDialogOpen by rememberSaveable { mutableStateOf(false) }
     val totalAttendance by viewModel.getTotalAttendanceCounts()
         .collectAsState(initial = TotalAttendance())
@@ -109,52 +113,78 @@ fun HomeScreen(
                 )
             }
 
-            item {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(20.dp)
-                ) {
-                    AnimatedHalfCircleProgress(
-                        progress = totalProgress,
-                        animationDuration = 3000,
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .height(100.dp)
-                            .width(200.dp)
-                    )
+            if (subjectCount == 0) {
+                item {
+                    Box(
+                        modifier
+                            .fillMaxWidth()
+                            .height(400.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        UndrawRelaxedReading()
+                    }
+                }
 
+                item {
                     Text(
-                        text = totalProgressText,
-                        style = MaterialTheme.typography.headlineMedium,
-                        modifier = Modifier.align(Alignment.BottomCenter),
-                        color = progressColor
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .alpha(0.75f),
+                        text = stringResource(R.string.no_subject_yet),
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center
                     )
                 }
             }
 
-            item {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    Label(
-                        text = "${stringResource(R.string.present)} : $totalPresent",
-                        labelColor = MaterialTheme.colorScheme.primaryContainer,
-                        strokeColor = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
+            if (subjectCount != 0) {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(20.dp)
+                    ) {
+                        AnimatedHalfCircleProgress(
+                            progress = totalProgress,
+                            animationDuration = 3000,
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .height(100.dp)
+                                .width(200.dp)
+                        )
 
-                    Label(
-                        text = "${stringResource(R.string.absent)} : $totalAbsent",
-                        labelColor = MaterialTheme.colorScheme.errorContainer,
-                        strokeColor = MaterialTheme.colorScheme.onErrorContainer
-                    )
+                        Text(
+                            text = totalProgressText,
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.align(Alignment.BottomCenter),
+                            color = progressColor
+                        )
+                    }
+                }
 
-                    Label(
-                        text = "${stringResource(R.string.total)} : $totalCount",
-                        labelColor = MaterialTheme.colorScheme.tertiaryContainer,
-                        strokeColor = MaterialTheme.colorScheme.onTertiaryContainer
-                    )
+                item {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        Label(
+                            text = "${stringResource(R.string.present)} : $totalPresent",
+                            labelColor = MaterialTheme.colorScheme.primaryContainer,
+                            strokeColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+
+                        Label(
+                            text = "${stringResource(R.string.absent)} : $totalAbsent",
+                            labelColor = MaterialTheme.colorScheme.errorContainer,
+                            strokeColor = MaterialTheme.colorScheme.onErrorContainer
+                        )
+
+                        Label(
+                            text = "${stringResource(R.string.total)} : $totalCount",
+                            labelColor = MaterialTheme.colorScheme.tertiaryContainer,
+                            strokeColor = MaterialTheme.colorScheme.onTertiaryContainer
+                        )
+                    }
                 }
             }
 

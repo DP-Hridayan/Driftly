@@ -17,4 +17,7 @@ interface SubjectDao {
 
     @Query("DELETE FROM subjects WHERE id = :subjectId")
     suspend fun deleteSubject(subjectId: Int)
+
+    @Query("SELECT COUNT(*) FROM subjects")
+    fun getSubjectCount(): Flow<Int>
 }

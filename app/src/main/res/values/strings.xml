@@ -17,5 +17,7 @@
     <string name="clear">Clear</string>
     <string name="calender">Calender</string>
     <string name="no_attendance_yet">No attendance yet. Add some to view progress</string>
+    <string name="no_subject_yet">Click on the + button to add a subject</string>"
     <string name="ok">OK</string>
+    <string name="no_data">No data available</string>"
 </resources>

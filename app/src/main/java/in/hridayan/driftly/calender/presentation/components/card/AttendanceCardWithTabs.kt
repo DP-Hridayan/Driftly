@@ -36,9 +36,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.image.UndrawDatePicker
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
+import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
-import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.home.presentation.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
@@ -54,6 +54,7 @@ enum class AttendanceDataTabs(
 fun AllMonthsView(viewModel: HomeViewModel = hiltViewModel(), subjectId: Int) {
     val counts by viewModel.getSubjectAttendanceCounts(subjectId)
         .collectAsState(initial = SubjectAttendance())
+
     val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
     if (counts.totalCount == 0) {
