@@ -2,6 +2,7 @@ package `in`.hridayan.driftly.core.data.repository
 
 import `in`.hridayan.driftly.core.data.database.AttendanceDao
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -24,20 +25,18 @@ class AttendanceRepositoryImpl @Inject constructor(
         dao.deleteBySubjectAndDate(subjectId, date)
     }
 
-    override suspend fun getAllAttendances(): List<AttendanceEntity> =
-        dao.getAllAttendances()
+    override suspend fun deleteAllAttendanceForSubject(subjectId: Int) {
+        dao.deleteAllAttendanceForSubject(subjectId)
+    }
 
     override fun getAttendanceForSubject(subjectId: Int): Flow<List<AttendanceEntity>> =
         dao.getAttendanceForSubjectFlow(subjectId)
 
-    override fun getPresentCountForSubject(subjectId: Int): Flow<Int> =
-        dao.getPresentCount(subjectId)
+    override fun getTotalCountByStatus(status: AttendanceStatus): Flow<Int> =
+        dao.getTotalCountByStatus(status)
 
-    override fun getAbsentCountForSubject(subjectId: Int): Flow<Int> =
-        dao.getAbsentCount(subjectId)
-
-    override fun getTotalCountForSubject(subjectId: Int): Flow<Int> =
-        dao.getTotalCount(subjectId)
+    override fun getCountBySubjectAndStatus(subjectId: Int, status: AttendanceStatus): Flow<Int> =
+        dao.getCountBySubjectAndStatus(subjectId, status)
 
     override fun getPresentCountForMonth(subjectId: Int, year: Int, month: Int): Flow<Int> =
         dao.getPresentCountForMonth(subjectId, year, month)

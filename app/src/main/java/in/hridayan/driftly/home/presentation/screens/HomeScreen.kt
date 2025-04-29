@@ -22,7 +22,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,26 +37,28 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
+import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
 import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
 import `in`.hridayan.driftly.home.presentation.components.dialog.AddSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.label.Label
-import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
+import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
 
 @SuppressLint("DefaultLocale")
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier, viewModel: HomeViewmodel = hiltViewModel(),
+    modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val navController = LocalNavController.current
     val subjects by viewModel.subjectList.collectAsState(initial = emptyList())
     var isDialogOpen by rememberSaveable { mutableStateOf(false) }
-    val attendanceSummary by viewModel.totalAttendance.collectAsState()
-    val totalPresent = attendanceSummary.totalPresent
-    val totalAbsent = attendanceSummary.totalAbsent
-    val totalCount = attendanceSummary.totalCount
+    val totalAttendance by viewModel.getTotalAttendanceCounts()
+        .collectAsState(initial = TotalAttendance())
+    val totalPresent = totalAttendance.totalPresent
+    val totalAbsent = totalAttendance.totalAbsent
+    val totalCount = totalAttendance.totalCount
     val totalProgress = totalPresent.toFloat() / totalCount.toFloat()
     val totalProgressText = "${String.format("%.0f", totalProgress * 100)}%"
 
@@ -69,23 +70,17 @@ fun HomeScreen(
 
     var showAddButton by rememberSaveable { mutableStateOf(true) }
     val fabScale by animateFloatAsState(
-        targetValue = if (showAddButton) 1f else 0f,
-        animationSpec = tween(
-            durationMillis = 300,
-            easing = FastOutSlowInEasing
+        targetValue = if (showAddButton) 1f else 0f, animationSpec = tween(
+            durationMillis = 300, easing = FastOutSlowInEasing
         )
     )
 
-    LaunchedEffect(Unit) {
-        viewModel.calculateTotalAttendance()
-    }
-
     Scaffold(
-        modifier = modifier
-            .fillMaxSize(),
-        floatingActionButton = {
+        modifier = modifier.fillMaxSize(), floatingActionButton = {
             FloatingActionButton(
-                modifier = Modifier.Companion.scale(fabScale),
+                modifier = Modifier.Companion
+                    .padding(bottom = 10.dp)
+                    .scale(fabScale),
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 onClick = { isDialogOpen = true },
@@ -100,14 +95,10 @@ fun HomeScreen(
             }
         }) { innerPadding ->
         LazyColumn(
-            modifier = modifier
-                .fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(15.dp),
             contentPadding = PaddingValues(
-                top = innerPadding.calculateTopPadding(),
-                bottom = 25.dp,
-                start = 25.dp,
-                end = 25.dp
+                top = innerPadding.calculateTopPadding(), bottom = 25.dp, start = 25.dp, end = 25.dp
             ),
         ) {
             item {
@@ -169,24 +160,20 @@ fun HomeScreen(
 
             items(subjects.size, key = { index -> subjects[index].id }) { index ->
 
-                val counts by viewModel.getAttendanceCounts(subjects[index].id)
+                val counts by viewModel.getSubjectAttendanceCounts(subjects[index].id)
                     .collectAsState(initial = SubjectAttendance())
 
-                val progress = if (counts.totalCount != 0) {
-                    counts.presentCount.toFloat() / counts.totalCount.toFloat()
-                } else {
-                    0f
-                }
+                val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
                 SubjectCard(
                     subjectId = subjects[index].id,
                     subject = subjects[index].subject,
                     progress = progress,
+                    isTotalCountZero = counts.totalCount == 0,
                     navigate = {
                         navController.navigate(
                             CalendarScreen(
-                                subjectId = subjects[index].id,
-                                subject = subjects[index].subject
+                                subjectId = subjects[index].id, subject = subjects[index].subject
                             )
                         )
                     },
@@ -195,8 +182,7 @@ fun HomeScreen(
                     },
                     onDeleteConfirmed = {
                         showAddButton = true
-                    }
-                )
+                    })
             }
         }
     }

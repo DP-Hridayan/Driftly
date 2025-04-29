@@ -20,14 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
+import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 
 
 @Composable
 fun AddSubjectDialog(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewmodel = hiltViewModel(),
+    viewModel: HomeViewModel = hiltViewModel(),
     onDismiss: () -> Unit
 ) {
     val subject by viewModel.subject.collectAsState()

@@ -34,12 +34,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.calender.presentation.image.UndrawDatePicker
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.home.presentation.components.label.Label
-import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
+import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
 
 enum class AttendanceDataTabs(
@@ -50,12 +51,16 @@ enum class AttendanceDataTabs(
 }
 
 @Composable
-fun AllMonthsView(viewModel: HomeViewmodel = hiltViewModel(), subjectId: Int) {
-    val counts by viewModel.getAttendanceCounts(subjectId)
+fun AllMonthsView(viewModel: HomeViewModel = hiltViewModel(), subjectId: Int) {
+    val counts by viewModel.getSubjectAttendanceCounts(subjectId)
         .collectAsState(initial = SubjectAttendance())
     val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
-    ProgressView(counts = counts, progress = progress)
+    if (counts.totalCount == 0) {
+        UndrawDatePicker()
+    } else {
+        ProgressView(counts = counts, progress = progress)
+    }
 }
 
 @Composable
@@ -69,7 +74,11 @@ fun ThisMonthView(viewModel: CalendarViewModel = hiltViewModel(), subjectId: Int
         .collectAsState(initial = SubjectAttendance())
     val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
-    ProgressView(counts = counts, progress = progress)
+    if (counts.totalCount == 0) {
+        UndrawDatePicker()
+    } else {
+        ProgressView(counts = counts, progress = progress)
+    }
 }
 
 @SuppressLint("DefaultLocale")

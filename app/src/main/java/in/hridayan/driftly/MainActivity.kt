@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.presentation.AppEntry
 import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
-import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
+import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -22,11 +22,11 @@ class MainActivity : ComponentActivity() {
         val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        val homeViewModel: HomeViewmodel by viewModels()
+        val homeViewModel: HomeViewModel by viewModels()
         val calendarViewModel: CalendarViewModel by viewModels()
 
         splash.setKeepOnScreenCondition {
-            !(homeViewModel.isLoaded.value && calendarViewModel.isLoaded.value)
+            !(calendarViewModel.isLoaded.value)
         }
         enableEdgeToEdge()
         setContent {

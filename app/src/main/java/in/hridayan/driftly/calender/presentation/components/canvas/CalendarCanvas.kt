@@ -40,7 +40,6 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
-import kotlinx.coroutines.delay
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter

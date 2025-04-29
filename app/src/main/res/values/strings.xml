@@ -16,4 +16,6 @@
     <string name="total">Total</string>
     <string name="clear">Clear</string>
     <string name="calender">Calender</string>
+    <string name="no_attendance_yet">No attendance yet. Add some to view progress</string>
+    <string name="ok">OK</string>
 </resources>

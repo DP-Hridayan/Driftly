@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,7 +36,8 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedCircularProgressIndicator
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
-import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewmodel
+import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
+import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 
 @SuppressLint("DefaultLocale")
 @Composable
@@ -43,10 +46,11 @@ fun SubjectCard(
     subjectId: Int,
     subject: String,
     progress: Float,
+    isTotalCountZero: Boolean = false,
     navigate: () -> Unit = {},
     onLongClicked: (Boolean) -> Unit = {},
     onDeleteConfirmed: () -> Unit = {},
-    viewModel: HomeViewmodel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val progressText = "${String.format("%.0f", progress * 100)}%"
 
@@ -58,6 +62,7 @@ fun SubjectCard(
 
     var isLongClicked by rememberSaveable { mutableStateOf(false) }
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
+    var isNoAttendanceDialogVisible by rememberSaveable { mutableStateOf(false) }
 
     val handleLongClick = {
         isLongClicked = !isLongClicked
@@ -74,10 +79,11 @@ fun SubjectCard(
 
     val handleDeleteConfirmation = {
         viewModel.deleteSubject(subjectId, onSuccess = {
+            viewModel.deleteAllAttendanceForSubject(subjectId)
             isLongClicked = false
             onLongClicked(isLongClicked)
             isDeleteDialogVisible = false
-            onDeleteConfirmed()  // Optional callback after delete
+            onDeleteConfirmed()
         })
     }
 
@@ -90,6 +96,9 @@ fun SubjectCard(
                 onClick = { handleClick() },
                 onLongClick = { handleLongClick() }),
         shape = Shape.cardCornerSmall,
+        colors = CardDefaults.cardColors(
+            containerColor = if (isLongClicked) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.surfaceContainer,
+        )
     ) {
         Row(
             modifier = Modifier
@@ -110,7 +119,8 @@ fun SubjectCard(
                         animationSpec = tween(
                             durationMillis = 500, easing = FastOutSlowInEasing
                         )
-                    ), style = MaterialTheme.typography.titleMedium
+                    ), style = MaterialTheme.typography.titleMedium,
+                color = if (isLongClicked) MaterialTheme.colorScheme.onErrorContainer else MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             if (isLongClicked) {
@@ -118,25 +128,45 @@ fun SubjectCard(
                     painter = painterResource(R.drawable.ic_delete),
                     colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
                     contentDescription = null,
-                    modifier = Modifier.clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null,
-                        onClick = {
-                            isDeleteDialogVisible = true
-                        })
+                    modifier = Modifier
+                        .padding(end = 7.dp)
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = {
+                                isDeleteDialogVisible = true
+                            })
                 )
             } else {
-                Box(contentAlignment = Alignment.Center) {
-                    AnimatedCircularProgressIndicator(
-                        progress = progress, animationDuration = 3000
+                if (isTotalCountZero) {
+                    Image(
+                        painter = painterResource(R.drawable.ic_error),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.tertiary),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(end = 2.dp)
+                            .size(36.dp)
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = null,
+                                onClick = {
+                                    isNoAttendanceDialogVisible = true
+                                })
                     )
+                } else {
+                    Box(contentAlignment = Alignment.Center) {
+                        AnimatedCircularProgressIndicator(
+                            progress = progress, animationDuration = 3000
+                        )
 
-                    Text(
-                        text = progressText,
-                        color = progressColor,
-                        style = MaterialTheme.typography.bodySmall
-                    )
+                        Text(
+                            text = progressText,
+                            color = progressColor,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
                 }
+
             }
         }
     }
@@ -146,6 +176,12 @@ fun SubjectCard(
             isDeleteDialogVisible = false
         }, onConfirm = {
             handleDeleteConfirmation()
+        })
+    }
+
+    if (isNoAttendanceDialogVisible) {
+        NoAttendanceDialog(onDismiss = {
+            isNoAttendanceDialogVisible = false
         })
     }
 }

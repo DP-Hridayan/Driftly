@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -21,8 +22,8 @@ interface AttendanceDao {
     @Delete
     suspend fun deleteAttendance(attendance: AttendanceEntity)
 
-    @Query("SELECT * FROM attendance")
-    suspend fun getAllAttendances(): List<AttendanceEntity>
+    @Query("DELETE FROM attendance WHERE subjectId = :subjectId")
+    suspend fun deleteAllAttendanceForSubject(subjectId: Int)
 
     @Query("SELECT * FROM attendance WHERE subjectId = :subjectId")
     fun getAttendanceForSubjectFlow(subjectId: Int): Flow<List<AttendanceEntity>>
@@ -30,14 +31,11 @@ interface AttendanceDao {
     @Query("DELETE FROM attendance WHERE subjectId = :subjectId AND date = :date")
     suspend fun deleteBySubjectAndDate(subjectId: Int, date: String)
 
-    @Query("SELECT COUNT(*) FROM attendance WHERE subjectId = :subjectId AND status = 'PRESENT'")
-    fun getPresentCount(subjectId: Int): Flow<Int>
+    @Query("SELECT COUNT(*) FROM attendance WHERE status = :status")
+    fun getTotalCountByStatus(status: AttendanceStatus): Flow<Int>
 
-    @Query("SELECT COUNT(*) FROM attendance WHERE subjectId = :subjectId AND status = 'ABSENT'")
-    fun getAbsentCount(subjectId: Int): Flow<Int>
-
-    @Query("SELECT COUNT(*) FROM attendance WHERE subjectId = :subjectId")
-    fun getTotalCount(subjectId: Int): Flow<Int>
+    @Query("SELECT COUNT(*) FROM attendance WHERE subjectId = :subjectId AND status = :status")
+    fun getCountBySubjectAndStatus(subjectId: Int, status: AttendanceStatus): Flow<Int>
 
     @Query(
         """
