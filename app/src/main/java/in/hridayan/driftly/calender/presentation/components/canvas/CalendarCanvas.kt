@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -38,13 +40,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.dialog.MonthYearPickerDialog
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
-import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -240,6 +240,20 @@ fun CalendarCanvas(
                             },
                         contentAlignment = Alignment.Center
                     ) {
+                        if (expandedDateState.value == dateString) {
+                            Box(
+                                modifier = Modifier
+                                    .align(Alignment.TopCenter)
+                                    .size(4.dp)
+                                    .offset(y = 3.dp)
+                                    .clip(CircleShape)
+                                    .background(
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                        shape = CircleShape
+                                    )
+                            )
+                        }
+
                         Text(
                             text = "$day",
                             color = MaterialTheme.colorScheme.onSurface,
@@ -277,21 +291,6 @@ fun CalendarCanvas(
             onConfirm = { month, year ->
                 onNavigate(year, month)
             }
-        )
-    }
-}
-
-
-@Preview
-@Composable
-fun PreviewCalendarCanvas() {
-    DriftlyTheme {
-        CalendarCanvas(
-            year = 2023,
-            month = 10,
-            markedDates = emptyMap(),
-            onStatusChange = { _, _ -> },
-            onNavigate = { _, _ -> }
         )
     }
 }
