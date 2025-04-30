@@ -20,4 +20,7 @@ interface SubjectDao {
 
     @Query("SELECT COUNT(*) FROM subjects")
     fun getSubjectCount(): Flow<Int>
+
+    @Query("SELECT EXISTS(SELECT * FROM subjects WHERE subject = :subject)")
+    fun isSubjectExists(subject: String): Flow<Boolean>
 }

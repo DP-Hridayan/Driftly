@@ -1,11 +1,13 @@
 package `in`.hridayan.driftly.home.presentation.viewmodel
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.core.data.model.SubjectEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
+import `in`.hridayan.driftly.core.domain.model.SubjectError
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
@@ -14,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,12 +29,12 @@ class HomeViewModel @Inject constructor(
     private val _subject = MutableStateFlow("")
     val subject: StateFlow<String> = _subject
 
-    private val _subjectError = MutableStateFlow(false)
-    val subjectError: StateFlow<Boolean> = _subjectError
+    private val _subjectError = MutableStateFlow<SubjectError>(SubjectError.None)
+    val subjectError: StateFlow<SubjectError> = _subjectError
 
     fun onSubjectChange(newValue: String) {
         _subject.value = newValue
-        _subjectError.value = false
+        _subjectError.value = SubjectError.None
     }
 
     val subjectList: Flow<List<SubjectEntity>> = subjectRepository.getAllSubjects().stateIn(
@@ -40,20 +43,27 @@ class HomeViewModel @Inject constructor(
     )
 
     fun addSubject(onSuccess: () -> Unit) {
-        val isSubjectValid = _subject.value.trim().isNotBlank()
-        _subjectError.value = !isSubjectValid
-
-        if (isSubjectValid) {
-            viewModelScope.launch {
-                subjectRepository.insertSubject(
-                    SubjectEntity(
-                        subject = _subject.value.trim()
-                    )
-                )
-                _subject.value = ""
-                onSuccess()
-            }
+        val isSubjectInvalid = _subject.value.trim().isBlank()
+        if(isSubjectInvalid){
+                _subjectError.value = SubjectError.Empty
+                return
         }
+
+            viewModelScope.launch {
+                val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim()).first()
+                if (isSubjectExists) {
+                    _subjectError.value = SubjectError.AlreadyExists
+                } else {
+                    subjectRepository.insertSubject(
+                        SubjectEntity(
+                            subject = _subject.value.trim()
+                        )
+                    )
+                    _subject.value = ""
+                    _subjectError.value = SubjectError.None
+                    onSuccess()
+                }
+            }
     }
 
     fun deleteSubject(subjectId: Int, onSuccess: () -> Unit) {

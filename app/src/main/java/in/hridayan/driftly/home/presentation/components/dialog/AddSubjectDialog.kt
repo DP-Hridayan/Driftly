@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.domain.model.SubjectError
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 
@@ -49,10 +50,11 @@ fun AddSubjectDialog(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                val label =
-                    if (subjectError) stringResource(R.string.field_blank_error) else stringResource(
-                        R.string.subject
-                    )
+                val label = when(subjectError){
+                    SubjectError.Empty  -> stringResource(R.string.field_blank_error)
+                    SubjectError.AlreadyExists -> stringResource(R.string.subject_already_exists)
+                    else -> stringResource(R.string.add_subject)
+                }
                 Text(
                     text = stringResource(R.string.add_subject),
                     color = MaterialTheme.colorScheme.onSurface,
@@ -63,9 +65,9 @@ fun AddSubjectDialog(
                     onValueChange = {
                         viewModel.onSubjectChange(it)
                     },
-                    isError = subjectError,
+                    isError = subjectError != SubjectError.None,
                     modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text(text = label) }
+                    label = { Text(text = label) },
                 )
 
                 Row {

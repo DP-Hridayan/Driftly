@@ -23,4 +23,7 @@ class SubjectRepositoryImpl @Inject constructor(
 
     override fun getSubjectCount(): Flow<Int> =
         subjectDao.getSubjectCount()
+
+    override fun isSubjectExists(subject: String): Flow<Boolean> =
+        subjectDao.isSubjectExists(subject)
 }

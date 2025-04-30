@@ -2,6 +2,7 @@
     <string name="app_name">Driftly</string>
     <string name="subjects">Subjects</string>
     <string name="field_blank_error">Field cannot be blank</string>
+    <string name="subject_already_exists">Subject already exists</string>
     <string name="error">Error</string>
     <string name="subject">Subject</string>
     <string name="add_subject">Add Subject</string>

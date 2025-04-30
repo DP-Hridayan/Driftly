@@ -8,4 +8,5 @@ interface SubjectRepository {
     suspend fun insertSubject(subject: SubjectEntity)
     suspend fun deleteSubject(subjectId: Int)
     fun getSubjectCount(): Flow<Int>
+    fun isSubjectExists(subject: String): Flow<Boolean>
 }
