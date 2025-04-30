@@ -130,9 +130,9 @@ fun HomeScreen(
                         painter = painterResource(R.drawable.ic_settings),
                         contentDescription = null,
                         modifier = Modifier.clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = null,
-                                onClick = {})
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = {})
                     )
                 }
             }
@@ -238,9 +238,8 @@ fun HomeScreen(
                     onLongClicked = { isLongClicked ->
                         showAddButton = !isLongClicked
                     },
-                    onDeleteConfirmed = {
-                        showAddButton = true
-                    })
+                    onDeleteConfirmed = { showAddButton = true },
+                    onUpdateConfirmed = { showAddButton = true })
             }
         }
     }

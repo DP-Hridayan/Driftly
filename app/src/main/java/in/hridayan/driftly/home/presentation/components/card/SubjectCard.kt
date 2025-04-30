@@ -51,6 +51,7 @@ fun SubjectCard(
     navigate: () -> Unit = {},
     onLongClicked: (Boolean) -> Unit = {},
     onDeleteConfirmed: () -> Unit = {},
+    onUpdateConfirmed: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val progressText = "${String.format("%.0f", progress * 100)}%"
@@ -130,7 +131,7 @@ fun SubjectCard(
             if (isLongClicked) {
                 Row(
                     modifier = Modifier.padding(end = 7.dp),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    horizontalArrangement = Arrangement.spacedBy(15.dp)
                 ) {
                     Image(
                         painter = painterResource(R.drawable.ic_edit),
@@ -205,6 +206,7 @@ fun SubjectCard(
             onDismiss = {
                 isLongClicked = false
                 isUpdateDialogVisible = false
+                onUpdateConfirmed()
             })
     }
 

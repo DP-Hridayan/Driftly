@@ -7,10 +7,12 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,8 +28,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,6 +42,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.calender.presentation.components.dialog.MonthYearPickerDialog
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
@@ -59,10 +65,12 @@ fun CalendarCanvas(
     val today = LocalDate.now()
     val daysInMonth = yearMonth.lengthOfMonth()
     val firstDayOfWeek = yearMonth.atDay(1).dayOfWeek.value % 7
-
+    val fullMonthName = yearMonth.month.name.lowercase().replaceFirstChar { it.uppercase() }
     val abbreviatedMonth = yearMonth.format(
         DateTimeFormatter.ofPattern("MMM").withLocale(Locale.ENGLISH)
     )
+
+    var showMonthYearDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier
@@ -93,30 +101,65 @@ fun CalendarCanvas(
         )
 
         Row(
-            modifier = Modifier.align(Alignment.End),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
+            modifier = Modifier.fillMaxWidth()
         ) {
-            IconButton(onClick = {
-                val prev = yearMonth.minusMonths(1)
-                onNavigate(prev.year, prev.monthValue)
-            }) {
-                Icon(
-                    painter = painterResource(R.drawable.chevron_left),
-                    contentDescription = "Previous"
+            Row(
+                modifier = Modifier
+                    .padding(start = 20.dp)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = {
+                            showMonthYearDialog = true
+                        }
+                    ),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = "$fullMonthName ${yearMonth.year}",
+                    style = MaterialTheme.typography.titleSmall
                 )
+
+                IconButton(onClick = {
+                    showMonthYearDialog = true
+                }) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_arrow_dropdown),
+                        contentDescription = "Dropdown icon"
+                    )
+                }
             }
 
-            IconButton(onClick = {
-                val next = yearMonth.plusMonths(1)
-                onNavigate(next.year, next.monthValue)
-            }) {
-                Icon(
-                    painter = painterResource(R.drawable.chevron_right),
-                    contentDescription = "Next"
-                )
+            Spacer(modifier = Modifier.weight(1f))
+
+            Row(
+                modifier = Modifier,
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(15.dp)
+            ) {
+                IconButton(onClick = {
+                    val prev = yearMonth.minusMonths(1)
+                    onNavigate(prev.year, prev.monthValue)
+                }) {
+                    Icon(
+                        painter = painterResource(R.drawable.chevron_left),
+                        contentDescription = "Previous"
+                    )
+                }
+
+                IconButton(onClick = {
+                    val next = yearMonth.plusMonths(1)
+                    onNavigate(next.year, next.monthValue)
+                }) {
+                    Icon(
+                        painter = painterResource(R.drawable.chevron_right),
+                        contentDescription = "Next"
+                    )
+                }
             }
         }
+
+
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -157,8 +200,8 @@ fun CalendarCanvas(
                         AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.errorContainer
                         AttendanceStatus.UNMARKED -> MaterialTheme.colorScheme.surface
                     }
-                    val animatedProgress = remember(dateString,status) { Animatable(0f) }
-                    val randomDuration  =  Random.nextInt(500, 1500)
+                    val animatedProgress = remember(dateString, status) { Animatable(0f) }
+                    val randomDuration = Random.nextInt(500, 1500)
                     val animatedScale = when (status) {
                         AttendanceStatus.UNMARKED -> 1f
                         else -> animatedProgress.value
@@ -225,6 +268,17 @@ fun CalendarCanvas(
                 }
             }
         }
+    }
+
+    if (showMonthYearDialog) {
+        MonthYearPickerDialog(
+            yearDisplayed = year,
+            monthDisplayed = month,
+            onDismiss = { showMonthYearDialog = false },
+            onConfirm = { month, year ->
+                onNavigate(year, month)
+            }
+        )
     }
 }
 
