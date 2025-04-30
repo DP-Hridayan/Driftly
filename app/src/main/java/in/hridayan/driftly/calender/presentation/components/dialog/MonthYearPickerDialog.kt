@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,6 +24,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -36,14 +41,21 @@ import java.util.Calendar
 
 @Composable
 fun MonthYearPickerDialog(
-    yearDisplayed: Int,
-    monthDisplayed: Int,
-    onDismiss: () -> Unit,
-    onConfirm: (Int, Int) -> Unit
+    yearDisplayed: Int, monthDisplayed: Int, onDismiss: () -> Unit, onConfirm: (Int, Int) -> Unit
 ) {
     val months = listOf(
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
     )
     val currentYear = Calendar.getInstance().get(Calendar.YEAR)
     val years = (currentYear - 10..currentYear + 10).toList()
@@ -71,6 +83,10 @@ fun MonthYearPickerDialog(
 
             // Month dropdown
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                val dropdownItemHeight = 48.dp
+                val maxVisibleItems = 6
+                val maxHeight = dropdownItemHeight * maxVisibleItems
+
                 ExposedDropdownMenuBox(
                     expanded = expandedMonth,
                     onExpandedChange = { expandedMonth = !expandedMonth },
@@ -85,23 +101,25 @@ fun MonthYearPickerDialog(
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMonth)
                         },
                         modifier = Modifier.menuAnchor(
-                            MenuAnchorType.PrimaryNotEditable,
-                            enabled = true
+                            MenuAnchorType.PrimaryNotEditable, enabled = true
                         )
                     )
 
                     ExposedDropdownMenu(
                         expanded = expandedMonth,
-                        onDismissRequest = { expandedMonth = false }
+                        onDismissRequest = { expandedMonth = false },
+                        modifier = Modifier
+                            .heightIn(max = maxHeight)
+                            .verticalScroll(rememberScrollState())
                     ) {
                         months.forEach { month ->
                             DropdownMenuItem(
+                                modifier = Modifier,
                                 text = { Text(month) },
                                 onClick = {
                                     selectedMonth = months.indexOf(month)
                                     expandedMonth = false
-                                }
-                            )
+                                })
                         }
                     }
                 }
@@ -121,14 +139,25 @@ fun MonthYearPickerDialog(
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedYear)
                         },
                         modifier = Modifier.menuAnchor(
-                            MenuAnchorType.PrimaryNotEditable,
-                            enabled = true
+                            MenuAnchorType.PrimaryNotEditable, enabled = true
                         )
                     )
 
+                    val scrollState = rememberScrollState()
+                    val itemHeightPx = with(LocalDensity.current) { dropdownItemHeight.toPx() }
+
+                    LaunchedEffect(expandedYear) {
+                        if (expandedYear) {
+                            scrollState.scrollTo((10 * itemHeightPx).toInt())
+                        }
+                    }
+
                     ExposedDropdownMenu(
                         expanded = expandedYear,
-                        onDismissRequest = { expandedYear = false }
+                        onDismissRequest = { expandedYear = false },
+                        modifier = Modifier
+                            .heightIn(max = maxHeight)
+                            .verticalScroll(scrollState)
                     ) {
                         years.forEach { year ->
                             DropdownMenuItem(
@@ -136,16 +165,14 @@ fun MonthYearPickerDialog(
                                 onClick = {
                                     selectedYear = year
                                     expandedYear = false
-                                }
-                            )
+                                })
                         }
                     }
                 }
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
             ) {
                 TextButton(onClick = onDismiss) {
                     Text("Cancel")
