@@ -20,6 +20,7 @@
     <string name="update">Update</string>
     <string name="update_subject">Update Subject</string>
     <string name="enter_subject_name">Enter subject name</string>
+    <string name="select_month_and_year">Select Month &amp; Year</string>
     <string name="enter_new_name">Enter new name</string>
     <string name="calender">Calender</string>
     <string name="no_attendance_yet">No attendance yet. Add some to view progress</string>

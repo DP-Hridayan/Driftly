@@ -28,8 +28,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import `in`.hridayan.driftly.R
 import java.util.Calendar
 
 @Composable
@@ -62,7 +64,7 @@ fun MonthYearPickerDialog(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Select Month & Year",
+                text = stringResource(R.string.select_month_and_year),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -82,7 +84,10 @@ fun MonthYearPickerDialog(
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMonth)
                         },
-                        modifier = Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable, enabled = true)
+                        modifier = Modifier.menuAnchor(
+                            MenuAnchorType.PrimaryNotEditable,
+                            enabled = true
+                        )
                     )
 
                     ExposedDropdownMenu(
@@ -115,7 +120,10 @@ fun MonthYearPickerDialog(
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedYear)
                         },
-                        modifier = Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable, enabled = true)
+                        modifier = Modifier.menuAnchor(
+                            MenuAnchorType.PrimaryNotEditable,
+                            enabled = true
+                        )
                     )
 
                     ExposedDropdownMenu(
