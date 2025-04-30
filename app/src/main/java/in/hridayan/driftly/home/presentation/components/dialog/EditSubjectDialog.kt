@@ -13,6 +13,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -31,9 +32,14 @@ import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 fun EditSubjectDialog(
     modifier: Modifier = Modifier,
     subjectId:Int,
+    subject: String,
     viewModel: HomeViewModel = hiltViewModel(),
     onDismiss: () -> Unit
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.setSubjectNamePlaceholder(subject)
+    }
+
     val subject by viewModel.subject.collectAsState()
     val subjectError by viewModel.subjectError.collectAsState()
 
@@ -72,7 +78,7 @@ fun EditSubjectDialog(
                     },
                     isError = subjectError != SubjectError.None,
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = label) },
+                    label = { Text(text = label) }
                 )
 
                 Row {

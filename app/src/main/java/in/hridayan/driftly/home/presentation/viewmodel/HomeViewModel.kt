@@ -31,6 +31,12 @@ class HomeViewModel @Inject constructor(
     private val _subjectError = MutableStateFlow<SubjectError>(SubjectError.None)
     val subjectError: StateFlow<SubjectError> = _subjectError
 
+    fun setSubjectNamePlaceholder(value: String) {
+        if (_subject.value.isBlank()) {
+            _subject.value = value
+        }
+    }
+
     fun onSubjectChange(newValue: String) {
         _subject.value = newValue
         _subjectError.value = SubjectError.None

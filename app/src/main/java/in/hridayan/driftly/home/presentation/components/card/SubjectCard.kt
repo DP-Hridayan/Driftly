@@ -201,6 +201,7 @@ fun SubjectCard(
     if (isUpdateDialogVisible) {
         EditSubjectDialog(
             subjectId = subjectId,
+            subject = subject,
             onDismiss = {
                 isLongClicked = false
                 isUpdateDialogVisible = false
