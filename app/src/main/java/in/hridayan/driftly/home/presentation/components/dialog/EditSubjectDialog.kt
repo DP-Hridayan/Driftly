@@ -28,8 +28,9 @@ import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 
 @Composable
-fun AddSubjectDialog(
+fun EditSubjectDialog(
     modifier: Modifier = Modifier,
+    subjectId:Int,
     viewModel: HomeViewModel = hiltViewModel(),
     onDismiss: () -> Unit
 ) {
@@ -56,11 +57,11 @@ fun AddSubjectDialog(
                     SubjectError.Empty -> stringResource(R.string.field_blank_error)
                     SubjectError.AlreadyExists -> stringResource(R.string.subject_already_exists)
                     is SubjectError.Unknown -> stringResource(R.string.unknown_error)
-                    else -> stringResource(R.string.enter_subject_name)
+                    else -> stringResource(R.string.enter_new_name)
                 }
 
                 Text(
-                    text = stringResource(R.string.add_subject),
+                    text = stringResource(R.string.update_subject),
                     color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.titleLarge,
                 )
@@ -89,14 +90,15 @@ fun AddSubjectDialog(
                     Button(
                         modifier = Modifier.weight(0.4f),
                         onClick = {
-                            viewModel.addSubject(
+                            viewModel.updateSubject(
+                                subjectId = subjectId,
                                 onSuccess = {
                                     viewModel.clearSubjectError()
                                     onDismiss()
                                 }
                             )
                         },
-                        content = { Text(text = stringResource(R.string.add)) }
+                        content = { Text(text = stringResource(R.string.update)) }
                     )
                 }
             }

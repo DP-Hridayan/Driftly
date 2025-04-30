@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface SubjectRepository {
     fun getAllSubjects(): Flow<List<SubjectEntity>>
     suspend fun insertSubject(subject: SubjectEntity)
+    suspend fun updateSubject(subjectId: Int, newName: String)
     suspend fun deleteSubject(subjectId: Int)
     fun getSubjectCount(): Flow<Int>
     fun isSubjectExists(subject: String): Flow<Boolean>

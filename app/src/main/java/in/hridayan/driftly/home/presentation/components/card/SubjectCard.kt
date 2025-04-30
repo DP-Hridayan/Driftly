@@ -36,6 +36,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedCircularProgressIndicator
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
+import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 
@@ -62,6 +63,7 @@ fun SubjectCard(
 
     var isLongClicked by rememberSaveable { mutableStateOf(false) }
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
+    var isUpdateDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isNoAttendanceDialogVisible by rememberSaveable { mutableStateOf(false) }
 
     val handleLongClick = {
@@ -97,7 +99,7 @@ fun SubjectCard(
                 onLongClick = { handleLongClick() }),
         shape = Shape.cardCornerSmall,
         colors = CardDefaults.cardColors(
-            containerColor = if (isLongClicked) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.surfaceContainer,
+            containerColor = if (isLongClicked) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surfaceContainer,
         )
     ) {
         Row(
@@ -113,30 +115,47 @@ fun SubjectCard(
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             Text(
-                text = subject, modifier = Modifier
+                text = subject,
+                modifier = Modifier
                     .weight(1f)
                     .animateContentSize(
                         animationSpec = tween(
                             durationMillis = 500, easing = FastOutSlowInEasing
                         )
-                    ), style = MaterialTheme.typography.titleMedium,
-                color = if (isLongClicked) MaterialTheme.colorScheme.onErrorContainer else MaterialTheme.colorScheme.onSurfaceVariant
+                    ),
+                style = MaterialTheme.typography.titleMedium,
+                color = if (isLongClicked) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             if (isLongClicked) {
-                Image(
-                    painter = painterResource(R.drawable.ic_delete),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(end = 7.dp)
-                        .clickable(
+                Row(
+                    modifier = Modifier.padding(end = 7.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.ic_edit),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.tertiary),
+                        contentDescription = null,
+                        modifier = Modifier.clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = {
+                                isUpdateDialogVisible = true
+                            })
+                    )
+
+                    Image(
+                        painter = painterResource(R.drawable.ic_delete),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
+                        contentDescription = null,
+                        modifier = Modifier.clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
                             onClick = {
                                 isDeleteDialogVisible = true
                             })
-                )
+                    )
+                }
             } else {
                 if (isTotalCountZero) {
                     Image(
@@ -177,6 +196,15 @@ fun SubjectCard(
         }, onConfirm = {
             handleDeleteConfirmation()
         })
+    }
+
+    if (isUpdateDialogVisible) {
+        EditSubjectDialog(
+            subjectId = subjectId,
+            onDismiss = {
+                isLongClicked = false
+                isUpdateDialogVisible = false
+            })
     }
 
     if (isNoAttendanceDialogVisible) {

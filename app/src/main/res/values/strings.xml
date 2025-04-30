@@ -3,6 +3,7 @@
     <string name="subjects">Subjects</string>
     <string name="field_blank_error">Field cannot be blank</string>
     <string name="subject_already_exists">Subject already exists</string>
+    <string name="unknown_error">Unknown error occurred</string>
     <string name="error">Error</string>
     <string name="subject">Subject</string>
     <string name="add_subject">Add Subject</string>
@@ -16,6 +17,10 @@
     <string name="absent">Absent</string>
     <string name="total">Total</string>
     <string name="clear">Clear</string>
+    <string name="update">Update</string>
+    <string name="update_subject">Update Subject</string>
+    <string name="enter_subject_name">Enter subject name</string>
+    <string name="enter_new_name">Enter new name</string>
     <string name="calender">Calender</string>
     <string name="no_attendance_yet">No attendance yet. Add some to view progress</string>
     <string name="no_subject_yet">Click on the + button to add a subject</string>"

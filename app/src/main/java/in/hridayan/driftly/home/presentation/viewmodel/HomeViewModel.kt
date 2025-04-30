@@ -1,6 +1,5 @@
 package `in`.hridayan.driftly.home.presentation.viewmodel
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,26 +43,44 @@ class HomeViewModel @Inject constructor(
 
     fun addSubject(onSuccess: () -> Unit) {
         val isSubjectInvalid = _subject.value.trim().isBlank()
-        if(isSubjectInvalid){
-                _subjectError.value = SubjectError.Empty
-                return
+        if (isSubjectInvalid) {
+            _subjectError.value = SubjectError.Empty
+            return
         }
 
-            viewModelScope.launch {
-                val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim()).first()
-                if (isSubjectExists) {
-                    _subjectError.value = SubjectError.AlreadyExists
-                } else {
-                    subjectRepository.insertSubject(
-                        SubjectEntity(
-                            subject = _subject.value.trim()
-                        )
+        viewModelScope.launch {
+            val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim()).first()
+            if (isSubjectExists) {
+                _subjectError.value = SubjectError.AlreadyExists
+            } else {
+                subjectRepository.insertSubject(
+                    SubjectEntity(
+                        subject = _subject.value.trim()
                     )
-                    _subject.value = ""
-                    _subjectError.value = SubjectError.None
-                    onSuccess()
-                }
+                )
+                _subject.value = ""
+                onSuccess()
             }
+        }
+    }
+
+    fun updateSubject(subjectId: Int, onSuccess: () -> Unit) {
+        val isSubjectInvalid = _subject.value.trim().isBlank()
+        if (isSubjectInvalid) {
+            _subjectError.value = SubjectError.Empty
+            return
+        }
+
+        viewModelScope.launch {
+            val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim()).first()
+            if (isSubjectExists) {
+                _subjectError.value = SubjectError.AlreadyExists
+            } else {
+                subjectRepository.updateSubject(subjectId = subjectId, newName = _subject.value.trim())
+                _subject.value = ""
+                onSuccess()
+            }
+        }
     }
 
     fun deleteSubject(subjectId: Int, onSuccess: () -> Unit) {
@@ -71,6 +88,10 @@ class HomeViewModel @Inject constructor(
             subjectRepository.deleteSubject(subjectId)
             onSuccess()
         }
+    }
+
+    fun clearSubjectError() {
+        _subjectError.value = SubjectError.None
     }
 
     val subjectCount: Flow<Int> = subjectRepository.getSubjectCount()

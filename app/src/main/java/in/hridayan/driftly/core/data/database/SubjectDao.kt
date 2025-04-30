@@ -15,6 +15,9 @@ interface SubjectDao {
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertSubject(subject: SubjectEntity)
 
+    @Query("UPDATE subjects SET subject = :newName WHERE id = :subjectId")
+    suspend fun updateSubject(subjectId: Int, newName: String)
+
     @Query("DELETE FROM subjects WHERE id = :subjectId")
     suspend fun deleteSubject(subjectId: Int)
 
