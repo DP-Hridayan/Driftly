@@ -24,7 +24,7 @@ object DatabaseModule {
             SubjectDatabase::class.java,
             "attendance_app_db"
         )
-            .fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigration(dropAllTables = true)
             .build()
 
     @Provides
