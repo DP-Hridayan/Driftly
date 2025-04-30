@@ -31,7 +31,7 @@ import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 @Composable
 fun EditSubjectDialog(
     modifier: Modifier = Modifier,
-    subjectId:Int,
+    subjectId: Int,
     subject: String,
     viewModel: HomeViewModel = hiltViewModel(),
     onDismiss: () -> Unit
@@ -45,7 +45,7 @@ fun EditSubjectDialog(
 
     Dialog(
         onDismissRequest = {
-            viewModel.clearSubjectError()
+            viewModel.resetInputFields()
             onDismiss()
         },
         content = {
@@ -85,7 +85,7 @@ fun EditSubjectDialog(
                     OutlinedButton(
                         modifier = Modifier.weight(0.4f),
                         onClick = {
-                            viewModel.clearSubjectError()
+                            viewModel.resetInputFields()
                             onDismiss()
                         },
                         content = { Text(text = stringResource(R.string.cancel)) }
@@ -99,7 +99,7 @@ fun EditSubjectDialog(
                             viewModel.updateSubject(
                                 subjectId = subjectId,
                                 onSuccess = {
-                                    viewModel.clearSubjectError()
+                                    viewModel.resetInputFields()
                                     onDismiss()
                                 }
                             )

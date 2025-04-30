@@ -38,7 +38,7 @@ fun AddSubjectDialog(
 
     Dialog(
         onDismissRequest = {
-            viewModel.clearSubjectError()
+            viewModel.resetInputFields()
             onDismiss()
         },
         content = {
@@ -78,7 +78,7 @@ fun AddSubjectDialog(
                     OutlinedButton(
                         modifier = Modifier.weight(0.4f),
                         onClick = {
-                            viewModel.clearSubjectError()
+                            viewModel.resetInputFields()
                             onDismiss()
                         },
                         content = { Text(text = stringResource(R.string.cancel)) }
@@ -91,7 +91,7 @@ fun AddSubjectDialog(
                         onClick = {
                             viewModel.addSubject(
                                 onSuccess = {
-                                    viewModel.clearSubjectError()
+                                    viewModel.resetInputFields()
                                     onDismiss()
                                 }
                             )

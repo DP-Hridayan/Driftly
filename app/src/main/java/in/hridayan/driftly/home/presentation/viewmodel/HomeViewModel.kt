@@ -70,6 +70,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun resetInputFields() {
+        _subject.value = ""
+        _subjectError.value = SubjectError.None
+    }
+
     fun updateSubject(subjectId: Int, onSuccess: () -> Unit) {
         val isSubjectInvalid = _subject.value.trim().isBlank()
         if (isSubjectInvalid) {
@@ -94,10 +99,6 @@ class HomeViewModel @Inject constructor(
             subjectRepository.deleteSubject(subjectId)
             onSuccess()
         }
-    }
-
-    fun clearSubjectError() {
-        _subjectError.value = SubjectError.None
     }
 
     val subjectCount: Flow<Int> = subjectRepository.getSubjectCount()
