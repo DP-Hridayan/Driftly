@@ -194,11 +194,19 @@ fun CalendarCanvas(
 
                 if (dateString != null) {
                     val status = markedDates[dateString] ?: AttendanceStatus.UNMARKED
-                    val bgColor = when (status) {
+
+                    val backgroundColor = when (status) {
                         AttendanceStatus.PRESENT -> MaterialTheme.colorScheme.primaryContainer
                         AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.errorContainer
                         AttendanceStatus.UNMARKED -> MaterialTheme.colorScheme.surface
                     }
+
+                    val foregroundColor = when (status){
+                        AttendanceStatus.PRESENT -> MaterialTheme.colorScheme.onPrimaryContainer
+                        AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.onErrorContainer
+                        AttendanceStatus.UNMARKED -> MaterialTheme.colorScheme.onSurface
+                    }
+
                     val animatedProgress = remember(dateString, status) { Animatable(0f) }
                     val randomDuration = Random.nextInt(500, 1500)
                     val animatedScale = when (status) {
@@ -227,11 +235,11 @@ fun CalendarCanvas(
                             .padding(4.dp)
                             .scale(animatedScale)
                             .clip(CircleShape)
-                            .background(bgColor)
+                            .background(backgroundColor)
                             .then(
                                 if (isToday) Modifier.border(
                                     width = 1.dp,
-                                    color = MaterialTheme.colorScheme.primary,
+                                    color = foregroundColor,
                                     shape = CircleShape
                                 ) else Modifier
                             )
@@ -248,7 +256,7 @@ fun CalendarCanvas(
                                     .offset(y = 3.dp)
                                     .clip(CircleShape)
                                     .background(
-                                        color = MaterialTheme.colorScheme.onSurface,
+                                        color = foregroundColor,
                                         shape = CircleShape
                                     )
                             )
@@ -256,7 +264,7 @@ fun CalendarCanvas(
 
                         Text(
                             text = "$day",
-                            color = MaterialTheme.colorScheme.onSurface,
+                            color = foregroundColor,
                             style = MaterialTheme.typography.titleMedium
                         )
 
