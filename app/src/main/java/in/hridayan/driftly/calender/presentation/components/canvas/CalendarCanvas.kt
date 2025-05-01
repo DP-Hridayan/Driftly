@@ -7,7 +7,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,8 +23,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,10 +39,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.dialog.MonthYearPickerDialog
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
@@ -53,7 +47,6 @@ import `in`.hridayan.driftly.core.domain.model.StreakType
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
-import java.time.format.TextStyle
 import java.util.Locale
 
 @Composable
@@ -82,21 +75,18 @@ fun CalendarCanvas(
             .padding(horizontal = 10.dp)
             .animateContentSize(
                 animationSpec = tween(
-                    durationMillis = 1000,
-                    easing = FastOutSlowInEasing
+                    durationMillis = 1000, easing = FastOutSlowInEasing
                 )
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-
-        Text(
-            text = "$abbreviatedMonth, $year",
-            style = MaterialTheme.typography.headlineLarge,
+        MonthYearHeader(
             modifier = Modifier
                 .align(Alignment.Start)
-                .animateContentSize()
-                .padding(horizontal = 20.dp)
+                .padding(horizontal = 20.dp),
+            month = abbreviatedMonth,
+            year = year
         )
 
         HorizontalDivider(
@@ -108,78 +98,24 @@ fun CalendarCanvas(
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
-            Row(
-                modifier = Modifier
-                    .padding(start = 20.dp)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null,
-                        onClick = {
-                            showMonthYearDialog = true
-                        }
-                    ),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = "$fullMonthName ${yearMonth.year}",
-                    style = MaterialTheme.typography.titleSmall
-                )
-
-                IconButton(onClick = {
-                    showMonthYearDialog = true
-                }) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_arrow_dropdown),
-                        contentDescription = "Dropdown icon"
-                    )
-                }
-            }
+            MonthYearPicker(
+                modifier = Modifier.padding(horizontal = 20.dp),
+                fullMonthName = fullMonthName,
+                year = year,
+                onClick = { showMonthYearDialog = true })
 
             Spacer(modifier = Modifier.weight(1f))
 
-            Row(
-                modifier = Modifier,
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(15.dp)
-            ) {
-                IconButton(onClick = {
-                    val prev = yearMonth.minusMonths(1)
-                    onNavigate(prev.year, prev.monthValue)
-                }) {
-                    Icon(
-                        painter = painterResource(R.drawable.chevron_left),
-                        contentDescription = "Previous"
-                    )
-                }
-
-                IconButton(onClick = {
-                    val next = yearMonth.plusMonths(1)
-                    onNavigate(next.year, next.monthValue)
-                }) {
-                    Icon(
-                        painter = painterResource(R.drawable.chevron_right),
-                        contentDescription = "Next"
-                    )
-                }
-            }
+            MonthNavigationButtons(onNavigatePrev = {
+                val prev = yearMonth.minusMonths(1)
+                onNavigate(prev.year, prev.monthValue)
+            }, onNavigateNext = {
+                val next = yearMonth.plusMonths(1)
+                onNavigate(next.year, next.monthValue)
+            })
         }
 
-
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            listOf("S", "M", "T", "W", "T", "F", "S").forEach {
-                Text(
-                    text = it,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.tertiary,
-                    modifier = Modifier.weight(1f),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
+        WeekDayLabels()
 
         val totalCells = ((firstDayOfWeek + daysInMonth + 6) / 7) * 7
 
@@ -223,10 +159,8 @@ fun CalendarCanvas(
                     LaunchedEffect(dateString, status) {
                         if (status != AttendanceStatus.UNMARKED) {
                             animatedProgress.animateTo(
-                                targetValue = 1f,
-                                animationSpec = tween(
-                                    durationMillis = 1000,
-                                    easing = FastOutSlowInEasing
+                                targetValue = 1f, animationSpec = tween(
+                                    durationMillis = 1000, easing = FastOutSlowInEasing
                                 )
                             )
                         }
@@ -258,19 +192,12 @@ fun CalendarCanvas(
                                     .size(4.dp)
                                     .then(
                                         if (streakType == StreakType.MIDDLE) {
-                                            Modifier
-                                                .offset(y = 5.dp)
-                                                .clip(CircleShape)
-                                                .background(
-                                                    color = backgroundColor,
-                                                    shape = CircleShape
+                                            Modifier.offset(y = 5.dp).clip(CircleShape).background(
+                                                    color = backgroundColor, shape = CircleShape
                                                 )
-                                        } else Modifier
-                                            .offset(y = 3.dp)
-                                            .clip(CircleShape)
+                                        } else Modifier.offset(y = 3.dp).clip(CircleShape)
                                             .background(
-                                                color = foregroundColor,
-                                                shape = CircleShape
+                                                color = foregroundColor, shape = CircleShape
                                             )
                                     )
                             )
@@ -312,8 +239,7 @@ fun CalendarCanvas(
             onDismiss = { showMonthYearDialog = false },
             onConfirm = { month, year ->
                 onNavigate(year, month)
-            }
-        )
+            })
     }
 }
 
@@ -331,11 +257,8 @@ fun Modifier.streakModifier(
                 val startX = size.width * 0.5f
 
                 drawRect(
-                    color = streakBandColor,
-                    topLeft = Offset(startX, paddingY),
-                    size = Size(
-                        width = size.width - startX,
-                        height = size.height - 2 * paddingY
+                    color = streakBandColor, topLeft = Offset(startX, paddingY), size = Size(
+                        width = size.width - startX, height = size.height - 2 * paddingY
                     )
                 )
             }
@@ -349,11 +272,8 @@ fun Modifier.streakModifier(
                 val endX = size.width * 0.5f
 
                 drawRect(
-                    color = streakBandColor,
-                    topLeft = Offset(0f, paddingY),
-                    size = Size(
-                        width = endX,
-                        height = size.height - 2 * paddingY
+                    color = streakBandColor, topLeft = Offset(0f, paddingY), size = Size(
+                        width = endX, height = size.height - 2 * paddingY
                     )
                 )
             }
@@ -369,12 +289,9 @@ fun Modifier.streakModifier(
             .padding(4.dp)
             .clip(CircleShape)
             .background(circleBg)
-    }
-        .then(
-            if (isToday) Modifier.border(
-                width = 1.dp,
-                color = circleFg,
-                shape = CircleShape
-            ) else Modifier
-        )
+    }.then(
+        if (isToday) Modifier.border(
+            width = 1.dp, color = circleFg, shape = CircleShape
+        ) else Modifier
+    )
 }
