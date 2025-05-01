@@ -19,6 +19,7 @@ material = "1.13.0-alpha13"
 materialIconsExtended = "1.7.8"
 composeAnimation = "1.8.0"
 splashscreen = "1.0.1"
+datastore = "1.0.0"
 
 [libraries]
 core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
@@ -48,6 +49,7 @@ hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref =
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-compose-animation = {group = "androidx.compose.animation", name = "animation", version.ref = "composeAnimation" }
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

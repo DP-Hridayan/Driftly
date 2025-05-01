@@ -54,6 +54,7 @@ import `in`.hridayan.driftly.home.presentation.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
+import `in`.hridayan.driftly.navigation.SettingsScreen
 
 @SuppressLint("DefaultLocale")
 @Composable
@@ -115,7 +116,7 @@ fun HomeScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 45.dp),
+                        .padding(top = 35.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -132,7 +133,7 @@ fun HomeScreen(
                         modifier = Modifier.clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
-                            onClick = {})
+                            onClick = { navController.navigate(SettingsScreen) })
                     )
                 }
             }
@@ -170,7 +171,7 @@ fun HomeScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(20.dp)
+                            .padding(top = 40.dp, bottom = 20.dp)
                     ) {
                         AnimatedHalfCircleProgress(
                             progress = totalProgress,

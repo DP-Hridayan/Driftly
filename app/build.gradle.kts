@@ -72,6 +72,7 @@ dependencies {
 
     implementation(libs.serialization.json)
     implementation(libs.gson)
+    implementation(libs.datastore.preferences)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
