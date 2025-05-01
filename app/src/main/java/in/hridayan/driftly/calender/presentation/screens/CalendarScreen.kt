@@ -39,11 +39,9 @@ fun CalendarScreen(
     val subjectId = args?.subjectId ?: 0
     val subject = args?.subject ?: ""
 
-    val attendanceEntries by viewModel.attendanceList.collectAsState()
+    val markedDates by viewModel.markedDatesFlow.collectAsState()
 
-    val markedDates = rememberSaveable(attendanceEntries) {
-        attendanceEntries.associate { it.date to it.status }
-    }
+    val streakMap by viewModel.streakMapFlow.collectAsState(initial = emptyMap())
 
     val onStatusChange: (String, AttendanceStatus?) -> Unit = { date, newStatus ->
         when (newStatus) {
@@ -94,6 +92,7 @@ fun CalendarScreen(
                 year = selectedMonthYear.year,
                 month = selectedMonthYear.month.value,
                 markedDates = markedDates,
+                streakMap = streakMap,
                 onStatusChange = onStatusChange,
                 onNavigate = { newYear, newMonth ->
                     viewModel.updateMonthYear(newYear, newMonth)

@@ -37,7 +37,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,18 +49,20 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.dialog.MonthYearPickerDialog
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.StreakType
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
 import java.util.Locale
-import kotlin.random.Random
 
 @Composable
 fun CalendarCanvas(
     modifier: Modifier = Modifier,
     year: Int,
     month: Int,
-    markedDates: Map<String, AttendanceStatus>,
+    markedDates: Map<LocalDate, AttendanceStatus>,
+    streakMap: Map<LocalDate, StreakType>,
     onStatusChange: (date: String, status: AttendanceStatus?) -> Unit,
     onNavigate: (Int, Int) -> Unit
 ) {
@@ -188,27 +194,27 @@ fun CalendarCanvas(
         ) {
             items((0 until totalCells).toList()) { index ->
                 val day = index - firstDayOfWeek + 1
-                val dateString = if (day in 1..daysInMonth)
-                    yearMonth.atDay(day).format(DateTimeFormatter.ISO_DATE)
-                else null
+                val date = if (day in 1..daysInMonth) yearMonth.atDay(day) else null
+                val dateString = date?.format(DateTimeFormatter.ISO_DATE)
 
                 if (dateString != null) {
-                    val status = markedDates[dateString] ?: AttendanceStatus.UNMARKED
+                    val status = markedDates[date] ?: AttendanceStatus.UNMARKED
+                    val streakType = streakMap[date] ?: StreakType.NONE
 
                     val backgroundColor = when (status) {
-                        AttendanceStatus.PRESENT -> MaterialTheme.colorScheme.primaryContainer
-                        AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.errorContainer
+                        AttendanceStatus.PRESENT -> MaterialTheme.colorScheme.primary
+                        AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.error
                         AttendanceStatus.UNMARKED -> MaterialTheme.colorScheme.surface
                     }
 
-                    val foregroundColor = when (status){
-                        AttendanceStatus.PRESENT -> MaterialTheme.colorScheme.onPrimaryContainer
-                        AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.onErrorContainer
+                    val foregroundColor = when (status) {
+                        AttendanceStatus.PRESENT -> MaterialTheme.colorScheme.primaryContainer
+                        AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.errorContainer
                         AttendanceStatus.UNMARKED -> MaterialTheme.colorScheme.onSurface
                     }
 
+
                     val animatedProgress = remember(dateString, status) { Animatable(0f) }
-                    val randomDuration = Random.nextInt(500, 1500)
                     val animatedScale = when (status) {
                         AttendanceStatus.UNMARKED -> 1f
                         else -> animatedProgress.value
@@ -219,7 +225,7 @@ fun CalendarCanvas(
                             animatedProgress.animateTo(
                                 targetValue = 1f,
                                 animationSpec = tween(
-                                    durationMillis = randomDuration,
+                                    durationMillis = 1000,
                                     easing = FastOutSlowInEasing
                                 )
                             )
@@ -232,39 +238,47 @@ fun CalendarCanvas(
                     Box(
                         modifier = Modifier
                             .aspectRatio(1f)
-                            .padding(4.dp)
                             .scale(animatedScale)
-                            .clip(CircleShape)
-                            .background(backgroundColor)
-                            .then(
-                                if (isToday) Modifier.border(
-                                    width = 1.dp,
-                                    color = foregroundColor,
-                                    shape = CircleShape
-                                ) else Modifier
+                            .streakModifier(
+                                streakType = streakType,
+                                circleBg = backgroundColor,
+                                circleFg = foregroundColor,
+                                streakBandColor = foregroundColor,
+                                isToday = isToday
                             )
                             .clickable {
                                 expandedDateState.value = dateString
                             },
-                        contentAlignment = Alignment.Center
+                        contentAlignment = Alignment.Center,
                     ) {
                         if (expandedDateState.value == dateString) {
                             Box(
                                 modifier = Modifier
                                     .align(Alignment.TopCenter)
                                     .size(4.dp)
-                                    .offset(y = 3.dp)
-                                    .clip(CircleShape)
-                                    .background(
-                                        color = foregroundColor,
-                                        shape = CircleShape
+                                    .then(
+                                        if (streakType == StreakType.MIDDLE) {
+                                            Modifier
+                                                .offset(y = 5.dp)
+                                                .clip(CircleShape)
+                                                .background(
+                                                    color = backgroundColor,
+                                                    shape = CircleShape
+                                                )
+                                        } else Modifier
+                                            .offset(y = 3.dp)
+                                            .clip(CircleShape)
+                                            .background(
+                                                color = foregroundColor,
+                                                shape = CircleShape
+                                            )
                                     )
                             )
                         }
 
                         Text(
                             text = "$day",
-                            color = foregroundColor,
+                            color = if (streakType == StreakType.MIDDLE) backgroundColor else foregroundColor,
                             style = MaterialTheme.typography.titleMedium
                         )
 
@@ -301,4 +315,66 @@ fun CalendarCanvas(
             }
         )
     }
+}
+
+fun Modifier.streakModifier(
+    streakType: StreakType,
+    circleBg: Color,
+    circleFg: Color,
+    streakBandColor: Color,
+    isToday: Boolean
+): Modifier {
+    return when (streakType) {
+        StreakType.START -> this
+            .drawBehind {
+                val paddingY = 8.dp.toPx()
+                val startX = size.width * 0.5f
+
+                drawRect(
+                    color = streakBandColor,
+                    topLeft = Offset(startX, paddingY),
+                    size = Size(
+                        width = size.width - startX,
+                        height = size.height - 2 * paddingY
+                    )
+                )
+            }
+            .padding(4.dp)
+            .clip(CircleShape)
+            .background(circleBg)
+
+        StreakType.END -> this
+            .drawBehind {
+                val paddingY = 8.dp.toPx()
+                val endX = size.width * 0.5f
+
+                drawRect(
+                    color = streakBandColor,
+                    topLeft = Offset(0f, paddingY),
+                    size = Size(
+                        width = endX,
+                        height = size.height - 2 * paddingY
+                    )
+                )
+            }
+            .padding(4.dp)
+            .clip(CircleShape)
+            .background(circleBg)
+
+        StreakType.MIDDLE -> this
+            .padding(vertical = 8.dp)
+            .background(streakBandColor)
+
+        StreakType.NONE -> this
+            .padding(4.dp)
+            .clip(CircleShape)
+            .background(circleBg)
+    }
+        .then(
+            if (isToday) Modifier.border(
+                width = 1.dp,
+                color = circleFg,
+                shape = CircleShape
+            ) else Modifier
+        )
 }

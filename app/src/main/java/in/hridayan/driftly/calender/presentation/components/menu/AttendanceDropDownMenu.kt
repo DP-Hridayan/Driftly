@@ -38,18 +38,18 @@ fun AttendanceDropDownMenu(
         DropdownMenuItem(
             modifier = Modifier
                 .clip(MaterialTheme.shapes.extraLarge)
-                .background(MaterialTheme.colorScheme.primaryContainer),
+                .background(MaterialTheme.colorScheme.primary),
             text = {
                 Text(
                     text = stringResource(R.string.present),
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             },
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_check),
                     contentDescription = "Present",
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             onClick = {
@@ -61,18 +61,18 @@ fun AttendanceDropDownMenu(
             modifier = Modifier
                 .padding(top = 5.dp)
                 .clip(MaterialTheme.shapes.extraLarge)
-                .background(MaterialTheme.colorScheme.errorContainer),
+                .background(MaterialTheme.colorScheme.error),
             text = {
                 Text(
                     text = stringResource(R.string.absent),
-                    color = MaterialTheme.colorScheme.onErrorContainer
+                    color = MaterialTheme.colorScheme.onError
                 )
             },
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_cross),
                     contentDescription = "Absent",
-                    tint = MaterialTheme.colorScheme.onErrorContainer
+                    tint = MaterialTheme.colorScheme.onError
                 )
             },
             onClick = {

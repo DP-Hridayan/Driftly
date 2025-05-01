@@ -25,9 +25,6 @@ class MainActivity : ComponentActivity() {
         val homeViewModel: HomeViewModel by viewModels()
         val calendarViewModel: CalendarViewModel by viewModels()
 
-        splash.setKeepOnScreenCondition {
-            !(calendarViewModel.isLoaded.value)
-        }
         enableEdgeToEdge()
         setContent {
             DriftlyTheme {
