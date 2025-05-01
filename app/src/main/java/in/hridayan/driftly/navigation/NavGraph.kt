@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import `in`.hridayan.driftly.calender.presentation.screens.CalendarScreen
 import `in`.hridayan.driftly.home.presentation.screens.HomeScreen
+import `in`.hridayan.driftly.settings.presentation.screens.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.presentation.screens.SettingsScreen
 import kotlinx.serialization.Serializable
 
@@ -33,9 +34,18 @@ fun Navigation() {
 
             composable<SettingsScreen>(
                 enterTransition = { slideFadeInFromRight() },
+                exitTransition = { slideFadeOutToLeft() },
+                popEnterTransition = { slideFadeInFromLeft() },
                 popExitTransition = { slideFadeOutToRight() }
             ) {
                 SettingsScreen()
+            }
+
+            composable<LookAndFeelScreen>(
+                enterTransition = { slideFadeInFromRight() },
+                popExitTransition = { slideFadeOutToRight() }
+            ) {
+                LookAndFeelScreen()
             }
         }
     }
@@ -51,3 +61,6 @@ data class CalendarScreen(
 
 @Serializable
 object SettingsScreen
+
+@Serializable
+object LookAndFeelScreen

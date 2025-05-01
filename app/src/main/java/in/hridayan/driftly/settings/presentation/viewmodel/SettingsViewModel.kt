@@ -6,9 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import `in`.hridayan.driftly.navigation.LookAndFeelScreen
+import `in`.hridayan.driftly.navigation.SettingsScreen
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.usecase.GetAllSettingsUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
+import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,16 +26,35 @@ class SettingsViewModel @Inject constructor(
     var settings by mutableStateOf<List<Pair<SettingsItem, Boolean>>>(emptyList())
         private set
 
-    init {
+    private val _uiEvent = MutableSharedFlow<SettingsUiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
+
+    fun loadSettingsForHost(host: Any? = SettingsScreen) {
         viewModelScope.launch {
-            settings = getAllSettingsUseCase()
+            val allSettings = getAllSettingsUseCase()
+            settings = if (host != null) {
+                allSettings.filter { it.first.host::class == host::class }
+            } else {
+                allSettings
+            }
         }
     }
+
 
     fun onToggle(key: String) {
         viewModelScope.launch {
             toggleSettingUseCase(key)
             settings = getAllSettingsUseCase()
+        }
+    }
+
+    fun onItemClicked(item: SettingsItem) {
+        viewModelScope.launch {
+            when(item.key){
+                "look_and_feel" -> {
+                    _uiEvent.emit(SettingsUiEvent.Navigate(LookAndFeelScreen))
+                }
+            }
         }
     }
 }

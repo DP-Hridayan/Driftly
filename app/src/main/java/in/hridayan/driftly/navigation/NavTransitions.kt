@@ -13,17 +13,17 @@ import androidx.compose.animation.slideOutHorizontally
 fun slideFadeInFromRight(): EnterTransition {
     return slideInHorizontally(
         initialOffsetX = { (it * 0.15f).toInt() },
-        animationSpec = tween(400, easing = FastOutSlowInEasing)
+        animationSpec = tween(250, easing = FastOutSlowInEasing)
     ) + fadeIn(
         initialAlpha = 0.5f,
-        animationSpec = tween(250, delayMillis = 66, easing = LinearEasing)
+        animationSpec = tween(200, delayMillis = 66, easing = LinearEasing)
     )
 }
 
 fun slideFadeOutToRight(): ExitTransition {
     return slideOutHorizontally(
         targetOffsetX = { (it * 0.10f).toInt() },
-        animationSpec = tween(300, easing = FastOutSlowInEasing)
+        animationSpec = tween(250, easing = FastOutSlowInEasing)
     ) + fadeOut(
         animationSpec = tween(50, easing = LinearEasing)
     )
@@ -32,7 +32,7 @@ fun slideFadeOutToRight(): ExitTransition {
 fun slideFadeInFromLeft(): EnterTransition {
     return slideInHorizontally(
         initialOffsetX = { -(it * 0.15f).toInt() },
-        animationSpec = tween(400, easing = FastOutSlowInEasing)
+        animationSpec = tween(350, easing = FastOutSlowInEasing)
     ) + fadeIn(
         initialAlpha = 0.5f,
         animationSpec = tween(50, delayMillis = 66, easing = LinearEasing)
@@ -42,7 +42,7 @@ fun slideFadeInFromLeft(): EnterTransition {
 fun slideFadeOutToLeft(): ExitTransition {
     return slideOutHorizontally(
         targetOffsetX = { -(it * 0.10f).toInt() },
-        animationSpec = tween(300, easing = FastOutSlowInEasing)
+        animationSpec = tween(250, easing = FastOutSlowInEasing)
     ) + fadeOut(
         animationSpec = tween(50, easing = LinearEasing)
     )

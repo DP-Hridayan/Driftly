@@ -1,9 +1,12 @@
 package `in`.hridayan.driftly.settings.domain.model
 
+import `in`.hridayan.driftly.navigation.SettingsScreen
+
 data class SettingsItem (
     val key: String,
+    val host:Any = SettingsScreen,
     val title: String,
     val description: String,
     val icon: Int,
-    val isToggleable: Boolean = false,
+    val type: SettingsType = SettingsType.NoSwitch
 )

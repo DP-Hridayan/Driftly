@@ -31,13 +31,14 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.navigation.LocalNavController
+import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.navigation.SettingsScreen
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
-fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel = hiltViewModel()) {
+fun LookAndFeelScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel = hiltViewModel()) {
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
@@ -48,7 +49,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is SettingsUiEvent.Navigate -> {
-                     navController.navigate(event.route)
+                    navController.navigate(event.route)
                 }
                 is SettingsUiEvent.ShowDialog -> {
                 }
@@ -60,7 +61,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
     }
 
     LaunchedEffect(Unit) {
-        viewModel.loadSettingsForHost(SettingsScreen)
+        viewModel.loadSettingsForHost(LookAndFeelScreen)
     }
 
 
@@ -76,7 +77,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
 
                     val fontSize = lerp(expandedFontSize, collapsedFontSize, collapsedFraction)
                     Text(
-                        text = "Settings",
+                        text = "Look & Feel",
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
                         fontSize = fontSize,

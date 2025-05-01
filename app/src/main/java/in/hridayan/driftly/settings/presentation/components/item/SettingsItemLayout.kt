@@ -18,20 +18,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
+import `in`.hridayan.driftly.settings.domain.model.SettingsType
 
 @Composable
 fun SettingsItemLayout(
     modifier: Modifier = Modifier,
     item: SettingsItem,
-    isEnabled: Boolean = false, onToggle: () -> Unit,
+    isEnabled: Boolean = false,
+    onToggle: () -> Unit,
+    onClick: (SettingsItem) -> Unit = {},
     contentDescription: String = "",
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .clickable(
-                enabled = true,
-                onClick = {})
+                enabled = true, onClick = { onClick(item) })
             .padding(15.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(15.dp)
@@ -43,8 +45,7 @@ fun SettingsItemLayout(
         )
 
         Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(7.dp)
+            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(7.dp)
         ) {
             Text(
                 text = item.title,
@@ -59,7 +60,7 @@ fun SettingsItemLayout(
             )
         }
 
-        if (item.isToggleable) {
+        if (item.type == SettingsType.Switch) {
             Switch(checked = isEnabled, onCheckedChange = { onToggle() })
         }
     }
