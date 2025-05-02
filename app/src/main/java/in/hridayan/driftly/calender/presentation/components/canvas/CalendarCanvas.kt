@@ -5,7 +5,6 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,14 +33,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import `in`.hridayan.driftly.calender.presentation.components.button.MonthNavigationButtons
+import `in`.hridayan.driftly.calender.presentation.components.color.getAttendanceColors
 import `in`.hridayan.driftly.calender.presentation.components.dialog.MonthYearPickerDialog
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
+import `in`.hridayan.driftly.calender.presentation.components.modifiers.streakModifier
+import `in`.hridayan.driftly.calender.presentation.components.text.MonthYearHeader
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.StreakType
 import java.time.LocalDate
@@ -137,18 +136,9 @@ fun CalendarCanvas(
                     val status = markedDates[date] ?: AttendanceStatus.UNMARKED
                     val streakType = streakMap[date] ?: StreakType.NONE
 
-                    val backgroundColor = when (status) {
-                        AttendanceStatus.PRESENT -> MaterialTheme.colorScheme.primary
-                        AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.error
-                        AttendanceStatus.UNMARKED -> MaterialTheme.colorScheme.surface
-                    }
-
-                    val foregroundColor = when (status) {
-                        AttendanceStatus.PRESENT -> MaterialTheme.colorScheme.primaryContainer
-                        AttendanceStatus.ABSENT -> MaterialTheme.colorScheme.errorContainer
-                        AttendanceStatus.UNMARKED -> MaterialTheme.colorScheme.onSurface
-                    }
-
+                    val attendanceColors = getAttendanceColors(status)
+                    val backgroundColor = attendanceColors.background
+                    val foregroundColor = attendanceColors.foreground
 
                     val animatedProgress = remember(dateString, status) { Animatable(0f) }
                     val animatedScale = when (status) {
@@ -192,10 +182,15 @@ fun CalendarCanvas(
                                     .size(4.dp)
                                     .then(
                                         if (streakType == StreakType.MIDDLE) {
-                                            Modifier.offset(y = 5.dp).clip(CircleShape).background(
+                                            Modifier
+                                                .offset(y = 4.dp)
+                                                .clip(CircleShape)
+                                                .background(
                                                     color = backgroundColor, shape = CircleShape
                                                 )
-                                        } else Modifier.offset(y = 3.dp).clip(CircleShape)
+                                        } else Modifier
+                                            .offset(y = 3.dp)
+                                            .clip(CircleShape)
                                             .background(
                                                 color = foregroundColor, shape = CircleShape
                                             )
@@ -241,57 +236,4 @@ fun CalendarCanvas(
                 onNavigate(year, month)
             })
     }
-}
-
-fun Modifier.streakModifier(
-    streakType: StreakType,
-    circleBg: Color,
-    circleFg: Color,
-    streakBandColor: Color,
-    isToday: Boolean
-): Modifier {
-    return when (streakType) {
-        StreakType.START -> this
-            .drawBehind {
-                val paddingY = 8.dp.toPx()
-                val startX = size.width * 0.5f
-
-                drawRect(
-                    color = streakBandColor, topLeft = Offset(startX, paddingY), size = Size(
-                        width = size.width - startX, height = size.height - 2 * paddingY
-                    )
-                )
-            }
-            .padding(4.dp)
-            .clip(CircleShape)
-            .background(circleBg)
-
-        StreakType.END -> this
-            .drawBehind {
-                val paddingY = 8.dp.toPx()
-                val endX = size.width * 0.5f
-
-                drawRect(
-                    color = streakBandColor, topLeft = Offset(0f, paddingY), size = Size(
-                        width = endX, height = size.height - 2 * paddingY
-                    )
-                )
-            }
-            .padding(4.dp)
-            .clip(CircleShape)
-            .background(circleBg)
-
-        StreakType.MIDDLE -> this
-            .padding(vertical = 8.dp)
-            .background(streakBandColor)
-
-        StreakType.NONE -> this
-            .padding(4.dp)
-            .clip(CircleShape)
-            .background(circleBg)
-    }.then(
-        if (isToday) Modifier.border(
-            width = 1.dp, color = circleFg, shape = CircleShape
-        ) else Modifier
-    )
 }
