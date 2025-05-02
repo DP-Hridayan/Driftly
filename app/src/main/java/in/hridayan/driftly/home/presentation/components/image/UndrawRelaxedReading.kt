@@ -15,9 +15,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
+import `in`.hridayan.driftly.core.presentation.components.svg.vectors.relaxedReading
 
 @Composable
 fun UndrawRelaxedReading(modifier: Modifier = Modifier) {
@@ -41,7 +41,7 @@ fun UndrawRelaxedReading(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(horizontal = 50.dp)
                 .alpha(alpha),
-            painter = painterResource(id = R.drawable.undraw_relaxed_reading),
+            imageVector = DynamicColorImageVectors.relaxedReading(),
             contentDescription = "Empty data placeholder"
         )
     }

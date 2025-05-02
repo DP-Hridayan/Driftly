@@ -15,9 +15,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
+import `in`.hridayan.driftly.core.presentation.components.svg.vectors.datePicker
 
 @Composable
 fun UndrawDatePicker(modifier: Modifier = Modifier) {
@@ -41,7 +41,7 @@ fun UndrawDatePicker(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(horizontal = 100.dp)
                 .alpha(alpha),
-            painter = painterResource(id = R.drawable.undraw_date_picker),
+            imageVector = DynamicColorImageVectors.datePicker(),
             contentDescription = "Empty data placeholder"
         )
     }
