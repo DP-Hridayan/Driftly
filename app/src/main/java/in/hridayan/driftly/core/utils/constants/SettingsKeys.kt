@@ -1,5 +1,14 @@
 package `in`.hridayan.driftly.core.utils.constants
 
-enum class SettingsKeys{
-    LOOK_AND_FEEL, AUTO_UPDATE, ABOUT, LANGUAGE, THEME_MODE, HIGH_CONTRAST_DARK_MODE
+import androidx.appcompat.app.AppCompatDelegate
+
+enum class SettingsKeys(val default: Any?) {
+    LOOK_AND_FEEL(null),
+    AUTO_UPDATE(false),
+    ABOUT(null),
+    LANGUAGE(null),
+    THEME_MODE(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM),
+    HIGH_CONTRAST_DARK_MODE(false),
+    DYNAMIC_COLORS(true),
+    HAPTICS_AND_VIBRATION(true)
 }

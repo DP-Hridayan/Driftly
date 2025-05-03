@@ -18,7 +18,7 @@ class ThemeViewModel @Inject constructor(
     private val store: SettingsDataStore
 ) : ViewModel() {
     val themeOption = store
-        .intFlow(SettingsKeys.THEME_MODE, default = ThemeOption.SYSTEM.mode)
+        .intFlow(SettingsKeys.THEME_MODE)
         .map { ThemeOption.fromMode(it) }
         .stateIn(
             scope = viewModelScope,

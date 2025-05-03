@@ -38,7 +38,10 @@ fun SettingsItemLayout(
         modifier = modifier
             .fillMaxWidth()
             .clickable(
-                enabled = true, onClick = { onClick(item) })
+                enabled = true, onClick = {
+                    onClick(item)
+                    onToggle()
+                })
             .padding(15.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(15.dp)

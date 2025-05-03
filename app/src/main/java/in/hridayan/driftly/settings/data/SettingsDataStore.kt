@@ -24,13 +24,23 @@ class SettingsDataStore @Inject constructor(
 
     fun isEnabled(key: SettingsKeys): Flow<Boolean> {
         val preferencesKey = key.toBooleanKey()
-        return ds.data.map { prefs -> prefs[preferencesKey] == true }
+        val default = key.default as? Boolean ?: false
+
+        return ds.data.map { prefs ->
+            if (!prefs.contains(preferencesKey)) {
+                runCatching {
+                    context.settingsDataStore.edit { it[preferencesKey] = default }
+                }
+            }
+            prefs[preferencesKey] ?: default
+        }
     }
+
 
     suspend fun toggle(key: SettingsKeys) {
         val preferencesKey = key.toBooleanKey()
         ds.edit { prefs ->
-            val current = prefs[preferencesKey] == true
+            val current = prefs[preferencesKey] ?: false
             prefs[preferencesKey] = !current
         }
     }
@@ -38,15 +48,11 @@ class SettingsDataStore @Inject constructor(
     private fun SettingsKeys.toIntKey(): Preferences.Key<Int> =
         intPreferencesKey(this.name)
 
-    fun intFlow(key: SettingsKeys, default: Int = 0): Flow<Int> {
+    fun intFlow(key: SettingsKeys): Flow<Int> {
         val preferencesKey = key.toIntKey()
+        val default = key.default as? Int ?: 0
         return ds.data
             .map { prefs -> prefs[preferencesKey] ?: default }
-    }
-
-    suspend fun getInt(key: SettingsKeys, default: Int = 0): Int {
-        val preferencesKey = key.toIntKey()
-        return ds.data.first()[preferencesKey] ?: default
     }
 
     suspend fun setInt(key: SettingsKeys, value: Int) {

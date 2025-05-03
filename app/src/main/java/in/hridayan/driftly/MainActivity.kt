@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val mode by store.intFlow(
-                SettingsKeys.THEME_MODE, default = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                SettingsKeys.THEME_MODE
             ).collectAsState(initial = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
             val isDarkTheme = when (mode) {
@@ -39,11 +39,15 @@ class MainActivity : ComponentActivity() {
                 else -> isSystemInDarkTheme()
             }
 
+            val dynamicColor by store.isEnabled(SettingsKeys.DYNAMIC_COLORS)
+                .collectAsState(initial = true)
+
             val isHighContrastDarkTheme by store.isEnabled(SettingsKeys.HIGH_CONTRAST_DARK_MODE)
                 .collectAsState(initial = false)
 
             DriftlyTheme(
                 darkTheme = isDarkTheme,
+                dynamicColor = dynamicColor,
                 isHighContrastDarkTheme = isHighContrastDarkTheme
             ) {
                 Surface(

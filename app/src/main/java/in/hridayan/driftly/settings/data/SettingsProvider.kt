@@ -38,6 +38,22 @@ object SettingsProvider {
             type = SettingsType.Switch
         ),
         SettingsItem(
+            key = key.DYNAMIC_COLORS,
+            host = LookAndFeelScreen,
+            title = "Dynamic colors",
+            description = "Automatically set the app theme according to the device wallpaper",
+            icon = R.drawable.ic_color_picker,
+            type = SettingsType.Switch
+        ),
+        SettingsItem(
+            key = key.HAPTICS_AND_VIBRATION,
+            host = LookAndFeelScreen,
+            title = "Haptics & Vibration",
+            description = "Interactive haptics for touch feedback",
+            icon = R.drawable.ic_vibration,
+            type = SettingsType.Switch
+        ),
+        SettingsItem(
             key = key.LANGUAGE,
             host = LookAndFeelScreen,
             title = "Default language",
