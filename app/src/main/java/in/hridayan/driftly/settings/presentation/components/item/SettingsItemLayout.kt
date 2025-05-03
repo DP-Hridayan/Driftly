@@ -11,6 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -19,16 +21,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun SettingsItemLayout(
     modifier: Modifier = Modifier,
     item: SettingsItem,
-    isEnabled: Boolean = false,
+    isEnabled: Flow<Boolean> = flowOf(false),
     onToggle: () -> Unit,
     onClick: (SettingsItem) -> Unit = {},
     contentDescription: String = "",
 ) {
+    val checked by isEnabled.collectAsState(initial = false)
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -61,7 +66,7 @@ fun SettingsItemLayout(
         }
 
         if (item.type == SettingsType.Switch) {
-            Switch(checked = isEnabled, onCheckedChange = { onToggle() })
+            Switch(checked = checked, onCheckedChange = { onToggle() })
         }
     }
 }
