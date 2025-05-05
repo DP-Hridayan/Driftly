@@ -5,7 +5,6 @@ import `in`.hridayan.driftly.navigation.SettingsScreen
 
 data class SettingsItem (
     val key: SettingsKeys,
-    val host:Any = SettingsScreen,
     val title: String,
     val description: String,
     val icon: Int,

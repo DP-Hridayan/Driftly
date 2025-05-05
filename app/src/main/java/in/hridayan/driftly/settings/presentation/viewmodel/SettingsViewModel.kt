@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.core.utils.constants.SettingsKeys
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
-import `in`.hridayan.driftly.navigation.SettingsScreen
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
-import `in`.hridayan.driftly.settings.domain.usecase.GetAllSettingsUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.Flow
@@ -22,50 +22,47 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val toggleSettingUseCase: ToggleSettingUseCase,
-    private val getAllSettingsUseCase: GetAllSettingsUseCase
+    private val getSettingsPageListUseCase: GetSettingsPageListUseCase,
+    private val getLookAndFeelPageListUseCase: GetLookAndFeelPageListUseCase,
 ) : ViewModel() {
 
-    private var currentHost: Any? = SettingsScreen
+    var settingsPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
+        private set
 
-    var settings by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
+    var lookAndFeelPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
         private set
 
     private val _uiEvent = MutableSharedFlow<SettingsUiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
 
-    fun loadSettingsForHost(host: Any? = SettingsScreen) {
-        viewModelScope.launch {
-            currentHost = host
-            val allSettings = getAllSettingsUseCase()
-            settings = filterByHost(allSettings, host)
-        }
-    }
 
     fun onToggle(key: SettingsKeys) {
         viewModelScope.launch {
             toggleSettingUseCase(key)
-            val allSettings = getAllSettingsUseCase()
-            settings = filterByHost(allSettings, currentHost)
+            loadSettings()
         }
     }
 
     fun onItemClicked(item: SettingsItem) {
         viewModelScope.launch {
             when (item.key) {
-                SettingsKeys.LOOK_AND_FEEL -> _uiEvent.emit(SettingsUiEvent.Navigate(LookAndFeelScreen))
+                SettingsKeys.LOOK_AND_FEEL -> _uiEvent.emit(
+                    SettingsUiEvent.Navigate(
+                        LookAndFeelScreen
+                    )
+                )
+
                 else -> {}
             }
         }
     }
 
-    private fun filterByHost(
-        fullList: List<Pair<SettingsItem, Flow<Boolean>>>,
-        host: Any?
-    ): List<Pair<SettingsItem, Flow<Boolean>>> {
-        return if (host != null) {
-            fullList.filter { it.first.host::class == host::class }
-        } else {
-            fullList
+    fun loadSettings() {
+        viewModelScope.launch {
+            val lookAndFeel = getLookAndFeelPageListUseCase()
+            val settings = getSettingsPageListUseCase()
+            settingsPageList = settings
+            lookAndFeelPageList = lookAndFeel
         }
     }
 }

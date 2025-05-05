@@ -35,4 +35,11 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="additional_settings">Additional settings</string>
+    <string name="auto_update">Auto update</string>
+    <string name="about">About</string>
+    <string name="high_contrast_dark_mode">High contrast dark mode</string>
+    <string name="dynamic_colors">Dynamic colors</string>
+    <string name="haptics_and_vibration">Haptics &amp; Vibration</string>
+    <string name="language">Language</string>
+
 </resources>

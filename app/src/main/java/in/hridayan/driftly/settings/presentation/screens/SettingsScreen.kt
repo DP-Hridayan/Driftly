@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.navigation.SettingsScreen
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
@@ -41,7 +40,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
-    val settings = viewModel.settings
+    val settings = viewModel.settingsPageList
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
@@ -60,7 +59,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
     }
 
     LaunchedEffect(Unit) {
-        viewModel.loadSettingsForHost(SettingsScreen)
+        viewModel.loadSettings()
     }
 
 

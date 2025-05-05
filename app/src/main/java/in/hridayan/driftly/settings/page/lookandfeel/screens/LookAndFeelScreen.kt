@@ -41,7 +41,6 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.page.lookandfeel.components.radiobutton.ThemeRadioGroup
 import `in`.hridayan.driftly.settings.page.lookandfeel.domain.ThemeOption
 import `in`.hridayan.driftly.settings.page.lookandfeel.viewmodel.ThemeViewModel
@@ -58,7 +57,7 @@ fun LookAndFeelScreen(
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
-    val settings = settingsViewModel.settings
+    val settings = settingsViewModel.lookAndFeelPageList
     val context = LocalContext.current
     val current by themeViewModel.themeOption.collectAsState()
     val options = ThemeOption.entries.map { option ->
@@ -83,7 +82,7 @@ fun LookAndFeelScreen(
     }
 
     LaunchedEffect(Unit) {
-        settingsViewModel.loadSettingsForHost(LookAndFeelScreen)
+        settingsViewModel.loadSettings()
     }
 
 

@@ -11,12 +11,19 @@ class SettingsRepositoryImpl(
     private val dataStore: SettingsDataStore
 ) : SettingsRepository {
 
-    override suspend fun isSettingEnabled(key: SettingsKeys): Flow<Boolean> = dataStore.isEnabled(key)
+    override suspend fun isSettingEnabled(key: SettingsKeys): Flow<Boolean> =
+        dataStore.isEnabled(key)
 
     override suspend fun toggleSetting(key: SettingsKeys) = dataStore.toggle(key)
 
-    override suspend fun getAllSettings(): List<Pair<SettingsItem,  Flow<Boolean>>> {
-        return SettingsProvider.settings.map {
+    override suspend fun getSettingsPageList(): List<Pair<SettingsItem, Flow<Boolean>>> {
+        return SettingsProvider.settingsPageList.map {
+            it to dataStore.isEnabled(it.key)
+        }
+    }
+
+    override suspend fun getLookAndFeelPageList(): List<Pair<SettingsItem, Flow<Boolean>>> {
+        return SettingsProvider.lookAndFeelPageList.map {
             it to dataStore.isEnabled(it.key)
         }
     }
