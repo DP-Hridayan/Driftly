@@ -41,5 +41,7 @@
     <string name="dynamic_colors">Dynamic colors</string>
     <string name="haptics_and_vibration">Haptics &amp; Vibration</string>
     <string name="language">Language</string>
-
+    <string name="lead_developer">Lead developer</string>
+    <string name="des_hridayan">Just a guy who loves apps and design</string>
+    <string name="support_bmc">Like what I do?\nConsider buying me a coffee</string>
 </resources>

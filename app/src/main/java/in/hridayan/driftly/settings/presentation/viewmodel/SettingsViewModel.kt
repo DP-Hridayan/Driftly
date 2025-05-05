@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.core.utils.constants.SettingsKeys
+import `in`.hridayan.driftly.navigation.AboutScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
@@ -47,9 +48,11 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             when (item.key) {
                 SettingsKeys.LOOK_AND_FEEL -> _uiEvent.emit(
-                    SettingsUiEvent.Navigate(
-                        LookAndFeelScreen
-                    )
+                    SettingsUiEvent.Navigate(LookAndFeelScreen)
+                )
+
+                SettingsKeys.ABOUT -> _uiEvent.emit(
+                    SettingsUiEvent.Navigate(AboutScreen)
                 )
 
                 else -> {}

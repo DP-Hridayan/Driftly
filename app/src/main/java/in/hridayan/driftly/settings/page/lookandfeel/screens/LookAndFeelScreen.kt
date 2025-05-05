@@ -98,7 +98,7 @@ fun LookAndFeelScreen(
 
                     val fontSize = lerp(expandedFontSize, collapsedFontSize, collapsedFraction)
                     Text(
-                        text = "Look & Feel",
+                        text = stringResource(R.string.look_and_feel),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
                         fontSize = fontSize,
