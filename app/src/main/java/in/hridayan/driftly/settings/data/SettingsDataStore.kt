@@ -8,7 +8,6 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.core.utils.constants.SettingsKeys
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -24,7 +23,7 @@ class SettingsDataStore @Inject constructor(
 
     fun isEnabled(key: SettingsKeys): Flow<Boolean> {
         val preferencesKey = key.toBooleanKey()
-        val default = key.default as? Boolean ?: false
+        val default = key.default as? Boolean == true
 
         return ds.data.map { prefs ->
             if (!prefs.contains(preferencesKey)) {
@@ -40,7 +39,7 @@ class SettingsDataStore @Inject constructor(
     suspend fun toggle(key: SettingsKeys) {
         val preferencesKey = key.toBooleanKey()
         ds.edit { prefs ->
-            val current = prefs[preferencesKey] ?: false
+            val current = prefs[preferencesKey] == true
             prefs[preferencesKey] = !current
         }
     }
