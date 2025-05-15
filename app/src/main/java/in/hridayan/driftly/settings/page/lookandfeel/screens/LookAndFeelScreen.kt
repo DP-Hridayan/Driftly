@@ -4,7 +4,9 @@ package `in`.hridayan.driftly.settings.page.lookandfeel.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -27,7 +29,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -44,6 +48,7 @@ import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageV
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
 import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.navigation.LocalNavController
+import `in`.hridayan.driftly.settings.page.lookandfeel.components.button.PaletteWheel
 import `in`.hridayan.driftly.settings.page.lookandfeel.components.radiobutton.ThemeRadioGroup
 import `in`.hridayan.driftly.settings.page.lookandfeel.domain.ThemeOption
 import `in`.hridayan.driftly.settings.page.lookandfeel.viewmodel.ThemeViewModel
@@ -144,6 +149,7 @@ fun LookAndFeelScreen(
                     contentDescription = null
                 )
             }
+
             item {
                 Column(
                     modifier = Modifier
@@ -188,9 +194,11 @@ fun LookAndFeelScreen(
             }
 
             item {
-                Spacer(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(25.dp))
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(25.dp)
+                )
             }
         }
     }
