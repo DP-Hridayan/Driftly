@@ -10,5 +10,11 @@ enum class SettingsKeys(val default: Any?) {
     THEME_MODE(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM),
     HIGH_CONTRAST_DARK_MODE(false),
     DYNAMIC_COLORS(true),
-    HAPTICS_AND_VIBRATION(true)
+    HAPTICS_AND_VIBRATION(true),
+    VERSION(null),
+    CHANGELOGS(null),
+    REPORT(null),
+    FEATURE_REQUEST(null),
+    GITHUB(null),
+    LICENSE(null),
 }

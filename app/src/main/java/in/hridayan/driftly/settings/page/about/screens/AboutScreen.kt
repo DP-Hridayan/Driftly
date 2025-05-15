@@ -2,19 +2,16 @@
 
 package `in`.hridayan.driftly.settings.page.about.screens
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Card
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,9 +24,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -40,23 +35,29 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.page.about.components.card.SupportMeCard
 import `in`.hridayan.driftly.settings.page.about.components.image.ProfilePicCircular
+import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
+import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
-fun AboutScreen(modifier: Modifier = Modifier) {
+fun AboutScreen(
+    modifier: Modifier = Modifier,
+    settingsViewModel: SettingsViewModel = hiltViewModel()
+) {
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+    val settings = settingsViewModel.aboutPageList
 
     Scaffold(
         modifier = modifier.fillMaxSize(), topBar = {
             LargeTopAppBar(
                 title = {
                     val collapsedFraction = scrollBehavior.state.collapsedFraction
-
                     val expandedFontSize = 33.sp
                     val collapsedFontSize = 20.sp
 
@@ -100,10 +101,10 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                     modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
                 )
 
-                Column (
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top= 25.dp),
+                        .padding(top = 25.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(15.dp)
                 ) {
@@ -128,8 +129,31 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                 }
             }
 
-            item{
+            item {
+                Text(
+                    text = stringResource(R.string.app),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(start = 20.dp, top = 45.dp, bottom = 25.dp)
+                )
+            }
 
+            itemsIndexed(
+                items = settings
+            ) { _, pair ->
+                val (item, isEnabled) = pair
+                SettingsItemLayout(
+                    item = item,
+                    isEnabled = isEnabled,
+                    onToggle = { settingsViewModel.onToggle(item.key) },
+                    onClick = { clickedItem -> settingsViewModel.onItemClicked(clickedItem) },
+                )
+            }
+
+            item {
+                Spacer(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(25.dp))
             }
         }
     }

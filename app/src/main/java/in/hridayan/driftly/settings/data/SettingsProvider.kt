@@ -1,12 +1,13 @@
 package `in`.hridayan.driftly.settings.data
 
+import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import `in`.hridayan.driftly.core.utils.constants.SettingsKeys as key
 
 object SettingsProvider {
-    val settingsPageList = listOf(
+    val settingsPageList = listOf<SettingsItem>(
         SettingsItem(
             key = key.LOOK_AND_FEEL,
             titleResId = R.string.look_and_feel,
@@ -30,7 +31,7 @@ object SettingsProvider {
         )
     )
 
-    val lookAndFeelPageList = listOf(
+    val lookAndFeelPageList = listOf<SettingsItem>(
         SettingsItem(
             key = key.HIGH_CONTRAST_DARK_MODE,
             titleResId = R.string.high_contrast_dark_mode,
@@ -59,5 +60,50 @@ object SettingsProvider {
             icon = R.drawable.ic_language,
             type = SettingsType.NoSwitch
         ),
+    )
+
+    val aboutPageList = listOf<SettingsItem>(
+        SettingsItem(
+            key = key.VERSION,
+            titleResId = R.string.version,
+            descriptionString = BuildConfig.VERSION_NAME,
+            icon = R.drawable.ic_version,
+            type = SettingsType.NoSwitch
+        ),
+        SettingsItem(
+            key = key.CHANGELOGS,
+            titleResId = R.string.changelogs,
+            descriptionResId = R.string.des_changelogs,
+            icon = R.drawable.ic_changelog,
+            type = SettingsType.NoSwitch
+        ),
+        SettingsItem(
+            key = key.REPORT,
+            titleResId = R.string.report_issue,
+            descriptionResId = R.string.des_report_issue,
+            icon = R.drawable.ic_report,
+            type = SettingsType.NoSwitch
+        ),
+        SettingsItem(
+            key = key.FEATURE_REQUEST,
+            titleResId = R.string.feature_request,
+            descriptionResId = R.string.des_feature_request,
+            icon = R.drawable.ic_feature,
+            type = SettingsType.NoSwitch
+        ),
+        SettingsItem(
+            key = key.GITHUB,
+            titleResId = R.string.github,
+            descriptionResId = R.string.des_github,
+            icon = R.drawable.ic_github,
+            type = SettingsType.NoSwitch
+        ),
+        SettingsItem(
+            key = key.LICENSE,
+            titleResId = R.string.license,
+            descriptionResId = R.string.des_license,
+            icon = R.drawable.ic_license,
+            type = SettingsType.NoSwitch
+        )
     )
 }

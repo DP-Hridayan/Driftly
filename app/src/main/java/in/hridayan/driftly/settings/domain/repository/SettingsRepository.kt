@@ -9,4 +9,5 @@ interface SettingsRepository {
     suspend fun toggleSetting(key: SettingsKeys)
     suspend fun getSettingsPageList(): List<Pair<SettingsItem, Flow<Boolean>>>
     suspend fun getLookAndFeelPageList(): List<Pair<SettingsItem, Flow<Boolean>>>
+    suspend fun getAboutPageList(): List<Pair<SettingsItem, Flow<Boolean>>>
 }

@@ -43,7 +43,7 @@ fun SettingsItemLayout(
                     onClick(item)
                     onToggle()
                 })
-            .padding(15.dp),
+            .padding(horizontal = 15.dp, vertical = 17.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     ) {
@@ -56,17 +56,34 @@ fun SettingsItemLayout(
         Column(
             modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(7.dp)
         ) {
-            Text(
-                text = stringResource(item.titleResId),
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.alpha(0.95f)
-            )
-            Text(
-                text = stringResource(item.descriptionResId),
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.alpha(0.90f)
-            )
+            val titleText = when {
+                item.titleResId != 0 -> runCatching { stringResource(item.titleResId) }.getOrElse { "" }
+                item.titleString.isNotBlank() -> item.titleString
+                else -> null
+            }
+
+            if (!titleText.isNullOrEmpty()) {
+                Text(
+                    text = titleText,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.alpha(0.95f)
+                )
+            }
+
+            val descriptionText = when {
+                item.descriptionResId != 0 -> runCatching { stringResource(item.descriptionResId) }.getOrElse { "" }
+                item.descriptionString.isNotBlank() -> item.descriptionString
+                else -> null
+            }
+
+            if (!descriptionText.isNullOrEmpty()) {
+                Text(
+                    text = descriptionText,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.alpha(0.90f)
+                )
+            }
         }
 
         if (item.type == SettingsType.Switch) {

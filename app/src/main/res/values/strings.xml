@@ -63,4 +63,6 @@
     <string name="des_github_repo">Visit the github repository of the app</string>
     <string name="license">License</string>
     <string name="des_license">Learn about the license this app is using</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="des_github">Visit the github repository of the app</string>
 </resources>

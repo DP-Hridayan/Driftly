@@ -27,4 +27,10 @@ class SettingsRepositoryImpl(
             it to dataStore.isEnabled(it.key)
         }
     }
+
+    override suspend fun getAboutPageList(): List<Pair<SettingsItem, Flow<Boolean>>> {
+        return SettingsProvider.aboutPageList.map {
+            it to dataStore.isEnabled(it.key)
+        }
+    }
 }

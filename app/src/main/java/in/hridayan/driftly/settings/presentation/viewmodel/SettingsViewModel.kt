@@ -10,6 +10,7 @@ import `in`.hridayan.driftly.core.utils.constants.SettingsKeys
 import `in`.hridayan.driftly.navigation.AboutScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
+import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
@@ -25,6 +26,7 @@ class SettingsViewModel @Inject constructor(
     private val toggleSettingUseCase: ToggleSettingUseCase,
     private val getSettingsPageListUseCase: GetSettingsPageListUseCase,
     private val getLookAndFeelPageListUseCase: GetLookAndFeelPageListUseCase,
+    private val getAboutPageListUseCase: GetAboutPageListUseCase
 ) : ViewModel() {
 
     var settingsPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
@@ -33,9 +35,17 @@ class SettingsViewModel @Inject constructor(
     var lookAndFeelPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
         private set
 
+    var aboutPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
+        private set
+
     private val _uiEvent = MutableSharedFlow<SettingsUiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
 
+    init {
+        viewModelScope.launch {
+            loadSettings()
+        }
+    }
 
     fun onToggle(key: SettingsKeys) {
         viewModelScope.launch {
@@ -64,8 +74,11 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val lookAndFeel = getLookAndFeelPageListUseCase()
             val settings = getSettingsPageListUseCase()
+            val about = getAboutPageListUseCase()
+
             settingsPageList = settings
             lookAndFeelPageList = lookAndFeel
+            aboutPageList = about
         }
     }
 }

@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import `in`.hridayan.driftly.settings.data.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.repository.SettingsRepositoryImpl
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
+import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
@@ -30,10 +31,14 @@ object SettingsModule {
         ToggleSettingUseCase(repo)
 
     @Provides
-    fun provideGetSettingsPageListUseCase(repo: SettingsRepository): GetSettingsPageListUseCase=
+    fun provideGetSettingsPageListUseCase(repo: SettingsRepository): GetSettingsPageListUseCase =
         GetSettingsPageListUseCase(repo)
 
     @Provides
-    fun provideGetLookAndFeelPageListUseCase(repo: SettingsRepository): GetLookAndFeelPageListUseCase=
+    fun provideGetLookAndFeelPageListUseCase(repo: SettingsRepository): GetLookAndFeelPageListUseCase =
         GetLookAndFeelPageListUseCase(repo)
+
+    @Provides
+    fun provideGetAboutPageListUseCase(repo: SettingsRepository): GetAboutPageListUseCase =
+        GetAboutPageListUseCase(repo)
 }

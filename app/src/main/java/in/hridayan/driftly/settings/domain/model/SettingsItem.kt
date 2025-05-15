@@ -1,13 +1,13 @@
 package `in`.hridayan.driftly.settings.domain.model
 
-import android.R
 import `in`.hridayan.driftly.core.utils.constants.SettingsKeys
-import `in`.hridayan.driftly.navigation.SettingsScreen
 
-data class SettingsItem (
+data class SettingsItem(
     val key: SettingsKeys,
-    val titleResId: Int,
-    val descriptionResId: Int,
+    val titleString: String = "",
+    val titleResId: Int = 0, //Error handling needs to be done
+    val descriptionString: String = "",
+    val descriptionResId: Int = 0, //Error handling needs to be done
     val icon: Int,
     val type: SettingsType = SettingsType.NoSwitch
 )
