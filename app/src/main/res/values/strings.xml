@@ -44,4 +44,16 @@
     <string name="lead_developer">Lead developer</string>
     <string name="des_hridayan">Just a guy who loves apps and design</string>
     <string name="support_bmc">Like what I do?\nConsider buying me a coffee</string>
+    <string name="app">App</string>
+    <string name="version">Version</string>
+    <string name="changelogs">Changelogs</string>
+    <string name="des_changelogs">History of all the changes made to the app</string>
+    <string name="feature_request">Feature request</string>
+    <string name="des_feature_request">If you have any ideas or suggestions for the app, let us know</string>
+    <string name="report_issue">Report issue</string>
+    <string name="des_report_issue">Report any issue or bug you have encountered while using the app</string>
+    <string name="github_repo">Github repo</string>
+    <string name="des_github_repo">Visit the github repository of the app</string>
+    <string name="license">License</string>
+    <string name="des_license">Learn about the license this app is using</string>
 </resources>
