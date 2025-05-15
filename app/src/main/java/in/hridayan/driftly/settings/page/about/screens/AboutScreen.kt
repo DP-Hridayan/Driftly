@@ -40,18 +40,20 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.page.about.components.card.SupportMeCard
 import `in`.hridayan.driftly.settings.page.about.components.image.ProfilePicCircular
+import `in`.hridayan.driftly.settings.page.about.viewmodel.AboutViewModel
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 fun AboutScreen(
     modifier: Modifier = Modifier,
-    settingsViewModel: SettingsViewModel = hiltViewModel()
+    settingsViewModel: SettingsViewModel = hiltViewModel(),
+    aboutViewModel: AboutViewModel = hiltViewModel()
 ) {
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
-    val settings = settingsViewModel.aboutPageList
+    val settings = aboutViewModel.aboutPageList
 
     Scaffold(
         modifier = modifier.fillMaxSize(), topBar = {
@@ -146,7 +148,7 @@ fun AboutScreen(
                     item = item,
                     isEnabled = isEnabled,
                     onToggle = { settingsViewModel.onToggle(item.key) },
-                    onClick = { clickedItem -> settingsViewModel.onItemClicked(clickedItem) },
+                    onClick = { clickedItem -> aboutViewModel.onItemClicked(clickedItem) },
                 )
             }
 
