@@ -2,6 +2,7 @@
 
 package `in`.hridayan.driftly.settings.page.about.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,9 +23,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -37,11 +40,13 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.page.about.components.card.SupportMeCard
 import `in`.hridayan.driftly.settings.page.about.components.image.ProfilePicCircular
 import `in`.hridayan.driftly.settings.page.about.viewmodel.AboutViewModel
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
+import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
@@ -53,7 +58,29 @@ fun AboutScreen(
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+    val context = LocalContext.current
     val settings = aboutViewModel.aboutPageList
+
+    LaunchedEffect(Unit) {
+        aboutViewModel.uiEvent.collect { event ->
+            when (event) {
+                is SettingsUiEvent.Navigate -> {
+                    navController.navigate(event.route)
+                }
+
+                is SettingsUiEvent.ShowDialog -> {
+                }
+
+                is SettingsUiEvent.ShowToast -> {
+                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                }
+
+                is SettingsUiEvent.OpenUrl -> {
+                    openUrl(event.url, context)
+                }
+            }
+        }
+    }
 
     Scaffold(
         modifier = modifier.fillMaxSize(), topBar = {

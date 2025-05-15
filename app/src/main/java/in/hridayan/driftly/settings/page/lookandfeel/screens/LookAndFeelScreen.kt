@@ -42,6 +42,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
+import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.page.lookandfeel.components.radiobutton.ThemeRadioGroup
 import `in`.hridayan.driftly.settings.page.lookandfeel.domain.ThemeOption
@@ -78,6 +79,10 @@ fun LookAndFeelScreen(
 
                 is SettingsUiEvent.ShowToast -> {
                     Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                }
+
+                is SettingsUiEvent.OpenUrl -> {
+                    openUrl(event.url, context)
                 }
             }
         }
