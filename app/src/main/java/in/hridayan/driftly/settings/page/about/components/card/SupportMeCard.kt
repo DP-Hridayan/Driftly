@@ -108,7 +108,7 @@ private fun ContactBox(
         )
         Text(
             text = text,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodySmall,
             fontWeight = FontWeight.Bold
         )
     }
@@ -132,7 +132,7 @@ private fun BuyMeACoffee(modifier: Modifier = Modifier, onClick: () -> Unit = {}
 
         Text(
             text = stringResource(R.string.support_bmc),
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodySmall,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.weight(6f)
         )
