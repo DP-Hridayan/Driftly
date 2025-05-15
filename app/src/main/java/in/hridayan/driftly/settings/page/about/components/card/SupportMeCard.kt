@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -30,9 +31,15 @@ import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.bmcLogo
+import `in`.hridayan.driftly.core.utils.constants.URL_DEV_BM_COFFEE
+import `in`.hridayan.driftly.core.utils.constants.URL_DEV_EMAIL
+import `in`.hridayan.driftly.core.utils.constants.URL_DEV_GITHUB
+import `in`.hridayan.driftly.core.utils.constants.URL_DEV_TELEGRAM
+import `in`.hridayan.driftly.core.utils.openUrl
 
 @Composable
 fun SupportMeCard(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -49,13 +56,14 @@ fun SupportMeCard(modifier: Modifier = Modifier) {
 
             HorizontalDivider(thickness = 1.dp)
 
-            BuyMeACoffee()
+            BuyMeACoffee(onClick = { openUrl(URL_DEV_BM_COFFEE, context) })
         }
     }
 }
 
 @Composable
 private fun ContactHandles(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
     Row(
         modifier = modifier
             .padding(horizontal = 25.dp, vertical = 10.dp)
@@ -64,7 +72,8 @@ private fun ContactHandles(modifier: Modifier = Modifier) {
         ContactBox(
             modifier = Modifier.weight(1f),
             painter = painterResource(R.drawable.ic_mail),
-            text = "E-mail"
+            text = "E-mail",
+            onClick = { openUrl(url = URL_DEV_EMAIL, context = context) }
         )
 
         VerticalDivider(thickness = 1.dp, modifier = Modifier.padding(horizontal = 5.dp))
@@ -72,7 +81,8 @@ private fun ContactHandles(modifier: Modifier = Modifier) {
         ContactBox(
             modifier = Modifier.weight(1f),
             painter = painterResource(R.drawable.ic_github),
-            text = "Github"
+            text = stringResource(R.string.github),
+            onClick = { openUrl(url = URL_DEV_GITHUB, context = context) }
         )
 
         VerticalDivider(thickness = 1.dp, modifier = Modifier.padding(horizontal = 5.dp))
@@ -80,7 +90,8 @@ private fun ContactHandles(modifier: Modifier = Modifier) {
         ContactBox(
             modifier = Modifier.weight(1f),
             painter = painterResource(R.drawable.ic_telegram),
-            text = "Telegram"
+            text = "Telegram",
+            onClick = { openUrl(url = URL_DEV_TELEGRAM, context = context) }
         )
     }
 }
@@ -97,7 +108,7 @@ private fun ContactBox(
         verticalArrangement = Arrangement.spacedBy(5.dp),
         modifier = modifier
             .clip(MaterialTheme.shapes.extraLarge)
-            .clickable(enabled = true, onClick = onClick)
+            .clickable(enabled = true, onClick = { onClick() })
             .padding(vertical = 5.dp),
     ) {
         Image(
@@ -120,7 +131,7 @@ private fun BuyMeACoffee(modifier: Modifier = Modifier, onClick: () -> Unit = {}
         horizontalArrangement = Arrangement.spacedBy(20.dp),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .clickable(enabled = true, onClick = onClick)
+            .clickable(enabled = true, onClick = { onClick() })
             .padding(horizontal = 25.dp, vertical = 15.dp)
     ) {
         Spacer(modifier = Modifier.weight(0.4f))
