@@ -9,22 +9,22 @@ object SettingsProvider {
     val settingsPageList = listOf(
         SettingsItem(
             key = key.LOOK_AND_FEEL,
-            title = "Look & Feel",
-            description = "Dynamic color, Dark theme, Language",
+            titleResId = R.string.look_and_feel,
+            descriptionResId = R.string.des_look_and_feel,
             icon = R.drawable.ic_pallete,
             type = SettingsType.NoSwitch
         ),
         SettingsItem(
             key = key.AUTO_UPDATE,
-            title = "Auto update",
-            description = "Check for updates automatically",
+            titleResId = R.string.auto_update,
+            descriptionResId = R.string.des_auto_update,
             icon = R.drawable.ic_update,
             type = SettingsType.Switch
         ),
         SettingsItem(
             key = key.ABOUT,
-            title = "About",
-            description = "Links and credits",
+            titleResId = R.string.about,
+            descriptionResId = R.string.des_about,
             icon = R.drawable.ic_info,
             type = SettingsType.NoSwitch
         )
@@ -33,29 +33,29 @@ object SettingsProvider {
     val lookAndFeelPageList = listOf(
         SettingsItem(
             key = key.HIGH_CONTRAST_DARK_MODE,
-            title = "High contrast dark mode",
-            description = "Pure black theme for devices with OLED panel",
+            titleResId = R.string.high_contrast_dark_mode,
+            descriptionResId = R.string.des_high_contrast_dark_mode,
             icon = R.drawable.ic_contrast,
             type = SettingsType.Switch
         ),
         SettingsItem(
             key = key.DYNAMIC_COLORS,
-            title = "Dynamic colors",
-            description = "Automatically set the app theme according to the device wallpaper",
+            titleResId = R.string.dynamic_colors,
+            descriptionResId = R.string.des_dynamic_colors,
             icon = R.drawable.ic_color_picker,
             type = SettingsType.Switch
         ),
         SettingsItem(
             key = key.HAPTICS_AND_VIBRATION,
-            title = "Haptics & Vibration",
-            description = "Interactive haptics for touch feedback",
+            titleResId = R.string.haptics_and_vibration,
+            descriptionResId = R.string.des_haptics_and_vibration,
             icon = R.drawable.ic_vibration,
             type = SettingsType.Switch
         ),
         SettingsItem(
             key = key.LANGUAGE,
-            title = "Default language",
-            description = "Choose the default language for the app",
+            titleResId = R.string.default_language,
+            descriptionResId = R.string.des_default_language,
             icon = R.drawable.ic_language,
             type = SettingsType.NoSwitch
         ),

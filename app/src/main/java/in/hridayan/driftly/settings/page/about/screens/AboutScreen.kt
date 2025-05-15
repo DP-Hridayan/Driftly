@@ -127,6 +127,10 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                     SupportMeCard(modifier = modifier.padding(horizontal = 20.dp))
                 }
             }
+
+            item{
+
+            }
         }
     }
 }

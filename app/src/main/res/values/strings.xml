@@ -29,6 +29,7 @@
     <string name="no_data">No data available</string>"
     <string name="settings">Settings</string>
     <string name="look_and_feel">Look &amp; Feel</string>
+    <string name="des_look_and_feel">Dynamic color, Dark theme, Language</string>
     <string name="theme">Theme</string>
     <string name="dark_theme">Dark theme</string>
     <string name="system">System</string>
@@ -36,11 +37,17 @@
     <string name="off">Off</string>
     <string name="additional_settings">Additional settings</string>
     <string name="auto_update">Auto update</string>
+    <string name="des_auto_update">Check for updates automatically</string>
     <string name="about">About</string>
+    <string name="des_about">Contributors and support</string>
     <string name="high_contrast_dark_mode">High contrast dark mode</string>
+    <string name="des_high_contrast_dark_mode">Pitch black dark theme for devices with OLED display</string>
     <string name="dynamic_colors">Dynamic colors</string>
+    <string name="des_dynamic_colors">Automatically set the app theme according to the device wallpaper</string>
     <string name="haptics_and_vibration">Haptics &amp; Vibration</string>
-    <string name="language">Language</string>
+    <string name="des_haptics_and_vibration">Interactive haptics for touch feedback</string>
+    <string name="default_language">Default language</string>
+    <string name="des_default_language">Change the default language of the app</string>
     <string name="lead_developer">Lead developer</string>
     <string name="des_hridayan">Just a guy who loves apps and design</string>
     <string name="support_bmc">Like what I do?\nConsider buying me a coffee</string>
