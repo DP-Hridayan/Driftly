@@ -11,6 +11,7 @@ import `in`.hridayan.driftly.core.utils.constants.URL_GITHUB_ISSUE_FEATURE_REQUE
 import `in`.hridayan.driftly.core.utils.constants.URL_GITHUB_ISSUE_REPORT
 import `in`.hridayan.driftly.core.utils.constants.URL_GITHUB_REPO
 import `in`.hridayan.driftly.core.utils.constants.URL_GITHUB_REPO_LICENSE
+import `in`.hridayan.driftly.navigation.ChangelogScreen
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
@@ -39,6 +40,10 @@ class AboutViewModel @Inject constructor(
     fun onItemClicked(item: SettingsItem) {
         viewModelScope.launch {
             when (item.key) {
+                SettingsKeys.CHANGELOGS -> _uiEvent.emit(
+                    SettingsUiEvent.Navigate(ChangelogScreen)
+                )
+
                 SettingsKeys.REPORT -> _uiEvent.emit(
                     SettingsUiEvent.OpenUrl(URL_GITHUB_ISSUE_REPORT)
                 )

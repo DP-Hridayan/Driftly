@@ -55,6 +55,7 @@
     <string name="version">Version</string>
     <string name="changelogs">Changelogs</string>
     <string name="des_changelogs">History of all the changes made to the app</string>
+    <string name="no_changelog_found">No changelog found for this version</string>
     <string name="feature_request">Feature request</string>
     <string name="des_feature_request">If you have any ideas or suggestions for the app, let us know</string>
     <string name="report_issue">Report issue</string>
@@ -65,4 +66,6 @@
     <string name="des_license">Learn about the license this app is using</string>
     <string name="github" translatable="false">Github</string>
     <string name="des_github">Visit the github repository of the app</string>
+
+    <string name="changelogs_v1_0_0">\nHuge UI and UX improvements across all sections of the app\nAdded ROOT and BASIC shell in addition to Shizuku shell for running commands\nAdded option to save output in custom directory\nFixed a lot of bugs and issues\nOptimised app\'s code for better performance and stability</string>
 </resources>
