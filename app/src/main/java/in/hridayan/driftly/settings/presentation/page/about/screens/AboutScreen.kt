@@ -1,12 +1,9 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package `in`.hridayan.driftly.settings.page.lookandfeel.screens
+package `in`.hridayan.driftly.settings.presentation.page.about.screens
 
 import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -27,16 +24,15 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
@@ -44,36 +40,29 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
-import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
 import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.settings.page.lookandfeel.components.button.PaletteWheel
-import `in`.hridayan.driftly.settings.page.lookandfeel.components.radiobutton.ThemeRadioGroup
-import `in`.hridayan.driftly.settings.page.lookandfeel.domain.ThemeOption
-import `in`.hridayan.driftly.settings.page.lookandfeel.viewmodel.ThemeViewModel
-import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
+import `in`.hridayan.driftly.settings.presentation.components.card.SupportMeCard
+import `in`.hridayan.driftly.settings.presentation.components.image.ProfilePicCircular
+import `in`.hridayan.driftly.settings.presentation.page.about.viewmodel.AboutViewModel
+import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
-fun LookAndFeelScreen(
+fun AboutScreen(
     modifier: Modifier = Modifier,
     settingsViewModel: SettingsViewModel = hiltViewModel(),
-    themeViewModel: ThemeViewModel = hiltViewModel()
+    aboutViewModel: AboutViewModel = hiltViewModel()
 ) {
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
-    val settings = settingsViewModel.lookAndFeelPageList
     val context = LocalContext.current
-    val current by themeViewModel.themeOption.collectAsState()
-    val options = ThemeOption.entries.map { option ->
-        stringResource(option.labelResId) to option
-    }
+    val settings = aboutViewModel.aboutPageList
 
     LaunchedEffect(Unit) {
-        settingsViewModel.uiEvent.collect { event ->
+        aboutViewModel.uiEvent.collect { event ->
             when (event) {
                 is SettingsUiEvent.Navigate -> {
                     navController.navigate(event.route)
@@ -93,24 +82,17 @@ fun LookAndFeelScreen(
         }
     }
 
-    LaunchedEffect(Unit) {
-        settingsViewModel.loadSettings()
-    }
-
-
     Scaffold(
-        modifier = modifier.fillMaxSize(),
-        topBar = {
+        modifier = modifier.fillMaxSize(), topBar = {
             LargeTopAppBar(
                 title = {
                     val collapsedFraction = scrollBehavior.state.collapsedFraction
-
                     val expandedFontSize = 33.sp
                     val collapsedFontSize = 20.sp
 
                     val fontSize = lerp(expandedFontSize, collapsedFontSize, collapsedFraction)
                     Text(
-                        text = stringResource(R.string.look_and_feel),
+                        text = stringResource(R.string.about),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
                         fontSize = fontSize,
@@ -141,43 +123,47 @@ fun LookAndFeelScreen(
             )
         ) {
             item {
-                Image(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 100.dp, vertical = 25.dp),
-                    imageVector = DynamicColorImageVectors.themePicker(),
-                    contentDescription = null
+                Text(
+                    text = stringResource(R.string.lead_developer),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
                 )
-            }
 
-            item {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                        .fillMaxWidth()
+                        .padding(top = 25.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(15.dp)
                 ) {
-                    Text(
-                        text = stringResource(R.string.dark_theme),
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp)
+                    ProfilePicCircular(
+                        painter = painterResource(R.mipmap.dp_hridayan),
+                        size = 150.dp,
                     )
 
-                    ThemeRadioGroup(
-                        options = options,
-                        selected = current,
-                        onSelectedChange = themeViewModel::select,
-                        modifier = Modifier.fillMaxWidth()
+                    Text(
+                        text = "Hridayan",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Bold,
                     )
+
+                    Text(
+                        text = stringResource(R.string.des_hridayan),
+                        style = MaterialTheme.typography.bodySmall,
+                        fontStyle = FontStyle.Italic,
+                    )
+
+                    SupportMeCard(modifier = modifier.padding(horizontal = 20.dp))
                 }
             }
 
             item {
                 Text(
-                    text = stringResource(R.string.additional_settings),
+                    text = stringResource(R.string.app),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
+                    modifier = Modifier.padding(start = 20.dp, top = 45.dp, bottom = 25.dp)
                 )
             }
 
@@ -189,16 +175,14 @@ fun LookAndFeelScreen(
                     item = item,
                     isEnabled = isEnabled,
                     onToggle = { settingsViewModel.onToggle(item.key) },
-                    onClick = { clickedItem -> settingsViewModel.onItemClicked(clickedItem) },
+                    onClick = { clickedItem -> aboutViewModel.onItemClicked(clickedItem) },
                 )
             }
 
             item {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(25.dp)
-                )
+                Spacer(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(25.dp))
             }
         }
     }

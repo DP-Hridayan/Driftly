@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.page.about.components.image
+package `in`.hridayan.driftly.settings.presentation.components.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border

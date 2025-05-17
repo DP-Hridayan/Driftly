@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.page.lookandfeel.viewmodel
+package `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.core.utils.constants.SettingsKeys
 import `in`.hridayan.driftly.settings.data.SettingsDataStore
-import `in`.hridayan.driftly.settings.page.lookandfeel.domain.ThemeOption
+import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.domain.ThemeOption
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn

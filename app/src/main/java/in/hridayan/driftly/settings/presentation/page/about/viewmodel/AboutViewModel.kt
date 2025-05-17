@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.page.about.viewmodel
+package `in`.hridayan.driftly.settings.presentation.page.about.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

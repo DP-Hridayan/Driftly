@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.page.lookandfeel.components.button
+package `in`.hridayan.driftly.settings.presentation.components.button
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween

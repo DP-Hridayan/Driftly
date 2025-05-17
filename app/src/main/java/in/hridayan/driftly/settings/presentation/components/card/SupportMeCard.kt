@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.page.about.components.card
+package `in`.hridayan.driftly.settings.presentation.components.card
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

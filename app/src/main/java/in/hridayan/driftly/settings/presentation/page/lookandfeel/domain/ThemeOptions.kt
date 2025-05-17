@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.page.lookandfeel.domain
+package `in`.hridayan.driftly.settings.presentation.page.lookandfeel.domain
 
 
 import androidx.appcompat.app.AppCompatDelegate

@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.page.lookandfeel.components.radiobutton
+package `in`.hridayan.driftly.settings.presentation.components.radiobutton
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
