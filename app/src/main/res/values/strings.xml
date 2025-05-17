@@ -67,5 +67,5 @@
     <string name="github" translatable="false">Github</string>
     <string name="des_github">Visit the github repository of the app</string>
 
-    <string name="changelogs_v1_0_0">\nHuge UI and UX improvements across all sections of the app\nAdded ROOT and BASIC shell in addition to Shizuku shell for running commands\nAdded option to save output in custom directory\nFixed a lot of bugs and issues\nOptimised app\'s code for better performance and stability</string>
+    <string name="changelogs_v1_0_0">Initial release</string>
 </resources>
