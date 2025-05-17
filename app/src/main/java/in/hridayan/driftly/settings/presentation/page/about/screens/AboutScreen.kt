@@ -68,16 +68,11 @@ fun AboutScreen(
                     navController.navigate(event.route)
                 }
 
-                is SettingsUiEvent.ShowDialog -> {
-                }
-
-                is SettingsUiEvent.ShowToast -> {
-                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
-                }
-
                 is SettingsUiEvent.OpenUrl -> {
                     openUrl(event.url, context)
                 }
+
+                else -> {}
             }
         }
     }

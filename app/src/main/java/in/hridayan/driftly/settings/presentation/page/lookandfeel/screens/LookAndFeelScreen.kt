@@ -2,7 +2,6 @@
 
 package `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -45,57 +44,43 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
-import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.components.button.PaletteWheel
-import `in`.hridayan.driftly.settings.presentation.components.radiobutton.ThemeRadioGroup
-import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.domain.ThemeOption
-import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.ThemeViewModel
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
+import `in`.hridayan.driftly.settings.presentation.components.radiobutton.ThemeRadioGroup
+import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
+import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.domain.ThemeOption
+import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.LookAndFeelViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 fun LookAndFeelScreen(
     modifier: Modifier = Modifier,
     settingsViewModel: SettingsViewModel = hiltViewModel(),
-    themeViewModel: ThemeViewModel = hiltViewModel()
+    lookAndFeelViewModel: LookAndFeelViewModel = hiltViewModel()
 ) {
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
     val settings = settingsViewModel.lookAndFeelPageList
     val context = LocalContext.current
-    val current by themeViewModel.themeOption.collectAsState()
+    val current by lookAndFeelViewModel.themeOption.collectAsState()
     val options = ThemeOption.entries.map { option ->
         stringResource(option.labelResId) to option
     }
 
     LaunchedEffect(Unit) {
-        settingsViewModel.uiEvent.collect { event ->
+        lookAndFeelViewModel.uiEvent.collect { event ->
             when (event) {
-                is SettingsUiEvent.Navigate -> {
-                    navController.navigate(event.route)
+                is SettingsUiEvent.LaunchIntent -> {
+                    context.startActivity(event.intent)
                 }
-
-                is SettingsUiEvent.ShowDialog -> {
-                }
-
-                is SettingsUiEvent.ShowToast -> {
-                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
-                }
-
-                is SettingsUiEvent.OpenUrl -> {
-                    openUrl(event.url, context)
-                }
+                else -> {}
             }
         }
-    }
 
-    LaunchedEffect(Unit) {
         settingsViewModel.loadSettings()
     }
-
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -150,16 +135,6 @@ fun LookAndFeelScreen(
             }
 
             item {
-                Box(
-                    modifier = Modifier
-                        .clip(MaterialTheme.shapes.large)
-                        .background(color = MaterialTheme.colorScheme.surfaceVariant)
-                ) {
-                    PaletteWheel(modifier = Modifier.padding(10.dp))
-                }
-            }
-
-            item {
                 Column(
                     modifier = Modifier
                         .fillMaxSize(),
@@ -175,7 +150,7 @@ fun LookAndFeelScreen(
                     ThemeRadioGroup(
                         options = options,
                         selected = current,
-                        onSelectedChange = themeViewModel::select,
+                        onSelectedChange = lookAndFeelViewModel::select,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -198,7 +173,7 @@ fun LookAndFeelScreen(
                     item = item,
                     isEnabled = isEnabled,
                     onToggle = { settingsViewModel.onToggle(item.key) },
-                    onClick = { clickedItem -> settingsViewModel.onItemClicked(clickedItem) },
+                    onClick = { clickedItem -> lookAndFeelViewModel.onItemClicked(clickedItem) },
                 )
             }
 
