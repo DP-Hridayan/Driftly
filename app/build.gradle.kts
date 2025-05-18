@@ -22,6 +22,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
