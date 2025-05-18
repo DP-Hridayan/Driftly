@@ -2,10 +2,9 @@
 
 package `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens
 
+import android.os.Build
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +28,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -44,8 +42,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
+import `in`.hridayan.driftly.core.utils.MiUiCheck
+import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.settings.presentation.components.button.PaletteWheel
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.components.radiobutton.ThemeRadioGroup
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
@@ -68,6 +67,8 @@ fun LookAndFeelScreen(
     val options = ThemeOption.entries.map { option ->
         stringResource(option.labelResId) to option
     }
+    val isMiUi = MiUiCheck.isMiui
+    val isSdkLowerThan13 = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
 
     LaunchedEffect(Unit) {
         lookAndFeelViewModel.uiEvent.collect { event ->
@@ -172,6 +173,7 @@ fun LookAndFeelScreen(
                 SettingsItemLayout(
                     item = item,
                     isEnabled = isEnabled,
+                    isLayoutVisible = !(item.key == SettingsKeys.LANGUAGE && (isSdkLowerThan13 || isMiUi)),
                     onToggle = { settingsViewModel.onToggle(item.key) },
                     onClick = { clickedItem -> lookAndFeelViewModel.onItemClicked(clickedItem) },
                 )

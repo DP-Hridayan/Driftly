@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.core.utils.constants
+package `in`.hridayan.driftly.core.common.constants
 
 const val URL_GITHUB_REPO = "https://github.com/DP-Hridayan/Driftly"
 const val URL_GITHUB_ISSUE_REPORT =

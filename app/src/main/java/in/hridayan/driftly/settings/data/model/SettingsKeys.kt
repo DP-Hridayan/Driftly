@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.core.utils.constants
+package `in`.hridayan.driftly.settings.data.model
 
 import androidx.appcompat.app.AppCompatDelegate
 

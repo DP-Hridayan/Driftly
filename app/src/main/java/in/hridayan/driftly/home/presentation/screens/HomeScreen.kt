@@ -37,7 +37,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.res.painterResource
@@ -49,6 +48,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
 import `in`.hridayan.driftly.home.presentation.components.dialog.AddSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.image.UndrawRelaxedReading
@@ -63,6 +63,7 @@ import `in`.hridayan.driftly.navigation.SettingsScreen
 fun HomeScreen(
     modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel(),
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val subjects by viewModel.subjectList.collectAsState(initial = emptyList())
     val subjectCount by viewModel.subjectCount.collectAsState(initial = 0)
@@ -96,7 +97,10 @@ fun HomeScreen(
                     .scale(fabScale),
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                onClick = { isDialogOpen = true },
+                onClick = {
+                    isDialogOpen = true
+                    weakHaptic()
+                },
             ) {
                 val rotationAngle by animateFloatAsState(if (isDialogOpen) 45f else 0f)
                 Icon(
@@ -132,11 +136,14 @@ fun HomeScreen(
                     Image(
                         painter = painterResource(R.drawable.ic_settings),
                         contentDescription = null,
-                        colorFilter    = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
                         modifier = Modifier.clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
-                            onClick = { navController.navigate(SettingsScreen) })
+                            onClick = {
+                                navController.navigate(SettingsScreen)
+                                weakHaptic()
+                            })
                     )
                 }
             }

@@ -31,10 +31,10 @@ import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.bmcLogo
-import `in`.hridayan.driftly.core.utils.constants.URL_DEV_BM_COFFEE
-import `in`.hridayan.driftly.core.utils.constants.URL_DEV_EMAIL
-import `in`.hridayan.driftly.core.utils.constants.URL_DEV_GITHUB
-import `in`.hridayan.driftly.core.utils.constants.URL_DEV_TELEGRAM
+import `in`.hridayan.driftly.core.common.constants.URL_DEV_BM_COFFEE
+import `in`.hridayan.driftly.core.common.constants.URL_DEV_EMAIL
+import `in`.hridayan.driftly.core.common.constants.URL_DEV_GITHUB
+import `in`.hridayan.driftly.core.common.constants.URL_DEV_TELEGRAM
 import `in`.hridayan.driftly.core.utils.openUrl
 
 @Composable

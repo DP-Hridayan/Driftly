@@ -4,7 +4,7 @@ import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
-import `in`.hridayan.driftly.core.utils.constants.SettingsKeys as key
+import `in`.hridayan.driftly.settings.data.model.SettingsKeys as key
 
 object SettingsProvider {
     val settingsPageList = listOf<SettingsItem>(

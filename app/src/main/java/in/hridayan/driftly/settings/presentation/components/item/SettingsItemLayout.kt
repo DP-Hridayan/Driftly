@@ -30,64 +30,67 @@ fun SettingsItemLayout(
     modifier: Modifier = Modifier,
     item: SettingsItem,
     isEnabled: Flow<Boolean> = flowOf(false),
+    isLayoutVisible: Boolean = true,
     onToggle: () -> Unit,
     onClick: (SettingsItem) -> Unit = {},
     contentDescription: String = "",
 ) {
     val checked by isEnabled.collectAsState(initial = false)
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .clickable(
-                enabled = true, onClick = {
-                    onClick(item)
-                    onToggle()
-                })
-            .padding(horizontal = 15.dp, vertical = 17.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(15.dp)
-    ) {
-        Icon(
-            painter = painterResource(item.icon),
-            contentDescription = contentDescription,
-            tint = MaterialTheme.colorScheme.primary
-        )
-
-        Column(
-            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(7.dp)
+    if (isLayoutVisible) {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .clickable(
+                    enabled = true, onClick = {
+                        onClick(item)
+                        onToggle()
+                    })
+                .padding(horizontal = 15.dp, vertical = 17.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
-            val titleText = when {
-                item.titleResId != 0 -> runCatching { stringResource(item.titleResId) }.getOrElse { "" }
-                item.titleString.isNotBlank() -> item.titleString
-                else -> null
+            Icon(
+                painter = painterResource(item.icon),
+                contentDescription = contentDescription,
+                tint = MaterialTheme.colorScheme.primary
+            )
+
+            Column(
+                modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(7.dp)
+            ) {
+                val titleText = when {
+                    item.titleResId != 0 -> runCatching { stringResource(item.titleResId) }.getOrElse { "" }
+                    item.titleString.isNotBlank() -> item.titleString
+                    else -> null
+                }
+
+                if (!titleText.isNullOrEmpty()) {
+                    Text(
+                        text = titleText,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.alpha(0.95f)
+                    )
+                }
+
+                val descriptionText = when {
+                    item.descriptionResId != 0 -> runCatching { stringResource(item.descriptionResId) }.getOrElse { "" }
+                    item.descriptionString.isNotBlank() -> item.descriptionString
+                    else -> null
+                }
+
+                if (!descriptionText.isNullOrEmpty()) {
+                    Text(
+                        text = descriptionText,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.alpha(0.90f)
+                    )
+                }
             }
 
-            if (!titleText.isNullOrEmpty()) {
-                Text(
-                    text = titleText,
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.alpha(0.95f)
-                )
+            if (item.type == SettingsType.Switch) {
+                Switch(checked = checked, onCheckedChange = { onToggle() })
             }
-
-            val descriptionText = when {
-                item.descriptionResId != 0 -> runCatching { stringResource(item.descriptionResId) }.getOrElse { "" }
-                item.descriptionString.isNotBlank() -> item.descriptionString
-                else -> null
-            }
-
-            if (!descriptionText.isNullOrEmpty()) {
-                Text(
-                    text = descriptionText,
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.alpha(0.90f)
-                )
-            }
-        }
-
-        if (item.type == SettingsType.Switch) {
-            Switch(checked = checked, onCheckedChange = { onToggle() })
         }
     }
 }

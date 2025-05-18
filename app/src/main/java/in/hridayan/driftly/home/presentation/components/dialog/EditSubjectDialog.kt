@@ -26,6 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.domain.model.SubjectError
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 
 @Composable
@@ -40,6 +41,7 @@ fun EditSubjectDialog(
         viewModel.setSubjectNamePlaceholder(subject)
     }
 
+    val weakHaptic = LocalWeakHaptic.current
     val subject by viewModel.subject.collectAsState()
     val subjectError by viewModel.subjectError.collectAsState()
 
@@ -85,6 +87,7 @@ fun EditSubjectDialog(
                     OutlinedButton(
                         modifier = Modifier.weight(0.4f),
                         onClick = {
+                            weakHaptic()
                             viewModel.resetInputFields()
                             onDismiss()
                         },
@@ -96,6 +99,7 @@ fun EditSubjectDialog(
                     Button(
                         modifier = Modifier.weight(0.4f),
                         onClick = {
+                            weakHaptic()
                             viewModel.updateSubject(
                                 subjectId = subjectId,
                                 onSuccess = {

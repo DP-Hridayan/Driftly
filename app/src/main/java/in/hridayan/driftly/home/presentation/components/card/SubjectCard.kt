@@ -36,6 +36,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedCircularProgressIndicator
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
@@ -62,6 +63,7 @@ fun SubjectCard(
         fraction = progress.coerceIn(0f, 1f)
     )
 
+    val weakHaptic = LocalWeakHaptic.current
     var isLongClicked by rememberSaveable { mutableStateOf(false) }
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isUpdateDialogVisible by rememberSaveable { mutableStateOf(false) }
@@ -70,6 +72,8 @@ fun SubjectCard(
     val handleLongClick = {
         isLongClicked = !isLongClicked
         onLongClicked(isLongClicked)
+        weakHaptic()
+
     }
 
     val handleClick = {
@@ -78,6 +82,7 @@ fun SubjectCard(
         } else {
             navigate()
         }
+        weakHaptic()
     }
 
     val handleDeleteConfirmation = {
@@ -142,6 +147,7 @@ fun SubjectCard(
                             indication = null,
                             onClick = {
                                 isUpdateDialogVisible = true
+                                weakHaptic()
                             })
                     )
 
@@ -154,6 +160,7 @@ fun SubjectCard(
                             indication = null,
                             onClick = {
                                 isDeleteDialogVisible = true
+                                weakHaptic()
                             })
                     )
                 }
@@ -171,6 +178,7 @@ fun SubjectCard(
                                 indication = null,
                                 onClick = {
                                     isNoAttendanceDialogVisible = true
+                                    weakHaptic()
                                 })
                     )
                 } else {

@@ -1,6 +1,6 @@
 package `in`.hridayan.driftly.settings.data.repository
 
-import `in`.hridayan.driftly.core.utils.constants.SettingsKeys
+import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.settings.data.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.SettingsProvider
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem

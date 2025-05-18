@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
@@ -32,6 +33,7 @@ fun Label(
     strokeColor: Color,
     onClick: () -> Unit = {}
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val animatedScale = remember { Animatable(0f) }
     val randomDelay = remember { Random.nextInt(250, 750) }
     LaunchedEffect(text) {
@@ -55,7 +57,10 @@ fun Label(
                 shape = Shape.cardCornerLarge,
                 color = strokeColor,
             )
-            .clickable(enabled = true, onClick = onClick)
+            .clickable(enabled = true, onClick = {
+                onClick()
+                weakHaptic()
+            })
             .padding(horizontal = 10.dp, vertical = 5.dp),
         contentAlignment = Alignment.Center
     ) {

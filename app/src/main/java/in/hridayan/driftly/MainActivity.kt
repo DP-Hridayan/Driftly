@@ -9,13 +9,13 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import dagger.hilt.android.AndroidEntryPoint
 import `in`.hridayan.driftly.core.presentation.AppEntry
 import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
-import `in`.hridayan.driftly.core.utils.constants.SettingsKeys
+import `in`.hridayan.driftly.core.common.CompositionLocals
+import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.settings.data.SettingsDataStore
 import javax.inject.Inject
 
@@ -29,32 +29,26 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            val mode by store.intFlow(
-                SettingsKeys.THEME_MODE
-            ).collectAsState(initial = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            CompositionLocals(store) {
+                val view = LocalView.current
+                val settings = LocalSettings.current
+                val isDarkTheme = when (settings.isDarkMode) {
+                    AppCompatDelegate.MODE_NIGHT_YES -> true
+                    AppCompatDelegate.MODE_NIGHT_NO -> false
+                    else -> isSystemInDarkTheme()
+                }
 
-            val isDarkTheme = when (mode) {
-                AppCompatDelegate.MODE_NIGHT_YES -> true
-                AppCompatDelegate.MODE_NIGHT_NO -> false
-                else -> isSystemInDarkTheme()
-            }
-
-            val dynamicColor by store.isEnabled(SettingsKeys.DYNAMIC_COLORS)
-                .collectAsState(initial = true)
-
-            val isHighContrastDarkTheme by store.isEnabled(SettingsKeys.HIGH_CONTRAST_DARK_MODE)
-                .collectAsState(initial = false)
-
-            DriftlyTheme(
-                darkTheme = isDarkTheme,
-                dynamicColor = dynamicColor,
-                isHighContrastDarkTheme = isHighContrastDarkTheme
-            ) {
-                Surface(
-                    modifier = Modifier.Companion.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.surface
+                DriftlyTheme(
+                    darkTheme = isDarkTheme,
+                    dynamicColor = settings.isDynamicColor,
+                    isHighContrastDarkTheme = settings.isHighContrastDarkMode
                 ) {
-                    AppEntry()
+                    Surface(
+                        modifier = Modifier.Companion.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.surface
+                    ) {
+                        AppEntry()
+                    }
                 }
             }
         }
