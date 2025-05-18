@@ -13,7 +13,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -24,6 +23,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCanvas
 import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.navigation.CalendarScreen
@@ -34,6 +34,7 @@ import `in`.hridayan.driftly.navigation.LocalNavController
 fun CalendarScreen(
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val args = navController.currentBackStackEntry?.toRoute<CalendarScreen>()
     val subjectId = args?.subjectId ?: 0
@@ -72,6 +73,7 @@ fun CalendarScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = {
+                        weakHaptic()
                         navController.popBackStack()
                     }) {
                         Icon(

@@ -40,11 +40,12 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
 import `in`.hridayan.driftly.core.utils.MiUiCheck
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.navigation.LocalNavController
+import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.components.radiobutton.ThemeRadioGroup
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
@@ -58,6 +59,7 @@ fun LookAndFeelScreen(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     lookAndFeelViewModel: LookAndFeelViewModel = hiltViewModel()
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
@@ -76,6 +78,7 @@ fun LookAndFeelScreen(
                 is SettingsUiEvent.LaunchIntent -> {
                     context.startActivity(event.intent)
                 }
+
                 else -> {}
             }
         }
@@ -106,6 +109,7 @@ fun LookAndFeelScreen(
                 navigationIcon = {
                     IconButton(onClick = {
                         navController.popBackStack()
+                        weakHaptic()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.arrow_back),

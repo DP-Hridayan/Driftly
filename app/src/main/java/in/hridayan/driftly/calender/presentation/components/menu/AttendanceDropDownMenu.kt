@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 
 @Composable
@@ -26,6 +27,7 @@ fun AttendanceDropDownMenu(
     dateString: String,
     expandedDateState: MutableState<String?>
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     DropdownMenu(
         expanded = true,
         onDismissRequest = {
@@ -53,6 +55,7 @@ fun AttendanceDropDownMenu(
                 )
             },
             onClick = {
+                weakHaptic()
                 onStatusChange(dateString, AttendanceStatus.PRESENT)
                 expandedDateState.value = null
             }
@@ -76,6 +79,7 @@ fun AttendanceDropDownMenu(
                 )
             },
             onClick = {
+                weakHaptic()
                 onStatusChange(dateString, AttendanceStatus.ABSENT)
                 expandedDateState.value = null
             }
@@ -99,6 +103,7 @@ fun AttendanceDropDownMenu(
                 )
             },
             onClick = {
+                weakHaptic()
                 onStatusChange(dateString, AttendanceStatus.UNMARKED)
                 expandedDateState.value = null
             }

@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 
 @Composable
 fun ConfirmDeleteDialog(
@@ -27,6 +28,7 @@ fun ConfirmDeleteDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     Dialog(
         onDismissRequest = { onDismiss() },
         properties = DialogProperties(dismissOnClickOutside = true)
@@ -62,7 +64,10 @@ fun ConfirmDeleteDialog(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(
-                        onClick = { onDismiss() }
+                        onClick = {
+                            onDismiss()
+                            weakHaptic()
+                        }
                     ) {
                         Text(stringResource(R.string.cancel))
                     }
@@ -70,7 +75,10 @@ fun ConfirmDeleteDialog(
                     Spacer(modifier = Modifier.width(8.dp))
 
                     TextButton(
-                        onClick = { onConfirm() }
+                        onClick = {
+                            onConfirm()
+                            weakHaptic()
+                        }
                     ) {
                         Text(
                             stringResource(R.string.confirm),

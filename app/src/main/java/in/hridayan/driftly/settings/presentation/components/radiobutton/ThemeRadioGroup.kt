@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 
 @Composable
 fun <T> ThemeRadioGroup(
@@ -22,13 +23,17 @@ fun <T> ThemeRadioGroup(
     onSelectedChange: (T) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     Column(modifier = modifier) {
         options.forEach { (label, value) ->
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onSelectedChange(value) }
+                    .clickable {
+                        onSelectedChange(value)
+                        weakHaptic()
+                    }
                     .padding(vertical = 8.dp, horizontal = 20.dp)
             ) {
                 Text(
@@ -41,7 +46,10 @@ fun <T> ThemeRadioGroup(
 
                 RadioButton(
                     selected = (value == selected),
-                    onClick = { onSelectedChange(value) }
+                    onClick = {
+                        onSelectedChange(value)
+                        weakHaptic()
+                    }
                 )
             }
         }

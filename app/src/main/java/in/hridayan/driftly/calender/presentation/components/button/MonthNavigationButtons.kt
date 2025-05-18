@@ -10,23 +10,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 
 @Composable
-fun  MonthNavigationButtons(modifier: Modifier = Modifier, onNavigatePrev: () -> Unit,
-                            onNavigateNext: () -> Unit) {
+fun MonthNavigationButtons(
+    modifier: Modifier = Modifier, onNavigatePrev: () -> Unit,
+    onNavigateNext: () -> Unit
+) {
+    val weakHaptic = LocalWeakHaptic.current
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     ) {
-        IconButton(onClick = onNavigatePrev) {
+        IconButton(onClick = {
+            weakHaptic()
+            onNavigatePrev()
+        }) {
             Icon(
                 painter = painterResource(R.drawable.chevron_left),
                 contentDescription = "Previous"
             )
         }
 
-        IconButton(onClick = onNavigateNext) {
+        IconButton(onClick = {
+            weakHaptic()
+            onNavigateNext()
+        }) {
             Icon(
                 painter = painterResource(R.drawable.chevron_right),
                 contentDescription = "Next"

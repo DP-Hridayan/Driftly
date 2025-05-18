@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
@@ -35,6 +36,7 @@ import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel = hiltViewModel()) {
+    val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
@@ -46,7 +48,8 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
                 is SettingsUiEvent.Navigate -> {
                     navController.navigate(event.route)
                 }
-                 else -> {}
+
+                else -> {}
             }
         }
 
@@ -76,6 +79,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
                 navigationIcon = {
                     IconButton(onClick = {
                         navController.popBackStack()
+                        weakHaptic()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.arrow_back),

@@ -41,6 +41,7 @@ import `in`.hridayan.driftly.calender.presentation.components.dialog.MonthYearPi
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
 import `in`.hridayan.driftly.calender.presentation.components.modifiers.streakModifier
 import `in`.hridayan.driftly.calender.presentation.components.text.MonthYearHeader
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.StreakType
 import java.time.LocalDate
@@ -58,6 +59,7 @@ fun CalendarCanvas(
     onStatusChange: (date: String, status: AttendanceStatus?) -> Unit,
     onNavigate: (Int, Int) -> Unit
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val yearMonth = YearMonth.of(year, month)
     val today = LocalDate.now()
     val daysInMonth = yearMonth.lengthOfMonth()
@@ -101,7 +103,10 @@ fun CalendarCanvas(
                 modifier = Modifier.padding(horizontal = 20.dp),
                 fullMonthName = fullMonthName,
                 year = year,
-                onClick = { showMonthYearDialog = true })
+                onClick = {
+                    showMonthYearDialog = true
+                    weakHaptic()
+                })
 
             Spacer(modifier = Modifier.weight(1f))
 
@@ -172,6 +177,7 @@ fun CalendarCanvas(
                             )
                             .clickable {
                                 expandedDateState.value = dateString
+                                weakHaptic()
                             },
                         contentAlignment = Alignment.Center,
                     ) {

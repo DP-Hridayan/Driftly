@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.presentation.components.item.ChangelogItemLayout
 import `in`.hridayan.driftly.settings.presentation.page.changelog.viewmodel.ChangelogViewModel
@@ -41,6 +42,7 @@ fun ChangelogScreen(
     modifier: Modifier = Modifier,
     changelogViewModel: ChangelogViewModel = hiltViewModel()
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
@@ -67,6 +69,7 @@ fun ChangelogScreen(
                 navigationIcon = {
                     IconButton(onClick = {
                         navController.popBackStack()
+                        weakHaptic()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.arrow_back),

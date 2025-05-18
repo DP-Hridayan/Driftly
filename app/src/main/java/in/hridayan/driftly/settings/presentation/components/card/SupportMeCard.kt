@@ -29,12 +29,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
-import `in`.hridayan.driftly.core.presentation.components.svg.vectors.bmcLogo
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.common.constants.URL_DEV_BM_COFFEE
 import `in`.hridayan.driftly.core.common.constants.URL_DEV_EMAIL
 import `in`.hridayan.driftly.core.common.constants.URL_DEV_GITHUB
 import `in`.hridayan.driftly.core.common.constants.URL_DEV_TELEGRAM
+import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
+import `in`.hridayan.driftly.core.presentation.components.svg.vectors.bmcLogo
 import `in`.hridayan.driftly.core.utils.openUrl
 
 @Composable
@@ -103,12 +104,16 @@ private fun ContactBox(
     text: String,
     onClick: () -> Unit = {}
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(5.dp),
         modifier = modifier
             .clip(MaterialTheme.shapes.extraLarge)
-            .clickable(enabled = true, onClick = { onClick() })
+            .clickable(enabled = true, onClick = {
+                onClick()
+                weakHaptic()
+            })
             .padding(vertical = 5.dp),
     ) {
         Image(
@@ -127,11 +132,15 @@ private fun ContactBox(
 
 @Composable
 private fun BuyMeACoffee(modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
+    val weakHaptic = LocalWeakHaptic.current
     Row(
         horizontalArrangement = Arrangement.spacedBy(20.dp),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .clickable(enabled = true, onClick = { onClick() })
+            .clickable(enabled = true, onClick = {
+                onClick()
+                weakHaptic()
+            })
             .padding(horizontal = 25.dp, vertical = 15.dp)
     ) {
         Spacer(modifier = Modifier.weight(0.4f))

@@ -37,12 +37,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import java.util.Calendar
 
 @Composable
 fun MonthYearPickerDialog(
     yearDisplayed: Int, monthDisplayed: Int, onDismiss: () -> Unit, onConfirm: (Int, Int) -> Unit
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val months = listOf(
         "January",
         "February",
@@ -163,6 +165,7 @@ fun MonthYearPickerDialog(
                             DropdownMenuItem(
                                 text = { Text(year.toString()) },
                                 onClick = {
+                                    weakHaptic()
                                     selectedYear = year
                                     expandedYear = false
                                 })
@@ -174,17 +177,21 @@ fun MonthYearPickerDialog(
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
             ) {
-                TextButton(onClick = onDismiss) {
-                    Text("Cancel")
+                TextButton(onClick = {
+                    weakHaptic()
+                    onDismiss()
+                }) {
+                    Text(text = stringResource(R.string.cancel))
                 }
 
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Button(onClick = {
+                    weakHaptic()
                     onConfirm(selectedMonth + 1, selectedYear)
                     onDismiss()
                 }) {
-                    Text("Select")
+                    Text(text = stringResource(R.string.select))
                 }
             }
         }

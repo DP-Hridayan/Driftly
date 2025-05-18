@@ -36,6 +36,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.image.UndrawDatePicker
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
@@ -153,6 +154,7 @@ fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
     val pagerState = rememberPagerState(pageCount = { AttendanceDataTabs.entries.size })
     val coroutineScope = rememberCoroutineScope()
     val selectedTabIndex = remember { derivedStateOf { pagerState.currentPage } }
+    val weakHaptic = LocalWeakHaptic.current
 
     Card(
         modifier = modifier
@@ -183,6 +185,7 @@ fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
                         onClick = {
                             coroutineScope.launch {
                                 pagerState.animateScrollToPage(currentTab.ordinal)
+                                weakHaptic()
                             }
                         },
                         text = {

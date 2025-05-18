@@ -10,12 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalView
 import dagger.hilt.android.AndroidEntryPoint
-import `in`.hridayan.driftly.core.presentation.AppEntry
-import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
 import `in`.hridayan.driftly.core.common.CompositionLocals
 import `in`.hridayan.driftly.core.common.LocalSettings
+import `in`.hridayan.driftly.core.presentation.AppEntry
+import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
 import `in`.hridayan.driftly.settings.data.SettingsDataStore
 import javax.inject.Inject
 
@@ -30,7 +29,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CompositionLocals(store) {
-                val view = LocalView.current
                 val settings = LocalSettings.current
                 val isDarkTheme = when (settings.isDarkMode) {
                     AppCompatDelegate.MODE_NIGHT_YES -> true

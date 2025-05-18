@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import kotlinx.coroutines.flow.Flow
@@ -35,6 +36,7 @@ fun SettingsItemLayout(
     onClick: (SettingsItem) -> Unit = {},
     contentDescription: String = "",
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val checked by isEnabled.collectAsState(initial = false)
     if (isLayoutVisible) {
         Row(
@@ -44,6 +46,7 @@ fun SettingsItemLayout(
                     enabled = true, onClick = {
                         onClick(item)
                         onToggle()
+                        weakHaptic()
                     })
                 .padding(horizontal = 15.dp, vertical = 17.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -89,7 +92,10 @@ fun SettingsItemLayout(
             }
 
             if (item.type == SettingsType.Switch) {
-                Switch(checked = checked, onCheckedChange = { onToggle() })
+                Switch(checked = checked, onCheckedChange = {
+                    onToggle()
+                    weakHaptic()
+                })
             }
         }
     }

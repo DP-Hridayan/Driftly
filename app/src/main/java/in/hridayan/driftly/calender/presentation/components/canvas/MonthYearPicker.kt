@@ -13,31 +13,35 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 
 @Composable
 fun MonthYearPicker(
-    modifier: Modifier = Modifier,
-    fullMonthName: String,
-    year: Int,
-    onClick: () -> Unit
-) = Row(
-    modifier = modifier
-        .clickable(
-            onClick = onClick,
-            interactionSource = remember { MutableInteractionSource() },
-            indication = null,
-        ),
-    verticalAlignment = Alignment.CenterVertically
+    modifier: Modifier = Modifier, fullMonthName: String, year: Int, onClick: () -> Unit
 ) {
-    Text(
-        text = "$fullMonthName $year",
-        style = MaterialTheme.typography.titleSmall
-    )
-
-    IconButton(onClick = onClick) {
-        Icon(
-            painter = painterResource(R.drawable.ic_arrow_dropdown),
-            contentDescription = "Dropdown icon"
+    val weakHaptic = LocalWeakHaptic.current
+    Row(
+        modifier = modifier.clickable(
+                onClick = {
+                    weakHaptic()
+                    onClick()
+                },
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+            ), verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "$fullMonthName $year", style = MaterialTheme.typography.titleSmall
         )
+
+        IconButton(onClick = {
+            weakHaptic()
+            onClick()
+        }) {
+            Icon(
+                painter = painterResource(R.drawable.ic_arrow_dropdown),
+                contentDescription = "Dropdown icon"
+            )
+        }
     }
 }

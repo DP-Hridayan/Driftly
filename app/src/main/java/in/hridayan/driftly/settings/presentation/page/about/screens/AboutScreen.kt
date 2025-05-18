@@ -2,7 +2,6 @@
 
 package `in`.hridayan.driftly.settings.presentation.page.about.screens
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -40,13 +39,14 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.components.card.SupportMeCard
 import `in`.hridayan.driftly.settings.presentation.components.image.ProfilePicCircular
-import `in`.hridayan.driftly.settings.presentation.page.about.viewmodel.AboutViewModel
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
+import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
+import `in`.hridayan.driftly.settings.presentation.page.about.viewmodel.AboutViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
@@ -55,6 +55,7 @@ fun AboutScreen(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     aboutViewModel: AboutViewModel = hiltViewModel()
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
@@ -98,6 +99,7 @@ fun AboutScreen(
                 navigationIcon = {
                     IconButton(onClick = {
                         navController.popBackStack()
+                        weakHaptic()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.arrow_back),
@@ -175,9 +177,11 @@ fun AboutScreen(
             }
 
             item {
-                Spacer(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(25.dp))
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(25.dp)
+                )
             }
         }
     }
