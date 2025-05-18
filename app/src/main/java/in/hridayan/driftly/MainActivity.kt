@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CompositionLocals(store) {
                 val settings = LocalSettings.current
+
                 val isDarkTheme = when (settings.isDarkMode) {
                     AppCompatDelegate.MODE_NIGHT_YES -> true
                     AppCompatDelegate.MODE_NIGHT_NO -> false
