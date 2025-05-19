@@ -43,6 +43,7 @@ import `in`.hridayan.driftly.core.utils.MiUiCheck
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
+import `in`.hridayan.driftly.settings.presentation.components.tab.ColorTabs
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.LookAndFeelViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
@@ -132,6 +133,10 @@ fun LookAndFeelScreen(
                     imageVector = DynamicColorImageVectors.themePicker(),
                     contentDescription = null
                 )
+            }
+
+            item {
+                ColorTabs(modifier = Modifier.padding(20.dp))
             }
 
             item {

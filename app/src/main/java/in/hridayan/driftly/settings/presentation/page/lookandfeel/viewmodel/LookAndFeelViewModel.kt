@@ -69,4 +69,10 @@ class LookAndFeelViewModel @Inject constructor(
             }
         }
     }
+
+    fun setSeedColor(seed:Int){
+        viewModelScope.launch {
+            store.setInt(SettingsKeys.SEED_COLOR, seed)
+        }
+    }
 }
