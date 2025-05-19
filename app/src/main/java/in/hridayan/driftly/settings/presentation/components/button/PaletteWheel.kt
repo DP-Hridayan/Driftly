@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 fun PaletteWheel(
     modifier: Modifier = Modifier,
     size: Dp = 50.dp,
+    seedColor : Color = MaterialTheme.colorScheme.primary,
     primaryColor: Color = MaterialTheme.colorScheme.primary,
     secondaryColor: Color = MaterialTheme.colorScheme.secondary,
     tertiaryColor: Color = MaterialTheme.colorScheme.tertiary,
@@ -85,7 +86,7 @@ fun PaletteWheel(
                 .align(Alignment.Center)
                 .scale(scale)
                 .clip(CircleShape)
-                .background(color = MaterialTheme.colorScheme.primaryContainer)
+                .background(color = seedColor)
         ) {
             Icon(
                 modifier = Modifier
@@ -93,7 +94,7 @@ fun PaletteWheel(
                     .align(Alignment.Center),
                 painter = painterResource(id = R.drawable.ic_check),
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onPrimaryContainer
+                tint = primaryColor
             )
         }
 

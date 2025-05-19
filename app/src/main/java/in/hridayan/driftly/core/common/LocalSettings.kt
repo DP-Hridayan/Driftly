@@ -10,7 +10,7 @@ val LocalSettings = compositionLocalOf<SettingsState> {
         isAutoUpdate = false,
         isDarkMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
         isHighContrastDarkMode = false,
-        seedColor = SeedColors.BLUE,
+        seedColor = SeedColors.Blue.seed,
         isDynamicColor = true,
         isHapticEnabled = true
     )
