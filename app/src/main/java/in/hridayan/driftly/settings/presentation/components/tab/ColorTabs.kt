@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import `in`.hridayan.driftly.core.common.LocalSeedColor
 import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.settings.presentation.components.button.PaletteWheel
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.LookAndFeelViewModel
@@ -59,7 +60,7 @@ fun ColorTabs(
             ) {
                 groupedPalettes[page].forEach { palette ->
 
-                    var isChecked by rememberSaveable { mutableStateOf(false) }
+                    var isChecked = LocalSeedColor.current == palette.seed
 
                     PaletteWheel(
                         seedColor = Color(palette.seed),
