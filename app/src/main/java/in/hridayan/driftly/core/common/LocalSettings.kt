@@ -2,7 +2,7 @@ package `in`.hridayan.driftly.core.common
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.compositionLocalOf
-import `in`.hridayan.driftly.core.common.constants.MATERIAL_BLUE
+import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
 
 val LocalSettings = compositionLocalOf<SettingsState> {
@@ -10,7 +10,7 @@ val LocalSettings = compositionLocalOf<SettingsState> {
         isAutoUpdate = false,
         isDarkMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
         isHighContrastDarkMode = false,
-        seedColor = MATERIAL_BLUE,
+        seedColor = SeedColors.BLUE,
         isDynamicColor = true,
         isHapticEnabled = true
     )

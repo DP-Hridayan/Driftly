@@ -11,16 +11,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import `in`.hridayan.driftly.core.common.LocalSettings
-import `in`.hridayan.driftly.core.common.constants.MATERIAL_BLUE
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
+import `in`.hridayan.driftly.core.common.constants.SeedColors
 
 
 @Composable
 fun DriftlyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     isHighContrastDarkTheme: Boolean = false,
-    seedColor :Int = MATERIAL_BLUE,
+    seedColor :Int = SeedColors.BLUE,
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
