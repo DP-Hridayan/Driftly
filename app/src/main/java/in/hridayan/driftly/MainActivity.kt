@@ -39,6 +39,7 @@ class MainActivity : ComponentActivity() {
 
                 DriftlyTheme(
                     darkTheme = isDarkTheme,
+                    seedColor = settings.seedColor,
                     dynamicColor = settings.isDynamicColor,
                     isHighContrastDarkTheme = settings.isHighContrastDarkMode
                 ) {
