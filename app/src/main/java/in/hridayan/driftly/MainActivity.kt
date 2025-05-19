@@ -12,7 +12,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import `in`.hridayan.driftly.core.common.CompositionLocals
+import `in`.hridayan.driftly.core.common.LocalSeedColor
 import `in`.hridayan.driftly.core.common.LocalSettings
+import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
 import `in`.hridayan.driftly.core.presentation.AppEntry
 import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
 import `in`.hridayan.driftly.settings.data.SettingsDataStore
@@ -30,6 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CompositionLocals(store) {
                 val settings = LocalSettings.current
+                SeedColorProvider.seedColor = LocalSeedColor.current
 
                 val isDarkTheme = when (settings.isDarkMode) {
                     AppCompatDelegate.MODE_NIGHT_YES -> true
@@ -39,7 +42,6 @@ class MainActivity : ComponentActivity() {
 
                 DriftlyTheme(
                     darkTheme = isDarkTheme,
-                    seedColor = settings.seedColor,
                     dynamicColor = settings.isDynamicColor,
                     isHighContrastDarkTheme = settings.isHighContrastDarkMode
                 ) {

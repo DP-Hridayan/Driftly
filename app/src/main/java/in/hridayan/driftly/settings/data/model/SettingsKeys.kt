@@ -10,7 +10,7 @@ enum class SettingsKeys(val default: Any?) {
     LANGUAGE(null),
     THEME_MODE(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM),
     HIGH_CONTRAST_DARK_MODE(false),
-    SEED_COLOR(SeedColors.BLUE),
+    SEED_COLOR(SeedColors.RED),
     DYNAMIC_COLORS(true),
     HAPTICS_AND_VIBRATION(true),
     VERSION(null),

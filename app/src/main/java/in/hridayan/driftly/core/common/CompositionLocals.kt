@@ -17,6 +17,9 @@ import `in`.hridayan.driftly.settings.domain.model.SettingsState
 
 val LocalWeakHaptic = staticCompositionLocalOf<() -> Unit> { {} }
 val LocalStrongHaptic = staticCompositionLocalOf<() -> Unit> { {} }
+val LocalSeedColor = staticCompositionLocalOf<Int> {
+    error("No seed color provided")
+}
 
 @Composable
 fun SettingsDataStore.booleanState(key: SettingsKeys): State<Boolean> {
@@ -79,7 +82,8 @@ fun CompositionLocals(
     CompositionLocalProvider(
         LocalSettings provides state,
         LocalWeakHaptic provides weakHaptic,
-        LocalStrongHaptic provides strongHaptic
+        LocalStrongHaptic provides strongHaptic,
+        LocalSeedColor provides seedColor
     ) {
         content()
     }

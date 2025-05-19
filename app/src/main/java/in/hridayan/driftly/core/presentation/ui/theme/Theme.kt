@@ -11,21 +11,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import `in`.hridayan.driftly.core.common.constants.SeedColors
 
 
 @Composable
 fun DriftlyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     isHighContrastDarkTheme: Boolean = false,
-    seedColor :Int = SeedColors.BLUE,
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val view = LocalView.current
 
-    val darkColorScheme = darkColorSchemeFromSeed(seedColor)
-    val lightColorScheme = lightColorSchemeFromSeed(seedColor)
+    val darkColorScheme = darkColorSchemeFromSeed()
+    val lightColorScheme = lightColorSchemeFromSeed()
 
     LaunchedEffect(darkTheme) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
