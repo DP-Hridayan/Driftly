@@ -1,5 +1,6 @@
 package `in`.hridayan.driftly.settings.presentation.components.item
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +21,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalDarkMode
+import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import kotlinx.coroutines.flow.Flow
@@ -38,6 +43,18 @@ fun SettingsItemLayout(
 ) {
     val weakHaptic = LocalWeakHaptic.current
     val checked by isEnabled.collectAsState(initial = false)
+
+    val darkModeText = when (LocalSettings.current.isDarkMode) {
+        AppCompatDelegate.MODE_NIGHT_YES -> stringResource(R.string.on)
+        AppCompatDelegate.MODE_NIGHT_NO -> stringResource(R.string.off)
+        AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> stringResource(R.string.system)
+        else -> ""
+    }
+
+    val darkModeIcon =
+        if (LocalDarkMode.current) painterResource(id = R.drawable.ic_dark_mode)
+        else painterResource(id = R.drawable.ic_light_mode)
+
     if (isLayoutVisible) {
         Row(
             modifier = modifier
@@ -53,7 +70,8 @@ fun SettingsItemLayout(
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             Icon(
-                painter = painterResource(item.icon),
+                painter = if (item.key == SettingsKeys.DARK_THEME) darkModeIcon
+                else painterResource(item.icon),
                 contentDescription = contentDescription,
                 tint = MaterialTheme.colorScheme.primary
             )
@@ -77,6 +95,7 @@ fun SettingsItemLayout(
                 }
 
                 val descriptionText = when {
+                    item.key == SettingsKeys.DARK_THEME -> darkModeText
                     item.descriptionResId != 0 -> runCatching { stringResource(item.descriptionResId) }.getOrElse { "" }
                     item.descriptionString.isNotBlank() -> item.descriptionString
                     else -> null

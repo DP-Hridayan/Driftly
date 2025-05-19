@@ -6,11 +6,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.navigation.AboutScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
+import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetDynamicColorSettingUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
@@ -26,7 +28,9 @@ class SettingsViewModel @Inject constructor(
     private val toggleSettingUseCase: ToggleSettingUseCase,
     private val getSettingsPageListUseCase: GetSettingsPageListUseCase,
     private val getLookAndFeelPageListUseCase: GetLookAndFeelPageListUseCase,
-    private val getAboutPageListUseCase: GetAboutPageListUseCase
+    private val getAboutPageListUseCase: GetAboutPageListUseCase,
+    private val getDynamicColorSettingUseCase: GetDynamicColorSettingUseCase,
+    private val getHighContrastDarkThemeSettingUseCase: GetHighContrastDarkThemeSettingUseCase
 ) : ViewModel() {
 
     var settingsPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
@@ -36,6 +40,12 @@ class SettingsViewModel @Inject constructor(
         private set
 
     var aboutPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
+        private set
+
+    var dynamicColorSetting by mutableStateOf<Pair<SettingsItem, Flow<Boolean>>?>(null)
+        private set
+
+    var highContrastDarkThemeSetting by mutableStateOf<Pair<SettingsItem, Flow<Boolean>>?>(null)
         private set
 
     private val _uiEvent = MutableSharedFlow<SettingsUiEvent>()
@@ -75,10 +85,14 @@ class SettingsViewModel @Inject constructor(
             val lookAndFeel = getLookAndFeelPageListUseCase()
             val settings = getSettingsPageListUseCase()
             val about = getAboutPageListUseCase()
+            val dynamicColor = getDynamicColorSettingUseCase()
+            val highContrastDarkTheme = getHighContrastDarkThemeSettingUseCase()
 
             settingsPageList = settings
             lookAndFeelPageList = lookAndFeel
             aboutPageList = about
+            dynamicColorSetting = dynamicColor
+            highContrastDarkThemeSetting = highContrastDarkTheme
         }
     }
 }

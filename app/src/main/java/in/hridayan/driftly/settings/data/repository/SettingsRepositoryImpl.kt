@@ -33,4 +33,12 @@ class SettingsRepositoryImpl(
             it to dataStore.isEnabled(it.key)
         }
     }
+
+    override suspend fun getDynamicColorSetting(): Pair<SettingsItem, Flow<Boolean>> {
+        return SettingsProvider.dynamicColorSetting to dataStore.isEnabled(SettingsKeys.DYNAMIC_COLORS)
+    }
+
+    override suspend fun getHighContrastDarkThemeSetting(): Pair<SettingsItem, Flow<Boolean>> {
+        return SettingsProvider.highContrastDarkThemeSetting to dataStore.isEnabled(SettingsKeys.HIGH_CONTRAST_DARK_MODE)
+    }
 }

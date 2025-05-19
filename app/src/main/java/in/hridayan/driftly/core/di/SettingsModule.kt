@@ -10,6 +10,8 @@ import `in`.hridayan.driftly.settings.data.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.repository.SettingsRepositoryImpl
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetDynamicColorSettingUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
@@ -46,4 +48,12 @@ object SettingsModule {
     @Provides
     fun provideGetAboutPageListUseCase(repo: SettingsRepository): GetAboutPageListUseCase =
         GetAboutPageListUseCase(repo)
+
+    @Provides
+    fun provideGetDynamicColorSettingUseCase(repo: SettingsRepository): GetDynamicColorSettingUseCase =
+        GetDynamicColorSettingUseCase(repo)
+
+    @Provides
+    fun provideGetHighContrastDarkThemeSettingUseCase(repo: SettingsRepository): GetHighContrastDarkThemeSettingUseCase =
+        GetHighContrastDarkThemeSettingUseCase(repo)
 }

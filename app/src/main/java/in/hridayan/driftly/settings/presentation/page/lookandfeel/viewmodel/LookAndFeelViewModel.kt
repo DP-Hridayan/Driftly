@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import `in`.hridayan.driftly.navigation.DarkThemeScreen
 import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.settings.data.SettingsDataStore
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
@@ -59,6 +60,10 @@ class LookAndFeelViewModel @Inject constructor(
                         )
                     )
                 }
+
+                SettingsKeys.DARK_THEME -> _uiEvent.emit(
+                    SettingsUiEvent.Navigate(DarkThemeScreen)
+                )
 
                 else -> {}
             }

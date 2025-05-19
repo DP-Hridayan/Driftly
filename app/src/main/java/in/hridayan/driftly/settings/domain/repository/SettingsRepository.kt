@@ -10,4 +10,6 @@ interface SettingsRepository {
     suspend fun getSettingsPageList(): List<Pair<SettingsItem, Flow<Boolean>>>
     suspend fun getLookAndFeelPageList(): List<Pair<SettingsItem, Flow<Boolean>>>
     suspend fun getAboutPageList(): List<Pair<SettingsItem, Flow<Boolean>>>
+    suspend fun getDynamicColorSetting(): Pair<SettingsItem, Flow<Boolean>>
+    suspend fun getHighContrastDarkThemeSetting(): Pair<SettingsItem, Flow<Boolean>>
 }

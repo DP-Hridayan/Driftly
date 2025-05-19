@@ -12,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import `in`.hridayan.driftly.core.common.CompositionLocals
+import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.common.LocalSeedColor
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
@@ -32,16 +33,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             CompositionLocals(store) {
                 val settings = LocalSettings.current
+                val isDarkMode = LocalDarkMode.current
                 SeedColorProvider.seedColor = LocalSeedColor.current
 
-                val isDarkTheme = when (settings.isDarkMode) {
-                    AppCompatDelegate.MODE_NIGHT_YES -> true
-                    AppCompatDelegate.MODE_NIGHT_NO -> false
-                    else -> isSystemInDarkTheme()
-                }
-
                 DriftlyTheme(
-                    darkTheme = isDarkTheme,
+                    darkTheme = isDarkMode,
                     dynamicColor = settings.isDynamicColor,
                     isHighContrastDarkTheme = settings.isHighContrastDarkMode
                 ) {

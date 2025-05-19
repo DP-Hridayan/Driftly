@@ -7,9 +7,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import `in`.hridayan.driftly.calender.presentation.screens.CalendarScreen
 import `in`.hridayan.driftly.home.presentation.screens.HomeScreen
-import `in`.hridayan.driftly.navigation.ChangelogScreen
 import `in`.hridayan.driftly.settings.presentation.page.about.screens.AboutScreen
 import `in`.hridayan.driftly.settings.presentation.page.changelog.screens.ChangelogScreen
+import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.DarkThemeScreen
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.presentation.page.mainscreen.screen.SettingsScreen
 import kotlinx.serialization.Serializable
@@ -46,9 +46,18 @@ fun Navigation() {
 
             composable<LookAndFeelScreen>(
                 enterTransition = { slideFadeInFromRight() },
+                exitTransition = { slideFadeOutToLeft() },
+                popEnterTransition = { slideFadeInFromLeft() },
                 popExitTransition = { slideFadeOutToRight() }
             ) {
                 LookAndFeelScreen()
+            }
+
+            composable<DarkThemeScreen>(
+                enterTransition = { slideFadeInFromRight() },
+                popExitTransition = { slideFadeOutToRight() }
+            ) {
+                DarkThemeScreen()
             }
 
             composable<AboutScreen>(
@@ -83,6 +92,9 @@ object SettingsScreen
 
 @Serializable
 object LookAndFeelScreen
+
+@Serializable
+object DarkThemeScreen
 
 @Serializable
 object AboutScreen

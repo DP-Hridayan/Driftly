@@ -1,5 +1,7 @@
 package `in`.hridayan.driftly.core.common
 
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.State
@@ -17,6 +19,9 @@ import `in`.hridayan.driftly.settings.domain.model.SettingsState
 
 val LocalWeakHaptic = staticCompositionLocalOf<() -> Unit> { {} }
 val LocalStrongHaptic = staticCompositionLocalOf<() -> Unit> { {} }
+val LocalDarkMode = staticCompositionLocalOf<Boolean> {
+    error("No dark mode provided")
+}
 val LocalSeedColor = staticCompositionLocalOf<Int> {
     error("No seed color provided")
 }
@@ -60,6 +65,11 @@ fun CompositionLocals(
             )
         }
 
+    val isDarkTheme = when (themeMode) {
+        AppCompatDelegate.MODE_NIGHT_YES -> true
+        AppCompatDelegate.MODE_NIGHT_NO -> false
+        else -> isSystemInDarkTheme()
+    }
 
     val view = LocalView.current
 
@@ -83,7 +93,8 @@ fun CompositionLocals(
         LocalSettings provides state,
         LocalWeakHaptic provides weakHaptic,
         LocalStrongHaptic provides strongHaptic,
-        LocalSeedColor provides seedColor
+        LocalSeedColor provides seedColor,
+        LocalDarkMode provides isDarkTheme
     ) {
         content()
     }

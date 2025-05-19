@@ -31,20 +31,29 @@ object SettingsProvider {
         )
     )
 
+    val dynamicColorSetting = SettingsItem(
+        key = key.DYNAMIC_COLORS,
+        titleResId = R.string.dynamic_colors,
+        descriptionResId = R.string.des_dynamic_colors,
+        icon = R.drawable.ic_color_picker,
+        type = SettingsType.Switch
+    )
+
+    val highContrastDarkThemeSetting = SettingsItem(
+        key = key.HIGH_CONTRAST_DARK_MODE,
+        titleResId = R.string.high_contrast_dark_mode,
+        descriptionResId = R.string.des_high_contrast_dark_mode,
+        icon = R.drawable.ic_contrast,
+        type = SettingsType.Switch
+    )
+
     val lookAndFeelPageList = listOf<SettingsItem>(
         SettingsItem(
-            key = key.HIGH_CONTRAST_DARK_MODE,
-            titleResId = R.string.high_contrast_dark_mode,
-            descriptionResId = R.string.des_high_contrast_dark_mode,
-            icon = R.drawable.ic_contrast,
-            type = SettingsType.Switch
-        ),
-        SettingsItem(
-            key = key.DYNAMIC_COLORS,
-            titleResId = R.string.dynamic_colors,
-            descriptionResId = R.string.des_dynamic_colors,
-            icon = R.drawable.ic_color_picker,
-            type = SettingsType.Switch
+            key = key.DARK_THEME,
+            titleResId = R.string.dark_theme,
+            descriptionResId = R.string.system,
+            icon = R.drawable.ic_dark_mode,
+            type = SettingsType.NoSwitch
         ),
         SettingsItem(
             key = key.HAPTICS_AND_VIBRATION,
