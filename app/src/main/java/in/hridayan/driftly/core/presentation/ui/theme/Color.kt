@@ -6,17 +6,11 @@ import android.annotation.SuppressLint
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
-import androidx.compose.ui.graphics.Color
-import com.google.android.material.color.utilities.CorePalette
-import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
-
-private val palette: CorePalette by lazy { CorePalette.of(SeedColorProvider.seedColor) }
-
-val Int.a1 get() = palette.a1.getHct(this.toDouble()).toInt().let { Color(it) }
-val Int.a2 get() = palette.a2.getHct(this.toDouble()).toInt().let { Color(it) }
-val Int.a3 get() = palette.a3.getHct(this.toDouble()).toInt().let { Color(it) }
-val Int.n1 get() = palette.n1.getHct(this.toDouble()).toInt().let { Color(it) }
-val Int.n2 get() = palette.n2.getHct(this.toDouble()).toInt().let { Color(it) }
+import `in`.hridayan.driftly.core.utils.a1
+import `in`.hridayan.driftly.core.utils.a2
+import `in`.hridayan.driftly.core.utils.a3
+import `in`.hridayan.driftly.core.utils.n1
+import `in`.hridayan.driftly.core.utils.n2
 
 fun lightColorSchemeFromSeed(): ColorScheme {
     return lightColorScheme(
