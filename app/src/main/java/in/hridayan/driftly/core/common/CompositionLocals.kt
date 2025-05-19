@@ -37,6 +37,8 @@ fun CompositionLocals(
 
     val themeMode by store.intState(SettingsKeys.THEME_MODE)
 
+    val seedColor by store.intState(SettingsKeys.SEED_COLOR)
+
     val isDynamicColor by store.booleanState(SettingsKeys.DYNAMIC_COLORS)
 
     val isHighContrastDarkMode by store.booleanState(SettingsKeys.HIGH_CONTRAST_DARK_MODE)
@@ -44,11 +46,12 @@ fun CompositionLocals(
     val isHapticEnabled by store.booleanState(SettingsKeys.HAPTICS_AND_VIBRATION)
 
     val state =
-        remember(autoUpdate, themeMode, isDynamicColor, isHighContrastDarkMode, isHapticEnabled) {
+        remember(autoUpdate, themeMode,seedColor, isDynamicColor, isHighContrastDarkMode, isHapticEnabled) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
                 isDarkMode = themeMode,
                 isHighContrastDarkMode = isHighContrastDarkMode,
+                seedColor = seedColor,
                 isDynamicColor = isDynamicColor,
                 isHapticEnabled = isHapticEnabled
             )

@@ -1,6 +1,7 @@
 package `in`.hridayan.driftly.settings.data.model
 
 import androidx.appcompat.app.AppCompatDelegate
+import `in`.hridayan.driftly.core.common.constants.MATERIAL_BLUE
 
 enum class SettingsKeys(val default: Any?) {
     LOOK_AND_FEEL(null),
@@ -9,6 +10,7 @@ enum class SettingsKeys(val default: Any?) {
     LANGUAGE(null),
     THEME_MODE(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM),
     HIGH_CONTRAST_DARK_MODE(false),
+    SEED_COLOR(MATERIAL_BLUE),
     DYNAMIC_COLORS(true),
     HAPTICS_AND_VIBRATION(true),
     VERSION(null),
