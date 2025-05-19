@@ -35,6 +35,12 @@ class SettingsDataStore @Inject constructor(
         }
     }
 
+    suspend fun setBoolean(key: SettingsKeys, value: Boolean) {
+        val preferencesKey = key.toBooleanKey()
+        ds.edit { prefs ->
+            prefs[preferencesKey] = value
+        }
+    }
 
     suspend fun toggle(key: SettingsKeys) {
         val preferencesKey = key.toBooleanKey()

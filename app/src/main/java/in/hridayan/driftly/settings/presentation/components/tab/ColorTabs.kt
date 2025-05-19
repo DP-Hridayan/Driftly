@@ -13,10 +13,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalSeedColor
+import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.settings.presentation.components.button.PaletteWheel
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.LookAndFeelViewModel
@@ -61,6 +58,7 @@ fun ColorTabs(
                 groupedPalettes[page].forEach { palette ->
 
                     var isChecked = LocalSeedColor.current == palette.seed
+                    val isDynamicColor = LocalSettings.current.isDynamicColor
 
                     PaletteWheel(
                         seedColor = Color(palette.seed),
@@ -69,9 +67,10 @@ fun ColorTabs(
                         tertiaryColor = palette.tertiary,
                         onClick = {
                             lookAndFeelViewModel.setSeedColor(seed = palette.seed)
+                            lookAndFeelViewModel.disableDynamicColors()
                             isChecked = !isChecked
                         },
-                        isChecked = isChecked,
+                        isChecked = isChecked && !isDynamicColor,
                     )
                 }
             }

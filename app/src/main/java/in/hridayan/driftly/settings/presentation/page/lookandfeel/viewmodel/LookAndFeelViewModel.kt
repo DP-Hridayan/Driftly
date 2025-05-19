@@ -11,8 +11,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.navigation.DarkThemeScreen
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.settings.data.SettingsDataStore
+import `in`.hridayan.driftly.settings.data.model.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.domain.ThemeOption
@@ -70,9 +70,15 @@ class LookAndFeelViewModel @Inject constructor(
         }
     }
 
-    fun setSeedColor(seed:Int){
+    fun setSeedColor(seed: Int) {
         viewModelScope.launch {
             store.setInt(SettingsKeys.SEED_COLOR, seed)
+        }
+    }
+
+    fun disableDynamicColors() {
+        viewModelScope.launch {
+            store.setBoolean(SettingsKeys.DYNAMIC_COLORS, false)
         }
     }
 }
