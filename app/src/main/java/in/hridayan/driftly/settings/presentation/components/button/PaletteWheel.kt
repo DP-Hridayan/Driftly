@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 
 @Composable
 fun PaletteWheel(
@@ -36,6 +37,7 @@ fun PaletteWheel(
     isChecked: Boolean = false,
     onClick: () -> Unit
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val scale by animateFloatAsState(
         targetValue = if (isChecked) 1f else 0f,
         animationSpec = tween(durationMillis = 300),
@@ -48,7 +50,10 @@ fun PaletteWheel(
             .background(
                 MaterialTheme.colorScheme.surfaceVariant
             )
-            .clickable(enabled = true, onClick = onClick)
+            .clickable(enabled = true, onClick = {
+                onClick()
+                weakHaptic()
+            })
     ) {
         Box(
             modifier = modifier
@@ -103,7 +108,6 @@ fun PaletteWheel(
                     tint = primaryColor
                 )
             }
-
         }
     }
 }

@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalView
+import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.core.utils.HapticUtils.strongHaptic
 import `in`.hridayan.driftly.core.utils.HapticUtils.weakHaptic
 import `in`.hridayan.driftly.settings.data.SettingsDataStore
@@ -25,15 +26,8 @@ val LocalDarkMode = staticCompositionLocalOf<Boolean> {
 val LocalSeedColor = staticCompositionLocalOf<Int> {
     error("No seed color provided")
 }
-
-@Composable
-fun SettingsDataStore.booleanState(key: SettingsKeys): State<Boolean> {
-    return isEnabled(key).collectAsState(initial = key.default as Boolean)
-}
-
-@Composable
-fun SettingsDataStore.intState(key: SettingsKeys): State<Int> {
-    return intFlow(key).collectAsState(initial = key.default as Int)
+val LocalTonalPalette = staticCompositionLocalOf<List<SeedColors>> {
+    error("No tonal palette provided")
 }
 
 @Composable
@@ -54,7 +48,14 @@ fun CompositionLocals(
     val isHapticEnabled by store.booleanState(SettingsKeys.HAPTICS_AND_VIBRATION)
 
     val state =
-        remember(autoUpdate, themeMode,seedColor, isDynamicColor, isHighContrastDarkMode, isHapticEnabled) {
+        remember(
+            autoUpdate,
+            themeMode,
+            seedColor,
+            isDynamicColor,
+            isHighContrastDarkMode,
+            isHapticEnabled
+        ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
                 isDarkMode = themeMode,
@@ -70,6 +71,18 @@ fun CompositionLocals(
         AppCompatDelegate.MODE_NIGHT_NO -> false
         else -> isSystemInDarkTheme()
     }
+
+    val tonalPalette = listOf<SeedColors>(
+        SeedColors.Blue,
+        SeedColors.Indigo,
+        SeedColors.Purple,
+        SeedColors.Pink,
+        SeedColors.Red,
+        SeedColors.Orange,
+        SeedColors.Yellow,
+        SeedColors.Teal,
+        SeedColors.Green
+    )
 
     val view = LocalView.current
 
@@ -94,8 +107,19 @@ fun CompositionLocals(
         LocalWeakHaptic provides weakHaptic,
         LocalStrongHaptic provides strongHaptic,
         LocalSeedColor provides seedColor,
-        LocalDarkMode provides isDarkTheme
+        LocalDarkMode provides isDarkTheme,
+        LocalTonalPalette provides tonalPalette
     ) {
         content()
     }
+}
+
+@Composable
+private fun SettingsDataStore.booleanState(key: SettingsKeys): State<Boolean> {
+    return isEnabled(key).collectAsState(initial = key.default as Boolean)
+}
+
+@Composable
+private fun SettingsDataStore.intState(key: SettingsKeys): State<Int> {
+    return intFlow(key).collectAsState(initial = key.default as Int)
 }

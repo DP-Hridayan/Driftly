@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalSeedColor
 import `in`.hridayan.driftly.core.common.LocalSettings
-import `in`.hridayan.driftly.core.common.constants.SeedColors
+import `in`.hridayan.driftly.core.common.LocalTonalPalette
 import `in`.hridayan.driftly.settings.presentation.components.button.PaletteWheel
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.LookAndFeelViewModel
 
@@ -30,17 +30,7 @@ fun ColorTabs(
     modifier: Modifier = Modifier,
     lookAndFeelViewModel: LookAndFeelViewModel = hiltViewModel()
 ) {
-    val tonalPalettes = listOf<SeedColors>(
-        SeedColors.Blue,
-        SeedColors.Indigo,
-        SeedColors.Purple,
-        SeedColors.Pink,
-        SeedColors.Red,
-        SeedColors.Orange,
-        SeedColors.Yellow,
-        SeedColors.Teal,
-        SeedColors.Green
-    )
+    val tonalPalettes = LocalTonalPalette.current
     val groupedPalettes = tonalPalettes.chunked(4)
 
     val pagerState = rememberPagerState(initialPage = 0) { groupedPalettes.size }
