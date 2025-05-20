@@ -1,31 +1,20 @@
 package `in`.hridayan.driftly.home.presentation.components.card
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
@@ -34,7 +23,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
-import `in`.hridayan.driftly.core.presentation.components.progress.CircularProgressWithText
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
@@ -87,65 +75,37 @@ fun SubjectCard(
         })
     }
 
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(cornerRadius))
-            .combinedClickable(
-                enabled = true,
-                onClick = { handleClick() },
-                onLongClick = { handleLongClick() }),
-        shape = RoundedCornerShape(cornerRadius),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isLongClicked) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surfaceContainer,
-        )
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 15.dp, vertical = 10.dp)
-                .animateContentSize(
-                    animationSpec = tween(
-                        durationMillis = 500, easing = FastOutSlowInEasing
-                    )
-                ),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
-        ) {
-            Text(
-                text = subject,
-                modifier = Modifier
-                    .weight(1f)
-                    .animateContentSize(
-                        animationSpec = tween(
-                            durationMillis = 500, easing = FastOutSlowInEasing
-                        )
-                    ),
-                style = MaterialTheme.typography.titleMedium,
-                color = if (isLongClicked) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
-            )
+    val onEditButtonClicked: () -> Unit = {
+        weakHaptic()
+        isUpdateDialogVisible = true
+    }
 
-            if (isLongClicked) {
-                UtilityRow(
-                    onEditButtonClicked = {
-                        weakHaptic()
-                        isUpdateDialogVisible = true
-                    },
-                    onDeleteButtonClicked = {
-                        weakHaptic()
-                        isDeleteDialogVisible = true
-                    })
-            } else {
-                if (isTotalCountZero) {
-                    ErrorIcon(onClick = {
-                        isNoAttendanceDialogVisible = true
-                        weakHaptic()
-                    })
-                } else {
-                    CircularProgressWithText(progress = progress)
-                }
-            }
-        }
+    val onDeleteButtonClicked: () -> Unit = {
+        weakHaptic()
+        isDeleteDialogVisible = true
+    }
+
+    val onErrorIconClicked: () -> Unit = {
+        weakHaptic()
+        isNoAttendanceDialogVisible = true
+    }
+
+    BaseCard(
+        modifier = modifier,
+        cornerRadius = cornerRadius,
+        onClick = { handleClick() },
+        onLongClick = { handleLongClick() },
+        isLongClicked = isLongClicked
+    ) {
+        CardStyleA(
+            subject = subject,
+            isLongClicked = isLongClicked,
+            isTotalCountZero = isTotalCountZero,
+            progress = progress,
+            onEditButtonClicked = onEditButtonClicked,
+            onDeleteButtonClicked = onDeleteButtonClicked,
+            onErrorIconClicked = onErrorIconClicked
+        )
     }
 
     if (isDeleteDialogVisible) {
@@ -175,7 +135,7 @@ fun SubjectCard(
 }
 
 @Composable
-private fun ErrorIcon(modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
+fun ErrorIcon(modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
     Image(
         painter = painterResource(R.drawable.ic_error),
         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.tertiary),
@@ -192,7 +152,7 @@ private fun ErrorIcon(modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
 }
 
 @Composable
-private fun UtilityRow(
+fun UtilityRow(
     modifier: Modifier = Modifier,
     onEditButtonClicked: () -> Unit = {},
     onDeleteButtonClicked: () -> Unit = {}
