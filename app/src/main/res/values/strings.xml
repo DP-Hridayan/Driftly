@@ -61,6 +61,9 @@
     <string name="github" translatable="false">Github</string>
     <string name="des_github">Visit the github repository of the app</string>
     <string name="select">Select</string>
-
-    <string name="changelogs_v1_0_0">Initial release</string>
+    <string name="customisation">Customisation</string>
+    <string name="des_customisation">Customise certain UI elements to your liking</string>
+    <string name="subject_card">Subject card</string>
+    <string name="subject_name">Subject name</string>
+    <string name="changelogs_v1_0_0">Initial release\nAdded calendar to mark attendance status\nAdded per subject progress display\nAdded ability to add, remove and edit subjects\nAdded settings for customising user experience</string>
 </resources>

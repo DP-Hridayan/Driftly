@@ -4,7 +4,7 @@ import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys as key
+import `in`.hridayan.driftly.settings.data.SettingsKeys as key
 
 object SettingsProvider {
     val settingsPageList = listOf<SettingsItem>(
@@ -13,6 +13,13 @@ object SettingsProvider {
             titleResId = R.string.look_and_feel,
             descriptionResId = R.string.des_look_and_feel,
             icon = R.drawable.ic_pallete,
+            type = SettingsType.NoSwitch
+        ),
+        SettingsItem(
+            key = key.CUSTOMISATION,
+            titleResId = R.string.customisation,
+            descriptionResId = R.string.des_customisation,
+            icon = R.drawable.ic_tune,
             type = SettingsType.NoSwitch
         ),
         SettingsItem(

@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import `in`.hridayan.driftly.settings.data.SettingsDataStore
+import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.repository.SettingsRepositoryImpl
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase

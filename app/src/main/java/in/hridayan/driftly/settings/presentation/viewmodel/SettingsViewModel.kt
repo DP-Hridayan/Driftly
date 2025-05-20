@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.navigation.AboutScreen
+import `in`.hridayan.driftly.navigation.CustomisationScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
+import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetDynamicColorSettingUseCase
@@ -69,6 +70,10 @@ class SettingsViewModel @Inject constructor(
             when (item.key) {
                 SettingsKeys.LOOK_AND_FEEL -> _uiEvent.emit(
                     SettingsUiEvent.Navigate(LookAndFeelScreen)
+                )
+
+                SettingsKeys.CUSTOMISATION -> _uiEvent.emit(
+                    SettingsUiEvent.Navigate(CustomisationScreen)
                 )
 
                 SettingsKeys.ABOUT -> _uiEvent.emit(

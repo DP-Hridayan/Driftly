@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.data.model
+package `in`.hridayan.driftly.settings.data
 
 import androidx.appcompat.app.AppCompatDelegate
 import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
@@ -20,4 +20,5 @@ enum class SettingsKeys(val default: Any?) {
     FEATURE_REQUEST(null),
     GITHUB(null),
     LICENSE(null),
+    CUSTOMISATION(null)
 }

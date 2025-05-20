@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
+import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_ISSUE_FEATURE_REQUEST
 import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_ISSUE_REPORT
 import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_REPO

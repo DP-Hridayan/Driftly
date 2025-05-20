@@ -1,6 +1,6 @@
 package `in`.hridayan.driftly.settings.domain.model
 
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
+import `in`.hridayan.driftly.settings.data.SettingsKeys
 
 data class SettingsItem(
     val key: SettingsKeys,

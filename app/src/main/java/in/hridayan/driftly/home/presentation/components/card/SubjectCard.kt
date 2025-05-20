@@ -1,6 +1,5 @@
 package `in`.hridayan.driftly.home.presentation.components.card
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -9,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,20 +26,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
-import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedCircularProgressIndicator
-import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
+import `in`.hridayan.driftly.core.presentation.components.progress.CircularProgressWithText
+import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 
-@SuppressLint("DefaultLocale")
 @Composable
 fun SubjectCard(
     modifier: Modifier = Modifier,
@@ -53,16 +49,9 @@ fun SubjectCard(
     onLongClicked: (Boolean) -> Unit = {},
     onDeleteConfirmed: () -> Unit = {},
     onUpdateConfirmed: () -> Unit = {},
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    isDemoCard: Boolean = false
 ) {
-    val progressText = "${String.format("%.0f", progress * 100)}%"
-
-    val progressColor = lerp(
-        start = MaterialTheme.colorScheme.error,
-        stop = MaterialTheme.colorScheme.primary,
-        fraction = progress.coerceIn(0f, 1f)
-    )
-
     val weakHaptic = LocalWeakHaptic.current
     var isLongClicked by rememberSaveable { mutableStateOf(false) }
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
@@ -70,10 +59,11 @@ fun SubjectCard(
     var isNoAttendanceDialogVisible by rememberSaveable { mutableStateOf(false) }
 
     val handleLongClick = {
-        isLongClicked = !isLongClicked
-        onLongClicked(isLongClicked)
-        weakHaptic()
-
+        if (!isDemoCard) {
+            isLongClicked = !isLongClicked
+            onLongClicked(isLongClicked)
+            weakHaptic()
+        }
     }
 
     val handleClick = {
@@ -134,67 +124,24 @@ fun SubjectCard(
             )
 
             if (isLongClicked) {
-                Row(
-                    modifier = Modifier.padding(end = 7.dp),
-                    horizontalArrangement = Arrangement.spacedBy(15.dp)
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.ic_edit),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.tertiary),
-                        contentDescription = null,
-                        modifier = Modifier.clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = null,
-                            onClick = {
-                                isUpdateDialogVisible = true
-                                weakHaptic()
-                            })
-                    )
-
-                    Image(
-                        painter = painterResource(R.drawable.ic_delete),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
-                        contentDescription = null,
-                        modifier = Modifier.clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = null,
-                            onClick = {
-                                isDeleteDialogVisible = true
-                                weakHaptic()
-                            })
-                    )
-                }
+                UtilityRow(
+                    onEditButtonClicked = {
+                        weakHaptic()
+                        isUpdateDialogVisible = true
+                    },
+                    onDeleteButtonClicked = {
+                        weakHaptic()
+                        isDeleteDialogVisible = true
+                    })
             } else {
                 if (isTotalCountZero) {
-                    Image(
-                        painter = painterResource(R.drawable.ic_error),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.tertiary),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(end = 2.dp)
-                            .size(36.dp)
-                            .clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = null,
-                                onClick = {
-                                    isNoAttendanceDialogVisible = true
-                                    weakHaptic()
-                                })
-                    )
+                    ErrorIcon(onClick = {
+                        isNoAttendanceDialogVisible = true
+                        weakHaptic()
+                    })
                 } else {
-                    Box(contentAlignment = Alignment.Center) {
-                        AnimatedCircularProgressIndicator(
-                            progress = progress, animationDuration = 3000
-                        )
-
-                        Text(
-                            text = progressText,
-                            color = progressColor,
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    }
+                    CircularProgressWithText(progress = progress)
                 }
-
             }
         }
     }
@@ -222,5 +169,56 @@ fun SubjectCard(
         NoAttendanceDialog(onDismiss = {
             isNoAttendanceDialogVisible = false
         })
+    }
+}
+
+@Composable
+private fun ErrorIcon(modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
+    Image(
+        painter = painterResource(R.drawable.ic_error),
+        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.tertiary),
+        contentDescription = null,
+        modifier = modifier
+            .padding(end = 2.dp)
+            .size(36.dp)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = onClick
+            )
+    )
+}
+
+@Composable
+private fun UtilityRow(
+    modifier: Modifier = Modifier,
+    onEditButtonClicked: () -> Unit = {},
+    onDeleteButtonClicked: () -> Unit = {}
+) {
+    Row(
+        modifier = modifier.padding(end = 7.dp),
+        horizontalArrangement = Arrangement.spacedBy(15.dp)
+    ) {
+        Image(
+            painter = painterResource(R.drawable.ic_edit),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.tertiary),
+            contentDescription = null,
+            modifier = Modifier.clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = onEditButtonClicked
+            )
+        )
+
+        Image(
+            painter = painterResource(R.drawable.ic_delete),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
+            contentDescription = null,
+            modifier = Modifier.clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = onDeleteButtonClicked
+            )
+        )
     }
 }

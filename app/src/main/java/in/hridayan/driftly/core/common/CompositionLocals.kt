@@ -13,8 +13,8 @@ import androidx.compose.ui.platform.LocalView
 import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.core.utils.HapticUtils.strongHaptic
 import `in`.hridayan.driftly.core.utils.HapticUtils.weakHaptic
-import `in`.hridayan.driftly.settings.data.SettingsDataStore
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
+import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
+import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
 
 

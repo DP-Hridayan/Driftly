@@ -1,6 +1,6 @@
 package `in`.hridayan.driftly.settings.domain.repository
 
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
+import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import kotlinx.coroutines.flow.Flow
 

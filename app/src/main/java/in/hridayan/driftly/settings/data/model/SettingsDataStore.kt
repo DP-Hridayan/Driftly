@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.data
+package `in`.hridayan.driftly.settings.data.model
 
 import android.content.Context
 import androidx.datastore.preferences.core.Preferences
@@ -6,7 +6,8 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import dagger.hilt.android.qualifiers.ApplicationContext
-import `in`.hridayan.driftly.settings.data.model.SettingsKeys
+import `in`.hridayan.driftly.settings.data.SettingsKeys
+import `in`.hridayan.driftly.settings.data.settingsDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
