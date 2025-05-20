@@ -17,7 +17,6 @@ import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
 
-
 val LocalWeakHaptic = staticCompositionLocalOf<() -> Unit> { {} }
 val LocalStrongHaptic = staticCompositionLocalOf<() -> Unit> { {} }
 val LocalDarkMode = staticCompositionLocalOf<Boolean> {
@@ -47,6 +46,8 @@ fun CompositionLocals(
 
     val isHapticEnabled by store.booleanState(SettingsKeys.HAPTICS_AND_VIBRATION)
 
+    val subjectCardCornerRadius by store.floatState(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS)
+
     val state =
         remember(
             autoUpdate,
@@ -54,7 +55,8 @@ fun CompositionLocals(
             seedColor,
             isDynamicColor,
             isHighContrastDarkMode,
-            isHapticEnabled
+            isHapticEnabled,
+            subjectCardCornerRadius
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -62,7 +64,8 @@ fun CompositionLocals(
                 isHighContrastDarkMode = isHighContrastDarkMode,
                 seedColor = seedColor,
                 isDynamicColor = isDynamicColor,
-                isHapticEnabled = isHapticEnabled
+                isHapticEnabled = isHapticEnabled,
+                subjectCardCornerRadius = subjectCardCornerRadius
             )
         }
 
@@ -123,3 +126,9 @@ private fun SettingsDataStore.booleanState(key: SettingsKeys): State<Boolean> {
 private fun SettingsDataStore.intState(key: SettingsKeys): State<Int> {
     return intFlow(key).collectAsState(initial = key.default as Int)
 }
+
+@Composable
+private fun SettingsDataStore.floatState(key: SettingsKeys): State<Float> {
+    return floatFlow(key).collectAsState(initial = key.default as Float)
+}
+

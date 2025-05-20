@@ -45,10 +45,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalSettings
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
 import `in`.hridayan.driftly.home.presentation.components.dialog.AddSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.image.UndrawRelaxedReading
@@ -88,6 +89,8 @@ fun HomeScreen(
             durationMillis = 300, easing = FastOutSlowInEasing
         )
     )
+
+    val subjectCardCornerRadius = LocalSettings.current.subjectCardCornerRadius
 
     Scaffold(
         modifier = modifier.fillMaxSize(), floatingActionButton = {
@@ -235,6 +238,7 @@ fun HomeScreen(
                 val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
                 SubjectCard(
+                    cornerRadius = subjectCardCornerRadius.dp,
                     subjectId = subjects[index].id,
                     subject = subjects[index].subject,
                     progress = progress,

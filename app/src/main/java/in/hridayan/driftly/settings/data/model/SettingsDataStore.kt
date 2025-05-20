@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.settings.data.SettingsKeys
@@ -63,6 +64,23 @@ class SettingsDataStore @Inject constructor(
 
     suspend fun setInt(key: SettingsKeys, value: Int) {
         val preferencesKey = key.toIntKey()
+        ds.edit { prefs ->
+            prefs[preferencesKey] = value
+        }
+    }
+
+    private fun SettingsKeys.toFloatKey(): Preferences.Key<Float> =
+        floatPreferencesKey(this.name)
+
+    fun floatFlow(key: SettingsKeys): Flow<Float> {
+        val preferencesKey = key.toFloatKey()
+        val default = key.default as? Float ?: 0f
+        return ds.data
+            .map { prefs -> prefs[preferencesKey] ?: default }
+    }
+
+    suspend fun setFLoat(key: SettingsKeys, value: Float) {
+        val preferencesKey = key.toFloatKey()
         ds.edit { prefs ->
             prefs[preferencesKey] = value
         }

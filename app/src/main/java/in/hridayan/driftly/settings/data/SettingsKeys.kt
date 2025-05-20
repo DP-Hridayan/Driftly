@@ -20,5 +20,6 @@ enum class SettingsKeys(val default: Any?) {
     FEATURE_REQUEST(null),
     GITHUB(null),
     LICENSE(null),
-    CUSTOMISATION(null)
+    CUSTOMISATION(null),
+    SUBJECT_CARD_CORNER_RADIUS(8f)
 }

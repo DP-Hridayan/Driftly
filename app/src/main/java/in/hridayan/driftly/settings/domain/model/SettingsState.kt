@@ -6,5 +6,6 @@ data class SettingsState(
     val isHighContrastDarkMode: Boolean,
     val seedColor : Int,
     val isDynamicColor: Boolean,
-    val isHapticEnabled: Boolean
+    val isHapticEnabled: Boolean,
+    val subjectCardCornerRadius: Float
 )

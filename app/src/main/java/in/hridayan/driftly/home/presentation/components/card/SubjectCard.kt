@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -27,13 +28,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
 import `in`.hridayan.driftly.core.presentation.components.progress.CircularProgressWithText
-import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
@@ -50,7 +51,8 @@ fun SubjectCard(
     onDeleteConfirmed: () -> Unit = {},
     onUpdateConfirmed: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
-    isDemoCard: Boolean = false
+    isDemoCard: Boolean = false,
+    cornerRadius: Dp = 15.dp
 ) {
     val weakHaptic = LocalWeakHaptic.current
     var isLongClicked by rememberSaveable { mutableStateOf(false) }
@@ -88,12 +90,12 @@ fun SubjectCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clip(Shape.cardCornerSmall)
+            .clip(RoundedCornerShape(cornerRadius))
             .combinedClickable(
                 enabled = true,
                 onClick = { handleClick() },
                 onLongClick = { handleLongClick() }),
-        shape = Shape.cardCornerSmall,
+        shape = RoundedCornerShape(cornerRadius),
         colors = CardDefaults.cardColors(
             containerColor = if (isLongClicked) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surfaceContainer,
         )
