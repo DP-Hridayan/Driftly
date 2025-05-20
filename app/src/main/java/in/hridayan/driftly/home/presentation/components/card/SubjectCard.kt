@@ -106,6 +106,8 @@ fun SubjectCard(
             onDeleteButtonClicked = onDeleteButtonClicked,
             onErrorIconClicked = onErrorIconClicked
         )
+
+        // CardStyleB(modifier = Modifier.height(50.dp), progress = progress)
     }
 
     if (isDeleteDialogVisible) {

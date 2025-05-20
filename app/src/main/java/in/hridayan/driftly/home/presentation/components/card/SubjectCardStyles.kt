@@ -5,6 +5,7 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,12 +13,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import `in`.hridayan.driftly.core.presentation.components.canvas.HorizontalProgressWave
 import `in`.hridayan.driftly.core.presentation.components.progress.CircularProgressWithText
 import `in`.hridayan.driftly.home.presentation.components.SubjectText
 
@@ -45,9 +48,7 @@ fun CardStyleA(
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         SubjectText(
-            modifier = Modifier.weight(1f),
-            subject = subject,
-            isLongClicked = isLongClicked
+            modifier = Modifier.weight(1f), subject = subject, isLongClicked = isLongClicked
         )
 
         if (isLongClicked) {
@@ -56,12 +57,32 @@ fun CardStyleA(
                 onDeleteButtonClicked = onDeleteButtonClicked
             )
         } else {
-            if (isTotalCountZero) {
-                ErrorIcon(onClick = onErrorIconClicked)
-            } else {
-                CircularProgressWithText(progress = progress)
-            }
+            if (isTotalCountZero) ErrorIcon(onClick = onErrorIconClicked)
+            else CircularProgressWithText(progress = progress)
         }
+    }
+}
+
+@Composable
+fun CardStyleB(
+    modifier: Modifier = Modifier,
+    progress: Float,
+    subject: String,
+    isLongClicked: Boolean,
+    isTotalCountZero: Boolean,
+    onEditButtonClicked: () -> Unit,
+    onDeleteButtonClicked: () -> Unit,
+    onErrorIconClicked: () -> Unit,
+) {
+    Box(modifier = modifier.fillMaxWidth()) {
+        HorizontalProgressWave(progress = progress, waveSpeed = 4000)
+
+        Text(
+            text = "${(progress * 100).toInt()}%",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            modifier = Modifier.align(Alignment.Center)
+        )
     }
 }
 
@@ -79,12 +100,8 @@ fun BaseCard(
             .fillMaxWidth()
             .clip(RoundedCornerShape(cornerRadius))
             .combinedClickable(
-                enabled = true,
-                onClick = onClick,
-                onLongClick = onLongClick
-            ),
-        shape = RoundedCornerShape(cornerRadius),
-        colors = CardDefaults.cardColors(
+                enabled = true, onClick = onClick, onLongClick = onLongClick
+            ), shape = RoundedCornerShape(cornerRadius), colors = CardDefaults.cardColors(
             containerColor = if (isLongClicked) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surfaceContainer,
         )
     ) {
