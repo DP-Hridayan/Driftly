@@ -12,6 +12,7 @@ val LocalSettings = compositionLocalOf<SettingsState> {
         isHighContrastDarkMode = false,
         seedColor = SeedColors.Blue.seed,
         isDynamicColor = true,
-        isHapticEnabled = true
+        isHapticEnabled = true,
+        subjectCardCornerRadius = 8f
     )
 }
