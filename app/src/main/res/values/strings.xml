@@ -66,5 +66,7 @@
     <string name="subject_card_style">Subject card style</string>
     <string name="subject_name">Subject name</string>
     <string name="adjust_card_corner_radius">Adjust card corner radius</string>
+    <string name="enable_auto_update">Enable auto update</string>
+    <string name="update_channel">Update channel</string>
     <string name="changelogs_v1_0_0">Initial release\nAdded calendar to mark attendance status\nAdded per subject progress display\nAdded ability to add, remove and edit subjects\nAdded settings for customising user experience</string>
 </resources>

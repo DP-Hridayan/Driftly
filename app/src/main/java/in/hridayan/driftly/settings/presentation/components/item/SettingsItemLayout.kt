@@ -61,9 +61,9 @@ fun SettingsItemLayout(
                 .fillMaxWidth()
                 .clickable(
                     enabled = true, onClick = {
-                        onClick(item)
-                        onToggle()
                         weakHaptic()
+                        onClick(item)
+                        if (item.type == SettingsType.Switch) onToggle()
                     })
                 .padding(horizontal = 15.dp, vertical = 17.dp),
             verticalAlignment = Alignment.CenterVertically,

@@ -9,6 +9,7 @@ import `in`.hridayan.driftly.calender.presentation.screens.CalendarScreen
 import `in`.hridayan.driftly.home.presentation.screens.HomeScreen
 import `in`.hridayan.driftly.settings.presentation.page.customisation.screens.CustomisationScreen
 import `in`.hridayan.driftly.settings.presentation.page.about.screens.AboutScreen
+import `in`.hridayan.driftly.settings.presentation.page.autoupdate.screens.AutoUpdateScreen
 import `in`.hridayan.driftly.settings.presentation.page.changelog.screens.ChangelogScreen
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.DarkThemeScreen
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.LookAndFeelScreen
@@ -83,6 +84,13 @@ fun Navigation() {
             ) {
                 CustomisationScreen()
             }
+
+            composable<AutoUpdateScreen>(
+                enterTransition = { slideFadeInFromRight() },
+                popExitTransition = { slideFadeOutToRight() }
+            ) {
+                AutoUpdateScreen()
+            }
         }
     }
 }
@@ -106,6 +114,9 @@ object DarkThemeScreen
 
 @Serializable
 object AboutScreen
+
+@Serializable
+object AutoUpdateScreen
 
 @Serializable
 object ChangelogScreen

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.navigation.AboutScreen
+import `in`.hridayan.driftly.navigation.AutoUpdateScreen
 import `in`.hridayan.driftly.navigation.CustomisationScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.data.SettingsKeys
@@ -17,6 +18,7 @@ import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSet
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
+import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -74,6 +76,10 @@ class SettingsViewModel @Inject constructor(
 
                 SettingsKeys.CUSTOMISATION -> _uiEvent.emit(
                     SettingsUiEvent.Navigate(CustomisationScreen)
+                )
+
+                SettingsKeys.AUTO_UPDATE -> _uiEvent.emit(
+                    SettingsUiEvent.Navigate(AutoUpdateScreen)
                 )
 
                 SettingsKeys.ABOUT -> _uiEvent.emit(

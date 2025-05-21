@@ -27,7 +27,7 @@ object SettingsProvider {
             titleResId = R.string.auto_update,
             descriptionResId = R.string.des_auto_update,
             icon = R.drawable.ic_update,
-            type = SettingsType.Switch
+            type = SettingsType.NoSwitch
         ),
         SettingsItem(
             key = key.ABOUT,
