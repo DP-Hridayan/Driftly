@@ -47,6 +47,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
+import `in`.hridayan.driftly.core.presentation.components.bottomsheet.UpdateBottomSheet
 import `in`.hridayan.driftly.core.presentation.components.progress.LoadingSpinner
 import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
@@ -66,6 +67,8 @@ fun AutoUpdateScreen(
     var showLoading by rememberSaveable { mutableStateOf(false) }
     val releaseTypes = listOf<Int>(GithubReleaseType.STABLE, GithubReleaseType.PRE_RELEASE)
     val currentReleaseType by autoUpdateViewModel.githubReleaseType.collectAsState()
+    var showUpdateSheet by rememberSaveable { mutableStateOf(false) }
+    var tagName by rememberSaveable { mutableStateOf(BuildConfig.VERSION_NAME) }
 
     LaunchedEffect(Unit) {
         autoUpdateViewModel.updateEvents.collect { result ->
@@ -73,7 +76,8 @@ fun AutoUpdateScreen(
             when (result) {
                 is UpdateResult.Success -> {
                     if (result.isUpdateAvailable) {
-                        Toast.makeText(context, "Update available", Toast.LENGTH_SHORT).show()
+                        tagName = result.release.tagName
+                        showUpdateSheet = true
                     } else {
                         Toast.makeText(context, "No updates", Toast.LENGTH_SHORT).show()
                     }
@@ -265,5 +269,12 @@ fun AutoUpdateScreen(
                 }
             }
         }
+    }
+
+    if (showUpdateSheet) {
+        UpdateBottomSheet(
+            onDismiss = { showUpdateSheet = false },
+            latestVersion = tagName
+        )
     }
 }
