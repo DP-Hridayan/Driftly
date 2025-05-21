@@ -111,7 +111,7 @@
 ## License
 
 ```
-Designed and developed by DP Hridayan @2024
+Designed and developed by DP Hridayan @2025
 This project is licensed under the GNU General Public License v3.0
 ```
 >[!NOTE]
