@@ -8,5 +8,6 @@ data class SettingsState(
     val isDynamicColor: Boolean,
     val isHapticEnabled: Boolean,
     val subjectCardCornerRadius: Float,
-    val subjectCardStyle: Int
+    val subjectCardStyle: Int,
+    val githubReleaseType: Int
 )

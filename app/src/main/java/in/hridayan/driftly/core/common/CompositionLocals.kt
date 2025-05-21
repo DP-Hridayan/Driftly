@@ -50,6 +50,8 @@ fun CompositionLocals(
 
     val subjectCardStyle by store.intState(SettingsKeys.SUBJECT_CARD_STYLE)
 
+    val githubReleaseType by store.intState(SettingsKeys.GITHUB_RELEASE_TYPE)
+
     val state =
         remember(
             autoUpdate,
@@ -59,7 +61,8 @@ fun CompositionLocals(
             isHighContrastDarkMode,
             isHapticEnabled,
             subjectCardCornerRadius,
-            subjectCardStyle
+            subjectCardStyle,
+            githubReleaseType
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -69,7 +72,8 @@ fun CompositionLocals(
                 isDynamicColor = isDynamicColor,
                 isHapticEnabled = isHapticEnabled,
                 subjectCardCornerRadius = subjectCardCornerRadius,
-                subjectCardStyle = subjectCardStyle
+                subjectCardStyle = subjectCardStyle,
+                githubReleaseType = githubReleaseType
             )
         }
 

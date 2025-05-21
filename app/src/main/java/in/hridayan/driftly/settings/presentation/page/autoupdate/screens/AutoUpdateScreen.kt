@@ -6,8 +6,10 @@ import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,12 +19,15 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -34,11 +39,14 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalSettings
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
 import `in`.hridayan.driftly.core.presentation.components.progress.LoadingSpinner
 import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
@@ -52,9 +60,12 @@ fun AutoUpdateScreen(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     autoUpdateViewModel: AutoUpdateViewModel = hiltViewModel()
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     var checked = LocalSettings.current.isAutoUpdate
     val context = LocalContext.current
     var showLoading by rememberSaveable { mutableStateOf(false) }
+    val releaseTypes = listOf<Int>(GithubReleaseType.STABLE, GithubReleaseType.PRE_RELEASE)
+    val currentReleaseType by autoUpdateViewModel.githubReleaseType.collectAsState()
 
     LaunchedEffect(Unit) {
         autoUpdateViewModel.updateEvents.collect { result ->
@@ -139,10 +150,53 @@ fun AutoUpdateScreen(
             }
 
             item {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 10.dp)
+                ) {
+                    releaseTypes.forEach { type ->
+                        val label = when (type) {
+                            GithubReleaseType.STABLE -> stringResource(R.string.stable)
+                            GithubReleaseType.PRE_RELEASE -> stringResource(R.string.pre_release)
+                            else -> ""
+                        }
+
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    autoUpdateViewModel.select(type)
+                                    weakHaptic()
+                                }
+                                .padding(vertical = 8.dp, horizontal = 20.dp)
+                        ) {
+                            Text(
+                                text = label,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Spacer(Modifier.weight(1f))
+
+                            RadioButton(
+                                selected = (currentReleaseType == type),
+                                onClick = {
+                                    autoUpdateViewModel.select(type)
+                                    weakHaptic()
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+
+            item {
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Button(
                         modifier = Modifier
-                            .padding(end = 25.dp)
+                            .padding(end = 25.dp, bottom = 25.dp)
                             .align(Alignment.CenterEnd),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -171,6 +225,43 @@ fun AutoUpdateScreen(
                             )
                         }
                     }
+                }
+            }
+
+            item {
+                HorizontalDivider(
+                    modifier = modifier.fillMaxWidth(),
+                    thickness = 1.dp
+                )
+            }
+
+            item {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(25.dp),
+                    verticalArrangement = Arrangement.spacedBy(15.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(20.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_info),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+
+                        Text(
+                            text = stringResource(R.string.pre_release_warning),
+                            style = MaterialTheme.typography.titleSmall
+                        )
+                    }
+                    Text(
+                        text = stringResource(R.string.pre_release_warning_description),
+                        style = MaterialTheme.typography.bodySmall
+                    )
                 }
             }
         }
