@@ -62,7 +62,8 @@ import `in`.hridayan.driftly.navigation.SettingsScreen
 @SuppressLint("DefaultLocale")
 @Composable
 fun HomeScreen(
-    modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel(),
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
@@ -206,7 +207,9 @@ fun HomeScreen(
 
                 item {
                     Row(
-                        modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 10.dp),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Label(
@@ -259,9 +262,11 @@ fun HomeScreen(
             }
 
             item {
-                Spacer(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(25.dp))
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(25.dp)
+                )
             }
         }
     }

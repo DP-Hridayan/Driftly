@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,6 +23,10 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,6 +39,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalSettings
+import `in`.hridayan.driftly.core.presentation.components.progress.LoadingSpinner
 import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
@@ -47,9 +54,11 @@ fun AutoUpdateScreen(
 ) {
     var checked = LocalSettings.current.isAutoUpdate
     val context = LocalContext.current
+    var showLoading by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         autoUpdateViewModel.updateEvents.collect { result ->
+            showLoading = false
             when (result) {
                 is UpdateResult.Success -> {
                     if (result.isUpdateAvailable) {
@@ -135,17 +144,27 @@ fun AutoUpdateScreen(
                         modifier = Modifier
                             .padding(end = 25.dp)
                             .align(Alignment.CenterEnd),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        ),
                         onClick = {
                             autoUpdateViewModel.checkForUpdates(BuildConfig.VERSION_NAME)
+                            showLoading = true
                         }) {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(10.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_update),
-                                contentDescription = null,
-                            )
+                            if (showLoading)
+                                LoadingSpinner(modifier = Modifier.size(20.dp))
+                            else
+                                Icon(
+                                    modifier = Modifier.size(20.dp),
+                                    painter = painterResource(R.drawable.ic_update),
+                                    contentDescription = null,
+                                )
+
                             Text(
                                 text = stringResource(R.string.check_for_updates),
                                 style = MaterialTheme.typography.labelLarge,
