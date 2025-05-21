@@ -3,9 +3,10 @@ package `in`.hridayan.driftly.settings.presentation.page.autoupdate.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.domain.usecase.CheckUpdateUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,12 +14,14 @@ import javax.inject.Inject
 class AutoUpdateViewModel @Inject constructor(
     private val checkUpdateUseCase: CheckUpdateUseCase
 ) : ViewModel() {
-    private val _isUpdateAvailable = MutableStateFlow<Boolean?>(null)
-    val isUpdateAvailable: StateFlow<Boolean?> = _isUpdateAvailable
+    private val _updateEvents = MutableSharedFlow<UpdateResult>()
+    val updateEvents = _updateEvents.asSharedFlow()
 
-    fun checkUpdate(currentVersion: String) {
+    fun checkForUpdates(currentVersion: String) {
         viewModelScope.launch {
-            _isUpdateAvailable.value = checkUpdateUseCase(currentVersion)
+            val result = checkUpdateUseCase(currentVersion)
+            _updateEvents.emit(result)
         }
     }
+
 }

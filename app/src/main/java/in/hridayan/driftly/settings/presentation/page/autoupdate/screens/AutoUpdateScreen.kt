@@ -3,7 +3,6 @@
 package `in`.hridayan.driftly.settings.presentation.page.autoupdate.screens
 
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,11 +21,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,6 +34,7 @@ import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.settings.data.SettingsKeys
+import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.viewmodel.AutoUpdateViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
@@ -51,15 +46,31 @@ fun AutoUpdateScreen(
     autoUpdateViewModel: AutoUpdateViewModel = hiltViewModel()
 ) {
     var checked = LocalSettings.current.isAutoUpdate
-    val isUpdateAvailable by autoUpdateViewModel.isUpdateAvailable.collectAsState()
-
-    var buttonClicked by rememberSaveable { mutableStateOf(false) }
     val context = LocalContext.current
 
-    LaunchedEffect(isUpdateAvailable, buttonClicked) {
-        if (buttonClicked && isUpdateAvailable == true) {
-            Toast.makeText(context, "Update Available", Toast.LENGTH_SHORT).show()
-            buttonClicked = false
+    LaunchedEffect(Unit) {
+        autoUpdateViewModel.updateEvents.collect { result ->
+            when (result) {
+                is UpdateResult.Success -> {
+                    if (result.isUpdateAvailable) {
+                        Toast.makeText(context, "Update available", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "No updates", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                UpdateResult.NetworkError -> {
+                    Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show()
+                }
+
+                UpdateResult.Timeout -> {
+                    Toast.makeText(context, "Request timeout", Toast.LENGTH_SHORT).show()
+                }
+
+                UpdateResult.UnknownError -> {
+                    Toast.makeText(context, "Unknown error", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -122,26 +133,22 @@ fun AutoUpdateScreen(
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Button(
                         modifier = Modifier
-                            .background(MaterialTheme.colorScheme.primaryContainer)
+                            .padding(end = 25.dp)
                             .align(Alignment.CenterEnd),
                         onClick = {
-                            autoUpdateViewModel.checkUpdate(BuildConfig.VERSION_NAME)
-                            buttonClicked = true
+                            autoUpdateViewModel.checkForUpdates(BuildConfig.VERSION_NAME)
                         }) {
                         Row(
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
                             horizontalArrangement = Arrangement.spacedBy(10.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
                                 painter = painterResource(R.drawable.ic_update),
                                 contentDescription = null,
-                                modifier = Modifier.background(MaterialTheme.colorScheme.onPrimaryContainer)
                             )
                             Text(
                                 text = stringResource(R.string.check_for_updates),
                                 style = MaterialTheme.typography.labelLarge,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
                         }
                     }

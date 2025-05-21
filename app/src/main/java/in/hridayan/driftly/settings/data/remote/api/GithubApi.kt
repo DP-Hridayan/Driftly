@@ -9,7 +9,9 @@ import javax.inject.Inject
 class GitHubApi @Inject constructor(
     private val client: HttpClient
 ) {
+    val apiUrl = "https://api.github.com/repos/DP-Hridayan/Driftly/releases/latest"
+
     suspend fun fetchLatestRelease(): GitHubReleaseDto {
-        return client.get("https://api.github.com/repos/DP-Hridayan/Driftly/releases/latest").body()
+        return client.get(apiUrl).body()
     }
 }
