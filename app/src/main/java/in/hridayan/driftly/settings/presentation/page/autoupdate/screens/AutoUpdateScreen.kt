@@ -116,7 +116,13 @@ fun AutoUpdateScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp, vertical = 25.dp)
                         .clip(MaterialTheme.shapes.extraLarge)
-                        .clickable(enabled = true, onClick = { checked = !checked }),
+                        .clickable(enabled = true, onClick = {
+                            weakHaptic()
+                            checked = !checked
+                            settingsViewModel.onToggle(
+                                SettingsKeys.AUTO_UPDATE
+                            )
+                        }),
                     shape = MaterialTheme.shapes.extraLarge,
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -136,6 +142,7 @@ fun AutoUpdateScreen(
                             style = MaterialTheme.typography.headlineSmall,
                         )
                         Switch(checked = checked, onCheckedChange = {
+                            weakHaptic()
                             settingsViewModel.onToggle(
                                 SettingsKeys.AUTO_UPDATE
                             )
@@ -207,6 +214,7 @@ fun AutoUpdateScreen(
                             contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                         ),
                         onClick = {
+                            weakHaptic()
                             autoUpdateViewModel.checkForUpdates(BuildConfig.VERSION_NAME)
                             showLoading = true
                         }) {

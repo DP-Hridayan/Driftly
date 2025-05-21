@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.common.constants.URL_LATEST_RELEASE
 import `in`.hridayan.driftly.core.utils.openUrl
 
@@ -30,6 +31,7 @@ fun UpdateBottomSheet(
     onDismiss: () -> Unit,
     latestVersion: String = "",
 ) {
+    val weakHaptic = LocalWeakHaptic.current
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val context = LocalContext.current
 
@@ -70,7 +72,10 @@ fun UpdateBottomSheet(
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp, bottom = 25.dp)
         ) {
-            OutlinedButton(onClick = onDismiss, modifier = Modifier.weight(4f)) {
+            OutlinedButton(onClick = {
+                onDismiss
+                weakHaptic()
+            }, modifier = Modifier.weight(4f)) {
                 Text(text = stringResource(R.string.cancel))
             }
 
@@ -79,6 +84,7 @@ fun UpdateBottomSheet(
             Button(onClick = {
                 onDismiss
                 openUrl(URL_LATEST_RELEASE, context)
+                weakHaptic()
             }, modifier = Modifier.weight(4f)) {
                 Text(text = stringResource(R.string.download))
             }
