@@ -7,5 +7,6 @@ data class SettingsState(
     val seedColor : Int,
     val isDynamicColor: Boolean,
     val isHapticEnabled: Boolean,
-    val subjectCardCornerRadius: Float
+    val subjectCardCornerRadius: Float,
+    val subjectCardStyle: Int
 )

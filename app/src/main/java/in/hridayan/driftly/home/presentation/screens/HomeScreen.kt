@@ -238,6 +238,7 @@ fun HomeScreen(
                 val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
                 SubjectCard(
+                    cardStyle = LocalSettings.current.subjectCardStyle,
                     cornerRadius = subjectCardCornerRadius.dp,
                     subjectId = subjects[index].id,
                     subject = subjects[index].subject,

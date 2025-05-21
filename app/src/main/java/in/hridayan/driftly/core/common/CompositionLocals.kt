@@ -13,8 +13,8 @@ import androidx.compose.ui.platform.LocalView
 import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.core.utils.HapticUtils.strongHaptic
 import `in`.hridayan.driftly.core.utils.HapticUtils.weakHaptic
-import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.SettingsKeys
+import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
 
 val LocalWeakHaptic = staticCompositionLocalOf<() -> Unit> { {} }
@@ -48,6 +48,8 @@ fun CompositionLocals(
 
     val subjectCardCornerRadius by store.floatState(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS)
 
+    val subjectCardStyle by store.intState(SettingsKeys.SUBJECT_CARD_STYLE)
+
     val state =
         remember(
             autoUpdate,
@@ -56,7 +58,8 @@ fun CompositionLocals(
             isDynamicColor,
             isHighContrastDarkMode,
             isHapticEnabled,
-            subjectCardCornerRadius
+            subjectCardCornerRadius,
+            subjectCardStyle
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -65,7 +68,8 @@ fun CompositionLocals(
                 seedColor = seedColor,
                 isDynamicColor = isDynamicColor,
                 isHapticEnabled = isHapticEnabled,
-                subjectCardCornerRadius = subjectCardCornerRadius
+                subjectCardCornerRadius = subjectCardCornerRadius,
+                subjectCardStyle = subjectCardStyle
             )
         }
 

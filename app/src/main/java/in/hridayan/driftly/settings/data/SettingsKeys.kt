@@ -2,6 +2,7 @@ package `in`.hridayan.driftly.settings.data
 
 import androidx.appcompat.app.AppCompatDelegate
 import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
+import `in`.hridayan.driftly.core.common.constants.SubjectCardStyle
 
 enum class SettingsKeys(val default: Any?) {
     LOOK_AND_FEEL(null),
@@ -21,5 +22,6 @@ enum class SettingsKeys(val default: Any?) {
     GITHUB(null),
     LICENSE(null),
     CUSTOMISATION(null),
-    SUBJECT_CARD_CORNER_RADIUS(8f)
+    SUBJECT_CARD_CORNER_RADIUS(8f),
+    SUBJECT_CARD_STYLE(SubjectCardStyle.CARD_STYLE_A)
 }

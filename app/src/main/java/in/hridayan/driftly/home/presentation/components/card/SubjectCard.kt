@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -23,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
-import `in`.hridayan.driftly.core.data.model.SubjectCardStyle
+import `in`.hridayan.driftly.core.common.constants.SubjectCardStyle
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
@@ -37,19 +36,20 @@ fun SubjectCard(
     progress: Float,
     isTotalCountZero: Boolean = false,
     navigate: () -> Unit = {},
+    onClick: () -> Unit = {},
     onLongClicked: (Boolean) -> Unit = {},
     onDeleteConfirmed: () -> Unit = {},
     onUpdateConfirmed: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
     isDemoCard: Boolean = false,
-    cornerRadius: Dp = 15.dp
+    cornerRadius: Dp = 15.dp,
+    cardStyle: Int = SubjectCardStyle.CARD_STYLE_A,
 ) {
     val weakHaptic = LocalWeakHaptic.current
     var isLongClicked by rememberSaveable { mutableStateOf(false) }
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isUpdateDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isNoAttendanceDialogVisible by rememberSaveable { mutableStateOf(false) }
-    val cardStyle = SubjectCardStyle.CARD_STYLE_A
 
     val handleLongClick = {
         if (!isDemoCard) {
@@ -60,6 +60,7 @@ fun SubjectCard(
     }
 
     val handleClick = {
+        onClick()
         if (isLongClicked) {
             handleLongClick()
         } else {
@@ -71,8 +72,8 @@ fun SubjectCard(
     val handleDeleteConfirmation = {
         viewModel.deleteSubject(subjectId, onSuccess = {
             viewModel.deleteAllAttendanceForSubject(subjectId)
-            isLongClicked = false
             onLongClicked(isLongClicked)
+            isLongClicked = false
             isDeleteDialogVisible = false
             onDeleteConfirmed()
         })
@@ -96,9 +97,8 @@ fun SubjectCard(
     BaseCard(
         modifier = modifier,
         cornerRadius = cornerRadius,
-        onClick = { handleClick() },
-        onLongClick = { handleLongClick() },
-        isLongClicked = isLongClicked
+        onClick = handleClick,
+        onLongClick = handleLongClick,
     ) {
         when (cardStyle) {
             SubjectCardStyle.CARD_STYLE_A ->
@@ -114,7 +114,7 @@ fun SubjectCard(
 
             SubjectCardStyle.CARD_STYLE_B ->
                 CardStyleB(
-                    modifier = Modifier.height(50.dp), subject = subject,
+                    subject = subject,
                     isLongClicked = isLongClicked,
                     isTotalCountZero = isTotalCountZero,
                     progress = progress,
@@ -126,11 +126,12 @@ fun SubjectCard(
     }
 
     if (isDeleteDialogVisible) {
-        ConfirmDeleteDialog(onDismiss = {
-            isDeleteDialogVisible = false
-        }, onConfirm = {
-            handleDeleteConfirmation()
-        })
+        ConfirmDeleteDialog(
+            onDismiss = {
+                isDeleteDialogVisible = false
+            },
+            onConfirm = handleDeleteConfirmation
+        )
     }
 
     if (isUpdateDialogVisible) {
