@@ -206,7 +206,7 @@ fun HomeScreen(
 
                 item {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 10.dp),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Label(
@@ -256,6 +256,12 @@ fun HomeScreen(
                     },
                     onDeleteConfirmed = { showAddButton = true },
                     onUpdateConfirmed = { showAddButton = true })
+            }
+
+            item {
+                Spacer(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(25.dp))
             }
         }
     }
