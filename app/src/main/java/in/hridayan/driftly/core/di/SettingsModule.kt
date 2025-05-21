@@ -15,7 +15,7 @@ import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSet
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
-import `in`.hridayan.driftly.settings.presentation.page.changelog.domain.usecase.GetChangelogsUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetChangelogsUseCase
 
 @Module
 @InstallIn(SingletonComponent::class)

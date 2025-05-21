@@ -1,0 +1,27 @@
+package `in`.hridayan.driftly.settings.domain.usecase
+
+import `in`.hridayan.driftly.settings.domain.repository.UpdateRepository
+import javax.inject.Inject
+
+class CheckUpdateUseCase @Inject constructor(
+    private val repository: UpdateRepository
+) {
+    suspend operator fun invoke(currentVersion: String): Boolean {
+        val latest = repository.fetchLatestRelease() ?: return false
+        return isNewerVersion(latest.tagName, currentVersion)
+    }
+
+    private fun isNewerVersion(latest: String, current: String): Boolean {
+        val latestParts = latest.trimStart('v').split(".")
+        val currentParts = current.trimStart('v').split(".")
+
+        for (i in 0 until maxOf(latestParts.size, currentParts.size)) {
+            val l = latestParts.getOrNull(i)?.toIntOrNull() ?: 0
+            val c = currentParts.getOrNull(i)?.toIntOrNull() ?: 0
+
+            if (l > c) return true
+            if (l < c) return false
+        }
+        return false
+    }
+}

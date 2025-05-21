@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import `in`.hridayan.driftly.settings.presentation.page.changelog.data.model.ChangelogItem
-import `in`.hridayan.driftly.settings.presentation.page.changelog.domain.usecase.GetChangelogsUseCase
+import `in`.hridayan.driftly.settings.data.model.ChangelogItem
+import `in`.hridayan.driftly.settings.domain.usecase.GetChangelogsUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

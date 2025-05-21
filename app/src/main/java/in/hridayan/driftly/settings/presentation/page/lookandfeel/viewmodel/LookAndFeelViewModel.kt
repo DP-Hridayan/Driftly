@@ -15,7 +15,7 @@ import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
-import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.domain.ThemeOption
+import `in`.hridayan.driftly.settings.domain.model.ThemeOption
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow

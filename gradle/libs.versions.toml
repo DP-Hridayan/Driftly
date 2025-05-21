@@ -7,7 +7,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.9.0"
 activityCompose = "1.10.1"
-composeBom = "2025.05.00"
+composeBom = "2025.05.01"
 ksp = "2.1.10-1.0.31"
 hilt = "2.56.1"
 serialization = "1.7.3"
@@ -17,9 +17,10 @@ hiltExt = "1.2.0"
 navigation = "2.9.0"
 material = "1.13.0-alpha13"
 materialIconsExtended = "1.7.8"
-composeAnimation = "1.8.1"
+composeAnimation = "1.8.2"
 splashscreen = "1.0.1"
-datastore = "1.1.6"
+datastore = "1.1.7"
+ktor = "2.3.8"
 
 [libraries]
 core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
@@ -50,6 +51,10 @@ navigation-compose = { group = "androidx.navigation", name = "navigation-compose
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-compose-animation = {group = "androidx.compose.animation", name = "animation", version.ref = "composeAnimation" }
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -1,10 +1,10 @@
-package `in`.hridayan.driftly.settings.presentation.page.changelog.domain.usecase
+package `in`.hridayan.driftly.settings.domain.usecase
 
 import android.annotation.SuppressLint
 import android.content.Context
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.settings.presentation.page.changelog.data.model.ChangelogItem
-import `in`.hridayan.driftly.settings.presentation.page.changelog.data.versionList
+import `in`.hridayan.driftly.settings.data.model.ChangelogItem
+import `in`.hridayan.driftly.settings.data.model.versionList
 
 class GetChangelogsUseCase(
     private val context: Context,

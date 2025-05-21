@@ -24,7 +24,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.components.radiobutton.ThemeRadioGroup
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
-import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.domain.ThemeOption
+import `in`.hridayan.driftly.settings.domain.model.ThemeOption
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.LookAndFeelViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
