@@ -100,6 +100,7 @@ fun CardStyleB(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .background(MaterialTheme.colorScheme.surfaceContainer)
     ) {
 
         VerticalProgressWave(
