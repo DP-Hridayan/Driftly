@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.core.presentation.components.canvas.HorizontalProgressWave
 import `in`.hridayan.driftly.core.presentation.components.progress.CircularProgressWithText
-import `in`.hridayan.driftly.home.presentation.components.SubjectText
+import `in`.hridayan.driftly.home.presentation.components.text.SubjectText
 
 @Composable
 fun CardStyleA(
@@ -35,6 +35,9 @@ fun CardStyleA(
     onDeleteButtonClicked: () -> Unit,
     onErrorIconClicked: () -> Unit,
 ) {
+    val subjectTextColor =
+        if (isLongClicked) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -48,7 +51,7 @@ fun CardStyleA(
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         SubjectText(
-            modifier = Modifier.weight(1f), subject = subject, isLongClicked = isLongClicked
+            modifier = Modifier.weight(1f), subject = subject, subjectTextColor = subjectTextColor
         )
 
         if (isLongClicked) {
@@ -76,13 +79,28 @@ fun CardStyleB(
 ) {
     Box(modifier = modifier.fillMaxWidth()) {
         HorizontalProgressWave(progress = progress, waveSpeed = 4000)
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 15.dp, vertical = 10.dp)
+                .animateContentSize(
+                    animationSpec = tween(
+                        durationMillis = 500, easing = FastOutSlowInEasing
+                    )
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(15.dp)
+        ) {
+            SubjectText(
+                modifier = Modifier.weight(1f), subject = subject
+            )
+            Text(
+                text = "${(progress * 100).toInt()}%",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+            )
+        }
 
-        Text(
-            text = "${(progress * 100).toInt()}%",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
-            modifier = Modifier.align(Alignment.Center)
-        )
     }
 }
 

@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.unit.sp
 
 @SuppressLint("DefaultLocale")
 @Composable
@@ -26,7 +27,9 @@ fun CircularProgressWithText(modifier: Modifier = Modifier, progress: Float) {
         Text(
             text = progressText,
             color = progressColor,
-            style = MaterialTheme.typography.bodySmall
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 10.sp
+            )
         )
     }
 }

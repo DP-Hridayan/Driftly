@@ -21,7 +21,7 @@ fun HorizontalProgressWave(
     progress: Float,
     waveSpeed: Int = 4000,
     waveFrequency: Float = 2f,
-    waveColor: Color = MaterialTheme.colorScheme.primaryContainer
+    waveColor: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
 ) {
     val animatedOffset by rememberInfiniteTransition(label = "wave")
         .animateFloat(

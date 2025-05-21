@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.data.model.SubjectCardStyle
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
@@ -47,6 +49,7 @@ fun SubjectCard(
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isUpdateDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isNoAttendanceDialogVisible by rememberSaveable { mutableStateOf(false) }
+    val cardStyle = SubjectCardStyle.CARD_STYLE_A
 
     val handleLongClick = {
         if (!isDemoCard) {
@@ -97,17 +100,29 @@ fun SubjectCard(
         onLongClick = { handleLongClick() },
         isLongClicked = isLongClicked
     ) {
-        CardStyleA(
-            subject = subject,
-            isLongClicked = isLongClicked,
-            isTotalCountZero = isTotalCountZero,
-            progress = progress,
-            onEditButtonClicked = onEditButtonClicked,
-            onDeleteButtonClicked = onDeleteButtonClicked,
-            onErrorIconClicked = onErrorIconClicked
-        )
+        when (cardStyle) {
+            SubjectCardStyle.CARD_STYLE_A ->
+                CardStyleA(
+                    subject = subject,
+                    isLongClicked = isLongClicked,
+                    isTotalCountZero = isTotalCountZero,
+                    progress = progress,
+                    onEditButtonClicked = onEditButtonClicked,
+                    onDeleteButtonClicked = onDeleteButtonClicked,
+                    onErrorIconClicked = onErrorIconClicked
+                )
 
-        // CardStyleB(modifier = Modifier.height(50.dp), progress = progress)
+            SubjectCardStyle.CARD_STYLE_B ->
+                CardStyleB(
+                    modifier = Modifier.height(50.dp), subject = subject,
+                    isLongClicked = isLongClicked,
+                    isTotalCountZero = isTotalCountZero,
+                    progress = progress,
+                    onEditButtonClicked = onEditButtonClicked,
+                    onDeleteButtonClicked = onDeleteButtonClicked,
+                    onErrorIconClicked = onErrorIconClicked
+                )
+        }
     }
 
     if (isDeleteDialogVisible) {

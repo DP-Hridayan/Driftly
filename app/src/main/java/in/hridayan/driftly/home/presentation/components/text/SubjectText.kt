@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.home.presentation.components
+package `in`.hridayan.driftly.home.presentation.components.text
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -7,9 +7,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 @Composable
-fun SubjectText(modifier: Modifier = Modifier, subject: String, isLongClicked: Boolean = false) {
+fun SubjectText(
+    modifier: Modifier = Modifier,
+    subject: String,
+    subjectTextColor: Color = MaterialTheme.colorScheme.onSurface
+) {
     Text(
         text = subject,
         modifier = modifier
@@ -19,6 +24,6 @@ fun SubjectText(modifier: Modifier = Modifier, subject: String, isLongClicked: B
                 )
             ),
         style = MaterialTheme.typography.titleMedium,
-        color = if (isLongClicked) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
+        color = subjectTextColor
     )
 }
