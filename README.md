@@ -91,13 +91,15 @@
   <a href="https://github.com/DP-Hridayan/Driftly/releases/latest/">
     <img src="assets/github.png" width="130" alt="GitHub" />
   </a>
-  &nbsp;&nbsp;
+</p>
+<p <p align="start">
   <a href="https://t.me/hridayan">
-    <img src="assets/telegram.png" width="180" alt="Join Telegram" />
+    <img src="assets/telegram.png" width="130" alt="Join Telegram" />
   </a>
-  <br/><br/>
+</p>
+<p align="start">
   <a href="https://www.buymeacoffee.com/Hridayan">
-    <img src="https://github.com/DP-Hridayan/aShellYou/assets/157479796/d0ad79e4-a19e-4686-9f30-dc1cb1e85168" width="200" alt="Buy Me a Coffee" />
+    <img src="https://github.com/DP-Hridayan/aShellYou/assets/157479796/d0ad79e4-a19e-4686-9f30-dc1cb1e85168" width="130" alt="Buy Me a Coffee" />
   </a></p>
 
   </br>
