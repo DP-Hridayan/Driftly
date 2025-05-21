@@ -26,6 +26,29 @@ android {
         baseline = file("lint-baseline.xml")
     }
 
+    signingConfigs {
+        create("release") {
+            if (System.getenv("CI")?.toBoolean() == true) {
+                val keystorePath = System.getenv("KEYSTORE_PATH")
+                val keystorePassword = System.getenv("KEYSTORE_PASSWORD")
+                val keyAlias = System.getenv("KEY_ALIAS")
+                val keyPassword = System.getenv("KEY_PASSWORD") ?: keystorePassword
+
+                if (
+                    !keystorePath.isNullOrBlank() &&
+                    !keystorePassword.isNullOrBlank() &&
+                    !keyAlias.isNullOrBlank() &&
+                    !keyPassword.isNullOrBlank()
+                ) {
+                    storeFile = file(keystorePath)
+                    storePassword = keystorePassword
+                    this.keyAlias = keyAlias
+                    this.keyPassword = keyPassword
+                }
+            }
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
@@ -39,9 +62,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -92,6 +116,7 @@ dependencies {
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.slf4j.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

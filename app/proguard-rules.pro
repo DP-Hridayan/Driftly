@@ -22,3 +22,6 @@
 
 -keep class androidx.datastore.preferences.PreferencesProto$* { *; }
 -keepclassmembers class androidx.datastore.preferences.PreferencesProto$* { *; }
+-keep class org.slf4j.** { *; }
+-dontwarn org.slf4j.**
+
