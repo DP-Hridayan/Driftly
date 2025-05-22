@@ -62,7 +62,7 @@ body:
     label: Version
     description: What version of Driftly are you running?
     options:
-    - v1.2.0 (Latest)
+    - v1.1.0 (Latest)
     - v1.0.0
     default: 0
   validations:
