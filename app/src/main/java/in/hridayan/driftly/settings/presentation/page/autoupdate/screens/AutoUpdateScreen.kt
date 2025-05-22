@@ -181,7 +181,7 @@ fun AutoUpdateScreen(
                                     autoUpdateViewModel.select(type)
                                     weakHaptic()
                                 }
-                                .padding(vertical = 8.dp, horizontal = 20.dp)
+                                .padding(top = 8.dp, bottom = 8.dp, start = 25.dp, end = 20.dp)
                         ) {
                             Text(
                                 text = label,
