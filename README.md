@@ -107,6 +107,24 @@
 
   </br>
 
+  ## Translations
+
+<p align="start">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/translations-dark.svg?ts=1747916651">
+    <source media="(prefers-color-scheme: light)" srcset="docs/translations-light.svg?ts=1747916651">
+    <img src="translations-light.svg" alt="Translation Progress" />
+  </picture>
+</p>
+
+>[!NOTE]
+>
+> Help us make this project accessible to more people by contributing translations on **[Crowdin](https://crowdin.com/project/driftly)**
+>
+> Thanks to our Crowdin [translators](docs/translators.md)
+
+</br>
+
 
 ## License
 
