@@ -39,6 +39,9 @@
   <img src="https://img.shields.io/badge/Room-3F51B5?style=for-the-badge&logo=sqlite&logoColor=white"/>
   <img alt="Min SDK" src="https://img.shields.io/badge/MinSDK-26-yellow?style=for-the-badge" />
   <img alt="Target SDK" src="https://img.shields.io/badge/TargetSDK-35-blue?style=for-the-badge" />
+    <a href="https://crowdin.com/project/driftly">
+    <img alt="Crowdin" src="https://img.shields.io/badge/Translation-Crowdin-222222?style=for-the-badge&logo=crowdin&logoColor=white"/>
+</a>
 </p>
 
 </br>
