@@ -1,0 +1,6 @@
+
+* Fixed some color values in color palette selection
+
+* Fixed some UI margins
+
+* Added prerelease build update checker
