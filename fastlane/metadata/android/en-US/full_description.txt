@@ -1,0 +1,19 @@
+<b>Driftly is a fully-featured Attendance Tracker app with Material Design 3 UI, letting you save your daily attendance and analyze them, packed in a beautiful and smart interface</b>
+
+<b>Features</b>
+
+- 🎨 Modern Material Design 3 UI
+
+- 📲 Save attendance
+
+- 🕵️Progress summarization
+
+- 🗓️ Inbuilt Calendar
+
+- 🛠️ Support for Adding, Deleting or Editing
+
+- 🌑 AMOLED-Friendly Dark Theme
+
+- 🎉 Packed with Extras
+
+

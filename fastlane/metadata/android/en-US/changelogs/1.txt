@@ -1,0 +1,10 @@
+
+* Initial release
+
+* Added calendar to mark attendance status
+
+* Added per subject progress display
+
+* Added ability to add, remove and edit subjects
+
+* Added settings for customising user experience
