@@ -14,16 +14,16 @@ sealed class SeedColors(
 ) {
     object Blue : SeedColors(
         seed = 0xFF0061A4.toInt(),
-        primary = Color(0xFF80D4DB),
-        secondary = Color(0xFF7C9598),
-        tertiary = Color(0xFF9CABCD)
+        primary = Color(0xFF2EC7FF),
+        secondary = Color(0xFF688D8F),
+        tertiary = Color(0xFF674875)
     )
 
     object Indigo : SeedColors(
         seed = 0xFF535A92.toInt(),
         primary = Color(0xFFA9C7FF),
         secondary = Color(0xFF8891A5),
-        tertiary = Color(0xFF95B8F6)
+        tertiary = Color(0xFF856079)
     )
 
     object Purple : SeedColors(
