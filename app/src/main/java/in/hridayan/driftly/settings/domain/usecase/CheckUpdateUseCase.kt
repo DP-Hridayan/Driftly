@@ -7,12 +7,13 @@ import javax.inject.Inject
 class CheckUpdateUseCase @Inject constructor(
     private val repository: UpdateRepository
 ) {
-    suspend operator fun invoke(currentVersion: String): UpdateResult {
-        return when (val result = repository.fetchLatestRelease()) {
+    suspend operator fun invoke(currentVersion: String, includePrerelease: Boolean): UpdateResult {
+        return when (val result = repository.fetchLatestRelease(includePrerelease)) {
             is UpdateResult.Success -> {
                 val isNewer = isNewerVersion(result.release.tagName, currentVersion)
                 UpdateResult.Success(result.release, isNewer)
             }
+
             is UpdateResult.NetworkError -> UpdateResult.NetworkError
             is UpdateResult.Timeout -> UpdateResult.Timeout
             is UpdateResult.UnknownError -> UpdateResult.UnknownError

@@ -15,6 +15,7 @@ import `in`.hridayan.driftly.core.common.CompositionLocals
 import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.common.LocalSeedColor
 import `in`.hridayan.driftly.core.common.LocalSettings
+import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
 import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
 import `in`.hridayan.driftly.core.presentation.AppEntry
 import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
@@ -38,8 +39,15 @@ class MainActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             val autoUpdateEnabled = store.isEnabled(SettingsKeys.AUTO_UPDATE).first()
+            val includePrerelease =
+                store.intFlow(SettingsKeys.GITHUB_RELEASE_TYPE)
+                    .first() == GithubReleaseType.PRE_RELEASE
+
             if (autoUpdateEnabled) {
-                autoUpdateViewModel.checkForUpdates(BuildConfig.VERSION_NAME)
+                autoUpdateViewModel.checkForUpdates(
+                    currentVersion = BuildConfig.VERSION_NAME,
+                    includePrerelease = includePrerelease
+                )
             }
         }
 

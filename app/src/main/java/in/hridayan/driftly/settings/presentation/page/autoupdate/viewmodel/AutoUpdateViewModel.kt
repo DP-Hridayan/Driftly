@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
-import `in`.hridayan.driftly.core.common.constants.SubjectCardStyle
 import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
@@ -24,9 +23,9 @@ class AutoUpdateViewModel @Inject constructor(
     private val _updateEvents = MutableSharedFlow<UpdateResult>()
     val updateEvents = _updateEvents.asSharedFlow()
 
-    fun checkForUpdates(currentVersion: String) {
+    fun checkForUpdates(currentVersion: String, includePrerelease: Boolean) {
         viewModelScope.launch {
-            val result = checkUpdateUseCase(currentVersion)
+            val result = checkUpdateUseCase(currentVersion, includePrerelease)
             _updateEvents.emit(result)
         }
     }

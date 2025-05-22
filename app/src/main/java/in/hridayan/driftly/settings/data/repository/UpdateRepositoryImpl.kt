@@ -16,10 +16,10 @@ class UpdateRepositoryImpl @Inject constructor(
     private val api: GitHubApi
 ) : UpdateRepository {
 
-    override suspend fun fetchLatestRelease(): UpdateResult {
+    override suspend fun fetchLatestRelease(includePrerelease:Boolean): UpdateResult {
         return try {
             Log.d("UpdateRepository", "Fetching latest release from GitHub")
-            val response = api.fetchLatestRelease().toDomain()
+            val response = api.fetchLatestRelease(includePrerelease).toDomain()
             UpdateResult.Success(response, response.tagName.isNotEmpty())
         } catch (e: SocketTimeoutException) {
             Log.e("UpdateRepository", "Timeout", e)

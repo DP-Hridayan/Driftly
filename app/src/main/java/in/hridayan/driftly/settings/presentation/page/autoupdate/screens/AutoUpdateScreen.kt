@@ -69,6 +69,11 @@ fun AutoUpdateScreen(
     val currentReleaseType by autoUpdateViewModel.githubReleaseType.collectAsState()
     var showUpdateSheet by rememberSaveable { mutableStateOf(false) }
     var tagName by rememberSaveable { mutableStateOf(BuildConfig.VERSION_NAME) }
+    val includePrerelease = LocalSettings.current.githubReleaseType == GithubReleaseType.PRE_RELEASE
+    val noUpdateAvailable = stringResource(R.string.no_update_available)
+    val networkError = stringResource(R.string.network_error)
+    val requestTimeout = stringResource(R.string.request_timeout)
+    val unKnownError = stringResource(R.string.unknown_error)
 
     LaunchedEffect(Unit) {
         autoUpdateViewModel.updateEvents.collect { result ->
@@ -79,20 +84,20 @@ fun AutoUpdateScreen(
                         tagName = result.release.tagName
                         showUpdateSheet = true
                     } else {
-                        Toast.makeText(context, "No updates", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, noUpdateAvailable, Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 UpdateResult.NetworkError -> {
-                    Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, networkError, Toast.LENGTH_SHORT).show()
                 }
 
                 UpdateResult.Timeout -> {
-                    Toast.makeText(context, "Request timeout", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, requestTimeout, Toast.LENGTH_SHORT).show()
                 }
 
                 UpdateResult.UnknownError -> {
-                    Toast.makeText(context, "Unknown error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, unKnownError, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -215,7 +220,10 @@ fun AutoUpdateScreen(
                         ),
                         onClick = {
                             weakHaptic()
-                            autoUpdateViewModel.checkForUpdates(BuildConfig.VERSION_NAME)
+                            autoUpdateViewModel.checkForUpdates(
+                                currentVersion = BuildConfig.VERSION_NAME,
+                                includePrerelease = includePrerelease
+                            )
                             showLoading = true
                         }) {
                         Row(

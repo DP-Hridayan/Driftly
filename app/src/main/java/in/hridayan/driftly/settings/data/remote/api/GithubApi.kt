@@ -9,9 +9,15 @@ import javax.inject.Inject
 class GitHubApi @Inject constructor(
     private val client: HttpClient
 ) {
-    val apiUrl = "https://api.github.com/repos/DP-Hridayan/Driftly/releases/latest"
+    private val releasesUrl = "https://api.github.com/repos/DP-Hridayan/Driftly/releases"
+    private val latestReleaseUrl = "https://api.github.com/repos/DP-Hridayan/Driftly/releases/latest"
 
-    suspend fun fetchLatestRelease(): GitHubReleaseDto {
-        return client.get(apiUrl).body()
+    suspend fun fetchLatestRelease(includePrerelease: Boolean): GitHubReleaseDto {
+        return if (includePrerelease) {
+            val allReleases: List<GitHubReleaseDto> = client.get(releasesUrl).body()
+            allReleases.first()
+        } else {
+            client.get(latestReleaseUrl).body()
+        }
     }
 }
