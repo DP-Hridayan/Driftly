@@ -1,7 +1,8 @@
-package `in`.hridayan.driftly.settings.domain.model
+package `in`.hridayan.driftly.settings.data.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import `in`.hridayan.driftly.settings.data.SettingsKeys
+import `in`.hridayan.driftly.settings.domain.model.SettingsType
 
 data class SettingsItem(
     val key: SettingsKeys,

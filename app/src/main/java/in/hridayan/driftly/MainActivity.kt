@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
-            val autoUpdateEnabled = store.isEnabled(SettingsKeys.AUTO_UPDATE).first()
+            val autoUpdateEnabled = store.booleanFlow(SettingsKeys.AUTO_UPDATE).first()
             val includePrerelease =
                 store.intFlow(SettingsKeys.GITHUB_RELEASE_TYPE)
                     .first() == GithubReleaseType.PRE_RELEASE

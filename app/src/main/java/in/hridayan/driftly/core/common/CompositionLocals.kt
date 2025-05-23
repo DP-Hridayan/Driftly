@@ -127,7 +127,7 @@ fun CompositionLocals(
 
 @Composable
 private fun SettingsDataStore.booleanState(key: SettingsKeys): State<Boolean> {
-    return isEnabled(key).collectAsState(initial = key.default as Boolean)
+    return booleanFlow(key).collectAsState(initial = key.default as Boolean)
 }
 
 @Composable

@@ -23,7 +23,7 @@ class SettingsDataStore @Inject constructor(
     private fun SettingsKeys.toBooleanKey(): Preferences.Key<Boolean> =
         booleanPreferencesKey(this.name)
 
-    fun isEnabled(key: SettingsKeys): Flow<Boolean> {
+    fun booleanFlow(key: SettingsKeys): Flow<Boolean> {
         val preferencesKey = key.toBooleanKey()
         val default = key.default as? Boolean == true
 
@@ -79,7 +79,7 @@ class SettingsDataStore @Inject constructor(
             .map { prefs -> prefs[preferencesKey] ?: default }
     }
 
-    suspend fun setFLoat(key: SettingsKeys, value: Float) {
+    suspend fun setFloat(key: SettingsKeys, value: Float) {
         val preferencesKey = key.toFloatKey()
         ds.edit { prefs ->
             prefs[preferencesKey] = value

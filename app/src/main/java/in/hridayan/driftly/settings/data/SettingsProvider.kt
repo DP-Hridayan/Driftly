@@ -13,7 +13,7 @@ import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material.icons.rounded.Vibration
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.settings.domain.model.SettingsItem
+import `in`.hridayan.driftly.settings.data.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import `in`.hridayan.driftly.settings.data.SettingsKeys as key
 

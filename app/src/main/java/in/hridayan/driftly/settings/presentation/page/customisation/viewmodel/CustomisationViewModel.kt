@@ -19,7 +19,7 @@ class CustomisationViewModel @Inject constructor(
 
     fun setSubjectCardCornerRadius(cornerRadius: Float) {
         viewModelScope.launch {
-            store.setFLoat(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS, cornerRadius)
+            store.setFloat(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS, cornerRadius)
         }
     }
 

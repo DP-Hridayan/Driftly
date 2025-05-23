@@ -12,7 +12,7 @@ import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_ISSUE_REPORT
 import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_REPO
 import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_REPO_LICENSE
 import `in`.hridayan.driftly.navigation.ChangelogScreen
-import `in`.hridayan.driftly.settings.domain.model.SettingsItem
+import `in`.hridayan.driftly.settings.data.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.Flow

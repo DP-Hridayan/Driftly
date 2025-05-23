@@ -11,7 +11,7 @@ import `in`.hridayan.driftly.navigation.AutoUpdateScreen
 import `in`.hridayan.driftly.navigation.CustomisationScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.data.SettingsKeys
-import `in`.hridayan.driftly.settings.domain.model.SettingsItem
+import `in`.hridayan.driftly.settings.data.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetDynamicColorSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSettingUseCase
