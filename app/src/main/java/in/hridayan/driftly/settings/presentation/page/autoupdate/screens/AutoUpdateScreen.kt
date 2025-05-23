@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -235,7 +237,7 @@ fun AutoUpdateScreen(
                             else
                                 Icon(
                                     modifier = Modifier.size(20.dp),
-                                    painter = painterResource(R.drawable.ic_update),
+                                    imageVector = Icons.Rounded.Update,
                                     contentDescription = null,
                                 )
 

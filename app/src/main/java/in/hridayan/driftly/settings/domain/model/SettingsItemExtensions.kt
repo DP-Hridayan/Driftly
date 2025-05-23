@@ -1,6 +1,9 @@
 package `in`.hridayan.driftly.settings.domain.model
 
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.DarkMode
+import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -16,8 +19,8 @@ fun SettingsItem.getResolvedIcon(): ImageVector? {
     val darkMode = LocalDarkMode.current
 
     return if (key == SettingsKeys.DARK_THEME) {
-        if (darkMode) ImageVector.vectorResource(id = R.drawable.ic_dark_mode)
-        else ImageVector.vectorResource(id = R.drawable.ic_light_mode)
+        if (darkMode) Icons.Outlined.DarkMode
+        else Icons.Rounded.LightMode
     } else {
         iconVector ?: iconResId.takeIf { it != 0 }?.let {
             runCatching { ImageVector.vectorResource(id = it) }.getOrNull()

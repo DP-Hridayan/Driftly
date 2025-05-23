@@ -1,5 +1,16 @@
 package `in`.hridayan.driftly.settings.data
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.DarkMode
+import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.rounded.AddComment
+import androidx.compose.material.icons.rounded.ChangeHistory
+import androidx.compose.material.icons.rounded.Colorize
+import androidx.compose.material.icons.rounded.Contrast
+import androidx.compose.material.icons.rounded.Language
+import androidx.compose.material.icons.rounded.Tune
+import androidx.compose.material.icons.rounded.Update
+import androidx.compose.material.icons.rounded.Vibration
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
@@ -12,21 +23,21 @@ object SettingsProvider {
             key = key.LOOK_AND_FEEL,
             titleResId = R.string.look_and_feel,
             descriptionResId = R.string.des_look_and_feel,
-            iconResId = R.drawable.ic_pallete,
+            iconVector = Icons.Outlined.Palette,
             type = SettingsType.NoSwitch
         ),
         SettingsItem(
             key = key.CUSTOMISATION,
             titleResId = R.string.customisation,
             descriptionResId = R.string.des_customisation,
-            iconResId = R.drawable.ic_tune,
+            iconVector = Icons.Rounded.Tune,
             type = SettingsType.NoSwitch
         ),
         SettingsItem(
             key = key.AUTO_UPDATE,
             titleResId = R.string.auto_update,
             descriptionResId = R.string.des_auto_update,
-            iconResId = R.drawable.ic_update,
+            iconVector = Icons.Rounded.Update,
             type = SettingsType.NoSwitch
         ),
         SettingsItem(
@@ -42,7 +53,7 @@ object SettingsProvider {
         key = key.DYNAMIC_COLORS,
         titleResId = R.string.dynamic_colors,
         descriptionResId = R.string.des_dynamic_colors,
-        iconResId = R.drawable.ic_color_picker,
+        iconVector = Icons.Rounded.Colorize,
         type = SettingsType.Switch
     )
 
@@ -50,7 +61,7 @@ object SettingsProvider {
         key = key.HIGH_CONTRAST_DARK_MODE,
         titleResId = R.string.high_contrast_dark_mode,
         descriptionResId = R.string.des_high_contrast_dark_mode,
-        iconResId = R.drawable.ic_contrast,
+        iconVector = Icons.Rounded.Contrast,
         type = SettingsType.Switch
     )
 
@@ -59,21 +70,21 @@ object SettingsProvider {
             key = key.DARK_THEME,
             titleResId = R.string.dark_theme,
             descriptionResId = R.string.system,
-            iconResId = R.drawable.ic_dark_mode,
+            iconVector = Icons.Outlined.DarkMode,
             type = SettingsType.NoSwitch
         ),
         SettingsItem(
             key = key.HAPTICS_AND_VIBRATION,
             titleResId = R.string.haptics_and_vibration,
             descriptionResId = R.string.des_haptics_and_vibration,
-            iconResId = R.drawable.ic_vibration,
+            iconVector = Icons.Rounded.Vibration,
             type = SettingsType.Switch
         ),
         SettingsItem(
             key = key.LANGUAGE,
             titleResId = R.string.default_language,
             descriptionResId = R.string.des_default_language,
-            iconResId = R.drawable.ic_language,
+            iconVector = Icons.Rounded.Language,
             type = SettingsType.NoSwitch
         ),
     )
@@ -90,7 +101,7 @@ object SettingsProvider {
             key = key.CHANGELOGS,
             titleResId = R.string.changelogs,
             descriptionResId = R.string.des_changelogs,
-            iconResId = R.drawable.ic_changelog,
+            iconVector = Icons.Rounded.ChangeHistory,
             type = SettingsType.NoSwitch
         ),
         SettingsItem(
@@ -104,7 +115,7 @@ object SettingsProvider {
             key = key.FEATURE_REQUEST,
             titleResId = R.string.feature_request,
             descriptionResId = R.string.des_feature_request,
-            iconResId = R.drawable.ic_feature,
+            iconVector = Icons.Rounded.AddComment,
             type = SettingsType.NoSwitch
         ),
         SettingsItem(

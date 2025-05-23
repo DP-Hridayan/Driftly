@@ -3,6 +3,10 @@ package `in`.hridayan.driftly.calender.presentation.components.menu
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -49,7 +53,7 @@ fun AttendanceDropDownMenu(
             },
             leadingIcon = {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_check),
+                    imageVector = Icons.Rounded.Check,
                     contentDescription = "Present",
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
@@ -73,7 +77,7 @@ fun AttendanceDropDownMenu(
             },
             leadingIcon = {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_cross),
+                    imageVector = Icons.Rounded.Close,
                     contentDescription = "Absent",
                     tint = MaterialTheme.colorScheme.onError
                 )
@@ -97,7 +101,7 @@ fun AttendanceDropDownMenu(
             text = { Text(text = stringResource(R.string.clear)) },
             leadingIcon = {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_remove),
+                    imageVector = Icons.Rounded.Remove,
                     contentDescription = stringResource(R.string.clear),
                     tint = MaterialTheme.colorScheme.onSurface
                 )
