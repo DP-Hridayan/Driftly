@@ -2,6 +2,9 @@ package `in`.hridayan.driftly.calender.presentation.components.button
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ChevronLeft
+import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -28,7 +31,7 @@ fun MonthNavigationButtons(
             onNavigatePrev()
         }) {
             Icon(
-                painter = painterResource(R.drawable.chevron_left),
+               imageVector = Icons.Rounded.ChevronLeft,
                 contentDescription = "Previous"
             )
         }
@@ -38,7 +41,7 @@ fun MonthNavigationButtons(
             onNavigateNext()
         }) {
             Icon(
-                painter = painterResource(R.drawable.chevron_right),
+                imageVector = Icons.Rounded.ChevronRight,
                 contentDescription = "Next"
             )
         }

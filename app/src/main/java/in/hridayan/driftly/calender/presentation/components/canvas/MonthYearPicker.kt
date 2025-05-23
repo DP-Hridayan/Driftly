@@ -3,6 +3,9 @@ package `in`.hridayan.driftly.calender.presentation.components.canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowDropDown
+import androidx.compose.material.icons.rounded.ChevronLeft
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -39,7 +42,7 @@ fun MonthYearPicker(
             onClick()
         }) {
             Icon(
-                painter = painterResource(R.drawable.ic_arrow_dropdown),
+                imageVector = Icons.Rounded.ArrowDropDown,
                 contentDescription = "Dropdown icon"
             )
         }
