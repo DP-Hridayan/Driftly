@@ -6,14 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.settings.data.model.ChangelogItem
-import `in`.hridayan.driftly.settings.domain.usecase.GetChangelogsUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetAllChangelogsUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class ChangelogViewModel @Inject constructor(
-    private val getChangelogsUseCase: GetChangelogsUseCase
+    private val getAllChangelogsUseCase: GetAllChangelogsUseCase
 ) : ViewModel() {
 
     private val _changelogs = mutableStateOf<List<ChangelogItem>>(emptyList())
@@ -21,7 +21,7 @@ class ChangelogViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _changelogs.value = getChangelogsUseCase()
+            _changelogs.value = getAllChangelogsUseCase()
         }
     }
 

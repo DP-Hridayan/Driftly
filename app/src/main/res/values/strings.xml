@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Driftly</string>
     <string name="field_blank_error">Field cannot be blank</string>
     <string name="subject_already_exists">Subject already exists</string>
@@ -72,6 +72,7 @@
     <string name="current_version">Current version</string>
     <string name="download">Download</string>
     <string name="stable">Stable</string>
+    <string name="whats_new" tools:ignore="MissingTranslation">What\'s new!</string>
     <string name="no_update_available">No update available</string>
     <string name="network_error">Network error</string>
     <string name="request_timeout">Request timeout</string>

@@ -9,5 +9,6 @@ data class SettingsState(
     val isHapticEnabled: Boolean,
     val subjectCardCornerRadius: Float,
     val subjectCardStyle: Int,
-    val githubReleaseType: Int
+    val githubReleaseType: Int,
+    val savedVersionCode: Int
 )

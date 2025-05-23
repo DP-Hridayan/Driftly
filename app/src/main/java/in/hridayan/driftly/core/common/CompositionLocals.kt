@@ -10,12 +10,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalView
+import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.core.utils.HapticUtils.strongHaptic
 import `in`.hridayan.driftly.core.utils.HapticUtils.weakHaptic
 import `in`.hridayan.driftly.settings.data.SettingsKeys
-import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
+import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 val LocalWeakHaptic = staticCompositionLocalOf<() -> Unit> { {} }
 val LocalStrongHaptic = staticCompositionLocalOf<() -> Unit> { {} }
@@ -31,26 +32,28 @@ val LocalTonalPalette = staticCompositionLocalOf<List<SeedColors>> {
 
 @Composable
 fun CompositionLocals(
-    store: SettingsDataStore,
+    settingsViewModel: SettingsViewModel= hiltViewModel(),
     content: @Composable () -> Unit
 ) {
-    val autoUpdate by store.booleanState(SettingsKeys.AUTO_UPDATE)
+    val autoUpdate by settingsViewModel.booleanState(SettingsKeys.AUTO_UPDATE)
 
-    val themeMode by store.intState(SettingsKeys.THEME_MODE)
+    val themeMode by settingsViewModel.intState(SettingsKeys.THEME_MODE)
 
-    val seedColor by store.intState(SettingsKeys.SEED_COLOR)
+    val seedColor by settingsViewModel.intState(SettingsKeys.SEED_COLOR)
 
-    val isDynamicColor by store.booleanState(SettingsKeys.DYNAMIC_COLORS)
+    val isDynamicColor by settingsViewModel.booleanState(SettingsKeys.DYNAMIC_COLORS)
 
-    val isHighContrastDarkMode by store.booleanState(SettingsKeys.HIGH_CONTRAST_DARK_MODE)
+    val isHighContrastDarkMode by settingsViewModel.booleanState(SettingsKeys.HIGH_CONTRAST_DARK_MODE)
 
-    val isHapticEnabled by store.booleanState(SettingsKeys.HAPTICS_AND_VIBRATION)
+    val isHapticEnabled by settingsViewModel.booleanState(SettingsKeys.HAPTICS_AND_VIBRATION)
 
-    val subjectCardCornerRadius by store.floatState(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS)
+    val subjectCardCornerRadius by settingsViewModel.floatState(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS)
 
-    val subjectCardStyle by store.intState(SettingsKeys.SUBJECT_CARD_STYLE)
+    val subjectCardStyle by settingsViewModel.intState(SettingsKeys.SUBJECT_CARD_STYLE)
 
-    val githubReleaseType by store.intState(SettingsKeys.GITHUB_RELEASE_TYPE)
+    val githubReleaseType by settingsViewModel.intState(SettingsKeys.GITHUB_RELEASE_TYPE)
+
+    val savedVersionCode by settingsViewModel.intState(SettingsKeys.SAVED_VERSION_CODE)
 
     val state =
         remember(
@@ -62,7 +65,8 @@ fun CompositionLocals(
             isHapticEnabled,
             subjectCardCornerRadius,
             subjectCardStyle,
-            githubReleaseType
+            githubReleaseType,
+            savedVersionCode
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -73,7 +77,8 @@ fun CompositionLocals(
                 isHapticEnabled = isHapticEnabled,
                 subjectCardCornerRadius = subjectCardCornerRadius,
                 subjectCardStyle = subjectCardStyle,
-                githubReleaseType = githubReleaseType
+                githubReleaseType = githubReleaseType,
+                savedVersionCode = savedVersionCode
             )
         }
 
@@ -119,24 +124,24 @@ fun CompositionLocals(
         LocalStrongHaptic provides strongHaptic,
         LocalSeedColor provides seedColor,
         LocalDarkMode provides isDarkTheme,
-        LocalTonalPalette provides tonalPalette
+        LocalTonalPalette provides tonalPalette,
     ) {
         content()
     }
 }
 
 @Composable
-private fun SettingsDataStore.booleanState(key: SettingsKeys): State<Boolean> {
-    return booleanFlow(key).collectAsState(initial = key.default as Boolean)
+private fun SettingsViewModel.booleanState(key: SettingsKeys): State<Boolean> {
+    return getBoolean(key).collectAsState(initial = key.default as Boolean)
 }
 
 @Composable
-private fun SettingsDataStore.intState(key: SettingsKeys): State<Int> {
-    return intFlow(key).collectAsState(initial = key.default as Int)
+private fun SettingsViewModel.intState(key: SettingsKeys): State<Int> {
+    return getInt(key).collectAsState(initial = key.default as Int)
 }
 
 @Composable
-private fun SettingsDataStore.floatState(key: SettingsKeys): State<Float> {
-    return floatFlow(key).collectAsState(initial = key.default as Float)
+private fun SettingsViewModel.floatState(key: SettingsKeys): State<Float> {
+    return getFloat(key).collectAsState(initial = key.default as Float)
 }
 

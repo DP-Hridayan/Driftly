@@ -6,7 +6,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.data.model.ChangelogItem
 import `in`.hridayan.driftly.settings.data.model.versionList
 
-class GetChangelogsUseCase(
+class GetAllChangelogsUseCase(
     private val context: Context,
     private val versions: List<String> = versionList
 ) {

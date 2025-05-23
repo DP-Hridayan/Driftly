@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.core.common.constants.SubjectCardStyle
 import `in`.hridayan.driftly.settings.data.SettingsKeys
-import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
+import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -13,18 +13,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CustomisationViewModel @Inject constructor(
-    private val store: SettingsDataStore,
+    private val settingsRepository: SettingsRepository
 ) : ViewModel() {
-    val subjectCardCornerRadius = store.floatFlow(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS)
+    val subjectCardCornerRadius = settingsRepository.getFloat(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS)
 
     fun setSubjectCardCornerRadius(cornerRadius: Float) {
         viewModelScope.launch {
-            store.setFloat(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS, cornerRadius)
+            settingsRepository.setFloat(SettingsKeys.SUBJECT_CARD_CORNER_RADIUS, cornerRadius)
         }
     }
 
-    val cardStyle = store
-        .intFlow(SettingsKeys.SUBJECT_CARD_STYLE)
+    val cardStyle = settingsRepository
+        .getInt(SettingsKeys.SUBJECT_CARD_STYLE)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,
@@ -33,7 +33,7 @@ class CustomisationViewModel @Inject constructor(
 
     fun select(option: Int) {
         viewModelScope.launch {
-            store.setInt(SettingsKeys.SUBJECT_CARD_STYLE, option)
+            settingsRepository.setInt(SettingsKeys.SUBJECT_CARD_STYLE, option)
         }
     }
 }

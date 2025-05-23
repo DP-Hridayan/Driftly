@@ -18,27 +18,23 @@ import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
 import `in`.hridayan.driftly.core.presentation.AppEntry
 import `in`.hridayan.driftly.core.presentation.ui.theme.DriftlyTheme
 import `in`.hridayan.driftly.settings.data.SettingsKeys
-import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.viewmodel.AutoUpdateViewModel
+import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @Inject
-    lateinit var store: SettingsDataStore
-
-
+    private val settingsViewModel: SettingsViewModel by viewModels()
     private val autoUpdateViewModel: AutoUpdateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
-            val autoUpdateEnabled = store.booleanFlow(SettingsKeys.AUTO_UPDATE).first()
+            val autoUpdateEnabled = settingsViewModel.getBoolean(SettingsKeys.AUTO_UPDATE).first()
             val includePrerelease =
-                store.intFlow(SettingsKeys.GITHUB_RELEASE_TYPE)
+                settingsViewModel.getInt(SettingsKeys.GITHUB_RELEASE_TYPE)
                     .first() == GithubReleaseType.PRE_RELEASE
 
             if (autoUpdateEnabled) {
@@ -51,10 +47,10 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            CompositionLocals(store) {
+            CompositionLocals {
                 SeedColorProvider.seedColor = LocalSeedColor.current
 
-                DriftlyTheme{
+                DriftlyTheme {
                     Surface(
                         modifier = Modifier.Companion.fillMaxSize(),
                         color = MaterialTheme.colorScheme.surface

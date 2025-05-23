@@ -10,12 +10,12 @@ import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.repository.SettingsRepositoryImpl
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetAllChangelogsUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetDynamicColorSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
-import `in`.hridayan.driftly.settings.domain.usecase.GetChangelogsUseCase
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -34,8 +34,8 @@ object SettingsModule {
         ToggleSettingUseCase(repo)
 
     @Provides
-    fun provideGetChangelogsUseCase(@ApplicationContext context: Context): GetChangelogsUseCase =
-        GetChangelogsUseCase(context)
+    fun provideGetChangelogsUseCase(@ApplicationContext context: Context): GetAllChangelogsUseCase =
+        GetAllChangelogsUseCase(context)
 
     @Provides
     fun provideGetSettingsPageListUseCase(repo: SettingsRepository): GetSettingsPageListUseCase =

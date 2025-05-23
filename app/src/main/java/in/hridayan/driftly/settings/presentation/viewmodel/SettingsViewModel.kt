@@ -12,13 +12,13 @@ import `in`.hridayan.driftly.navigation.CustomisationScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.data.model.SettingsItem
+import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetDynamicColorSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
-import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -28,6 +28,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
+    private val settingsRepository: SettingsRepository,
     private val toggleSettingUseCase: ToggleSettingUseCase,
     private val getSettingsPageListUseCase: GetSettingsPageListUseCase,
     private val getLookAndFeelPageListUseCase: GetLookAndFeelPageListUseCase,
@@ -66,6 +67,30 @@ class SettingsViewModel @Inject constructor(
             loadSettings()
         }
     }
+
+    fun setBoolean(key: SettingsKeys, value: Boolean) {
+        viewModelScope.launch {
+            settingsRepository.setBoolean(key, value)
+        }
+    }
+
+    fun getBoolean(key: SettingsKeys): Flow<Boolean> = settingsRepository.getBoolean(key)
+
+    fun setInt(key: SettingsKeys, value: Int) {
+        viewModelScope.launch {
+            settingsRepository.setInt(key, value)
+        }
+    }
+
+    fun getInt(key: SettingsKeys): Flow<Int> = settingsRepository.getInt(key)
+
+    fun setFloat(key: SettingsKeys, value: Float) {
+        viewModelScope.launch {
+            settingsRepository.setFloat(key, value)
+        }
+    }
+
+    fun getFloat(key: SettingsKeys): Flow<Float> = settingsRepository.getFloat(key)
 
     fun onItemClicked(item: SettingsItem) {
         viewModelScope.launch {

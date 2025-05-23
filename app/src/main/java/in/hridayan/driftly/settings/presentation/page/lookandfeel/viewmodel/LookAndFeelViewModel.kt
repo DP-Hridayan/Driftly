@@ -11,11 +11,11 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.navigation.DarkThemeScreen
-import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.data.model.SettingsItem
-import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.domain.model.ThemeOption
+import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
+import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
@@ -26,11 +26,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LookAndFeelViewModel @Inject constructor(
-    private val store: SettingsDataStore,
+    private val settingsRepository: SettingsRepository,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
-    val themeOption = store
-        .intFlow(SettingsKeys.THEME_MODE)
+    val themeOption = settingsRepository
+        .getInt(SettingsKeys.THEME_MODE)
         .map { ThemeOption.fromMode(it) }
         .stateIn(
             scope = viewModelScope,
@@ -40,7 +40,7 @@ class LookAndFeelViewModel @Inject constructor(
 
     fun select(option: ThemeOption) {
         viewModelScope.launch {
-            store.setInt(SettingsKeys.THEME_MODE, option.mode)
+            settingsRepository.setInt(SettingsKeys.THEME_MODE, option.mode)
             AppCompatDelegate.setDefaultNightMode(option.mode)
         }
     }
@@ -72,13 +72,13 @@ class LookAndFeelViewModel @Inject constructor(
 
     fun setSeedColor(seed: Int) {
         viewModelScope.launch {
-            store.setInt(SettingsKeys.SEED_COLOR, seed)
+            settingsRepository.setInt(SettingsKeys.SEED_COLOR, seed)
         }
     }
 
     fun disableDynamicColors() {
         viewModelScope.launch {
-            store.setBoolean(SettingsKeys.DYNAMIC_COLORS, false)
+            settingsRepository.setBoolean(SettingsKeys.DYNAMIC_COLORS, false)
         }
     }
 }
