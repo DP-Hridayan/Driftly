@@ -22,6 +22,7 @@ splashscreen = "1.0.1"
 datastore = "1.1.7"
 ktor = "2.3.8"
 slf4j = "1.7.36"
+material3 = "1.4.0-alpha15"
 
 [libraries]
 core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
@@ -38,7 +39,7 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-material3 = { group = "androidx.compose.material3", name = "material3" }
+material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -171,7 +172,7 @@ fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
         )
     ) {
         Column {
-            TabRow(
+            PrimaryTabRow (
                 selectedTabIndex = selectedTabIndex.value,
                 containerColor = MaterialTheme.colorScheme.surfaceVariant,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
