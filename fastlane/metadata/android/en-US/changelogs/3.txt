@@ -1,0 +1,6 @@
+
+* Improved color scheme in high contrast dark theme
+
+* Added what\'s new bottomsheet to show changelogs after an update
+
+* Code optimisations
