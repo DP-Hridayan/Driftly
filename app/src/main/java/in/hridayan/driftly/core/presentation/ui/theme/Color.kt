@@ -3,9 +3,14 @@
 package `in`.hridayan.driftly.core.presentation.ui.theme
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.ui.graphics.Color
 import `in`.hridayan.driftly.core.utils.a1
 import `in`.hridayan.driftly.core.utils.a2
 import `in`.hridayan.driftly.core.utils.a3
@@ -89,6 +94,31 @@ fun darkColorSchemeFromSeed(): ColorScheme {
 
         outline = 60.n2,
         outlineVariant = 30.n2,
+    )
+}
+
+fun highContrastDarkColorSchemeFromSeed(): ColorScheme {
+    return darkColorScheme().copy(
+        background = Color.Black,
+        surface = Color.Black,
+        surfaceContainerLowest = Color.Black,
+        surfaceContainerLow = 6.n1,
+        surfaceContainer = 10.n1,
+        surfaceContainerHigh = 12.n1,
+        surfaceContainerHighest = 17.n1,
+    )
+}
+
+@RequiresApi(Build.VERSION_CODES.S)
+fun highContrastDynamicDarkColorScheme(context: Context): ColorScheme {
+    return dynamicDarkColorScheme(context = context).copy(
+        background = Color.Black,
+        surface = Color.Black,
+        surfaceContainerLowest = Color.Black,
+        surfaceContainerLow = dynamicDarkColorScheme(context).surfaceContainerLowest,
+        surfaceContainer = dynamicDarkColorScheme(context).surfaceContainerLow,
+        surfaceContainerHigh = dynamicDarkColorScheme(context).surfaceContainer,
+        surfaceContainerHighest = dynamicDarkColorScheme(context).surfaceContainerHigh,
     )
 }
 

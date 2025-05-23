@@ -8,7 +8,6 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 
@@ -21,9 +20,7 @@ fun DriftlyTheme(
     content: @Composable () -> Unit
 ) {
     val view = LocalView.current
-
-    val darkColorScheme = darkColorSchemeFromSeed()
-    val lightColorScheme = lightColorSchemeFromSeed()
+    val context = LocalContext.current
 
     LaunchedEffect(darkTheme) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -43,23 +40,15 @@ fun DriftlyTheme(
 
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme && isHighContrastDarkTheme) dynamicDarkColorScheme(context).copy(
-                surface = Color.Black,
-                background = Color.Black,
-                surfaceContainerLowest = Color.Black,
-            )
+            if (darkTheme && isHighContrastDarkTheme) highContrastDynamicDarkColorScheme(context)
             else if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme && isHighContrastDarkTheme -> darkColorScheme.copy(
-            surface = Color.Black,
-            background = Color.Black,
-            surfaceContainerLowest = Color.Black,
-        )
+        darkTheme && isHighContrastDarkTheme -> highContrastDarkColorSchemeFromSeed()
 
-        darkTheme -> darkColorScheme
-        else -> lightColorScheme
+        darkTheme -> darkColorSchemeFromSeed()
+
+        else -> lightColorSchemeFromSeed()
     }
 
     MaterialTheme(
