@@ -66,7 +66,7 @@ fun CompositionLocals(
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
-                isDarkMode = themeMode,
+                themeMode = themeMode,
                 isHighContrastDarkMode = isHighContrastDarkMode,
                 seedColor = seedColor,
                 isDynamicColor = isDynamicColor,

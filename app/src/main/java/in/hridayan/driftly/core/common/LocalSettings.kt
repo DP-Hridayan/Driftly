@@ -10,7 +10,7 @@ import `in`.hridayan.driftly.settings.domain.model.SettingsState
 val LocalSettings = compositionLocalOf<SettingsState> {
     SettingsState(
         isAutoUpdate = false,
-        isDarkMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
+        themeMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
         isHighContrastDarkMode = false,
         seedColor = SeedColors.Blue.seed,
         isDynamicColor = true,

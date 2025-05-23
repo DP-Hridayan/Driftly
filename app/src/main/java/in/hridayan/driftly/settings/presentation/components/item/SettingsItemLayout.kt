@@ -1,6 +1,5 @@
 package `in`.hridayan.driftly.settings.presentation.components.item
 
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,17 +16,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalDarkMode
-import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
-import `in`.hridayan.driftly.settings.data.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
+import `in`.hridayan.driftly.settings.domain.model.getResolvedDescription
+import `in`.hridayan.driftly.settings.domain.model.getResolvedIcon
+import `in`.hridayan.driftly.settings.domain.model.getResolvedTitle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -41,81 +37,62 @@ fun SettingsItemLayout(
     onClick: (SettingsItem) -> Unit = {},
     contentDescription: String = "",
 ) {
+    if (!isLayoutVisible) return
+
     val weakHaptic = LocalWeakHaptic.current
     val checked by isEnabled.collectAsState(initial = false)
 
-    val darkModeText = when (LocalSettings.current.isDarkMode) {
-        AppCompatDelegate.MODE_NIGHT_YES -> stringResource(R.string.on)
-        AppCompatDelegate.MODE_NIGHT_NO -> stringResource(R.string.off)
-        AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> stringResource(R.string.system)
-        else -> ""
-    }
+    val icon = item.getResolvedIcon()
+    val titleText = item.getResolvedTitle()
+    val descriptionText = item.getResolvedDescription()
 
-    val darkModeIcon =
-        if (LocalDarkMode.current) painterResource(id = R.drawable.ic_dark_mode)
-        else painterResource(id = R.drawable.ic_light_mode)
-
-    if (isLayoutVisible) {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .clickable(
-                    enabled = true, onClick = {
-                        weakHaptic()
-                        onClick(item)
-                        if (item.type == SettingsType.Switch) onToggle()
-                    })
-                .padding(horizontal = 15.dp, vertical = 17.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
-        ) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(
+                enabled = true, onClick = {
+                    weakHaptic()
+                    onClick(item)
+                    if (item.type == SettingsType.Switch) onToggle()
+                })
+            .padding(horizontal = 15.dp, vertical = 17.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(15.dp)
+    ) {
+        icon?.let {
             Icon(
-                painter = if (item.key == SettingsKeys.DARK_THEME) darkModeIcon
-                else painterResource(item.icon),
+                imageVector = it,
                 contentDescription = contentDescription,
                 tint = MaterialTheme.colorScheme.primary
             )
+        }
 
-            Column(
-                modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(7.dp)
-            ) {
-                val titleText = when {
-                    item.titleResId != 0 -> runCatching { stringResource(item.titleResId) }.getOrElse { "" }
-                    item.titleString.isNotBlank() -> item.titleString
-                    else -> null
-                }
-
-                if (!titleText.isNullOrEmpty()) {
-                    Text(
-                        text = titleText,
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.alpha(0.95f)
-                    )
-                }
-
-                val descriptionText = when {
-                    item.key == SettingsKeys.DARK_THEME -> darkModeText
-                    item.descriptionResId != 0 -> runCatching { stringResource(item.descriptionResId) }.getOrElse { "" }
-                    item.descriptionString.isNotBlank() -> item.descriptionString
-                    else -> null
-                }
-
-                if (!descriptionText.isNullOrEmpty()) {
-                    Text(
-                        text = descriptionText,
-                        style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.alpha(0.90f)
-                    )
-                }
+        Column(
+            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(7.dp)
+        ) {
+            if (titleText.isNotEmpty()) {
+                Text(
+                    text = titleText,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.alpha(0.95f)
+                )
             }
 
-            if (item.type == SettingsType.Switch) {
-                Switch(checked = checked, onCheckedChange = {
-                    onToggle()
-                    weakHaptic()
-                })
+            if (descriptionText.isNotEmpty()) {
+                Text(
+                    text = descriptionText,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.alpha(0.90f)
+                )
             }
+        }
+
+        if (item.type == SettingsType.Switch) {
+            Switch(checked = checked, onCheckedChange = {
+                onToggle()
+                weakHaptic()
+            })
         }
     }
 }
