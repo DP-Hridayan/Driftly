@@ -1,8 +1,9 @@
 package `in`.hridayan.driftly.home.presentation.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -20,11 +21,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.animateFloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -36,7 +39,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.res.painterResource
@@ -59,6 +61,7 @@ import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.navigation.SettingsScreen
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @SuppressLint("DefaultLocale")
 @Composable
 fun HomeScreen(
@@ -85,23 +88,27 @@ fun HomeScreen(
     )
 
     var showAddButton by rememberSaveable { mutableStateOf(true) }
-    val fabScale by animateFloatAsState(
-        targetValue = if (showAddButton) 1f else 0f, animationSpec = tween(
-            durationMillis = 300, easing = FastOutSlowInEasing
-        )
-    )
 
     val subjectCardCornerRadius = LocalSettings.current.subjectCardCornerRadius
 
     Scaffold(
-        modifier = modifier.fillMaxSize(), floatingActionButton = {
+        modifier = modifier.fillMaxSize(),
+
+        floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.Companion
                     .padding(bottom = 10.dp)
-                    .scale(fabScale),
+                    .animateFloatingActionButton(
+                        visible = showAddButton,
+                        alignment = Alignment.Center,
+                        targetScale = 0f,
+                        scaleAnimationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
+                        alphaAnimationSpec = tween(durationMillis = 150),
+                    ),
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 onClick = {
+                    if(!showAddButton) return@FloatingActionButton
                     isDialogOpen = true
                     weakHaptic()
                 },
@@ -115,6 +122,7 @@ fun HomeScreen(
                 )
             }
         }) { innerPadding ->
+
         LazyColumn(
             modifier = modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(15.dp),
