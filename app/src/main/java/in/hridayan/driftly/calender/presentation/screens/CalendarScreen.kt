@@ -1,11 +1,12 @@
 package `in`.hridayan.driftly.calender.presentation.screens
 
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -17,12 +18,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.toRoute
-import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCanvas
 import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
@@ -71,6 +70,9 @@ fun CalendarScreen(
             TopAppBar(
                 title = {
                     Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .basicMarquee(repeatDelayMillis = 5000),
                         text = subject, overflow = TextOverflow.Ellipsis, maxLines = 1
                     )
                 },
