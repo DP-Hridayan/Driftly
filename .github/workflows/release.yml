@@ -103,11 +103,11 @@ jobs:
             exit 1
           fi
 
-          # Replace • with * and \n with two spaces followed by \n
-          CHANGELOG=$(echo "$CHANGELOG" | sed 's/\\n/\\n*/g')
+          # Replace \n with \n*
+          CHANGELOG=$(echo "$CHANGELOG" | sed 's/\\n/\\n* /g')
 
           # Add ### Changelog before the changelog text
-          CHANGELOG="### Changelog \n $CHANGELOG"
+          CHANGELOG="### Changelog \n* $CHANGELOG"
 
           # Write CHANGELOG to a temporary file
           echo -e "$CHANGELOG" > changelog.txt
