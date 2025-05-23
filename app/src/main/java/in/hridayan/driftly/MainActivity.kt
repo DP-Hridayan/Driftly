@@ -12,9 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import `in`.hridayan.driftly.core.common.CompositionLocals
-import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.common.LocalSeedColor
-import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
 import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
 import `in`.hridayan.driftly.core.presentation.AppEntry
@@ -54,15 +52,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CompositionLocals(store) {
-                val settings = LocalSettings.current
-                val isDarkMode = LocalDarkMode.current
                 SeedColorProvider.seedColor = LocalSeedColor.current
 
-                DriftlyTheme(
-                    darkTheme = isDarkMode,
-                    dynamicColor = settings.isDynamicColor,
-                    isHighContrastDarkTheme = settings.isHighContrastDarkMode
-                ) {
+                DriftlyTheme{
                     Surface(
                         modifier = Modifier.Companion.fillMaxSize(),
                         color = MaterialTheme.colorScheme.surface
