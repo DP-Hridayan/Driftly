@@ -72,7 +72,7 @@ fun CalendarScreen(
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .basicMarquee(repeatDelayMillis = 5000),
+                            .basicMarquee(),
                         text = subject, overflow = TextOverflow.Ellipsis, maxLines = 1
                     )
                 },
