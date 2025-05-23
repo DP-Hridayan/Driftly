@@ -98,7 +98,7 @@ fun darkColorSchemeFromSeed(): ColorScheme {
 }
 
 fun highContrastDarkColorSchemeFromSeed(): ColorScheme {
-    return darkColorScheme().copy(
+    return darkColorSchemeFromSeed().copy(
         background = Color.Black,
         surface = Color.Black,
         surfaceContainerLowest = Color.Black,

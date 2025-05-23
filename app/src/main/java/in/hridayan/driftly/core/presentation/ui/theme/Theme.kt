@@ -11,7 +11,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 
-
 @Composable
 fun DriftlyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
