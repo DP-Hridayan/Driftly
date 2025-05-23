@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Driftly</string>
     <string name="field_blank_error">Field cannot be blank</string>
     <string name="subject_already_exists">Subject already exists</string>
@@ -72,6 +72,7 @@
     <string name="current_version">Current version</string>
     <string name="download">Download</string>
     <string name="stable">Stable</string>
+    <string name="whats_new" tools:ignore="MissingTranslation">What\'s new!</string>
     <string name="no_update_available">No update available</string>
     <string name="network_error">Network error</string>
     <string name="request_timeout">Request timeout</string>
@@ -81,4 +82,5 @@
     <string name="pre_release_warning_description">These versions are still in testing and may contain unfinished features or unexpected bugs. If you choose to update to a pre-release, please be aware that things might break or behave strangely.\nIf you encounter any issues, crashes, or weird behavior, please report them so we can fix and improve Driftly before the stable release.\nThanks for helping us build better!</string>
     <string name="changelogs_v1_0_0">Initial release\nAdded calendar to mark attendance status\nAdded per subject progress display\nAdded ability to add, remove and edit subjects\nAdded settings for customising user experience</string>
     <string name="changelogs_v1_1_0">Fixed some color values in color palette selection\nFixed some UI margins\nAdded prerelease build update checker</string>
+    <string name="changelogs_v1_2_0" tools:ignore="MissingTranslation">Improved color scheme in high contrast dark theme\nAdded what\'s new bottomsheet to show changelogs after an update\nCode optimisations</string>
 </resources>
