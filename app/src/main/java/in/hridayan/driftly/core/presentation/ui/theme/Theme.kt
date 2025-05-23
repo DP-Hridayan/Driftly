@@ -23,29 +23,24 @@ fun DriftlyTheme(
 
     LaunchedEffect(darkTheme) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (darkTheme) {
-                view.windowInsetsController?.setSystemBarsAppearance(
-                    0,
-                    APPEARANCE_LIGHT_STATUS_BARS,
-                )
-            } else {
-                view.windowInsetsController?.setSystemBarsAppearance(
-                    APPEARANCE_LIGHT_STATUS_BARS,
-                    APPEARANCE_LIGHT_STATUS_BARS,
-                )
-            }
+            view.windowInsetsController?.setSystemBarsAppearance(
+                if (darkTheme) 0 else APPEARANCE_LIGHT_STATUS_BARS,
+                APPEARANCE_LIGHT_STATUS_BARS
+            )
         }
     }
 
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             if (darkTheme && isHighContrastDarkTheme) highContrastDynamicDarkColorScheme(context)
-            else if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            else if (darkTheme) dynamicDarkColorScheme(context)
+            else dynamicLightColorScheme(context)
         }
 
-        darkTheme && isHighContrastDarkTheme -> highContrastDarkColorSchemeFromSeed()
-
-        darkTheme -> darkColorSchemeFromSeed()
+        darkTheme -> {
+            if (isHighContrastDarkTheme) highContrastDarkColorSchemeFromSeed()
+            else darkColorSchemeFromSeed()
+        }
 
         else -> lightColorSchemeFromSeed()
     }
