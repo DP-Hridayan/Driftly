@@ -72,18 +72,18 @@
     <string name="current_version">Current version</string>
     <string name="download">Download</string>
     <string name="stable">Stable</string>
-    <string name="whats_new" >What\'s new!</string>
+    <string name="whats_new">What\'s new!</string>
     <string name="no_update_available">No update available</string>
     <string name="network_error">Network error</string>
     <string name="request_timeout">Request timeout</string>
     <string name="visit_repo_to_download">Click on the download button to get the latest version of Driftly from the github repository</string>
     <string name="pre_release">Pre-release</string>
     <string name="pre_release_warning">Pre-release builds may be unstable</string>
-    <string name="behavior" >Behavior</string>
-    <string name="remember_month_year" >Remember calendar month and year</string>
-    <string name="des_remember_month_year" >Turn on this option to remember the last viewed month for every subject</string>
-    <string name="show_attendance_steaks" >Show attendance streaks</string>
-    <string name="des_show_attendance_streaks" >If enabled, attendance streaks will be shown on the calendar</string>
+    <string name="behavior">Behavior</string>
+    <string name="remember_month_year">Remember calendar month and year</string>
+    <string name="des_remember_month_year">Turn on this option to remember the last viewed month for every subject</string>
+    <string name="show_attendance_steaks">Show attendance streaks</string>
+    <string name="des_show_attendance_streaks">If enabled, attendance streaks will be shown on the calendar</string>
     <string name="des_behavior">Modify certain behavior of the app</string>
     <string name="reset_to_current_month">Reset to current month</string>
     <string name="previous_month">Previous month</string>
@@ -93,4 +93,5 @@
     <string name="changelogs_v1_0_0">Initial release\nAdded calendar to mark attendance status\nAdded per subject progress display\nAdded ability to add, remove and edit subjects\nAdded settings for customising user experience</string>
     <string name="changelogs_v1_1_0">Fixed some color values in color palette selection\nFixed some UI margins\nAdded prerelease build update checker</string>
     <string name="changelogs_v1_2_0">Improved color scheme in high contrast dark theme\nAdded what\'s new bottomsheet to show changelogs after an update\nCode optimisations</string>
+    <string name="changelogs_v1_3_0" tools:ignore="MissingTranslation">Added behavior settings to modify certain app behavior\nAdded option to remember the last viewed month\nAdded option to turn off attendance streak visuals in calendar</string>
 </resources>

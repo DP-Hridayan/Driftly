@@ -1,0 +1,6 @@
+
+* Added behavior settings to modify certain app behavior
+
+* Added option to remember the last viewed month
+
+* Added option to turn off attendance streak visuals in calendar
