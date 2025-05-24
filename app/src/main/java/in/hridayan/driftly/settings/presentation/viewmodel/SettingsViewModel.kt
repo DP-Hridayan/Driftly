@@ -11,10 +11,11 @@ import `in`.hridayan.driftly.navigation.AutoUpdateScreen
 import `in`.hridayan.driftly.navigation.BehaviorScreen
 import `in`.hridayan.driftly.navigation.CustomisationScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
-import `in`.hridayan.driftly.settings.data.SettingsKeys
-import `in`.hridayan.driftly.settings.data.model.SettingsItem
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
+import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetBehaviorPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetDynamicColorSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
@@ -35,7 +36,8 @@ class SettingsViewModel @Inject constructor(
     private val getLookAndFeelPageListUseCase: GetLookAndFeelPageListUseCase,
     private val getAboutPageListUseCase: GetAboutPageListUseCase,
     private val getDynamicColorSettingUseCase: GetDynamicColorSettingUseCase,
-    private val getHighContrastDarkThemeSettingUseCase: GetHighContrastDarkThemeSettingUseCase
+    private val getHighContrastDarkThemeSettingUseCase: GetHighContrastDarkThemeSettingUseCase,
+    private val getBehaviorPageListUseCase: GetBehaviorPageListUseCase
 ) : ViewModel() {
 
     var settingsPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
@@ -45,6 +47,9 @@ class SettingsViewModel @Inject constructor(
         private set
 
     var aboutPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
+        private set
+
+    var behaviorPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
         private set
 
     var dynamicColorSetting by mutableStateOf<Pair<SettingsItem, Flow<Boolean>>?>(null)
@@ -126,12 +131,14 @@ class SettingsViewModel @Inject constructor(
             val lookAndFeel = getLookAndFeelPageListUseCase()
             val settings = getSettingsPageListUseCase()
             val about = getAboutPageListUseCase()
+            val behavior = getBehaviorPageListUseCase()
             val dynamicColor = getDynamicColorSettingUseCase()
             val highContrastDarkTheme = getHighContrastDarkThemeSettingUseCase()
 
             settingsPageList = settings
             lookAndFeelPageList = lookAndFeel
             aboutPageList = about
+            behaviorPageList = behavior
             dynamicColorSetting = dynamicColor
             highContrastDarkThemeSetting = highContrastDarkTheme
         }

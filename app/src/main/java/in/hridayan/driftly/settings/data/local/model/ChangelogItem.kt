@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.data.model
+package `in`.hridayan.driftly.settings.data.local.model
 
 data class ChangelogItem(
     val versionName: String,

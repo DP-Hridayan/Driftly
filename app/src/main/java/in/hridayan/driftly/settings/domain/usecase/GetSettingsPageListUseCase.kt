@@ -1,6 +1,6 @@
 package `in`.hridayan.driftly.settings.domain.usecase
 
-import `in`.hridayan.driftly.settings.data.model.SettingsItem
+import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 

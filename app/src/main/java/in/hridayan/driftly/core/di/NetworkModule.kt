@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import `in`.hridayan.driftly.settings.data.remote.api.GitHubApi
-import `in`.hridayan.driftly.settings.data.repository.UpdateRepositoryImpl
+import `in`.hridayan.driftly.settings.data.remote.repository.UpdateRepositoryImpl
 import `in`.hridayan.driftly.settings.domain.repository.UpdateRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO

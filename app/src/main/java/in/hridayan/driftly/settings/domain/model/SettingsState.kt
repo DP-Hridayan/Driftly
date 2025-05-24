@@ -10,5 +10,6 @@ data class SettingsState(
     val subjectCardCornerRadius: Float,
     val subjectCardStyle: Int,
     val githubReleaseType: Int,
-    val savedVersionCode: Int
+    val savedVersionCode: Int,
+    val showAttendanceStreaks: Boolean
 )

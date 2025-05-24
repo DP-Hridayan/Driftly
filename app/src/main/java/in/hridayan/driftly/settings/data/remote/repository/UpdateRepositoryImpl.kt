@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.data.repository
+package `in`.hridayan.driftly.settings.data.remote.repository
 
 import android.util.Log
 import `in`.hridayan.driftly.settings.data.remote.api.GitHubApi

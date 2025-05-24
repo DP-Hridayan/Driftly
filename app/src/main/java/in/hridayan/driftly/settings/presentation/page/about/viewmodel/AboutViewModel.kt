@@ -6,13 +6,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import `in`.hridayan.driftly.settings.data.SettingsKeys
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_ISSUE_FEATURE_REQUEST
 import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_ISSUE_REPORT
 import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_REPO
 import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_REPO_LICENSE
 import `in`.hridayan.driftly.navigation.ChangelogScreen
-import `in`.hridayan.driftly.settings.data.model.SettingsItem
+import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.Flow

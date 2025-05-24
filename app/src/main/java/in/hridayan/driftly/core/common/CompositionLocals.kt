@@ -14,7 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.core.utils.HapticUtils.strongHaptic
 import `in`.hridayan.driftly.core.utils.HapticUtils.weakHaptic
-import `in`.hridayan.driftly.settings.data.SettingsKeys
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
@@ -32,7 +32,7 @@ val LocalTonalPalette = staticCompositionLocalOf<List<SeedColors>> {
 
 @Composable
 fun CompositionLocals(
-    settingsViewModel: SettingsViewModel= hiltViewModel(),
+    settingsViewModel: SettingsViewModel = hiltViewModel(),
     content: @Composable () -> Unit
 ) {
     val autoUpdate by settingsViewModel.booleanState(SettingsKeys.AUTO_UPDATE)
@@ -55,6 +55,8 @@ fun CompositionLocals(
 
     val savedVersionCode by settingsViewModel.intState(SettingsKeys.SAVED_VERSION_CODE)
 
+    val showAttendanceStreaks by settingsViewModel.booleanState(SettingsKeys.STREAK_MODIFIER)
+
     val state =
         remember(
             autoUpdate,
@@ -66,7 +68,8 @@ fun CompositionLocals(
             subjectCardCornerRadius,
             subjectCardStyle,
             githubReleaseType,
-            savedVersionCode
+            savedVersionCode,
+            showAttendanceStreaks
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -78,7 +81,8 @@ fun CompositionLocals(
                 subjectCardCornerRadius = subjectCardCornerRadius,
                 subjectCardStyle = subjectCardStyle,
                 githubReleaseType = githubReleaseType,
-                savedVersionCode = savedVersionCode
+                savedVersionCode = savedVersionCode,
+                showAttendanceStreaks = showAttendanceStreaks
             )
         }
 

@@ -18,6 +18,7 @@ val LocalSettings = compositionLocalOf<SettingsState> {
         subjectCardCornerRadius = 8f,
         subjectCardStyle = SubjectCardStyle.CARD_STYLE_A,
         githubReleaseType = GithubReleaseType.STABLE,
-        savedVersionCode = 0
+        savedVersionCode = 0,
+        showAttendanceStreaks = true
     )
 }

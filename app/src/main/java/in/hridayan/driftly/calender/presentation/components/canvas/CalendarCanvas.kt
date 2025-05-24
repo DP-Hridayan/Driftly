@@ -41,6 +41,7 @@ import `in`.hridayan.driftly.calender.presentation.components.dialog.MonthYearPi
 import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDropDownMenu
 import `in`.hridayan.driftly.calender.presentation.components.modifiers.streakModifier
 import `in`.hridayan.driftly.calender.presentation.components.text.MonthYearHeader
+import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.StreakType
@@ -70,6 +71,7 @@ fun CalendarCanvas(
     )
 
     var showMonthYearDialog by remember { mutableStateOf(false) }
+    val showStreakModifier = LocalSettings.current.showAttendanceStreaks
 
     Column(
         modifier = modifier
@@ -169,6 +171,7 @@ fun CalendarCanvas(
                             .aspectRatio(1f)
                             .scale(animatedScale)
                             .streakModifier(
+                                showStreak = showStreakModifier,
                                 streakType = streakType,
                                 circleBg = backgroundColor,
                                 circleFg = foregroundColor,
@@ -206,7 +209,7 @@ fun CalendarCanvas(
 
                         Text(
                             text = "$day",
-                            color = if (streakType == StreakType.MIDDLE) backgroundColor else foregroundColor,
+                            color = if (streakType == StreakType.MIDDLE && showStreakModifier) backgroundColor else foregroundColor,
                             style = MaterialTheme.typography.titleMedium
                         )
 

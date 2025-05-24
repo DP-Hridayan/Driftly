@@ -11,8 +11,8 @@ import androidx.compose.ui.res.vectorResource
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.common.LocalSettings
-import `in`.hridayan.driftly.settings.data.SettingsKeys
-import `in`.hridayan.driftly.settings.data.model.SettingsItem
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
+import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
 
 @Composable
 fun SettingsItem.getResolvedIcon(): ImageVector? {

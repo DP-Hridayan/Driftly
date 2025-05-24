@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.data
+package `in`.hridayan.driftly.settings.data.local
 
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore

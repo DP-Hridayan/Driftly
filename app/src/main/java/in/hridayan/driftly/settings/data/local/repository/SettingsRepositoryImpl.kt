@@ -1,9 +1,9 @@
-package `in`.hridayan.driftly.settings.data.repository
+package `in`.hridayan.driftly.settings.data.local.repository
 
-import `in`.hridayan.driftly.settings.data.SettingsKeys
-import `in`.hridayan.driftly.settings.data.SettingsProvider
-import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
-import `in`.hridayan.driftly.settings.data.model.SettingsItem
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
+import `in`.hridayan.driftly.settings.data.local.SettingsProvider
+import `in`.hridayan.driftly.settings.data.local.datastore.SettingsDataStore
+import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -34,6 +34,12 @@ class SettingsRepositoryImpl(
 
     override suspend fun getAboutPageList(): List<Pair<SettingsItem, Flow<Boolean>>> {
         return SettingsProvider.aboutPageList.map {
+            it to dataStore.booleanFlow(it.key)
+        }
+    }
+
+    override suspend fun getBehaviorPageList(): List<Pair<SettingsItem, Flow<Boolean>>> {
+        return SettingsProvider.behaviorPageList.map {
             it to dataStore.booleanFlow(it.key)
         }
     }

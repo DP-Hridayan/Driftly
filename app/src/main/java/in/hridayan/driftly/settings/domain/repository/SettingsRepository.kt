@@ -1,7 +1,7 @@
 package `in`.hridayan.driftly.settings.domain.repository
 
-import `in`.hridayan.driftly.settings.data.SettingsKeys
-import `in`.hridayan.driftly.settings.data.model.SettingsItem
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
+import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {
@@ -17,4 +17,5 @@ interface SettingsRepository {
     suspend fun getAboutPageList(): List<Pair<SettingsItem, Flow<Boolean>>>
     suspend fun getDynamicColorSetting(): Pair<SettingsItem, Flow<Boolean>>
     suspend fun getHighContrastDarkThemeSetting(): Pair<SettingsItem, Flow<Boolean>>
+    suspend fun getBehaviorPageList(): List<Pair<SettingsItem, Flow<Boolean>>>
 }

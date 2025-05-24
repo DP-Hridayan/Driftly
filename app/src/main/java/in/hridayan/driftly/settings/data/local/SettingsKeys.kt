@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.data
+package `in`.hridayan.driftly.settings.data.local
 
 import androidx.appcompat.app.AppCompatDelegate
 import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
@@ -10,6 +10,7 @@ enum class SettingsKeys(val default: Any?) {
     AUTO_UPDATE(false),
     ABOUT(null),
     BEHAVIOR(null),
+    STREAK_MODIFIER(true),
     LANGUAGE(null),
     THEME_MODE(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM),
     DARK_THEME(null),

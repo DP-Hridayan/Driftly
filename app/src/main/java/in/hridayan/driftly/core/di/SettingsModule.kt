@@ -6,11 +6,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import `in`.hridayan.driftly.settings.data.model.SettingsDataStore
-import `in`.hridayan.driftly.settings.data.repository.SettingsRepositoryImpl
+import `in`.hridayan.driftly.settings.data.local.datastore.SettingsDataStore
+import `in`.hridayan.driftly.settings.data.local.repository.SettingsRepositoryImpl
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetAllChangelogsUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetBehaviorPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetDynamicColorSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSettingUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
@@ -48,6 +49,10 @@ object SettingsModule {
     @Provides
     fun provideGetAboutPageListUseCase(repo: SettingsRepository): GetAboutPageListUseCase =
         GetAboutPageListUseCase(repo)
+
+    @Provides
+    fun provideGetBehaviorPageListUseCase(repo: SettingsRepository): GetBehaviorPageListUseCase =
+        GetBehaviorPageListUseCase(repo)
 
     @Provides
     fun provideGetDynamicColorSettingUseCase(repo: SettingsRepository): GetDynamicColorSettingUseCase =
