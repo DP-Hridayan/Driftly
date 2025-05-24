@@ -15,12 +15,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.toRoute
 import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCanvas
 import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
@@ -38,6 +43,7 @@ fun CalendarScreen(
 ) {
     val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
+    val lifecycleOwner = LocalLifecycleOwner.current
     val args = navController.currentBackStackEntry?.toRoute<CalendarScreen>()
     val subjectId = args?.subjectId ?: 0
     val subject = args?.subject ?: ""
@@ -63,7 +69,32 @@ fun CalendarScreen(
         }
     }
 
-    val selectedMonthYear = viewModel.selectedMonthYear.value
+    val subjectEntity = viewModel.getSubjectEntityById(subjectId).collectAsState(initial = null)
+    val savedYear = subjectEntity.value?.savedYear
+    val savedMonth = subjectEntity.value?.savedMonth
+    var monthYear = viewModel.selectedMonthYear.value
+    val year = monthYear.year
+    val month = monthYear.monthValue
+
+    LaunchedEffect(savedYear, savedMonth) {
+        if (savedYear != null && savedMonth != null) viewModel.updateMonthYear(
+            savedYear,
+            savedMonth
+        )
+    }
+
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_PAUSE) {
+                viewModel.saveMonthYearForSubject(subjectId)
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -96,14 +127,15 @@ fun CalendarScreen(
         ) {
             CalendarCanvas(
                 modifier = Modifier.padding(horizontal = 15.dp),
-                year = selectedMonthYear.year,
-                month = selectedMonthYear.month.value,
+                year = year,
+                month = month,
                 markedDates = markedDates,
                 streakMap = streakMap,
                 onStatusChange = onStatusChange,
                 onNavigate = { newYear, newMonth ->
                     viewModel.updateMonthYear(newYear, newMonth)
-                })
+                },
+            )
 
             AttendanceCardWithTabs(modifier = Modifier.weight(1f), subjectId = subjectId)
         }

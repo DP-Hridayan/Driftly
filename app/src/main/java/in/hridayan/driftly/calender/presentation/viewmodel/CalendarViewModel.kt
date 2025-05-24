@@ -1,6 +1,5 @@
 package `in`.hridayan.driftly.calender.presentation.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -8,22 +7,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
+import `in`.hridayan.driftly.core.data.model.SubjectEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.StreakType
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
+import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
@@ -32,6 +26,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CalendarViewModel @Inject constructor(
     private val attendanceRepository: AttendanceRepository,
+    private val subjectRepository: SubjectRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -71,10 +66,24 @@ class CalendarViewModel @Inject constructor(
         subjectId: Int, year: Int, month: Int
     ): Flow<SubjectAttendance> {
         val presentFlow = attendanceRepository.getPresentCountForMonth(subjectId, year, month)
-        val absentFlow  = attendanceRepository.getAbsentCountForMonth(subjectId, year, month)
-        val totalFlow   = attendanceRepository.getTotalCountForMonth(subjectId, year, month)
+        val absentFlow = attendanceRepository.getAbsentCountForMonth(subjectId, year, month)
+        val totalFlow = attendanceRepository.getTotalCountForMonth(subjectId, year, month)
         return combine(presentFlow, absentFlow, totalFlow) { p, a, t ->
             SubjectAttendance(p, a, t)
+        }
+    }
+
+    fun getSubjectEntityById(subjectId: Int): Flow<SubjectEntity> {
+        return subjectRepository.getSubjectById(subjectId)
+    }
+
+    fun saveMonthYearForSubject(subjectId: Int) {
+        viewModelScope.launch {
+            subjectRepository.updateSavedMonthYear(
+                subjectId = subjectId,
+                month = _selectedMonthYear.value.monthValue,
+                year = _selectedMonthYear.value.year
+            )
         }
     }
 
@@ -82,7 +91,6 @@ class CalendarViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             attendanceRepository.getAttendanceForSubject(subjectId)
                 .collect { list ->
-                    // rebuild markedDates map
                     val newMap = list
                         .mapNotNull { e ->
                             if (e.status == AttendanceStatus.UNMARKED) null
@@ -117,17 +125,17 @@ class CalendarViewModel @Inject constructor(
             var i = 0
             while (i < sorted.size) {
                 var end = i
-                while (end+1 < sorted.size && sorted[end+1] == sorted[end].plusDays(1)) {
+                while (end + 1 < sorted.size && sorted[end + 1] == sorted[end].plusDays(1)) {
                     end++
                 }
                 val len = end - i + 1
                 for (j in i..end) {
                     val d = sorted[j]
                     streaks[d] = when {
-                        len < 3       -> StreakType.NONE
-                        j == i        -> StreakType.START
-                        j == end      -> StreakType.END
-                        else          -> StreakType.MIDDLE
+                        len < 3 -> StreakType.NONE
+                        j == i -> StreakType.START
+                        j == end -> StreakType.END
+                        else -> StreakType.MIDDLE
                     }
                 }
                 i = end + 1
