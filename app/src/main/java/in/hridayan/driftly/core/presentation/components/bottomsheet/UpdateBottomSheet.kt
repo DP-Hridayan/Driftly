@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
-import `in`.hridayan.driftly.core.common.constants.URL_LATEST_RELEASE
 import `in`.hridayan.driftly.core.utils.openUrl
 
 @Composable
@@ -73,7 +72,7 @@ fun UpdateBottomSheet(
                 .padding(start = 20.dp, end = 20.dp, bottom = 25.dp)
         ) {
             OutlinedButton(onClick = {
-                onDismiss
+                onDismiss()
                 weakHaptic()
             }, modifier = Modifier.weight(4f)) {
                 Text(text = stringResource(R.string.cancel))
@@ -82,8 +81,8 @@ fun UpdateBottomSheet(
             Spacer(modifier.weight(1f))
 
             Button(onClick = {
-                onDismiss
-                openUrl(URL_LATEST_RELEASE, context)
+                onDismiss()
+                openUrl("https://github.com/DP-Hridayan/Driftly/releases/tag/$latestVersion", context)
                 weakHaptic()
             }, modifier = Modifier.weight(4f)) {
                 Text(text = stringResource(R.string.download))
