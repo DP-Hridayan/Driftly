@@ -5,12 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -31,8 +26,8 @@ import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCan
 import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.common.LocalSettings
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
+import `in`.hridayan.driftly.core.presentation.components.button.BackButton
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
 
@@ -41,7 +36,6 @@ import `in`.hridayan.driftly.navigation.LocalNavController
 fun CalendarScreen(
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val args = navController.currentBackStackEntry?.toRoute<CalendarScreen>()
@@ -92,18 +86,7 @@ fun CalendarScreen(
                         text = subject, overflow = TextOverflow.Ellipsis, maxLines = 1
                     )
                 },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        weakHaptic()
-                        navController.popBackStack()
-                    }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurface
-                        )
-                    }
-                },
+                navigationIcon = { BackButton() },
             )
         }) {
 
@@ -120,6 +103,7 @@ fun CalendarScreen(
                 onNavigate = { newYear, newMonth ->
                     viewModel.updateMonthYear(newYear, newMonth)
                 },
+                onResetMonth = { viewModel.resetYearMonthToCurrent() }
             )
 
             AttendanceCardWithTabs(modifier = Modifier.weight(1f), subjectId = subjectId)

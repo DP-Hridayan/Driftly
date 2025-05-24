@@ -87,6 +87,10 @@ class CalendarViewModel @Inject constructor(
         }
     }
 
+    fun resetYearMonthToCurrent(){
+        _selectedMonthYear.value = YearMonth.now()
+    }
+
     private fun loadAttendanceData(subjectId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             attendanceRepository.getAttendanceForSubject(subjectId)
@@ -102,15 +106,6 @@ class CalendarViewModel @Inject constructor(
                     _streakMap.value = calculateStreaks(newMap)
                 }
         }
-    }
-
-    fun updateDate(date: LocalDate, status: AttendanceStatus) {
-        val m = _markedDates.value.toMutableMap()
-        if (status == AttendanceStatus.UNMARKED) m.remove(date)
-        else m[date] = status
-        _markedDates.value = m
-
-        _streakMap.value = calculateStreaks(m)
     }
 
     fun onStatusChange(subjectId: Int, date: String, newStatus: AttendanceStatus?) {

@@ -58,7 +58,8 @@ fun CalendarCanvas(
     markedDates: Map<LocalDate, AttendanceStatus>,
     streakMap: Map<LocalDate, StreakType>,
     onStatusChange: (date: String, status: AttendanceStatus?) -> Unit,
-    onNavigate: (Int, Int) -> Unit
+    onNavigate: (Int, Int) -> Unit,
+    onResetMonth: () -> Unit,
 ) {
     val weakHaptic = LocalWeakHaptic.current
     val yearMonth = YearMonth.of(year, month)
@@ -118,7 +119,8 @@ fun CalendarCanvas(
             }, onNavigateNext = {
                 val next = yearMonth.plusMonths(1)
                 onNavigate(next.year, next.monthValue)
-            })
+            },
+                onReset = onResetMonth)
         }
 
         WeekDayLabels()
