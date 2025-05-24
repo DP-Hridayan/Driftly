@@ -57,6 +57,8 @@ fun CompositionLocals(
 
     val showAttendanceStreaks by settingsViewModel.booleanState(SettingsKeys.STREAK_MODIFIER)
 
+    val rememberCalendarMonthYear by settingsViewModel.booleanState(SettingsKeys.REMEMBER_CALENDAR_MONTH_YEAR)
+
     val state =
         remember(
             autoUpdate,
@@ -69,7 +71,8 @@ fun CompositionLocals(
             subjectCardStyle,
             githubReleaseType,
             savedVersionCode,
-            showAttendanceStreaks
+            showAttendanceStreaks,
+            rememberCalendarMonthYear
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -82,7 +85,8 @@ fun CompositionLocals(
                 subjectCardStyle = subjectCardStyle,
                 githubReleaseType = githubReleaseType,
                 savedVersionCode = savedVersionCode,
-                showAttendanceStreaks = showAttendanceStreaks
+                showAttendanceStreaks = showAttendanceStreaks,
+                rememberCalendarMonthYear = rememberCalendarMonthYear
             )
         }
 

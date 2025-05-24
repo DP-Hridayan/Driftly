@@ -30,8 +30,8 @@ import androidx.navigation.toRoute
 import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCanvas
 import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
+import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
-import `in`.hridayan.driftly.core.data.model.AttendanceEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
@@ -47,40 +47,25 @@ fun CalendarScreen(
     val args = navController.currentBackStackEntry?.toRoute<CalendarScreen>()
     val subjectId = args?.subjectId ?: 0
     val subject = args?.subject ?: ""
-
     val markedDates by viewModel.markedDatesFlow.collectAsState()
-
     val streakMap by viewModel.streakMapFlow.collectAsState(initial = emptyMap())
-
-    val onStatusChange: (String, AttendanceStatus?) -> Unit = { date, newStatus ->
-        when (newStatus) {
-            AttendanceStatus.PRESENT, AttendanceStatus.ABSENT -> {
-                viewModel.upsert(
-                    AttendanceEntity(subjectId = subjectId, date = date),
-                    newStatus
-                )
-            }
-
-            AttendanceStatus.UNMARKED -> {
-                viewModel.clear(subjectId, date)
-            }
-
-            null -> viewModel.clear(subjectId, date)
-        }
-    }
-
     val subjectEntity = viewModel.getSubjectEntityById(subjectId).collectAsState(initial = null)
     val savedYear = subjectEntity.value?.savedYear
     val savedMonth = subjectEntity.value?.savedMonth
     var monthYear = viewModel.selectedMonthYear.value
     val year = monthYear.year
     val month = monthYear.monthValue
+    val shouldRememberMonthYear = LocalSettings.current.rememberCalendarMonthYear
 
-    LaunchedEffect(savedYear, savedMonth) {
-        if (savedYear != null && savedMonth != null) viewModel.updateMonthYear(
-            savedYear,
-            savedMonth
-        )
+    val onStatusChange: (String, AttendanceStatus?) -> Unit =
+        { date, status ->
+            viewModel.onStatusChange(subjectId, date, status)
+        }
+
+    LaunchedEffect(savedYear, savedMonth, shouldRememberMonthYear) {
+        if (savedYear != null && savedMonth != null && shouldRememberMonthYear) {
+            viewModel.updateMonthYear(savedYear, savedMonth)
+        }
     }
 
     DisposableEffect(lifecycleOwner) {

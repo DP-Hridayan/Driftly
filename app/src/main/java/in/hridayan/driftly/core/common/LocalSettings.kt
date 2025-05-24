@@ -19,6 +19,7 @@ val LocalSettings = compositionLocalOf<SettingsState> {
         subjectCardStyle = SubjectCardStyle.CARD_STYLE_A,
         githubReleaseType = GithubReleaseType.STABLE,
         savedVersionCode = 0,
-        showAttendanceStreaks = true
+        showAttendanceStreaks = true,
+        rememberCalendarMonthYear = false
     )
 }

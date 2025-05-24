@@ -11,5 +11,6 @@ data class SettingsState(
     val subjectCardStyle: Int,
     val githubReleaseType: Int,
     val savedVersionCode: Int,
-    val showAttendanceStreaks: Boolean
+    val showAttendanceStreaks: Boolean,
+    val rememberCalendarMonthYear: Boolean
 )

@@ -113,6 +113,22 @@ class CalendarViewModel @Inject constructor(
         _streakMap.value = calculateStreaks(m)
     }
 
+    fun onStatusChange(subjectId: Int, date: String, newStatus: AttendanceStatus?) {
+        when (newStatus) {
+            AttendanceStatus.PRESENT, AttendanceStatus.ABSENT -> {
+                upsert(
+                    AttendanceEntity(subjectId = subjectId, date = date),
+                    newStatus
+                )
+            }
+
+            AttendanceStatus.UNMARKED, null -> {
+                clear(subjectId, date)
+            }
+        }
+    }
+
+
     private fun calculateStreaks(
         marked: Map<LocalDate, AttendanceStatus>
     ): Map<LocalDate, StreakType> {
