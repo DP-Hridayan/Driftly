@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.navigation.AboutScreen
 import `in`.hridayan.driftly.navigation.AutoUpdateScreen
+import `in`.hridayan.driftly.navigation.BehaviorScreen
 import `in`.hridayan.driftly.navigation.CustomisationScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.data.SettingsKeys
@@ -105,6 +106,10 @@ class SettingsViewModel @Inject constructor(
 
                 SettingsKeys.AUTO_UPDATE -> _uiEvent.emit(
                     SettingsUiEvent.Navigate(AutoUpdateScreen)
+                )
+
+                SettingsKeys.BEHAVIOR -> _uiEvent.emit(
+                    SettingsUiEvent.Navigate(BehaviorScreen)
                 )
 
                 SettingsKeys.ABOUT -> _uiEvent.emit(

@@ -10,6 +10,7 @@ import `in`.hridayan.driftly.home.presentation.screens.HomeScreen
 import `in`.hridayan.driftly.settings.presentation.page.customisation.screens.CustomisationScreen
 import `in`.hridayan.driftly.settings.presentation.page.about.screens.AboutScreen
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.screens.AutoUpdateScreen
+import `in`.hridayan.driftly.settings.presentation.page.behavior.screens.BehaviorScreen
 import `in`.hridayan.driftly.settings.presentation.page.changelog.screens.ChangelogScreen
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.DarkThemeScreen
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.LookAndFeelScreen
@@ -60,6 +61,15 @@ fun Navigation() {
                 popExitTransition = { slideFadeOutToRight() }
             ) {
                 DarkThemeScreen()
+            }
+
+            composable<BehaviorScreen>(
+                enterTransition = { slideFadeInFromRight() },
+                exitTransition = { slideFadeOutToLeft() },
+                popEnterTransition = { slideFadeInFromLeft() },
+                popExitTransition = { slideFadeOutToRight() }
+            ) {
+                BehaviorScreen()
             }
 
             composable<AboutScreen>(
@@ -123,3 +133,6 @@ object ChangelogScreen
 
 @Serializable
 object CustomisationScreen
+
+@Serializable
+object BehaviorScreen

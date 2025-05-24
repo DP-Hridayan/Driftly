@@ -8,6 +8,7 @@ import androidx.compose.material.icons.rounded.ChangeHistory
 import androidx.compose.material.icons.rounded.Colorize
 import androidx.compose.material.icons.rounded.Contrast
 import androidx.compose.material.icons.rounded.Language
+import androidx.compose.material.icons.rounded.SentimentNeutral
 import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material.icons.rounded.Vibration
@@ -31,6 +32,13 @@ object SettingsProvider {
             titleResId = R.string.customisation,
             descriptionResId = R.string.des_customisation,
             iconVector = Icons.Rounded.Tune,
+            type = SettingsType.NoSwitch
+        ),
+        SettingsItem(
+            key = key.BEHAVIOR,
+            titleResId = R.string.behavior,
+            descriptionResId = R.string.des_behavior,
+            iconVector = Icons.Rounded.SentimentNeutral,
             type = SettingsType.NoSwitch
         ),
         SettingsItem(
