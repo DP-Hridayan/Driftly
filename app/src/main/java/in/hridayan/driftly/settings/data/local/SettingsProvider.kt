@@ -8,6 +8,7 @@ import androidx.compose.material.icons.rounded.ChangeHistory
 import androidx.compose.material.icons.rounded.Colorize
 import androidx.compose.material.icons.rounded.Contrast
 import androidx.compose.material.icons.rounded.DateRange
+import androidx.compose.material.icons.rounded.EventAvailable
 import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.SentimentNeutral
 import androidx.compose.material.icons.rounded.Tune
@@ -148,6 +149,13 @@ object SettingsProvider {
             titleResId = R.string.show_attendance_steaks,
             descriptionResId = R.string.des_show_attendance_streaks,
             iconVector = Icons.Rounded.DateRange,
+            type = SettingsType.Switch
+        ),
+        SettingsItem(
+            key = SettingsKeys.REMEMBER_CALENDAR_MONTH_YEAR,
+            titleResId = R.string.remember_month_year,
+            descriptionResId = R.string.des_remember_month_year,
+            iconVector = Icons.Rounded.EventAvailable,
             type = SettingsType.Switch
         )
     )
