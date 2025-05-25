@@ -89,6 +89,10 @@
     <string name="previous_month">Previous month</string>
     <string name="next_month">Next month</string>
     <string name="back_button">Back button</string>
+    <string name="overall_attendance">Overall attendance</string>
+    <string name="attendance_comment_1">You are doing great! Keep it up</string>
+    <string name="attendance_comment_2">You can do better!</string>
+    <string name="attendance_comment_3">You need to work harder!</string>
     <string name="pre_release_warning_description">These versions are still in testing and may contain unfinished features or unexpected bugs. If you choose to update to a pre-release, please be aware that things might break or behave strangely.\nIf you encounter any issues, crashes, or weird behavior, please report them so we can fix and improve Driftly before the stable release.\nThanks for helping us build better!</string>
     <string name="changelogs_v1_0_0">Initial release\nAdded calendar to mark attendance status\nAdded per subject progress display\nAdded ability to add, remove and edit subjects\nAdded settings for customising user experience</string>
     <string name="changelogs_v1_1_0">Fixed some color values in color palette selection\nFixed some UI margins\nAdded prerelease build update checker</string>

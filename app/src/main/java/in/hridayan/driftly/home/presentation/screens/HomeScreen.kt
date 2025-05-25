@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -40,7 +39,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -51,11 +49,10 @@ import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
-import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
+import `in`.hridayan.driftly.home.presentation.components.card.AttendanceOverviewCard
 import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
 import `in`.hridayan.driftly.home.presentation.components.dialog.AddSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.image.UndrawRelaxedReading
-import `in`.hridayan.driftly.home.presentation.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
@@ -76,16 +73,7 @@ fun HomeScreen(
     val totalAttendance by viewModel.getTotalAttendanceCounts()
         .collectAsState(initial = TotalAttendance())
     val totalPresent = totalAttendance.totalPresent
-    val totalAbsent = totalAttendance.totalAbsent
     val totalCount = totalAttendance.totalCount
-    val totalProgress = totalPresent.toFloat() / totalCount.toFloat()
-    val totalProgressText = "${String.format("%.0f", totalProgress * 100)}%"
-
-    val progressColor = lerp(
-        start = MaterialTheme.colorScheme.error,
-        stop = MaterialTheme.colorScheme.primary,
-        fraction = totalProgress.coerceIn(0f, 1f)
-    )
 
     var showAddButton by rememberSaveable { mutableStateOf(true) }
 
@@ -108,7 +96,7 @@ fun HomeScreen(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 onClick = {
-                    if(!showAddButton) return@FloatingActionButton
+                    if (!showAddButton) return@FloatingActionButton
                     isDialogOpen = true
                     weakHaptic()
                 },
@@ -190,54 +178,14 @@ fun HomeScreen(
 
             if (subjectCount != 0 && totalCount != 0) {
                 item {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 40.dp, bottom = 20.dp)
-                    ) {
-                        AnimatedHalfCircleProgress(
-                            progress = totalProgress,
-                            animationDuration = 3000,
-                            modifier = Modifier
-                                .align(Alignment.Center)
-                                .height(100.dp)
-                                .width(200.dp)
-                        )
-
-                        Text(
-                            text = totalProgressText,
-                            style = MaterialTheme.typography.headlineMedium,
-                            modifier = Modifier.align(Alignment.BottomCenter),
-                            color = progressColor
-                        )
-                    }
-                }
-
-                item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 10.dp),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        Label(
-                            text = "${stringResource(R.string.present)} : $totalPresent",
-                            labelColor = MaterialTheme.colorScheme.primaryContainer,
-                            strokeColor = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-
-                        Label(
-                            text = "${stringResource(R.string.absent)} : $totalAbsent",
-                            labelColor = MaterialTheme.colorScheme.errorContainer,
-                            strokeColor = MaterialTheme.colorScheme.onErrorContainer
-                        )
-
-                        Label(
-                            text = "${stringResource(R.string.total)} : $totalCount",
-                            labelColor = MaterialTheme.colorScheme.tertiaryContainer,
-                            strokeColor = MaterialTheme.colorScheme.onTertiaryContainer
-                        )
-                    }
+                    AttendanceOverviewCard(
+                        modifier = Modifier.padding(
+                            top = 15.dp,
+                            bottom = 10.dp
+                        ),
+                        presentCount = totalPresent,
+                        totalCount = totalCount
+                    )
                 }
             }
 

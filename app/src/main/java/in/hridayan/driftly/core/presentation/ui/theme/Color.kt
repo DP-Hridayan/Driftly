@@ -1,4 +1,5 @@
 @file:SuppressLint("RestrictedApi")
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
 
 package `in`.hridayan.driftly.core.presentation.ui.theme
 
@@ -7,6 +8,7 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.lightColorScheme
