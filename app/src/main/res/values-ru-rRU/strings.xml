@@ -93,4 +93,5 @@
     <string name="changelogs_v1_0_0">Первая версия\nДобавлен календарь для отметки статуса посещаемости\nДобавлено отображение прогресса по каждому занятию \nДобавлена возможность добавлять, удалять и редактировать занятия\nДобавлены настройки</string>
     <string name="changelogs_v1_1_0">Исправлены некоторые цвета в цветовой палитре\nИсправлены некоторые отступы интерфейса\nДобавлена проверка обновления предварительных сборок</string>
     <string name="changelogs_v1_2_0">Улучшена цветовая схема в высококонтрастной тёмной теме\nДобавлен раздел \"Что нового\" для отображения списка изменений после обновления\nОптимизация кода</string>
+    <string name="changelogs_v1_3_0" tools:ignore="MissingTranslation">Added behavior settings to modify certain app behavior\nAdded option to remember the last viewed month\nAdded option to turn off attendance streak visuals in calendar</string>
 </resources>
