@@ -35,7 +35,8 @@ fun SubjectCard(
     modifier: Modifier = Modifier,
     subjectId: Int,
     subject: String,
-    progress: Float,
+    presentCount: Int,
+    totalCount: Int,
     isTotalCountZero: Boolean = false,
     navigate: () -> Unit = {},
     onClick: () -> Unit = {},
@@ -45,13 +46,14 @@ fun SubjectCard(
     viewModel: HomeViewModel = hiltViewModel(),
     isDemoCard: Boolean = false,
     cornerRadius: Dp = 15.dp,
-    cardStyle: Int = SubjectCardStyle.CARD_STYLE_A,
+    cardStyle: Int = SubjectCardStyle.CARD_STYLE_C,
 ) {
     val weakHaptic = LocalWeakHaptic.current
     var isLongClicked by rememberSaveable { mutableStateOf(false) }
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isUpdateDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isNoAttendanceDialogVisible by rememberSaveable { mutableStateOf(false) }
+    val progress = presentCount.toFloat() / totalCount.toFloat()
 
     val handleLongClick = {
         if (!isDemoCard) {
@@ -123,6 +125,14 @@ fun SubjectCard(
                     onEditButtonClicked = onEditButtonClicked,
                     onDeleteButtonClicked = onDeleteButtonClicked,
                     onErrorIconClicked = onErrorIconClicked
+                )
+
+            SubjectCardStyle.CARD_STYLE_C ->
+                CardStyleC(
+                    modifier = Modifier,
+                    subject = subject,
+                    presentCount = presentCount,
+                    totalCount = totalCount,
                 )
         }
     }

@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 fun SubjectText(
     modifier: Modifier = Modifier,
     subject: String,
-    subjectTextColor: Color = MaterialTheme.colorScheme.onSurface
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         text = subject,
@@ -24,6 +24,6 @@ fun SubjectText(
                 )
             ),
         style = MaterialTheme.typography.titleMedium,
-        color = subjectTextColor
+        color = color
     )
 }

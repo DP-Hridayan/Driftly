@@ -43,10 +43,10 @@ fun DriftlyTheme(
 
         darkTheme -> {
             if (isHighContrastDarkTheme) highContrastDarkColorSchemeFromSeed()
-            else darkColorSchemeFromSeed()
+            else expressiveDarkColorSchemeFromSeed()
         }
 
-        else -> lightColorSchemeFromSeed()
+        else -> expressiveLightColorSchemeFromSeed()
     }
 
     MaterialExpressiveTheme(

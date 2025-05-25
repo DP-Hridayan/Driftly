@@ -43,7 +43,10 @@ fun CustomisationScreen(
         customisationViewModel.subjectCardCornerRadius.collectAsState(initial = 8f)
     val currentCardStyle by customisationViewModel.cardStyle.collectAsState()
     val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
-    val cardStyleList = listOf(SubjectCardStyle.CARD_STYLE_A, SubjectCardStyle.CARD_STYLE_B)
+    val cardStyleList = listOf(
+        SubjectCardStyle.CARD_STYLE_A, SubjectCardStyle.CARD_STYLE_B,
+        SubjectCardStyle.CARD_STYLE_C
+    )
 
     SettingsScaffold(
         modifier = modifier,
@@ -89,7 +92,8 @@ fun CustomisationScreen(
                             SubjectCard(
                                 subject = stringResource(R.string.subject_name),
                                 subjectId = 999,
-                                progress = 0.67f,
+                                presentCount = 3,
+                                totalCount = 5,
                                 isDemoCard = true,
                                 cornerRadius = cardCornerSliderValue.value.dp,
                                 cardStyle = style,

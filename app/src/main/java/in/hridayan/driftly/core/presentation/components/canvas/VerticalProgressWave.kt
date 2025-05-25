@@ -6,7 +6,6 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -21,7 +20,7 @@ fun VerticalProgressWave(
     modifier: Modifier = Modifier, progress: Float,
     waveSpeed: Int = 4000,
     waveFrequency: Float = 2f,
-    waveColor: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+    waveColor: Color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.5f)
 ) {
     val animatedOffset by rememberInfiniteTransition(label = "wave")
         .animateFloat(

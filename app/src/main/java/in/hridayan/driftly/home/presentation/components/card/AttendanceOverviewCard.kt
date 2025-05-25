@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.presentation.ui.theme.RobotoFlexBlack900
 
 @SuppressLint("DefaultLocale")
@@ -37,6 +38,11 @@ fun AttendanceOverviewCard(modifier: Modifier = Modifier, presentCount: Int, tot
     val safeTarget = progress.takeIf { !it.isNaN() }?.coerceIn(0f, 1f) ?: 0f
 
     val animatedProgress = remember { Animatable(0f) }
+
+    val isDarkMode = LocalDarkMode.current
+
+    val contentColor =
+        if (isDarkMode) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer
 
     LaunchedEffect(safeTarget) {
         animatedProgress.animateTo(
@@ -59,13 +65,14 @@ fun AttendanceOverviewCard(modifier: Modifier = Modifier, presentCount: Int, tot
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clip(MaterialTheme.shapes.medium)
+            .clip(MaterialTheme.shapes.largeIncreased)
             .clickable(
                 enabled = true,
                 onClick = { }
             ),
+        shape = MaterialTheme.shapes.largeIncreased,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            containerColor = MaterialTheme.colorScheme.primary,
         ),
     ) {
         Column(
@@ -75,20 +82,20 @@ fun AttendanceOverviewCard(modifier: Modifier = Modifier, presentCount: Int, tot
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Text(
-                modifier = Modifier.alpha(0.75f),
+                modifier = Modifier.alpha(0.9f),
                 text = stringResource(R.string.overall_attendance),
                 style = MaterialTheme.typography.titleMediumEmphasized,
-                color = MaterialTheme.colorScheme.primary,
+                color = contentColor,
             )
             Text(
                 text = progressText,
                 fontFamily = RobotoFlexBlack900,
                 fontSize = 80.sp,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                color = contentColor
             )
             LinearWavyProgressIndicator(
                 progress = { animatedProgress.value },
-                color = MaterialTheme.colorScheme.primary,
+                color = contentColor,
                 trackColor = MaterialTheme.colorScheme.surface,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -96,7 +103,7 @@ fun AttendanceOverviewCard(modifier: Modifier = Modifier, presentCount: Int, tot
             Text(
                 text = attendanceComment,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.primary
+                color = contentColor
             )
         }
     }

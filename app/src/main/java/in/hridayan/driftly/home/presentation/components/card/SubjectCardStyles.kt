@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package `in`.hridayan.driftly.home.presentation.components.card
 
 import android.annotation.SuppressLint
@@ -13,9 +15,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AddCircleOutline
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,8 +37,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.presentation.components.canvas.VerticalProgressWave
 import `in`.hridayan.driftly.core.presentation.components.progress.CircularProgressWithText
 import `in`.hridayan.driftly.home.presentation.components.text.SubjectText
@@ -46,10 +57,10 @@ fun CardStyleA(
     onErrorIconClicked: () -> Unit,
 ) {
     val subjectTextColor =
-        if (isLongClicked) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
+        if (isLongClicked) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onPrimaryContainer
 
     val backgroundColor =
-        if (isLongClicked) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surfaceContainer
+        if (isLongClicked) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.primaryContainer
 
     Row(
         modifier = modifier
@@ -65,7 +76,9 @@ fun CardStyleA(
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         SubjectText(
-            modifier = Modifier.weight(1f), subject = subject, subjectTextColor = subjectTextColor
+            modifier = Modifier.weight(1f),
+            subject = subject,
+            color =subjectTextColor
         )
 
         if (isLongClicked) {
@@ -96,17 +109,26 @@ fun CardStyleB(
 
     var contentHeightPx by remember { mutableIntStateOf(0) }
 
+
+    val isDarkMode = LocalDarkMode.current
+
+    val waveColor =
+        if (isDarkMode) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary.copy(
+            alpha = 0.65f
+        )
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .background(MaterialTheme.colorScheme.surfaceContainer)
+            .background(MaterialTheme.colorScheme.primaryContainer)
     ) {
 
         VerticalProgressWave(
             modifier = Modifier.height(with(LocalDensity.current) { contentHeightPx.toDp() }),
             progress = progress,
-            waveSpeed = 4000
+            waveSpeed = 4000,
+            waveColor = waveColor
         )
 
         Column(
@@ -127,8 +149,11 @@ fun CardStyleB(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(15.dp)
             ) {
-                SubjectText(
-                    modifier = Modifier.weight(1f), subject = subject
+                Text(
+                    text = subject,
+                    style = MaterialTheme.typography.titleLargeEmphasized,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.weight(1f)
                 )
 
                 if (isLongClicked) {
@@ -140,10 +165,80 @@ fun CardStyleB(
                     if (isTotalCountZero) ErrorIcon(onClick = onErrorIconClicked)
                     else Text(
                         text = progressText,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.titleLargeEmphasized,
+                        fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
                 }
+            }
+        }
+    }
+}
+
+@SuppressLint("DefaultLocale")
+@Composable
+fun CardStyleC(modifier: Modifier = Modifier, subject: String, presentCount: Int, totalCount: Int) {
+    val progress = presentCount.toFloat() / totalCount.toFloat()
+    val progressText = "${String.format("%.0f", progress * 100)}%"
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.primaryContainer),
+        verticalArrangement = Arrangement.spacedBy(5.dp),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 5.dp),
+            verticalAlignment = Alignment.Bottom
+        ) {
+            Text(
+                text = subject,
+                style = MaterialTheme.typography.headlineSmallEmphasized,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier.weight(1f)
+            )
+
+            Text(
+                text = progressText,
+                style = MaterialTheme.typography.headlineSmallEmphasized,
+                fontWeight = FontWeight.Black,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+            )
+        }
+
+        LinearProgressIndicator(
+            progress = { progress },
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            trackColor = MaterialTheme.colorScheme.surface,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        )
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, bottom = 10.dp),
+            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Attended: $presentCount/$totalCount",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier.weight(1f)
+
+            )
+
+            IconButton(modifier = Modifier.padding(start = 10.dp), onClick = { }) {
+                Icon(
+                    imageVector = Icons.Rounded.AddCircleOutline,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
             }
         }
     }

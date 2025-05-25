@@ -26,7 +26,7 @@ enum class SettingsKeys(val default: Any?) {
     LICENSE(null),
     CUSTOMISATION(null),
     SUBJECT_CARD_CORNER_RADIUS(8f),
-    SUBJECT_CARD_STYLE(SubjectCardStyle.CARD_STYLE_A),
+    SUBJECT_CARD_STYLE(SubjectCardStyle.CARD_STYLE_C),
     GITHUB_RELEASE_TYPE(GithubReleaseType.STABLE),
     SAVED_VERSION_CODE(0),
     REMEMBER_CALENDAR_MONTH_YEAR(false)

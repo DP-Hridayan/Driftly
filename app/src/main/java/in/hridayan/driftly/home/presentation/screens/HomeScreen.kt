@@ -194,14 +194,16 @@ fun HomeScreen(
                 val counts by viewModel.getSubjectAttendanceCounts(subjects[index].id)
                     .collectAsState(initial = SubjectAttendance())
 
-                val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
+                val presentCount = counts.presentCount
+                val totalCount = counts.totalCount
 
                 SubjectCard(
                     cardStyle = LocalSettings.current.subjectCardStyle,
                     cornerRadius = subjectCardCornerRadius.dp,
                     subjectId = subjects[index].id,
                     subject = subjects[index].subject,
-                    progress = progress,
+                    presentCount = presentCount,
+                    totalCount = totalCount,
                     isTotalCountZero = counts.totalCount == 0,
                     navigate = {
                         navController.navigate(

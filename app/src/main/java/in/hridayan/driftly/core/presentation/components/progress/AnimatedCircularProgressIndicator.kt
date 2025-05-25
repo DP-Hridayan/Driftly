@@ -43,7 +43,7 @@ fun AnimatedCircularProgressIndicator(
         modifier = modifier,
         color = progressColor,
         strokeWidth = 3.dp,
-        trackColor = MaterialTheme.colorScheme.secondaryContainer,
+        trackColor = MaterialTheme.colorScheme.surface,
         strokeCap = StrokeCap.Round,
     )
 }
