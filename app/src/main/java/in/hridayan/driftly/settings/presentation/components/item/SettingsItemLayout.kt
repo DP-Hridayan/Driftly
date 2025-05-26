@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -24,6 +23,7 @@ import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import `in`.hridayan.driftly.settings.domain.model.getResolvedDescription
 import `in`.hridayan.driftly.settings.domain.model.getResolvedIcon
 import `in`.hridayan.driftly.settings.domain.model.getResolvedTitle
+import `in`.hridayan.driftly.settings.presentation.components.switch.SettingsSwitch
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -89,9 +89,9 @@ fun SettingsItemLayout(
         }
 
         if (item.type == SettingsType.Switch) {
-            Switch(checked = checked, onCheckedChange = {
-                onToggle()
+            SettingsSwitch(checked = checked, onCheckedChange = {
                 weakHaptic()
+                onToggle()
             })
         }
     }
