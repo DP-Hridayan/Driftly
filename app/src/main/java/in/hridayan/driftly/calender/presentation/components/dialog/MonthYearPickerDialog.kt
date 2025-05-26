@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 
 package `in`.hridayan.driftly.calender.presentation.components.dialog
 
@@ -10,19 +10,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -177,20 +177,28 @@ fun MonthYearPickerDialog(
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
             ) {
-                TextButton(onClick = {
-                    weakHaptic()
-                    onDismiss()
-                }) {
+                Button(
+                    onClick = {
+                        weakHaptic()
+                        onDismiss()
+                    },
+                    shapes = ButtonDefaults.shapes(),
+                    modifier = Modifier.weight(4f)
+                ) {
                     Text(text = stringResource(R.string.cancel))
                 }
 
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.weight(1f))
 
-                Button(onClick = {
-                    weakHaptic()
-                    onConfirm(selectedMonth + 1, selectedYear)
-                    onDismiss()
-                }) {
+                Button(
+                    onClick = {
+                        weakHaptic()
+                        onConfirm(selectedMonth + 1, selectedYear)
+                        onDismiss()
+                    },
+                    shapes = ButtonDefaults.shapes(),
+                    modifier = Modifier.weight(4f)
+                ) {
                     Text(text = stringResource(R.string.select))
                 }
             }
