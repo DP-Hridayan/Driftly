@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -21,6 +22,7 @@ import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,11 +32,13 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
@@ -84,7 +88,11 @@ fun MonthYearPickerDialog(
             )
 
             // Month dropdown
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 val dropdownItemHeight = 48.dp
                 val maxVisibleItems = 6
                 val maxHeight = dropdownItemHeight * maxVisibleItems
@@ -92,12 +100,12 @@ fun MonthYearPickerDialog(
                 ExposedDropdownMenuBox(
                     expanded = expandedMonth,
                     onExpandedChange = { expandedMonth = !expandedMonth },
-                    modifier = Modifier.weight(1f)
                 ) {
                     OutlinedTextField(
                         value = months[selectedMonth],
                         onValueChange = {},
                         readOnly = true,
+                        singleLine = true,
                         label = { Text("Month") },
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMonth)
@@ -117,7 +125,17 @@ fun MonthYearPickerDialog(
                         months.forEach { month ->
                             DropdownMenuItem(
                                 modifier = Modifier,
-                                text = { Text(month) },
+                                text = {
+                                    Text(
+                                        text = month,
+                                        maxLines = 1,
+                                        autoSize = TextAutoSize.StepBased(
+                                            minFontSize = MaterialTheme.typography.bodySmall.fontSize,
+                                            maxFontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                                            stepSize = 0.5.sp
+                                        )
+                                    )
+                                },
                                 onClick = {
                                     selectedMonth = months.indexOf(month)
                                     expandedMonth = false
@@ -130,7 +148,6 @@ fun MonthYearPickerDialog(
                 ExposedDropdownMenuBox(
                     expanded = expandedYear,
                     onExpandedChange = { expandedYear = !expandedYear },
-                    modifier = Modifier.weight(1f)
                 ) {
                     OutlinedTextField(
                         value = selectedYear.toString(),
@@ -163,7 +180,17 @@ fun MonthYearPickerDialog(
                     ) {
                         years.forEach { year ->
                             DropdownMenuItem(
-                                text = { Text(year.toString()) },
+                                text = {
+                                    Text(
+                                        text = year.toString(),
+                                        maxLines = 1,
+                                        autoSize = TextAutoSize.StepBased(
+                                            minFontSize = MaterialTheme.typography.bodySmall.fontSize,
+                                            maxFontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                                            stepSize = 0.5.sp
+                                        )
+                                    )
+                                },
                                 onClick = {
                                     weakHaptic()
                                     selectedYear = year
@@ -177,7 +204,7 @@ fun MonthYearPickerDialog(
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
             ) {
-                Button(
+                OutlinedButton(
                     onClick = {
                         weakHaptic()
                         onDismiss()
