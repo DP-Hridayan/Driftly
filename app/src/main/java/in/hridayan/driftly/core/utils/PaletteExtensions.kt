@@ -5,7 +5,7 @@ package `in`.hridayan.driftly.core.utils
 import android.annotation.SuppressLint
 import androidx.compose.ui.graphics.Color
 import com.google.android.material.color.utilities.CorePalette
-import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
+import `in`.hridayan.driftly.core.common.SeedColorProvider
 
 private val palette: CorePalette get() = CorePalette.of(SeedColorProvider.seedColor)
 

@@ -30,10 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
-import `in`.hridayan.driftly.core.common.constants.URL_DEV_BM_COFFEE
-import `in`.hridayan.driftly.core.common.constants.URL_DEV_EMAIL
-import `in`.hridayan.driftly.core.common.constants.URL_DEV_GITHUB
-import `in`.hridayan.driftly.core.common.constants.URL_DEV_TELEGRAM
+import `in`.hridayan.driftly.core.common.constants.UrlConst
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.bmcLogo
 import `in`.hridayan.driftly.core.utils.openUrl
@@ -57,7 +54,7 @@ fun SupportMeCard(modifier: Modifier = Modifier) {
 
             HorizontalDivider(thickness = 1.dp)
 
-            BuyMeACoffee(onClick = { openUrl(URL_DEV_BM_COFFEE, context) })
+            BuyMeACoffee(onClick = { openUrl(UrlConst.URL_DEV_BM_COFFEE, context) })
         }
     }
 }
@@ -74,7 +71,7 @@ private fun ContactHandles(modifier: Modifier = Modifier) {
             modifier = Modifier.weight(1f),
             painter = painterResource(R.drawable.ic_mail),
             text = "E-mail",
-            onClick = { openUrl(url = URL_DEV_EMAIL, context = context) }
+            onClick = { openUrl(url = UrlConst.URL_DEV_EMAIL, context = context) }
         )
 
         VerticalDivider(thickness = 1.dp, modifier = Modifier.padding(horizontal = 5.dp))
@@ -83,7 +80,7 @@ private fun ContactHandles(modifier: Modifier = Modifier) {
             modifier = Modifier.weight(1f),
             painter = painterResource(R.drawable.ic_github),
             text = stringResource(R.string.github),
-            onClick = { openUrl(url = URL_DEV_GITHUB, context = context) }
+            onClick = { openUrl(url = UrlConst.URL_DEV_GITHUB, context = context) }
         )
 
         VerticalDivider(thickness = 1.dp, modifier = Modifier.padding(horizontal = 5.dp))
@@ -92,7 +89,7 @@ private fun ContactHandles(modifier: Modifier = Modifier) {
             modifier = Modifier.weight(1f),
             painter = painterResource(R.drawable.ic_telegram),
             text = "Telegram",
-            onClick = { openUrl(url = URL_DEV_TELEGRAM, context = context) }
+            onClick = { openUrl(url = UrlConst.URL_DEV_TELEGRAM, context = context) }
         )
     }
 }

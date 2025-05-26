@@ -2,10 +2,6 @@ package `in`.hridayan.driftly.core.common.constants
 
 import androidx.compose.ui.graphics.Color
 
-object SeedColorProvider {
-    var seedColor: Int = SeedColors.Blue.seed
-}
-
 sealed class SeedColors(
     val seed: Int,
     val primary: Color,

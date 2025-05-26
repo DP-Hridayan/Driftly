@@ -1,8 +1,8 @@
 package `in`.hridayan.driftly.settings.data.local
 
 import androidx.appcompat.app.AppCompatDelegate
+import `in`.hridayan.driftly.core.common.SeedColorProvider
 import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
-import `in`.hridayan.driftly.core.common.constants.SeedColorProvider
 import `in`.hridayan.driftly.core.common.constants.SubjectCardStyle
 
 enum class SettingsKeys(val default: Any?) {

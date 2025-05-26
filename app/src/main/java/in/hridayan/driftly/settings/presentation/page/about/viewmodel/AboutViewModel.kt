@@ -7,10 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_ISSUE_FEATURE_REQUEST
-import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_ISSUE_REPORT
-import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_REPO
-import `in`.hridayan.driftly.core.common.constants.URL_GITHUB_REPO_LICENSE
+import `in`.hridayan.driftly.core.common.constants.UrlConst
 import `in`.hridayan.driftly.navigation.ChangelogScreen
 import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
@@ -45,19 +42,19 @@ class AboutViewModel @Inject constructor(
                 )
 
                 SettingsKeys.REPORT -> _uiEvent.emit(
-                    SettingsUiEvent.OpenUrl(URL_GITHUB_ISSUE_REPORT)
+                    SettingsUiEvent.OpenUrl(UrlConst.URL_GITHUB_ISSUE_REPORT)
                 )
 
                 SettingsKeys.FEATURE_REQUEST -> _uiEvent.emit(
-                    SettingsUiEvent.OpenUrl(URL_GITHUB_ISSUE_FEATURE_REQUEST)
+                    SettingsUiEvent.OpenUrl(UrlConst.URL_GITHUB_ISSUE_FEATURE_REQUEST)
                 )
 
                 SettingsKeys.LICENSE -> _uiEvent.emit(
-                    SettingsUiEvent.OpenUrl(URL_GITHUB_REPO_LICENSE)
+                    SettingsUiEvent.OpenUrl(UrlConst.URL_GITHUB_REPO_LICENSE)
                 )
 
                 SettingsKeys.GITHUB -> _uiEvent.emit(
-                    SettingsUiEvent.OpenUrl(URL_GITHUB_REPO)
+                    SettingsUiEvent.OpenUrl(UrlConst.URL_GITHUB_REPO)
                 )
 
                 else -> {}
