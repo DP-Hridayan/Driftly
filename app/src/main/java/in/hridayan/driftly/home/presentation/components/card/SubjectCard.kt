@@ -1,9 +1,10 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package `in`.hridayan.driftly.home.presentation.components.card
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -11,6 +12,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.ErrorOutline
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.Dp
@@ -178,29 +184,33 @@ fun UtilityRow(
     onDeleteButtonClicked: () -> Unit = {}
 ) {
     Row(
-        modifier = modifier.padding(end = 7.dp),
-        horizontalArrangement = Arrangement.spacedBy(15.dp)
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            imageVector = Icons.Rounded.Edit,
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.tertiary),
-            contentDescription = null,
-            modifier = Modifier.clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = null,
-                onClick = onEditButtonClicked
+        IconButton(
+            onClick = onEditButtonClicked,
+            shapes = IconButtonDefaults.shapes(),
+            colors = IconButtonDefaults.iconButtonColors(
+                contentColor = MaterialTheme.colorScheme.primary
             )
-        )
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.Edit,
+                contentDescription = null,
+            )
+        }
 
-        Image(
-            imageVector = Icons.Rounded.Delete,
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
-            contentDescription = null,
-            modifier = Modifier.clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = null,
-                onClick = onDeleteButtonClicked
+        IconButton(
+            onClick = onDeleteButtonClicked,
+            shapes = IconButtonDefaults.shapes(),
+            colors = IconButtonDefaults.iconButtonColors(
+                contentColor = MaterialTheme.colorScheme.error
             )
-        )
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.Delete,
+                contentDescription = null,
+            )
+        }
     }
 }

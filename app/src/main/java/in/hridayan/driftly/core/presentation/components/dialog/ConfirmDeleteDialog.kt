@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package `in`.hridayan.driftly.core.presentation.components.dialog
 
 import androidx.compose.foundation.layout.Arrangement
@@ -7,12 +9,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -29,6 +33,7 @@ fun ConfirmDeleteDialog(
     onConfirm: () -> Unit
 ) {
     val weakHaptic = LocalWeakHaptic.current
+
     Dialog(
         onDismissRequest = { onDismiss() },
         properties = DialogProperties(dismissOnClickOutside = true)
@@ -63,26 +68,33 @@ fun ConfirmDeleteDialog(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    TextButton(
+                    OutlinedButton(
                         onClick = {
                             onDismiss()
                             weakHaptic()
-                        }
+                        },
+                        shapes = ButtonDefaults.shapes(),
+                        modifier = Modifier.weight(4f)
                     ) {
                         Text(stringResource(R.string.cancel))
                     }
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.weight(1f))
 
-                    TextButton(
+                    Button(
                         onClick = {
                             onConfirm()
                             weakHaptic()
-                        }
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.errorContainer,
+                            contentColor = MaterialTheme.colorScheme.onErrorContainer
+                        ),
+                        modifier = Modifier.weight(4f),
+                        shapes = ButtonDefaults.shapes(),
                     ) {
                         Text(
                             stringResource(R.string.confirm),
-                            color = MaterialTheme.colorScheme.error
                         )
                     }
                 }

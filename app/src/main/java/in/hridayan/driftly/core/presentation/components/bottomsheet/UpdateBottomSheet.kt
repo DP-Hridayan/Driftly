@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 
 package `in`.hridayan.driftly.core.presentation.components.bottomsheet
 
@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
@@ -71,20 +73,30 @@ fun UpdateBottomSheet(
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp, bottom = 25.dp)
         ) {
-            OutlinedButton(onClick = {
-                onDismiss()
-                weakHaptic()
-            }, modifier = Modifier.weight(4f)) {
+            OutlinedButton(
+                onClick = {
+                    onDismiss()
+                    weakHaptic()
+                },
+                shapes = ButtonDefaults.shapes(),
+                modifier = Modifier.weight(4f)
+            ) {
                 Text(text = stringResource(R.string.cancel))
             }
 
             Spacer(modifier.weight(1f))
 
-            Button(onClick = {
+            Button(
+                onClick = {
                 onDismiss()
-                openUrl("https://github.com/DP-Hridayan/Driftly/releases/tag/$latestVersion", context)
+                openUrl(
+                    "https://github.com/DP-Hridayan/Driftly/releases/tag/$latestVersion",
+                    context
+                )
                 weakHaptic()
-            }, modifier = Modifier.weight(4f)) {
+            },
+                shapes = ButtonDefaults.shapes(),
+                modifier = Modifier.weight(4f)) {
                 Text(text = stringResource(R.string.download))
             }
         }
