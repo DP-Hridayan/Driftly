@@ -11,14 +11,16 @@ class SettingsRepositoryImpl(
     private val dataStore: SettingsDataStore
 ) : SettingsRepository {
 
+    override fun getBoolean(key: SettingsKeys): Flow<Boolean> = dataStore.booleanFlow(key)
     override suspend fun setBoolean(key: SettingsKeys, value: Boolean) =
         dataStore.setBoolean(key, value)
-    override fun getBoolean(key: SettingsKeys): Flow<Boolean> = dataStore.booleanFlow(key)
     override suspend fun toggleSetting(key: SettingsKeys) = dataStore.toggle(key)
-    override suspend fun setInt(key: SettingsKeys, value: Int) = dataStore.setInt(key, value)
+
     override  fun getInt(key: SettingsKeys): Flow<Int> = dataStore.intFlow(key)
-    override suspend fun setFloat(key: SettingsKeys, value: Float) = dataStore.setFloat(key, value)
+    override suspend fun setInt(key: SettingsKeys, value: Int) = dataStore.setInt(key, value)
+
     override  fun getFloat(key: SettingsKeys): Flow<Float> = dataStore.floatFlow(key)
+    override suspend fun setFloat(key: SettingsKeys, value: Float) = dataStore.setFloat(key, value)
 
     override suspend fun getSettingsPageList(): List<Pair<SettingsItem, Flow<Boolean>>> {
         return SettingsProvider.settingsPageList.map {
