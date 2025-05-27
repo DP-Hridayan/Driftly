@@ -25,6 +25,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 
 @Composable
 fun ConfirmDeleteDialog(
@@ -48,10 +49,10 @@ fun ConfirmDeleteDialog(
                     .padding(24.dp)
                     .widthIn(min = 280.dp)
             ) {
-                Text(
+                AutoResizeableText(
                     text = stringResource(R.string.delete_subject),
                     style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -76,7 +77,10 @@ fun ConfirmDeleteDialog(
                         shapes = ButtonDefaults.shapes(),
                         modifier = Modifier.weight(4f)
                     ) {
-                        Text(stringResource(R.string.cancel))
+                        AutoResizeableText(
+                            text = stringResource(R.string.cancel),
+                            style = MaterialTheme.typography.labelLarge
+                        )
                     }
 
                     Spacer(modifier = Modifier.weight(1f))
@@ -93,8 +97,8 @@ fun ConfirmDeleteDialog(
                         modifier = Modifier.weight(4f),
                         shapes = ButtonDefaults.shapes(),
                     ) {
-                        Text(
-                            stringResource(R.string.confirm),
+                        AutoResizeableText(
+                            text = stringResource(R.string.confirm),
                         )
                     }
                 }

@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import java.util.Calendar
 
 @Composable
@@ -81,7 +82,7 @@ fun MonthYearPickerDialog(
                 .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text(
+            AutoResizeableText(
                 text = stringResource(R.string.select_month_and_year),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface
@@ -212,7 +213,7 @@ fun MonthYearPickerDialog(
                     shapes = ButtonDefaults.shapes(),
                     modifier = Modifier.weight(4f)
                 ) {
-                    Text(text = stringResource(R.string.cancel))
+                    AutoResizeableText(text = stringResource(R.string.cancel))
                 }
 
                 Spacer(modifier = Modifier.weight(1f))
@@ -226,7 +227,7 @@ fun MonthYearPickerDialog(
                     shapes = ButtonDefaults.shapes(),
                     modifier = Modifier.weight(4f)
                 ) {
-                    Text(text = stringResource(R.string.select))
+                    AutoResizeableText(text = stringResource(R.string.select))
                 }
             }
         }

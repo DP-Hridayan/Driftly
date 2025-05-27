@@ -27,9 +27,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.domain.model.SubjectError
-import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.domain.model.SubjectError
+import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
+import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 
 @Composable
@@ -65,11 +66,12 @@ fun AddSubjectDialog(
                     else -> stringResource(R.string.enter_subject_name)
                 }
 
-                Text(
+                AutoResizeableText(
                     text = stringResource(R.string.add_subject),
                     color = MaterialTheme.colorScheme.onSurface,
                     style = MaterialTheme.typography.titleLarge,
                 )
+
                 OutlinedTextField(
                     value = subject,
                     onValueChange = {
@@ -89,7 +91,7 @@ fun AddSubjectDialog(
                             viewModel.resetInputFields()
                             onDismiss()
                         },
-                        content = { Text(text = stringResource(R.string.cancel)) }
+                        content = { AutoResizeableText(text = stringResource(R.string.cancel)) }
                     )
 
                     Spacer(modifier = Modifier.weight(0.1f))
@@ -106,7 +108,7 @@ fun AddSubjectDialog(
                                 }
                             )
                         },
-                        content = { Text(text = stringResource(R.string.add)) }
+                        content = { AutoResizeableText(text = stringResource(R.string.add)) }
                     )
                 }
             }

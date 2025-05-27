@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 
 @Composable
 fun ChangelogItemLayout(
@@ -29,7 +30,7 @@ fun ChangelogItemLayout(
     Column(
         modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(25.dp)
     ) {
-        Text(
+        AutoResizeableText(
             text = stringResource(R.string.version) + "\t\t$versionName",
             style = if (isLatestVersion) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.headlineSmall,
             color = if (isLatestVersion) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
@@ -44,7 +45,7 @@ fun ChangelogItemLayout(
                 Box(
                     modifier = Modifier
                         .size(10.dp)
-                        .alignBy { it.measuredHeight}
+                        .alignBy { it.measuredHeight }
                         .border(2.dp, MaterialTheme.colorScheme.primary, CircleShape)
                 )
 

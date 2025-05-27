@@ -26,7 +26,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -55,6 +54,7 @@ import `in`.hridayan.driftly.core.presentation.components.progress.LoadingSpinne
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
+import `in`.hridayan.driftly.settings.presentation.components.switch.SettingsSwitch
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.viewmodel.AutoUpdateViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
@@ -149,12 +149,14 @@ fun AutoUpdateScreen(
                             text = stringResource(R.string.enable_auto_update),
                             style = MaterialTheme.typography.headlineSmall,
                         )
-                        Switch(checked = checked, onCheckedChange = {
-                            weakHaptic()
-                            settingsViewModel.onToggle(
-                                SettingsKeys.AUTO_UPDATE
-                            )
-                        })
+                        SettingsSwitch(
+                            checked = checked,
+                            onCheckedChange = {
+                                weakHaptic()
+                                settingsViewModel.onToggle(
+                                    SettingsKeys.AUTO_UPDATE
+                                )
+                            })
                     }
                 }
             }
