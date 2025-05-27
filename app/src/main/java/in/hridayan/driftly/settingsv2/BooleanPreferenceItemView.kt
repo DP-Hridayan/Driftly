@@ -22,7 +22,6 @@ import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.settings.presentation.components.switch.SettingsSwitch
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
-
 @Composable
 fun BooleanPreferenceItemView(
     modifier: Modifier = Modifier,
@@ -80,13 +79,13 @@ fun BooleanPreferenceItemView(
                     modifier = Modifier.alpha(0.90f)
                 )
             }
-
-            SettingsSwitch(
-                checked = checked,
-                onCheckedChange = {
-                    weakHaptic()
-                    settingsViewModel.onToggle(item.key)
-                })
         }
+
+        SettingsSwitch(
+            checked = checked,
+            onCheckedChange = {
+                weakHaptic()
+                settingsViewModel.onToggle(item.key)
+            })
     }
 }
