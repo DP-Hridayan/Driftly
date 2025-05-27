@@ -5,6 +5,7 @@ import `in`.hridayan.driftly.settings.data.local.SettingsProvider
 import `in`.hridayan.driftly.settings.data.local.datastore.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
+import `in`.hridayan.driftly.settingsv2.PreferenceGroup
 import kotlinx.coroutines.flow.Flow
 
 class SettingsRepositoryImpl(
@@ -22,12 +23,6 @@ class SettingsRepositoryImpl(
     override  fun getFloat(key: SettingsKeys): Flow<Float> = dataStore.floatFlow(key)
     override suspend fun setFloat(key: SettingsKeys, value: Float) = dataStore.setFloat(key, value)
 
-    override suspend fun getSettingsPageList(): List<Pair<SettingsItem, Flow<Boolean>>> {
-        return SettingsProvider.settingsPageList.map {
-            it to dataStore.booleanFlow(it.key)
-        }
-    }
-
     override suspend fun getLookAndFeelPageList(): List<Pair<SettingsItem, Flow<Boolean>>> {
         return SettingsProvider.lookAndFeelPageList.map {
             it to dataStore.booleanFlow(it.key)
@@ -40,10 +35,8 @@ class SettingsRepositoryImpl(
         }
     }
 
-    override suspend fun getBehaviorPageList(): List<Pair<SettingsItem, Flow<Boolean>>> {
-        return SettingsProvider.behaviorPageList.map {
-            it to dataStore.booleanFlow(it.key)
-        }
+    override suspend fun getBehaviorPageList():List<PreferenceGroup>{
+        return SettingsProvider.behaviorPageList
     }
 
     override suspend fun getDynamicColorSetting(): Pair<SettingsItem, Flow<Boolean>> {
@@ -52,5 +45,9 @@ class SettingsRepositoryImpl(
 
     override suspend fun getHighContrastDarkThemeSetting(): Pair<SettingsItem, Flow<Boolean>> {
         return SettingsProvider.highContrastDarkThemeSetting to dataStore.booleanFlow(SettingsKeys.HIGH_CONTRAST_DARK_MODE)
+    }
+
+    override suspend fun getSettingsPageList(): List<PreferenceGroup> {
+        return SettingsProvider.settingsPageList
     }
 }

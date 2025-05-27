@@ -22,6 +22,7 @@ import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCa
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
+import `in`.hridayan.driftly.settingsv2.PreferenceGroup
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -39,8 +40,7 @@ class SettingsViewModel @Inject constructor(
     private val getHighContrastDarkThemeSettingUseCase: GetHighContrastDarkThemeSettingUseCase,
     private val getBehaviorPageListUseCase: GetBehaviorPageListUseCase
 ) : ViewModel() {
-
-    var settingsPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
+    var settingsPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
         private set
 
     var lookAndFeelPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
@@ -49,7 +49,7 @@ class SettingsViewModel @Inject constructor(
     var aboutPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
         private set
 
-    var behaviorPageList by mutableStateOf<List<Pair<SettingsItem, Flow<Boolean>>>>(emptyList())
+    var behaviorPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
         private set
 
     var dynamicColorSetting by mutableStateOf<Pair<SettingsItem, Flow<Boolean>>?>(null)
@@ -98,9 +98,9 @@ class SettingsViewModel @Inject constructor(
 
     fun getFloat(key: SettingsKeys): Flow<Float> = settingsRepository.getFloat(key)
 
-    fun onItemClicked(item: SettingsItem) {
+    fun onItemClicked(key: SettingsKeys) {
         viewModelScope.launch {
-            when (item.key) {
+            when (key) {
                 SettingsKeys.LOOK_AND_FEEL -> _uiEvent.emit(
                     SettingsUiEvent.Navigate(LookAndFeelScreen)
                 )

@@ -19,43 +19,46 @@ import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
+import `in`.hridayan.driftly.settingsv2.PreferenceGroup
+import `in`.hridayan.driftly.settingsv2.PreferenceItem
+import `in`.hridayan.driftly.settingsv2.boolPreferenceItem
+import `in`.hridayan.driftly.settingsv2.category
+import `in`.hridayan.driftly.settingsv2.nullPreferenceItem
+import `in`.hridayan.driftly.settingsv2.uncategorizedItems
 
 object SettingsProvider {
-    val settingsPageList = listOf<SettingsItem>(
-        SettingsItem(
-            key = SettingsKeys.LOOK_AND_FEEL,
-            titleResId = R.string.look_and_feel,
-            descriptionResId = R.string.des_look_and_feel,
-            iconVector = Icons.Outlined.Palette,
-            type = SettingsType.NoSwitch
-        ),
-        SettingsItem(
-            key = SettingsKeys.CUSTOMISATION,
-            titleResId = R.string.customisation,
-            descriptionResId = R.string.des_customisation,
-            iconVector = Icons.Rounded.Tune,
-            type = SettingsType.NoSwitch
-        ),
-        SettingsItem(
-            key = SettingsKeys.BEHAVIOR,
-            titleResId = R.string.behavior,
-            descriptionResId = R.string.des_behavior,
-            iconVector = Icons.Rounded.SentimentNeutral,
-            type = SettingsType.NoSwitch
-        ),
-        SettingsItem(
-            key = SettingsKeys.AUTO_UPDATE,
-            titleResId = R.string.auto_update,
-            descriptionResId = R.string.des_auto_update,
-            iconVector = Icons.Rounded.Update,
-            type = SettingsType.NoSwitch
-        ),
-        SettingsItem(
-            key = SettingsKeys.ABOUT,
-            titleResId = R.string.about,
-            descriptionResId = R.string.des_about,
-            iconResId = R.drawable.ic_info,
-            type = SettingsType.NoSwitch
+    val settingsPageList: List<PreferenceGroup> = listOf(
+        uncategorizedItems(
+            nullPreferenceItem(
+                key = SettingsKeys.LOOK_AND_FEEL,
+                titleResId = R.string.look_and_feel,
+                descriptionResId = R.string.des_look_and_feel,
+                iconVector = Icons.Outlined.Palette
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.CUSTOMISATION,
+                titleResId = R.string.customisation,
+                descriptionResId = R.string.des_customisation,
+                iconVector = Icons.Rounded.Tune
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.BEHAVIOR,
+                titleResId = R.string.behavior,
+                descriptionResId = R.string.des_behavior,
+                iconVector = Icons.Rounded.SentimentNeutral
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.AUTO_UPDATE,
+                titleResId = R.string.auto_update,
+                descriptionResId = R.string.des_auto_update,
+                iconVector = Icons.Rounded.Update
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.ABOUT,
+                titleResId = R.string.about,
+                descriptionResId = R.string.des_about,
+                iconResId = R.drawable.ic_info
+            )
         )
     )
 
@@ -144,27 +147,29 @@ object SettingsProvider {
         )
     )
 
-    val behaviorPageList = listOf<SettingsItem>(
-        SettingsItem(
-            key = SettingsKeys.STREAK_MODIFIER,
-            titleResId = R.string.show_attendance_steaks,
-            descriptionResId = R.string.des_show_attendance_streaks,
-            iconVector = Icons.Rounded.DateRange,
-            type = SettingsType.Switch
-        ),
-        SettingsItem(
-            key = SettingsKeys.REMEMBER_CALENDAR_MONTH_YEAR,
-            titleResId = R.string.remember_month_year,
-            descriptionResId = R.string.des_remember_month_year,
-            iconVector = Icons.Rounded.EventAvailable,
-            type = SettingsType.Switch
-        ),
-        SettingsItem(
-            key = SettingsKeys.START_WEEK_ON_MONDAY,
-            titleResId = R.string.start_week_on_monday,
-            descriptionResId = R.string.des_start_week_on_monday,
-            iconVector = Icons.Rounded.CalendarViewWeek,
-            type = SettingsType.Switch
+    val behaviorPageList: List<PreferenceGroup> = listOf(
+        category(
+            titleResId = R.string.calendar,
+            boolPreferenceItem(
+                key = SettingsKeys.STREAK_MODIFIER,
+                titleResId = R.string.show_attendance_steaks,
+                descriptionResId = R.string.des_show_attendance_streaks,
+                iconVector = Icons.Rounded.DateRange,
+            ),
+            boolPreferenceItem(
+                key = SettingsKeys.REMEMBER_CALENDAR_MONTH_YEAR,
+                titleResId = R.string.remember_month_year,
+                descriptionResId = R.string.des_remember_month_year,
+                iconVector = Icons.Rounded.EventAvailable
+            ),
+            boolPreferenceItem(
+                key = SettingsKeys.START_WEEK_ON_MONDAY,
+                titleResId = R.string.start_week_on_monday,
+                descriptionResId = R.string.des_start_week_on_monday,
+                iconVector = Icons.Rounded.CalendarViewWeek
+            )
         )
+
     )
+
 }
