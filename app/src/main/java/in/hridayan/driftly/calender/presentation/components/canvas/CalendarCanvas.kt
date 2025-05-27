@@ -65,7 +65,9 @@ fun CalendarCanvas(
     val yearMonth = YearMonth.of(year, month)
     val today = LocalDate.now()
     val daysInMonth = yearMonth.lengthOfMonth()
-    val firstDayOfWeek = yearMonth.atDay(1).dayOfWeek.value % 7
+    val isMondayFirstDay = LocalSettings.current.startWeekOnMonday
+    val firstDayOfWeek =
+        if (isMondayFirstDay) yearMonth.atDay(1).dayOfWeek.value - 1 else yearMonth.atDay(1).dayOfWeek.value % 7
     val fullMonthName = yearMonth.month.name.lowercase().replaceFirstChar { it.uppercase() }
     val abbreviatedMonth = yearMonth.format(
         DateTimeFormatter.ofPattern("MMM").withLocale(Locale.ENGLISH)
@@ -113,14 +115,16 @@ fun CalendarCanvas(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            MonthNavigationButtons(onNavigatePrev = {
-                val prev = yearMonth.minusMonths(1)
-                onNavigate(prev.year, prev.monthValue)
-            }, onNavigateNext = {
-                val next = yearMonth.plusMonths(1)
-                onNavigate(next.year, next.monthValue)
-            },
-                onReset = onResetMonth)
+            MonthNavigationButtons(
+                onNavigatePrev = {
+                    val prev = yearMonth.minusMonths(1)
+                    onNavigate(prev.year, prev.monthValue)
+                }, onNavigateNext = {
+                    val next = yearMonth.plusMonths(1)
+                    onNavigate(next.year, next.monthValue)
+                },
+                onReset = onResetMonth
+            )
         }
 
         WeekDayLabels()

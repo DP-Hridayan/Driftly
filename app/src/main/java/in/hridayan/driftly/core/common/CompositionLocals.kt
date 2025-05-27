@@ -59,6 +59,8 @@ fun CompositionLocals(
 
     val rememberCalendarMonthYear by settingsViewModel.booleanState(SettingsKeys.REMEMBER_CALENDAR_MONTH_YEAR)
 
+    val startWeekOnMonday by settingsViewModel.booleanState(SettingsKeys.START_WEEK_ON_MONDAY)
+
     val state =
         remember(
             autoUpdate,
@@ -72,7 +74,8 @@ fun CompositionLocals(
             githubReleaseType,
             savedVersionCode,
             showAttendanceStreaks,
-            rememberCalendarMonthYear
+            rememberCalendarMonthYear,
+            startWeekOnMonday
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -86,7 +89,8 @@ fun CompositionLocals(
                 githubReleaseType = githubReleaseType,
                 savedVersionCode = savedVersionCode,
                 showAttendanceStreaks = showAttendanceStreaks,
-                rememberCalendarMonthYear = rememberCalendarMonthYear
+                rememberCalendarMonthYear = rememberCalendarMonthYear,
+                startWeekOnMonday = startWeekOnMonday
             )
         }
 

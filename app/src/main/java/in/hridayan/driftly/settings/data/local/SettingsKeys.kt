@@ -29,5 +29,6 @@ enum class SettingsKeys(val default: Any?) {
     SUBJECT_CARD_STYLE(SubjectCardStyle.CARD_STYLE_A),
     GITHUB_RELEASE_TYPE(GithubReleaseType.STABLE),
     SAVED_VERSION_CODE(0),
-    REMEMBER_CALENDAR_MONTH_YEAR(false)
+    REMEMBER_CALENDAR_MONTH_YEAR(false),
+    START_WEEK_ON_MONDAY(false)
 }

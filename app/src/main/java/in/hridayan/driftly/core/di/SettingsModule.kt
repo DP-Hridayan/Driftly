@@ -35,10 +35,6 @@ object SettingsModule {
         ToggleSettingUseCase(repo)
 
     @Provides
-    fun provideGetChangelogsUseCase(@ApplicationContext context: Context): GetAllChangelogsUseCase =
-        GetAllChangelogsUseCase(context)
-
-    @Provides
     fun provideGetSettingsPageListUseCase(repo: SettingsRepository): GetSettingsPageListUseCase =
         GetSettingsPageListUseCase(repo)
 

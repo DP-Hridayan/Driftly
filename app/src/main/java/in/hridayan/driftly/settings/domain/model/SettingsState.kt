@@ -12,5 +12,6 @@ data class SettingsState(
     val githubReleaseType: Int,
     val savedVersionCode: Int,
     val showAttendanceStreaks: Boolean,
-    val rememberCalendarMonthYear: Boolean
+    val rememberCalendarMonthYear: Boolean,
+    val startWeekOnMonday: Boolean
 )

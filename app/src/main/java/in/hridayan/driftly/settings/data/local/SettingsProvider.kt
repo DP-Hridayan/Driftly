@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.rounded.AddComment
+import androidx.compose.material.icons.rounded.CalendarViewWeek
 import androidx.compose.material.icons.rounded.ChangeHistory
 import androidx.compose.material.icons.rounded.Colorize
 import androidx.compose.material.icons.rounded.Contrast
@@ -156,6 +157,13 @@ object SettingsProvider {
             titleResId = R.string.remember_month_year,
             descriptionResId = R.string.des_remember_month_year,
             iconVector = Icons.Rounded.EventAvailable,
+            type = SettingsType.Switch
+        ),
+        SettingsItem(
+            key = SettingsKeys.START_WEEK_ON_MONDAY,
+            titleResId = R.string.start_week_on_monday,
+            descriptionResId = R.string.des_start_week_on_monday,
+            iconVector = Icons.Rounded.CalendarViewWeek,
             type = SettingsType.Switch
         )
     )

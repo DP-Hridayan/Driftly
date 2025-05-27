@@ -6,6 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import `in`.hridayan.driftly.calender.domain.usecase.GetWeekDayLabelsUseCase
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
 import `in`.hridayan.driftly.core.data.model.SubjectEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
@@ -27,6 +28,7 @@ import javax.inject.Inject
 class CalendarViewModel @Inject constructor(
     private val attendanceRepository: AttendanceRepository,
     private val subjectRepository: SubjectRepository,
+    private val getWeekDayLabelsUseCase: GetWeekDayLabelsUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -153,5 +155,12 @@ class CalendarViewModel @Inject constructor(
             }
         }
         return streaks
+    }
+
+    private val _weekdayLabels = mutableStateOf<List<String>>(emptyList())
+    val weekdayLabels: State<List<String>> = _weekdayLabels
+
+    fun loadWeekdayLabels(isMondayFirstDay: Boolean) {
+        _weekdayLabels.value = getWeekDayLabelsUseCase(isMondayFirstDay)
     }
 }

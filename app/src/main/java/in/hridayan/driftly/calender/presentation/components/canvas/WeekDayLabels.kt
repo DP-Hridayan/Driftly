@@ -6,18 +6,31 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-
-private val WEEKDAYS = listOf("S", "M", "T", "W", "T", "F", "S")
+import androidx.hilt.navigation.compose.hiltViewModel
+import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
+import `in`.hridayan.driftly.core.common.LocalSettings
 
 @Composable
-fun WeekDayLabels(modifier: Modifier = Modifier) {
+fun WeekDayLabels(
+    modifier: Modifier = Modifier,
+    calendarViewModel: CalendarViewModel = hiltViewModel()
+) {
+    val isMondayFirstDay = LocalSettings.current.startWeekOnMonday
+
+    LaunchedEffect(isMondayFirstDay) {
+        calendarViewModel.loadWeekdayLabels(isMondayFirstDay)
+    }
+
+    val labels = calendarViewModel.weekdayLabels.value
+
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        WEEKDAYS.forEach { day ->
+        labels.forEach { day ->
             Text(
                 text = day,
                 style = MaterialTheme.typography.titleMedium,

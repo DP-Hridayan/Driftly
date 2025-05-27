@@ -20,6 +20,7 @@ val LocalSettings = compositionLocalOf<SettingsState> {
         githubReleaseType = GithubReleaseType.STABLE,
         savedVersionCode = 0,
         showAttendanceStreaks = true,
-        rememberCalendarMonthYear = false
+        rememberCalendarMonthYear = false,
+        startWeekOnMonday = true
     )
 }
