@@ -16,8 +16,8 @@ import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
 import `in`.hridayan.driftly.settings.data.local.model.RadioButtonOptions
 
-fun category(titleResId: Int, vararg items: PreferenceItem): PreferenceGroup.Category {
-    return PreferenceGroup.Category(titleResId, items.toList())
+fun categorizedItems(categoryNameResId: Int, vararg items: PreferenceItem): PreferenceGroup.Category {
+    return PreferenceGroup.Category(categoryNameResId, items.toList())
 }
 
 fun uncategorizedItems(vararg items: PreferenceItem): PreferenceGroup.Items {

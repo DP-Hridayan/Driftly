@@ -114,7 +114,7 @@ fun AboutScreen(
                 when (group) {
                     is PreferenceGroup.Category -> {
                         Text(
-                            text = stringResource(group.titleResId),
+                            text = stringResource(group.categoryNameResId),
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)

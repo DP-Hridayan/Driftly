@@ -19,10 +19,10 @@ import androidx.compose.material.icons.rounded.Vibration
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.utils.MiUiCheck
-import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import `in`.hridayan.driftly.settings.domain.model.boolPreferenceItem
-import `in`.hridayan.driftly.settings.domain.model.category
+import `in`.hridayan.driftly.settings.domain.model.categorizedItems
 import `in`.hridayan.driftly.settings.domain.model.intPreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.nullPreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.uncategorizedItems
@@ -74,8 +74,8 @@ object SettingsProvider {
                 radioOptions = RadioGroupOptionsProvider.darkModeOptions
             )
         ),
-        category(
-            titleResId = R.string.additional_settings,
+        categorizedItems(
+            categoryNameResId = R.string.additional_settings,
             boolPreferenceItem(
                 key = SettingsKeys.HIGH_CONTRAST_DARK_MODE,
                 titleResId = R.string.high_contrast_dark_mode,
@@ -94,8 +94,8 @@ object SettingsProvider {
                 iconVector = Icons.Rounded.Colorize,
             )
         ),
-        category(
-            titleResId = R.string.additional_settings,
+        categorizedItems(
+            categoryNameResId = R.string.additional_settings,
             nullPreferenceItem(
                 key = SettingsKeys.DARK_THEME,
                 titleResId = R.string.dark_theme,
@@ -126,8 +126,8 @@ object SettingsProvider {
                 type = SettingsType.SwitchBanner
             )
         ),
-        category(
-            titleResId = R.string.update_channel,
+        categorizedItems(
+            categoryNameResId = R.string.update_channel,
             intPreferenceItem(
                 key = SettingsKeys.GITHUB_RELEASE_TYPE,
                 type = SettingsType.RadioGroup,
@@ -137,8 +137,8 @@ object SettingsProvider {
     )
 
     val aboutPageList: List<PreferenceGroup> = listOf(
-        category(
-            titleResId = R.string.app,
+        categorizedItems(
+            categoryNameResId = R.string.app,
             nullPreferenceItem(
                 key = SettingsKeys.VERSION,
                 titleResId = R.string.version,
@@ -179,8 +179,8 @@ object SettingsProvider {
     )
 
     val behaviorPageList: List<PreferenceGroup> = listOf(
-        category(
-            titleResId = R.string.calendar,
+        categorizedItems(
+            categoryNameResId = R.string.calendar,
             boolPreferenceItem(
                 key = SettingsKeys.STREAK_MODIFIER,
                 titleResId = R.string.show_attendance_steaks,
