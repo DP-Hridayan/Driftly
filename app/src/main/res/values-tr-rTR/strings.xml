@@ -89,8 +89,12 @@
     <string name="previous_month">Previous month</string>
     <string name="next_month">Next month</string>
     <string name="back_button">Back button</string>
+    <string name="calendar">Calendar</string>
+    <string name="start_week_on_monday">Start week on Monday</string>
+    <string name="des_start_week_on_monday">Prefer seeing your week begin with Monday instead of Sunday? Enable this to shift the calendar layout so Monday becomes the first day of the week.</string>
     <string name="pre_release_warning_description">These versions are still in testing and may contain unfinished features or unexpected bugs. If you choose to update to a pre-release, please be aware that things might break or behave strangely.\nIf you encounter any issues, crashes, or weird behavior, please report them so we can fix and improve Driftly before the stable release.\nThanks for helping us build better!</string>
     <string name="changelogs_v1_0_0">Initial release\nAdded calendar to mark attendance status\nAdded per subject progress display\nAdded ability to add, remove and edit subjects\nAdded settings for customising user experience</string>
     <string name="changelogs_v1_1_0">Fixed some color values in color palette selection\nFixed some UI margins\nAdded prerelease build update checker</string>
     <string name="changelogs_v1_2_0">Improved color scheme in high contrast dark theme\nAdded what\'s new bottomsheet to show changelogs after an update\nCode optimisations</string>
+    <string name="changelogs_v1_3_0" tools:ignore="MissingTranslation">Added behavior settings to modify certain app behavior\nAdded option to remember the last viewed month\nAdded option to turn off attendance streak visuals in calendar</string>
 </resources>
