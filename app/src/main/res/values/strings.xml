@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Driftly</string>
     <string name="field_blank_error">Field cannot be blank</string>
     <string name="subject_already_exists">Subject already exists</string>
@@ -91,6 +91,20 @@
     <string name="back_button">Back button</string>
     <string name="this_month_data">This month data</string>
     <string name="all_months_data">All months data</string>
+    <string-array name="month_names">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
     <string name="calendar">Calendar</string>
     <string name="start_week_on_monday">Start week on Monday</string>
     <string name="des_start_week_on_monday">Prefer seeing your week begin with Monday instead of Sunday? Enable this to shift the calendar layout so Monday becomes the first day of the week.</string>
@@ -98,5 +112,5 @@
     <string name="changelogs_v1_0_0">Initial release\nAdded calendar to mark attendance status\nAdded per subject progress display\nAdded ability to add, remove and edit subjects\nAdded settings for customising user experience</string>
     <string name="changelogs_v1_1_0">Fixed some color values in color palette selection\nFixed some UI margins\nAdded prerelease build update checker</string>
     <string name="changelogs_v1_2_0">Improved color scheme in high contrast dark theme\nAdded what\'s new bottomsheet to show changelogs after an update\nCode optimisations</string>
-    <string name="changelogs_v1_3_0" >Added behavior settings to modify certain app behavior\nAdded option to remember the last viewed month\nAdded option to turn off attendance streak visuals in calendar</string>
+    <string name="changelogs_v1_3_0">Added behavior settings to modify certain app behavior\nAdded option to remember the last viewed month\nAdded option to turn off attendance streak visuals in calendar</string>
 </resources>

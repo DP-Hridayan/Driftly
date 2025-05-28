@@ -85,6 +85,7 @@ fun AddSubjectDialog(
                     label = { Text(text = label) },
                 )
 
+                @Suppress("DEPRECATION")
                 ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
                         modifier = Modifier.weight(1f).animateWidth(interactionSources[0]),

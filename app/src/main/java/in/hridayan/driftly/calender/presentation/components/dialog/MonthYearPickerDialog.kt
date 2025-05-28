@@ -35,6 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -50,20 +51,10 @@ fun MonthYearPickerDialog(
     yearDisplayed: Int, monthDisplayed: Int, onDismiss: () -> Unit, onConfirm: (Int, Int) -> Unit
 ) {
     val weakHaptic = LocalWeakHaptic.current
-    val months = listOf(
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    )
+    val context = LocalContext.current
+
+    val months: List<String> = context.resources.getStringArray(R.array.month_names).toList()
+
     val currentYear = Calendar.getInstance().get(Calendar.YEAR)
     val years = (currentYear - 10..currentYear + 10).toList()
 
@@ -204,6 +195,7 @@ fun MonthYearPickerDialog(
                 }
             }
 
+            @Suppress("DEPRECATION")
             ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                 OutlinedButton(
                     onClick = {

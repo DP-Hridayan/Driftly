@@ -31,6 +31,7 @@ fun MonthNavigationButtons(
 
     val interactionSources = remember { List(3) { MutableInteractionSource() } }
 
+    @Suppress("DEPRECATION")
     ButtonGroup(modifier = modifier.wrapContentSize()) {
 
         FilledIconButton(

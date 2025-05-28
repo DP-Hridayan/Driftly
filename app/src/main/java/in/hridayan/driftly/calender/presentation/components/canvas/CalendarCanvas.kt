@@ -70,7 +70,7 @@ fun CalendarCanvas(
         if (isMondayFirstDay) yearMonth.atDay(1).dayOfWeek.value - 1 else yearMonth.atDay(1).dayOfWeek.value % 7
     val fullMonthName = yearMonth.month.name.lowercase().replaceFirstChar { it.uppercase() }
     val abbreviatedMonth = yearMonth.format(
-        DateTimeFormatter.ofPattern("MMM").withLocale(Locale.ENGLISH)
+        DateTimeFormatter.ofPattern("MMM").withLocale(Locale.getDefault())
     )
 
     var showMonthYearDialog by remember { mutableStateOf(false) }

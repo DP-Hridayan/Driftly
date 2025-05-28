@@ -92,6 +92,7 @@ fun EditSubjectDialog(
                     label = { Text(text = label) }
                 )
 
+                @Suppress("DEPRECATION")
                 ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
                         onClick = {
