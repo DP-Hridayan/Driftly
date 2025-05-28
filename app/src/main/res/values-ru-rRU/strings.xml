@@ -79,18 +79,22 @@
     <string name="visit_repo_to_download">Нажмите на кнопку загрузки, чтобы получить последнюю версию Driftly из репозитория github</string>
     <string name="pre_release">Предварительный</string>
     <string name="pre_release_warning">Предварительные сборки могут быть нестабильными</string>
-    <string name="behavior">Behavior</string>
-    <string name="remember_month_year">Remember calendar month and year</string>
-    <string name="des_remember_month_year">Turn on this option to remember the last viewed month for every subject</string>
-    <string name="show_attendance_steaks">Show attendance streaks</string>
-    <string name="des_show_attendance_streaks">If enabled, attendance streaks will be shown on the calendar</string>
-    <string name="des_behavior">Modify certain behavior of the app</string>
-    <string name="reset_to_current_month">Reset to current month</string>
-    <string name="previous_month">Previous month</string>
-    <string name="next_month">Next month</string>
-    <string name="back_button">Back button</string>
+    <string name="behavior">Поведение</string>
+    <string name="remember_month_year">Запоминать месяц и год в календаре</string>
+    <string name="des_remember_month_year">Включите этот параметр, чтобы отображать последний просмотренный месяц для каждого предмета</string>
+    <string name="show_attendance_steaks">Показывать серии посещений</string>
+    <string name="des_show_attendance_streaks">Если включено, серии посещений будут показываться в календаре</string>
+    <string name="des_behavior">Изменить определенное поведение приложения</string>
+    <string name="reset_to_current_month">Вернуться к текущему месяцу</string>
+    <string name="previous_month">Предыдущий месяц</string>
+    <string name="next_month">Следующий месяц</string>
+    <string name="back_button">Кнопка назад</string>
+    <string name="calendar">Calendar</string>
+    <string name="start_week_on_monday">Start week on Monday</string>
+    <string name="des_start_week_on_monday">Prefer seeing your week begin with Monday instead of Sunday? Enable this to shift the calendar layout so Monday becomes the first day of the week.</string>
     <string name="pre_release_warning_description">Эти версии находятся в стадии тестирования и могут содержать недоработанные функции или неожиданные ошибки. Если вы решили обновиться до предварительной версии, пожалуйста, имейте в виду, что что-то может сломаться или вести себя странно.\nЕсли вы столкнулись с какими-либо проблемами, сбоями или странным поведением, пожалуйста, сообщите о них, чтобы мы могли исправить и улучшить Driftly до стабильного релиза.\nСпасибо, что помогаете нам становиться лучше!</string>
     <string name="changelogs_v1_0_0">Первая версия\nДобавлен календарь для отметки статуса посещаемости\nДобавлено отображение прогресса по каждому занятию \nДобавлена возможность добавлять, удалять и редактировать занятия\nДобавлены настройки</string>
     <string name="changelogs_v1_1_0">Исправлены некоторые цвета в цветовой палитре\nИсправлены некоторые отступы интерфейса\nДобавлена проверка обновления предварительных сборок</string>
     <string name="changelogs_v1_2_0">Улучшена цветовая схема в высококонтрастной тёмной теме\nДобавлен раздел \"Что нового\" для отображения списка изменений после обновления\nОптимизация кода</string>
+    <string name="changelogs_v1_3_0" tools:ignore="MissingTranslation">Добавлены настройки поведения для изменения определенного поведения приложения\nДобавлена опция запоминания последнего просмотренного месяца\nДобавлена опция отключения визуального отображения серий посещаемости в календаре</string>
 </resources>
