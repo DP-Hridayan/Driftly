@@ -108,7 +108,7 @@ fun HomeScreen(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 onClick = {
-                    if(!showAddButton) return@FloatingActionButton
+                    if (!showAddButton) return@FloatingActionButton
                     isDialogOpen = true
                     weakHaptic()
                 },
@@ -223,19 +223,22 @@ fun HomeScreen(
                         Label(
                             text = "${stringResource(R.string.present)} : $totalPresent",
                             labelColor = MaterialTheme.colorScheme.primaryContainer,
-                            strokeColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            strokeColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.weight(1f).padding(horizontal = 5.dp)
                         )
 
                         Label(
                             text = "${stringResource(R.string.absent)} : $totalAbsent",
                             labelColor = MaterialTheme.colorScheme.errorContainer,
-                            strokeColor = MaterialTheme.colorScheme.onErrorContainer
+                            strokeColor = MaterialTheme.colorScheme.onErrorContainer,
+                            modifier = Modifier.weight(1f).padding(horizontal = 5.dp)
                         )
 
                         Label(
                             text = "${stringResource(R.string.total)} : $totalCount",
                             labelColor = MaterialTheme.colorScheme.tertiaryContainer,
-                            strokeColor = MaterialTheme.colorScheme.onTertiaryContainer
+                            strokeColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                            modifier = Modifier.weight(1f).padding(horizontal = 5.dp)
                         )
                     }
                 }

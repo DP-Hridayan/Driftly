@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
@@ -36,6 +37,7 @@ fun Label(
     val weakHaptic = LocalWeakHaptic.current
     val animatedScale = remember { Animatable(0f) }
     val randomDelay = remember { Random.nextInt(250, 750) }
+
     LaunchedEffect(text) {
         delay(randomDelay.toLong())
         animatedScale.animateTo(
@@ -46,6 +48,7 @@ fun Label(
             )
         )
     }
+
     Box(
         modifier = modifier
             .wrapContentSize()
@@ -64,7 +67,7 @@ fun Label(
             .padding(horizontal = 10.dp, vertical = 5.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(
+        AutoResizeableText(
             text = text,
             color = strokeColor,
             style = MaterialTheme.typography.labelMedium,

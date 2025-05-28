@@ -19,7 +19,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -44,13 +43,6 @@ import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
 import `in`.hridayan.driftly.home.presentation.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
-
-enum class AttendanceDataTabs(
-    val text: String
-) {
-    THIS_MONTH("This Month"),
-    ALL_MONTHS("All Months")
-}
 
 @Composable
 fun AllMonthsView(viewModel: HomeViewModel = hiltViewModel(), subjectId: Int) {
@@ -132,18 +124,27 @@ fun ProgressView(
             Label(
                 text = "${stringResource(R.string.present)}: ${counts.presentCount}",
                 labelColor = MaterialTheme.colorScheme.primaryContainer,
-                strokeColor = MaterialTheme.colorScheme.onPrimaryContainer
+                strokeColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 5.dp)
             )
             Label(
                 text = "${stringResource(R.string.absent)}: ${counts.absentCount}",
                 labelColor = MaterialTheme.colorScheme.errorContainer,
-                strokeColor = MaterialTheme.colorScheme.onErrorContainer
+                strokeColor = MaterialTheme.colorScheme.onErrorContainer,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 5.dp)
             )
 
             Label(
                 text = "${stringResource(R.string.total)}: ${counts.totalCount}",
                 labelColor = MaterialTheme.colorScheme.tertiaryContainer,
-                strokeColor = MaterialTheme.colorScheme.onTertiaryContainer
+                strokeColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 5.dp)
             )
         }
 
@@ -152,7 +153,13 @@ fun ProgressView(
 
 @Composable
 fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
-    val pagerState = rememberPagerState(pageCount = { AttendanceDataTabs.entries.size })
+    val attendanceDataTabs =
+        listOf<String>(
+            stringResource(R.string.this_month_data),
+            stringResource(R.string.all_months_data)
+        )
+
+    val pagerState = rememberPagerState(pageCount = { attendanceDataTabs.size })
     val coroutineScope = rememberCoroutineScope()
     val selectedTabIndex = remember { derivedStateOf { pagerState.currentPage } }
     val weakHaptic = LocalWeakHaptic.current
@@ -172,26 +179,26 @@ fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
         )
     ) {
         Column {
-            PrimaryTabRow (
+            PrimaryTabRow(
                 selectedTabIndex = selectedTabIndex.value,
                 containerColor = MaterialTheme.colorScheme.surfaceVariant,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                AttendanceDataTabs.entries.forEachIndexed { index, currentTab ->
+                attendanceDataTabs.forEachIndexed { index, currentTab ->
                     Tab(
                         selected = index == selectedTabIndex.value,
                         selectedContentColor = MaterialTheme.colorScheme.primaryContainer,
                         unselectedContentColor = MaterialTheme.colorScheme.outline,
                         onClick = {
                             coroutineScope.launch {
-                                pagerState.animateScrollToPage(currentTab.ordinal)
+                                pagerState.animateScrollToPage(attendanceDataTabs.indexOf(currentTab))
                                 weakHaptic()
                             }
                         },
                         text = {
                             Text(
-                                text = currentTab.text,
+                                text = currentTab,
                                 color = if (index == selectedTabIndex.value) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
                             )
                         }

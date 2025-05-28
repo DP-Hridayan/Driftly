@@ -44,12 +44,12 @@ import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
 import `in`.hridayan.driftly.core.presentation.components.bottomsheet.UpdateBottomSheet
 import `in`.hridayan.driftly.core.presentation.components.progress.LoadingSpinner
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
+import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.viewmodel.AutoUpdateViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
-import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 
 @Composable
 fun AutoUpdateScreen(
@@ -135,7 +135,7 @@ fun AutoUpdateScreen(
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Button(
                         modifier = Modifier
-                            .padding(end = 25.dp, bottom = 25.dp)
+                            .padding(end = 25.dp, bottom = 25.dp, top = 15.dp)
                             .align(Alignment.CenterEnd),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer,
