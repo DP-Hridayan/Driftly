@@ -2,12 +2,12 @@
 
 package `in`.hridayan.driftly.core.presentation.components.bottomsheet
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonGroup
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
@@ -16,6 +16,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -35,6 +36,8 @@ fun UpdateBottomSheet(
     val weakHaptic = LocalWeakHaptic.current
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val context = LocalContext.current
+
+    val interactionSources = remember { List(2) { MutableInteractionSource() } }
 
     ModalBottomSheet(
         modifier = modifier,
@@ -68,10 +71,11 @@ fun UpdateBottomSheet(
             style = MaterialTheme.typography.bodySmall,
         )
 
-        Row(
+        @Suppress("DEPRECATION")
+        ButtonGroup(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp, bottom = 25.dp)
+                .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
         ) {
             OutlinedButton(
                 onClick = {
@@ -79,24 +83,29 @@ fun UpdateBottomSheet(
                     weakHaptic()
                 },
                 shapes = ButtonDefaults.shapes(),
-                modifier = Modifier.weight(4f)
+                modifier = Modifier
+                    .weight(1f)
+                    .animateWidth(interactionSources[0]),
+                interactionSource = interactionSources[0],
             ) {
                 Text(text = stringResource(R.string.cancel))
             }
 
-            Spacer(modifier.weight(1f))
-
             Button(
                 onClick = {
-                onDismiss()
-                openUrl(
-                    "https://github.com/DP-Hridayan/Driftly/releases/tag/$latestVersion",
-                    context
-                )
-                weakHaptic()
-            },
+                    onDismiss()
+                    openUrl(
+                        "https://github.com/DP-Hridayan/Driftly/releases/tag/$latestVersion",
+                        context
+                    )
+                    weakHaptic()
+                },
                 shapes = ButtonDefaults.shapes(),
-                modifier = Modifier.weight(4f)) {
+                modifier = Modifier
+                    .weight(1f)
+                    .animateWidth(interactionSources[1]),
+                interactionSource = interactionSources[1],
+            ) {
                 Text(text = stringResource(R.string.download))
             }
         }
