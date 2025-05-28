@@ -12,12 +12,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 
 @Composable
 fun MonthYearPicker(
@@ -34,7 +34,7 @@ fun MonthYearPicker(
             indication = null,
         ), verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
+        AutoResizeableText(
             text = "$fullMonthName $year", style = MaterialTheme.typography.titleSmall
         )
 

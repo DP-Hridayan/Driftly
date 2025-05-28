@@ -3,14 +3,15 @@
 package `in`.hridayan.driftly.home.presentation.components.dialog
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonGroup
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -19,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,6 +44,8 @@ fun AddSubjectDialog(
     val subject by viewModel.subject.collectAsState()
     val subjectError by viewModel.subjectError.collectAsState()
     val weakHaptic = LocalWeakHaptic.current
+
+    val interactionSources = remember { List(2) { MutableInteractionSource() } }
 
     Dialog(
         onDismissRequest = {
@@ -82,10 +86,11 @@ fun AddSubjectDialog(
                     label = { Text(text = label) },
                 )
 
-                Row {
+                ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
-                        modifier = Modifier.weight(0.4f),
+                        modifier = Modifier.weight(1f).animateWidth(interactionSources[0]),
                         shapes = ButtonDefaults.shapes(),
+                        interactionSource = interactionSources[0],
                         onClick = {
                             weakHaptic()
                             viewModel.resetInputFields()
@@ -94,11 +99,10 @@ fun AddSubjectDialog(
                         content = { AutoResizeableText(text = stringResource(R.string.cancel)) }
                     )
 
-                    Spacer(modifier = Modifier.weight(0.1f))
-
                     Button(
-                        modifier = Modifier.weight(0.4f),
+                        modifier = Modifier.weight(1f).animateWidth(interactionSources[1]),
                         shapes = ButtonDefaults.shapes(),
+                        interactionSource = interactionSources[1],
                         onClick = {
                             weakHaptic()
                             viewModel.addSubject(

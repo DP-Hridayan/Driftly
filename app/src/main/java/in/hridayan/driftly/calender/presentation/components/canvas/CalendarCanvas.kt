@@ -102,10 +102,13 @@ fun CalendarCanvas(
         )
 
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             MonthYearPicker(
-                modifier = Modifier.padding(horizontal = 20.dp),
+                modifier = Modifier
+                    .padding(start = 15.dp),
                 fullMonthName = fullMonthName,
                 year = year,
                 onClick = {
@@ -113,9 +116,12 @@ fun CalendarCanvas(
                     weakHaptic()
                 })
 
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth())
 
             MonthNavigationButtons(
+                modifier = Modifier.padding(end = 20.dp),
                 onNavigatePrev = {
                     val prev = yearMonth.minusMonths(1)
                     onNavigate(prev.year, prev.monthValue)
