@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Driftly</string>
     <string name="field_blank_error">Le champ ne peut pas être vide</string>
     <string name="subject_already_exists">La matière existe déjà</string>
@@ -89,6 +89,22 @@
     <string name="previous_month">Mois précédent</string>
     <string name="next_month">Mois suivant</string>
     <string name="back_button">Bouton retour</string>
+    <string name="this_month_data">This month data</string>
+    <string name="all_months_data">All months data</string>
+    <string-array name="month_names">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
     <string name="calendar">Calendar</string>
     <string name="start_week_on_monday">Start week on Monday</string>
     <string name="des_start_week_on_monday">Prefer seeing your week begin with Monday instead of Sunday? Enable this to shift the calendar layout so Monday becomes the first day of the week.</string>
@@ -96,5 +112,5 @@
     <string name="changelogs_v1_0_0">Version initiale\nCalendrier ajouté pour marquer le statut de présence\nAjouté par sujet affichage de la progression\nAjout de la possibilité d\'ajouter, supprimer et modifier les sujets\nParamètres ajoutés pour personnaliser l\'expérience utilisateur</string>
     <string name="changelogs_v1_1_0">Correction de certaines valeurs de couleur dans la sélection de la palette de couleurs\nCorrection de certaines marges de l\'interface utilisateur\nAjout du vérificateur de mise à jour de la version de pré-version</string>
     <string name="changelogs_v1_2_0">Schéma de couleurs amélioré dans le thème sombre à fort contraste\nAjout de la nouvelle page pour afficher les changelogs après une mise à jour\nOptimisation du code</string>
-    <string name="changelogs_v1_3_0" tools:ignore="MissingTranslation">Ajout de paramètres de comportement pour modifier le comportement de certaines applications\nAjout d\'une option pour se souvenir du dernier mois\nAjout d\'une option pour désactiver la série de présence dans le calendrier</string>
+    <string name="changelogs_v1_3_0">Ajout de paramètres de comportement pour modifier le comportement de certaines applications\nAjout d\'une option pour se souvenir du dernier mois\nAjout d\'une option pour désactiver la série de présence dans le calendrier</string>
 </resources>
