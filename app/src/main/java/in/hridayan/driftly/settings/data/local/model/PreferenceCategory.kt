@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settingsv2
+package `in`.hridayan.driftly.settings.data.local.model
 
 data class PreferenceCategory(
     val titleResId: Int,

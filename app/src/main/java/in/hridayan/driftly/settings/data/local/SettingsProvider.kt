@@ -1,5 +1,6 @@
 package `in`.hridayan.driftly.settings.data.local
 
+import android.os.Build
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.Palette
@@ -17,14 +18,17 @@ import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material.icons.rounded.Vibration
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.settings.data.local.model.SettingsItem
+import `in`.hridayan.driftly.core.utils.MiUiCheck
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
-import `in`.hridayan.driftly.settingsv2.PreferenceGroup
-import `in`.hridayan.driftly.settingsv2.PreferenceItem
-import `in`.hridayan.driftly.settingsv2.boolPreferenceItem
-import `in`.hridayan.driftly.settingsv2.category
-import `in`.hridayan.driftly.settingsv2.nullPreferenceItem
-import `in`.hridayan.driftly.settingsv2.uncategorizedItems
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.domain.model.boolPreferenceItem
+import `in`.hridayan.driftly.settings.domain.model.category
+import `in`.hridayan.driftly.settings.domain.model.intPreferenceItem
+import `in`.hridayan.driftly.settings.domain.model.nullPreferenceItem
+import `in`.hridayan.driftly.settings.domain.model.uncategorizedItems
+
+val isMiUi = MiUiCheck.isMiui
+val isSdkLowerThan13 = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
 
 object SettingsProvider {
     val settingsPageList: List<PreferenceGroup> = listOf(
@@ -62,88 +66,115 @@ object SettingsProvider {
         )
     )
 
-    val dynamicColorSetting = SettingsItem(
-        key = SettingsKeys.DYNAMIC_COLORS,
-        titleResId = R.string.dynamic_colors,
-        descriptionResId = R.string.des_dynamic_colors,
-        iconVector = Icons.Rounded.Colorize,
-        type = SettingsType.Switch
+    val darkThemePageList: List<PreferenceGroup> = listOf(
+        uncategorizedItems(
+            intPreferenceItem(
+                key = SettingsKeys.THEME_MODE,
+                type = SettingsType.RadioGroup,
+                radioOptions = RadioGroupOptionsProvider.darkModeOptions
+            )
+        ),
+        category(
+            titleResId = R.string.additional_settings,
+            boolPreferenceItem(
+                key = SettingsKeys.HIGH_CONTRAST_DARK_MODE,
+                titleResId = R.string.high_contrast_dark_mode,
+                descriptionResId = R.string.des_high_contrast_dark_mode,
+                iconVector = Icons.Rounded.Contrast,
+            )
+        )
     )
 
-    val highContrastDarkThemeSetting = SettingsItem(
-        key = SettingsKeys.HIGH_CONTRAST_DARK_MODE,
-        titleResId = R.string.high_contrast_dark_mode,
-        descriptionResId = R.string.des_high_contrast_dark_mode,
-        iconVector = Icons.Rounded.Contrast,
-        type = SettingsType.Switch
+    val lookAndFeelPageList: List<PreferenceGroup> = listOf(
+        uncategorizedItems(
+            boolPreferenceItem(
+                key = SettingsKeys.DYNAMIC_COLORS,
+                titleResId = R.string.dynamic_colors,
+                descriptionResId = R.string.des_dynamic_colors,
+                iconVector = Icons.Rounded.Colorize,
+            )
+        ),
+        category(
+            titleResId = R.string.additional_settings,
+            nullPreferenceItem(
+                key = SettingsKeys.DARK_THEME,
+                titleResId = R.string.dark_theme,
+                descriptionResId = R.string.system,
+                iconVector = Icons.Outlined.DarkMode,
+            ),
+            boolPreferenceItem(
+                key = SettingsKeys.HAPTICS_AND_VIBRATION,
+                titleResId = R.string.haptics_and_vibration,
+                descriptionResId = R.string.des_haptics_and_vibration,
+                iconVector = Icons.Rounded.Vibration,
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.LANGUAGE,
+                isLayoutVisible = !isMiUi && !isSdkLowerThan13,
+                titleResId = R.string.default_language,
+                descriptionResId = R.string.des_default_language,
+                iconVector = Icons.Rounded.Language,
+            )
+        )
     )
 
-    val lookAndFeelPageList = listOf<SettingsItem>(
-        SettingsItem(
-            key = SettingsKeys.DARK_THEME,
-            titleResId = R.string.dark_theme,
-            descriptionResId = R.string.system,
-            iconVector = Icons.Outlined.DarkMode,
-            type = SettingsType.NoSwitch
+    val autoUpdatePageList: List<PreferenceGroup> = listOf(
+        uncategorizedItems(
+            boolPreferenceItem(
+                key = SettingsKeys.AUTO_UPDATE,
+                titleResId = R.string.enable_auto_update,
+                type = SettingsType.SwitchBanner
+            )
         ),
-        SettingsItem(
-            key = SettingsKeys.HAPTICS_AND_VIBRATION,
-            titleResId = R.string.haptics_and_vibration,
-            descriptionResId = R.string.des_haptics_and_vibration,
-            iconVector = Icons.Rounded.Vibration,
-            type = SettingsType.Switch
-        ),
-        SettingsItem(
-            key = SettingsKeys.LANGUAGE,
-            titleResId = R.string.default_language,
-            descriptionResId = R.string.des_default_language,
-            iconVector = Icons.Rounded.Language,
-            type = SettingsType.NoSwitch
-        ),
+        category(
+            titleResId = R.string.update_channel,
+            intPreferenceItem(
+                key = SettingsKeys.GITHUB_RELEASE_TYPE,
+                type = SettingsType.RadioGroup,
+                radioOptions = RadioGroupOptionsProvider.updateChannelOptions
+            )
+        )
     )
 
-    val aboutPageList = listOf<SettingsItem>(
-        SettingsItem(
-            key = SettingsKeys.VERSION,
-            titleResId = R.string.version,
-            descriptionString = BuildConfig.VERSION_NAME,
-            iconResId = R.drawable.ic_version,
-            type = SettingsType.NoSwitch
-        ),
-        SettingsItem(
-            key = SettingsKeys.CHANGELOGS,
-            titleResId = R.string.changelogs,
-            descriptionResId = R.string.des_changelogs,
-            iconVector = Icons.Rounded.ChangeHistory,
-            type = SettingsType.NoSwitch
-        ),
-        SettingsItem(
-            key = SettingsKeys.REPORT,
-            titleResId = R.string.report_issue,
-            descriptionResId = R.string.des_report_issue,
-            iconResId = R.drawable.ic_report,
-            type = SettingsType.NoSwitch
-        ),
-        SettingsItem(
-            key = SettingsKeys.FEATURE_REQUEST,
-            titleResId = R.string.feature_request,
-            descriptionResId = R.string.des_feature_request,
-            iconVector = Icons.Rounded.AddComment,
-            type = SettingsType.NoSwitch
-        ),
-        SettingsItem(
-            key = SettingsKeys.GITHUB,
-            titleResId = R.string.github,
-            descriptionResId = R.string.des_github,
-            iconResId = R.drawable.ic_github,
-            type = SettingsType.NoSwitch
-        ),
-        SettingsItem(
-            key = SettingsKeys.LICENSE,
-            titleResId = R.string.license,
-            descriptionResId = R.string.des_license,
-            iconResId = R.drawable.ic_license,
-            type = SettingsType.NoSwitch
+    val aboutPageList: List<PreferenceGroup> = listOf(
+        category(
+            titleResId = R.string.app,
+            nullPreferenceItem(
+                key = SettingsKeys.VERSION,
+                titleResId = R.string.version,
+                descriptionString = BuildConfig.VERSION_NAME,
+                iconResId = R.drawable.ic_version,
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.CHANGELOGS,
+                titleResId = R.string.changelogs,
+                descriptionResId = R.string.des_changelogs,
+                iconVector = Icons.Rounded.ChangeHistory,
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.REPORT,
+                titleResId = R.string.report_issue,
+                descriptionResId = R.string.des_report_issue,
+                iconResId = R.drawable.ic_report
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.FEATURE_REQUEST,
+                titleResId = R.string.feature_request,
+                descriptionResId = R.string.des_feature_request,
+                iconVector = Icons.Rounded.AddComment,
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.GITHUB,
+                titleResId = R.string.github,
+                descriptionResId = R.string.des_github,
+                iconResId = R.drawable.ic_github,
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.LICENSE,
+                titleResId = R.string.license,
+                descriptionResId = R.string.des_license,
+                iconResId = R.drawable.ic_license,
+            )
         )
     )
 
@@ -169,7 +200,5 @@ object SettingsProvider {
                 iconVector = Icons.Rounded.CalendarViewWeek
             )
         )
-
     )
-
 }

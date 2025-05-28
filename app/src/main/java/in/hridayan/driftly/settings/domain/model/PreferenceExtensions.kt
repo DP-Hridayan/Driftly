@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settingsv2
+package `in`.hridayan.driftly.settings.domain.model
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.material.icons.Icons
@@ -12,7 +12,9 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.domain.model.SettingsType
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
+import `in`.hridayan.driftly.settings.data.local.model.RadioButtonOptions
 
 fun category(titleResId: Int, vararg items: PreferenceItem): PreferenceGroup.Category {
     return PreferenceGroup.Category(titleResId, items.toList())
@@ -22,22 +24,21 @@ fun uncategorizedItems(vararg items: PreferenceItem): PreferenceGroup.Items {
     return PreferenceGroup.Items(items.toList())
 }
 
-
 fun intPreferenceItem(
     key: SettingsKeys,
-    options: List<Int>,
-    default: Int,
+    radioOptions: List<RadioButtonOptions> = emptyList(),
+    isLayoutVisible: Boolean = true,
     titleString: String = "",
     titleResId: Int = 0,
     descriptionString: String = "",
     descriptionResId: Int = 0,
     iconResId: Int = 0,
     iconVector: ImageVector? = null,
-    type: SettingsType = SettingsType.NoSwitch
+    type: SettingsType = SettingsType.None
 ) = PreferenceItem.IntPreferenceItem(
     key = key,
-    options = options,
-    default = default,
+    isLayoutVisible = isLayoutVisible,
+    radioOptions = radioOptions,
     titleString = titleString,
     titleResId = titleResId,
     descriptionString = descriptionString,
@@ -49,6 +50,7 @@ fun intPreferenceItem(
 
 fun boolPreferenceItem(
     key: SettingsKeys,
+    isLayoutVisible: Boolean = true,
     titleString: String = "",
     titleResId: Int = 0,
     descriptionString: String = "",
@@ -58,6 +60,7 @@ fun boolPreferenceItem(
     type: SettingsType = SettingsType.Switch
 ) = PreferenceItem.BoolPreferenceItem(
     key = key,
+    isLayoutVisible = isLayoutVisible,
     titleString = titleString,
     titleResId = titleResId,
     descriptionString = descriptionString,
@@ -69,17 +72,17 @@ fun boolPreferenceItem(
 
 fun stringPreferenceItem(
     key: SettingsKeys,
-    default: String,
+    isLayoutVisible: Boolean = true,
     titleString: String = "",
     titleResId: Int = 0,
     descriptionString: String = "",
     descriptionResId: Int = 0,
     iconResId: Int = 0,
     iconVector: ImageVector? = null,
-    type: SettingsType = SettingsType.NoSwitch
+    type: SettingsType = SettingsType.None
 ) = PreferenceItem.StringPreferenceItem(
     key = key,
-    default = default,
+    isLayoutVisible = isLayoutVisible,
     titleString = titleString,
     titleResId = titleResId,
     descriptionString = descriptionString,
@@ -91,17 +94,17 @@ fun stringPreferenceItem(
 
 fun floatPreferenceItem(
     key: SettingsKeys,
-    default: Float,
+    isLayoutVisible: Boolean = true,
     titleString: String = "",
     titleResId: Int = 0,
     descriptionString: String = "",
     descriptionResId: Int = 0,
     iconResId: Int = 0,
     iconVector: ImageVector? = null,
-    type: SettingsType = SettingsType.NoSwitch
+    type: SettingsType = SettingsType.None
 ) = PreferenceItem.FloatPreferenceItem(
     key = key,
-    default = default,
+    isLayoutVisible = isLayoutVisible,
     titleString = titleString,
     titleResId = titleResId,
     descriptionString = descriptionString,
@@ -113,15 +116,17 @@ fun floatPreferenceItem(
 
 fun nullPreferenceItem(
     key: SettingsKeys,
+    isLayoutVisible: Boolean = true,
     titleString: String = "",
     titleResId: Int = 0,
     descriptionString: String = "",
     descriptionResId: Int = 0,
     iconResId: Int = 0,
     iconVector: ImageVector? = null,
-    type: SettingsType = SettingsType.NoSwitch
+    type: SettingsType = SettingsType.None
 ) = PreferenceItem.NullPreferenceItem(
     key = key,
+    isLayoutVisible = isLayoutVisible,
     titleString = titleString,
     titleResId = titleResId,
     descriptionString = descriptionString,

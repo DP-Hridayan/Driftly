@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settingsv2
+package `in`.hridayan.driftly.settings.presentation.components.item
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +17,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
+import `in`.hridayan.driftly.settings.domain.model.getResolvedDescription
+import `in`.hridayan.driftly.settings.domain.model.getResolvedIcon
+import `in`.hridayan.driftly.settings.domain.model.getResolvedTitle
 
 @Composable
 fun NullPreferenceItemView(
@@ -26,7 +30,7 @@ fun NullPreferenceItemView(
     contentDescription: String = "",
     settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
-    //  if (!isLayoutVisible) return
+    if (!item.isLayoutVisible) return
 
     val weakHaptic = LocalWeakHaptic.current
 

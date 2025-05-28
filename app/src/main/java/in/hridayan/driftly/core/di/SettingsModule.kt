@@ -10,9 +10,9 @@ import `in`.hridayan.driftly.settings.data.local.datastore.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.local.repository.SettingsRepositoryImpl
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetAutoUpdatePageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetBehaviorPageListUseCase
-import `in`.hridayan.driftly.settings.domain.usecase.GetDynamicColorSettingUseCase
-import `in`.hridayan.driftly.settings.domain.usecase.GetHighContrastDarkThemeSettingUseCase
+import `in`.hridayan.driftly.settings.domain.usecase.GetDarkThemePageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
@@ -38,20 +38,20 @@ object SettingsModule {
         GetLookAndFeelPageListUseCase(repo)
 
     @Provides
+    fun provideGetDarkThemePageListUseCase(repo: SettingsRepository): GetDarkThemePageListUseCase =
+        GetDarkThemePageListUseCase(repo)
+
+    @Provides
     fun provideGetAboutPageListUseCase(repo: SettingsRepository): GetAboutPageListUseCase =
         GetAboutPageListUseCase(repo)
 
     @Provides
+    fun provideGetAutoUpdatePageListUseCase(repo: SettingsRepository): GetAutoUpdatePageListUseCase =
+        GetAutoUpdatePageListUseCase(repo)
+
+    @Provides
     fun provideGetBehaviorPageListUseCase(repo: SettingsRepository): GetBehaviorPageListUseCase =
         GetBehaviorPageListUseCase(repo)
-
-    @Provides
-    fun provideGetDynamicColorSettingUseCase(repo: SettingsRepository): GetDynamicColorSettingUseCase =
-        GetDynamicColorSettingUseCase(repo)
-
-    @Provides
-    fun provideGetHighContrastDarkThemeSettingUseCase(repo: SettingsRepository): GetHighContrastDarkThemeSettingUseCase =
-        GetHighContrastDarkThemeSettingUseCase(repo)
 
     @Provides
     fun provideGetSettingsPageListUseCase(repo: SettingsRepository): GetSettingsPageListUseCase =

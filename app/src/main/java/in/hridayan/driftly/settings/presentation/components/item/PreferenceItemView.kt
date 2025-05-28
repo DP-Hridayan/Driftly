@@ -1,7 +1,8 @@
-package `in`.hridayan.driftly.settingsv2
+package `in`.hridayan.driftly.settings.presentation.components.item
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
 
 @Composable
 fun PreferenceItemView(item: PreferenceItem, modifier: Modifier = Modifier) {
@@ -10,9 +11,15 @@ fun PreferenceItemView(item: PreferenceItem, modifier: Modifier = Modifier) {
             item = item,
             modifier = modifier
         )
-        //  is PreferenceItem.IntPreferenceItem -> IntPreferenceItemView(item)
+
+        is PreferenceItem.IntPreferenceItem -> IntPreferenceItemView(
+            item = item,
+            modifier = modifier
+        )
+
         //    is PreferenceItem.StringPreferenceItem -> StringPreferenceItemView(item)
         //   is PreferenceItem.FloatPreferenceItem -> FloatPreferenceItemView(item)
+
         is PreferenceItem.NullPreferenceItem -> NullPreferenceItemView(
             item = item,
             modifier = modifier

@@ -31,24 +31,23 @@ import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.presentation.components.card.SupportMeCard
 import `in`.hridayan.driftly.settings.presentation.components.image.ProfilePicCircular
-import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
-import `in`.hridayan.driftly.settings.presentation.page.about.viewmodel.AboutViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 
 @Composable
 fun AboutScreen(
     modifier: Modifier = Modifier,
-    settingsViewModel: SettingsViewModel = hiltViewModel(),
-    aboutViewModel: AboutViewModel = hiltViewModel()
+    settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
     val navController = LocalNavController.current
     val context = LocalContext.current
-    val settings = aboutViewModel.aboutPageList
+    val settings = settingsViewModel.aboutPageList
 
     LaunchedEffect(Unit) {
-        aboutViewModel.uiEvent.collect { event ->
+        settingsViewModel.uiEvent.collect { event ->
             when (event) {
                 is SettingsUiEvent.Navigate -> {
                     navController.navigate(event.route)
@@ -111,25 +110,26 @@ fun AboutScreen(
                 }
             }
 
-            item {
-                Text(
-                    text = stringResource(R.string.app),
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(start = 20.dp, top = 45.dp, bottom = 25.dp)
-                )
-            }
+            itemsIndexed(settings) { index, group ->
+                when (group) {
+                    is PreferenceGroup.Category -> {
+                        Text(
+                            text = stringResource(group.titleResId),
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
+                        )
+                        group.items.forEach { item ->
+                            PreferenceItemView(item)
+                        }
+                    }
 
-            itemsIndexed(
-                items = settings
-            ) { _, pair ->
-                val (item, isEnabled) = pair
-                SettingsItemLayout(
-                    item = item,
-                    isEnabled = isEnabled,
-                    onToggle = { settingsViewModel.onToggle(item.key) },
-                    onClick = { clickedItem -> aboutViewModel.onItemClicked(clickedItem) },
-                )
+                    is PreferenceGroup.Items -> {
+                        group.items.forEach { item ->
+                            PreferenceItemView(item)
+                        }
+                    }
+                }
             }
 
             item {

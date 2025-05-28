@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settingsv2
+package `in`.hridayan.driftly.settings.data.local.model
 
 sealed class PreferenceGroup {
     data class Category(val titleResId: Int, val items: List<PreferenceItem>) : PreferenceGroup()

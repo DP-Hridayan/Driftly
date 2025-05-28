@@ -19,8 +19,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
-import `in`.hridayan.driftly.settingsv2.PreferenceGroup
-import `in`.hridayan.driftly.settingsv2.PreferenceItemView
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 
 @Composable
 fun BehaviorScreen(

@@ -2,7 +2,6 @@
 
 package `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens
 
-import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -25,31 +24,25 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
-import `in`.hridayan.driftly.core.utils.MiUiCheck
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.presentation.components.item.SettingsItemLayout
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.components.tab.ColorTabs
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
-import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.LookAndFeelViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 
 @Composable
 fun LookAndFeelScreen(
     modifier: Modifier = Modifier,
     settingsViewModel: SettingsViewModel = hiltViewModel(),
-    lookAndFeelViewModel: LookAndFeelViewModel = hiltViewModel()
 ) {
     val navController = LocalNavController.current
     val settings = settingsViewModel.lookAndFeelPageList
-    val dynamicColorSetting = settingsViewModel.dynamicColorSetting
     val context = LocalContext.current
-    val isMiUi = MiUiCheck.isMiui
-    val isSdkLowerThan13 = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
 
     LaunchedEffect(Unit) {
-        lookAndFeelViewModel.uiEvent.collect { event ->
+        settingsViewModel.uiEvent.collect { event ->
             when (event) {
                 is SettingsUiEvent.LaunchIntent -> {
                     context.startActivity(event.intent)
@@ -92,38 +85,26 @@ fun LookAndFeelScreen(
                 ColorTabs(modifier = Modifier.padding(20.dp))
             }
 
-            item {
-                dynamicColorSetting?.let { (item, isEnabled) ->
-                    SettingsItemLayout(
-                        item = item,
-                        isEnabled = isEnabled,
-                        onToggle = { settingsViewModel.onToggle(item.key) },
-                        onClick = { clickedItem -> lookAndFeelViewModel.onItemClicked(clickedItem) },
-                    )
+            itemsIndexed(settings) { index, group ->
+                when (group) {
+                    is PreferenceGroup.Category -> {
+                        Text(
+                            text = stringResource(group.titleResId),
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
+                        )
+                        group.items.forEach { item ->
+                            PreferenceItemView(item)
+                        }
+                    }
+
+                    is PreferenceGroup.Items -> {
+                        group.items.forEach { item ->
+                            PreferenceItemView(item)
+                        }
+                    }
                 }
-            }
-
-
-            item {
-                Text(
-                    text = stringResource(R.string.additional_settings),
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
-                )
-            }
-
-            itemsIndexed(
-                items = settings
-            ) { _, pair ->
-                val (item, isEnabled) = pair
-                SettingsItemLayout(
-                    item = item,
-                    isEnabled = isEnabled,
-                    isLayoutVisible = !(item.key == SettingsKeys.LANGUAGE && (isSdkLowerThan13 || isMiUi)),
-                    onToggle = { settingsViewModel.onToggle(item.key) },
-                    onClick = { clickedItem -> lookAndFeelViewModel.onItemClicked(clickedItem) },
-                )
             }
 
             item {
