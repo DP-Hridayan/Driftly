@@ -2,9 +2,8 @@
 
 package `in`.hridayan.driftly.core.presentation.components.dialog
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,12 +11,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonGroup
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,8 @@ fun ConfirmDeleteDialog(
     onConfirm: () -> Unit
 ) {
     val weakHaptic = LocalWeakHaptic.current
+
+    val interactionSources = remember { List(2) { MutableInteractionSource() } }
 
     Dialog(
         onDismissRequest = { onDismiss() },
@@ -65,25 +68,23 @@ fun ConfirmDeleteDialog(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
+                ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
                         onClick = {
                             onDismiss()
                             weakHaptic()
                         },
                         shapes = ButtonDefaults.shapes(),
-                        modifier = Modifier.weight(4f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .animateWidth(interactionSources[0]),
+                        interactionSource = interactionSources[0],
                     ) {
                         AutoResizeableText(
                             text = stringResource(R.string.cancel),
                             style = MaterialTheme.typography.labelLarge
                         )
                     }
-
-                    Spacer(modifier = Modifier.weight(1f))
 
                     Button(
                         onClick = {
@@ -94,7 +95,10 @@ fun ConfirmDeleteDialog(
                             containerColor = MaterialTheme.colorScheme.errorContainer,
                             contentColor = MaterialTheme.colorScheme.onErrorContainer
                         ),
-                        modifier = Modifier.weight(4f),
+                        modifier = Modifier
+                            .weight(1f)
+                            .animateWidth(interactionSources[1]),
+                        interactionSource = interactionSources[1],
                         shapes = ButtonDefaults.shapes(),
                     ) {
                         AutoResizeableText(

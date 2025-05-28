@@ -3,10 +3,9 @@
 package `in`.hridayan.driftly.calender.presentation.components.dialog
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -15,6 +14,7 @@ import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonGroup
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -72,6 +72,8 @@ fun MonthYearPickerDialog(
 
     var selectedMonth by remember { mutableIntStateOf(monthDisplayed - 1) }
     var selectedYear by remember { mutableIntStateOf(yearDisplayed) }
+
+    val interactionSources = remember { List(2) { MutableInteractionSource() } }
 
     Dialog(onDismissRequest = onDismiss) {
         Column(
@@ -202,21 +204,20 @@ fun MonthYearPickerDialog(
                 }
             }
 
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
-            ) {
+            ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                 OutlinedButton(
                     onClick = {
                         weakHaptic()
                         onDismiss()
                     },
                     shapes = ButtonDefaults.shapes(),
-                    modifier = Modifier.weight(4f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .animateWidth(interactionSources[0]),
+                    interactionSource = interactionSources[0],
                 ) {
                     AutoResizeableText(text = stringResource(R.string.cancel))
                 }
-
-                Spacer(modifier = Modifier.weight(1f))
 
                 Button(
                     onClick = {
@@ -225,7 +226,10 @@ fun MonthYearPickerDialog(
                         onDismiss()
                     },
                     shapes = ButtonDefaults.shapes(),
-                    modifier = Modifier.weight(4f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .animateWidth(interactionSources[1]),
+                    interactionSource = interactionSources[1],
                 ) {
                     AutoResizeableText(text = stringResource(R.string.select))
                 }
