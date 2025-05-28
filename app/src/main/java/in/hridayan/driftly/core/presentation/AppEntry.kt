@@ -24,7 +24,7 @@ fun AppEntry(
     autoUpdateViewModel: AutoUpdateViewModel = hiltViewModel(),
     settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
-    var showUpdateSheet by rememberSaveable { mutableStateOf(false) }
+    var showUpdateSheet by rememberSaveable { mutableStateOf(true) }
     var showChangelogSheet by rememberSaveable { mutableStateOf(false) }
     var tagName by rememberSaveable { mutableStateOf(BuildConfig.VERSION_NAME) }
     val savedVersionCode = LocalSettings.current.savedVersionCode
