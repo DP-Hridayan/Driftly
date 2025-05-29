@@ -104,6 +104,8 @@ fun LookAndFeelScreen(
                             PreferenceItemView(item)
                         }
                     }
+
+                    else -> {}
                 }
             }
 

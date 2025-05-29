@@ -129,6 +129,8 @@ fun AboutScreen(
                             PreferenceItemView(item)
                         }
                     }
+
+                    else -> {}
                 }
             }
 

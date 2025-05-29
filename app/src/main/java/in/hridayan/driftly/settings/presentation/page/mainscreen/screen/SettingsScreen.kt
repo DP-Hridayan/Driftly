@@ -75,6 +75,8 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
                             PreferenceItemView(item)
                         }
                     }
+
+                    else -> {}
                 }
             }
         }

@@ -10,6 +10,8 @@ import androidx.compose.material.icons.rounded.ChangeHistory
 import androidx.compose.material.icons.rounded.Colorize
 import androidx.compose.material.icons.rounded.Contrast
 import androidx.compose.material.icons.rounded.DateRange
+import androidx.compose.material.icons.rounded.Download
+import androidx.compose.material.icons.rounded.Downloading
 import androidx.compose.material.icons.rounded.EventAvailable
 import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.SentimentNeutral
@@ -23,6 +25,8 @@ import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import `in`.hridayan.driftly.settings.domain.model.boolPreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.categorizedItems
+import `in`.hridayan.driftly.settings.domain.model.customComposable
+import `in`.hridayan.driftly.settings.domain.model.horizontalDivider
 import `in`.hridayan.driftly.settings.domain.model.intPreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.nullPreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.uncategorizedItems
@@ -133,7 +137,21 @@ object SettingsProvider {
                 type = SettingsType.RadioGroup,
                 radioOptions = RadioGroupOptionsProvider.updateChannelOptions
             )
-        )
+        ),
+        customComposable(label = "check_update_button"),
+
+        horizontalDivider(),
+
+        uncategorizedItems(
+            boolPreferenceItem(
+                key = SettingsKeys.ENABLE_DIRECT_DOWNLOAD,
+                titleResId = R.string.enable_direct_download,
+                descriptionResId = R.string.des_enable_direct_download,
+                iconVector = Icons.Rounded.Downloading
+            )
+        ),
+
+        horizontalDivider()
     )
 
     val aboutPageList: List<PreferenceGroup> = listOf(

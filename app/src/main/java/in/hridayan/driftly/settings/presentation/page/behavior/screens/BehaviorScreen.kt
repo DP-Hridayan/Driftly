@@ -60,6 +60,8 @@ fun BehaviorScreen(
                             PreferenceItemView(item)
                         }
                     }
+
+                    else -> {}
                 }
             }
         }

@@ -21,6 +21,7 @@ val LocalSettings = compositionLocalOf<SettingsState> {
         savedVersionCode = 0,
         showAttendanceStreaks = true,
         rememberCalendarMonthYear = false,
-        startWeekOnMonday = true
+        startWeekOnMonday = true,
+        enableDirectDownload = true
     )
 }

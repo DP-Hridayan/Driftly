@@ -61,6 +61,8 @@ fun CompositionLocals(
 
     val startWeekOnMonday by settingsViewModel.booleanState(SettingsKeys.START_WEEK_ON_MONDAY)
 
+    val enableDirectDownload by settingsViewModel.booleanState(SettingsKeys.ENABLE_DIRECT_DOWNLOAD)
+
     val state =
         remember(
             autoUpdate,
@@ -75,7 +77,8 @@ fun CompositionLocals(
             savedVersionCode,
             showAttendanceStreaks,
             rememberCalendarMonthYear,
-            startWeekOnMonday
+            startWeekOnMonday,
+            enableDirectDownload
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -90,7 +93,8 @@ fun CompositionLocals(
                 savedVersionCode = savedVersionCode,
                 showAttendanceStreaks = showAttendanceStreaks,
                 rememberCalendarMonthYear = rememberCalendarMonthYear,
-                startWeekOnMonday = startWeekOnMonday
+                startWeekOnMonday = startWeekOnMonday,
+                enableDirectDownload = enableDirectDownload
             )
         }
 

@@ -4,7 +4,7 @@ data class SettingsState(
     val isAutoUpdate: Boolean,
     val themeMode: Int,
     val isHighContrastDarkMode: Boolean,
-    val seedColor : Int,
+    val seedColor: Int,
     val isDynamicColor: Boolean,
     val isHapticEnabled: Boolean,
     val subjectCardCornerRadius: Float,
@@ -13,5 +13,6 @@ data class SettingsState(
     val savedVersionCode: Int,
     val showAttendanceStreaks: Boolean,
     val rememberCalendarMonthYear: Boolean,
-    val startWeekOnMonday: Boolean
+    val startWeekOnMonday: Boolean,
+    val enableDirectDownload: Boolean,
 )

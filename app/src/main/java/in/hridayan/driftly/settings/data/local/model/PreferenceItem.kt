@@ -76,6 +76,4 @@ sealed class PreferenceItem(
         override val iconVector: ImageVector?,
         override val type: SettingsType
     ) : PreferenceItem(key)
-
-    object CustomComposable
 }

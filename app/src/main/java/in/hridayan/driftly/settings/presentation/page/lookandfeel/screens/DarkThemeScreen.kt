@@ -61,6 +61,8 @@ fun DarkThemeScreen(
                             PreferenceItemView(item)
                         }
                     }
+
+                    else -> {}
                 }
             }
         }

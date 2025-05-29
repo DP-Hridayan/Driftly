@@ -8,7 +8,6 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -45,10 +44,12 @@ import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.DownloadState
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.core.utils.installApk
+import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.viewmodel.AutoUpdateViewModel
 import java.io.File
 
@@ -64,19 +65,13 @@ fun UpdateBottomSheet(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val context = LocalContext.current
     val activity = context as? Activity
-
+    val isDirectDownloadEnabled = LocalSettings.current.enableDirectDownload
     val interactionSources = remember { List(2) { MutableInteractionSource() } }
-
     val downloadState by viewModel.downloadState.collectAsState()
-
     val apkName = "update.apk"
-
     val apkFile = remember { File(context.getExternalFilesDir(null), apkName) }
-
     var pendingInstall by rememberSaveable { mutableStateOf(false) }
-
     var permissionPromptShown by rememberSaveable { mutableStateOf(false) }
-
     var showDownloadButton by rememberSaveable { mutableStateOf(true) }
 
     val settingsLauncher = rememberLauncherForActivityResult(
@@ -239,7 +234,6 @@ fun UpdateBottomSheet(
                 shapes = ButtonDefaults.shapes(),
                 modifier = Modifier
                     .weight(1f)
-                    .animateContentSize()
                     .animateWidth(interactionSources[0]),
                 interactionSource = interactionSources[0],
             ) {
@@ -249,8 +243,15 @@ fun UpdateBottomSheet(
             if (showDownloadButton)
                 Button(
                     onClick = {
-                        permissionPromptShown = false
-                        viewModel.downloadApk(apkUrl, apkName)
+                        if (isDirectDownloadEnabled) {
+                            permissionPromptShown = false
+                            viewModel.downloadApk(apkUrl, apkName)
+                        } else {
+                            openUrl(
+                                context = context,
+                                url = "https://github.com/dp-hridayan/driftly/releases/tag/$latestVersion"
+                            )
+                        }
                         weakHaptic()
                     },
                     shapes = ButtonDefaults.shapes(),

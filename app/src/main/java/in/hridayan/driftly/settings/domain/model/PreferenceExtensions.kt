@@ -16,13 +16,22 @@ import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
 import `in`.hridayan.driftly.settings.data.local.model.RadioButtonOptions
 
-fun categorizedItems(categoryNameResId: Int, vararg items: PreferenceItem): PreferenceGroup.Category {
+fun categorizedItems(
+    categoryNameResId: Int,
+    vararg items: PreferenceItem
+): PreferenceGroup.Category {
     return PreferenceGroup.Category(categoryNameResId, items.toList())
 }
 
 fun uncategorizedItems(vararg items: PreferenceItem): PreferenceGroup.Items {
     return PreferenceGroup.Items(items.toList())
 }
+
+fun customComposable(label: String = ""): PreferenceGroup.CustomComposable {
+    return PreferenceGroup.CustomComposable(label)
+}
+
+fun horizontalDivider() = PreferenceGroup.HorizontalDivider
 
 fun intPreferenceItem(
     key: SettingsKeys,
@@ -136,7 +145,6 @@ fun nullPreferenceItem(
     type = type
 )
 
-fun customComposable() = PreferenceItem.CustomComposable
 
 @Composable
 fun PreferenceItem.getResolvedTitle(): String {

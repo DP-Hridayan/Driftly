@@ -108,7 +108,8 @@ fun AutoUpdateScreen(
                 .fillMaxWidth()
                 .nestedScroll(topBarScrollBehavior.nestedScrollConnection),
             contentPadding = PaddingValues(
-                top = innerPadding.calculateTopPadding()
+                top = innerPadding.calculateTopPadding(),
+                bottom = innerPadding.calculateBottomPadding()
             )
         ) {
             itemsIndexed(settings) { index, group ->
@@ -130,55 +131,31 @@ fun AutoUpdateScreen(
                             PreferenceItemView(item)
                         }
                     }
-                }
-            }
 
-            item {
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Button(
-                        modifier = Modifier
-                            .padding(end = 25.dp, bottom = 25.dp, top = 15.dp)
-                            .align(Alignment.CenterEnd),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                        ),
-                        shapes = ButtonDefaults.shapes(),
-                        onClick = {
-                            weakHaptic()
-                            autoUpdateViewModel.checkForUpdates(
-                                currentVersion = BuildConfig.VERSION_NAME,
-                                includePrerelease = includePrerelease
-                            )
-                            showLoading = true
-                        }) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            if (showLoading)
-                                LoadingSpinner(modifier = Modifier.size(20.dp))
-                            else
-                                Icon(
-                                    modifier = Modifier.size(20.dp),
-                                    imageVector = Icons.Rounded.Update,
-                                    contentDescription = null,
-                                )
-
-                            Text(
-                                text = stringResource(R.string.check_for_updates),
-                                style = MaterialTheme.typography.labelLarge,
+                    is PreferenceGroup.CustomComposable -> {
+                        if (group.label == "check_update_button") {
+                            CheckUpdateButton(
+                                showLoading = showLoading,
+                                onClick = {
+                                    weakHaptic()
+                                    autoUpdateViewModel.checkForUpdates(
+                                        currentVersion = BuildConfig.VERSION_NAME,
+                                        includePrerelease = includePrerelease
+                                    )
+                                    showLoading = true
+                                },
+                                modifier = Modifier.fillMaxWidth()
                             )
                         }
                     }
-                }
-            }
 
-            item {
-                HorizontalDivider(
-                    modifier = modifier.fillMaxWidth(),
-                    thickness = 1.dp
-                )
+                    is PreferenceGroup.HorizontalDivider -> {
+                        HorizontalDivider(
+                            modifier = modifier.fillMaxWidth(),
+                            thickness = 1.dp
+                        )
+                    }
+                }
             }
 
             item {
@@ -219,5 +196,45 @@ fun AutoUpdateScreen(
             latestVersion = tagName,
             apkUrl = apkUrl
         )
+    }
+}
+
+@Composable
+private fun CheckUpdateButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    showLoading: Boolean
+) {
+    Box(modifier = modifier) {
+        Button(
+            modifier = Modifier
+                .padding(end = 25.dp, bottom = 25.dp, top = 15.dp)
+                .align(Alignment.CenterEnd),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            ),
+            shapes = ButtonDefaults.shapes(),
+            onClick = onClick
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (showLoading)
+                    LoadingSpinner(modifier = Modifier.size(20.dp))
+                else
+                    Icon(
+                        modifier = Modifier.size(20.dp),
+                        imageVector = Icons.Rounded.Update,
+                        contentDescription = null,
+                    )
+
+                Text(
+                    text = stringResource(R.string.check_for_updates),
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+        }
     }
 }

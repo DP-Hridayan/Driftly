@@ -78,7 +78,9 @@
     <string name="no_update_available">No update available</string>
     <string name="network_error">Network error</string>
     <string name="request_timeout">Request timeout</string>
-    <string name="visit_repo_to_download">Click on the download button to get the latest version of Driftly from the github repository</string>
+    <string name="enable_direct_download">Enable direct apk download</string>
+    <string name="des_enable_direct_download">When turned on, updates will be downloaded directly from Github inside the app. Turn off to visit the Github releases page for manual download instead.</string>
+    <string name="visit_repo_to_download">Click on the download button to get the latest version of Driftly from the github repository.</string>
     <string name="pre_release">Pre-release</string>
     <string name="pre_release_warning">Pre-release builds may be unstable</string>
     <string name="behavior">Behavior</string>
