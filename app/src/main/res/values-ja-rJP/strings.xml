@@ -117,4 +117,5 @@
     <string name="changelogs_v1_1_0">カラーパレット選択におけるいくつかのカラー値を修正しました\nいくつかのUIマージンを修正しました\nプレリリースビルド更新チェッカーを追加しました</string>
     <string name="changelogs_v1_2_0">高コントラストダークテーマの配色を改善\nアップデート後の変更履歴を表示するためのシートを追加\nコードの最適化</string>
     <string name="changelogs_v1_3_0">特定のアプリの動作を変更するための動作設定を追加\n最後に表示した月を記憶するオプションを追加\nカレンダーの出席記録の表示をオフにするオプションを追加</string>
+    <string name="changelogs_v1_4_0">Switched some UI components to material expressive theme\nAdded option to make Monday as first day of the week in the Calendar\nAdded option to directly download the latest updated apk inside the app without the need to visit the Github repository\nFixed many UI inconsistencies</string>
 </resources>
