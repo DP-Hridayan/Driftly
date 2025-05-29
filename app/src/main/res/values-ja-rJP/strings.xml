@@ -59,6 +59,7 @@
     <string name="des_license">このアプリが使用しているライセンスについて</string>
     <string name="des_github">アプリのgithubリポジトリにアクセスしてください</string>
     <string name="select">選択</string>
+    <string name="unknown_sources_install_permission_not_granted">Permission not granted. Please allow app installation from unknown sources.</string>
     <string name="customisation">カスタマイズ</string>
     <string name="des_customisation">特定のUI要素をあなたの好みに合わせてカスタマイズ</string>
     <string name="subject_card_style">教科のカードスタイル</string>
@@ -71,12 +72,15 @@
     <string name="latest_version">最新バージョン</string>
     <string name="current_version">最近のバージョン</string>
     <string name="download">ダウンロード</string>
+    <string name="download_failed">Download failed</string>
     <string name="stable">Stable</string>
     <string name="whats_new">更新内容！</string>
     <string name="no_update_available">更新はありません</string>
     <string name="network_error">ネットワークエラー</string>
     <string name="request_timeout">リクエストがタイムアウトしました</string>
-    <string name="visit_repo_to_download">ダウンロードボタンをクリックして、githubリポジトリからDriftlyの最新バージョンを入手してください</string>
+    <string name="enable_direct_download">Enable direct apk download</string>
+    <string name="des_enable_direct_download">When turned on, updates will be downloaded directly from Github inside the app. Turn off to visit the Github releases page for manual download instead.</string>
+    <string name="visit_repo_to_download">Click on the download button to get the latest version of Driftly from the github repository.</string>
     <string name="pre_release">プレリリース</string>
     <string name="pre_release_warning">プレリリースビルドは不安定になる可能性があります</string>
     <string name="behavior">動作</string>

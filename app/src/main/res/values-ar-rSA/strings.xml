@@ -59,6 +59,7 @@
     <string name="des_license">تعرف على الترخيص الذي يستخدمه هذا التطبيق</string>
     <string name="des_github">زيارة مستودع github للتطبيق</string>
     <string name="select">اختيار</string>
+    <string name="unknown_sources_install_permission_not_granted">Permission not granted. Please allow app installation from unknown sources.</string>
     <string name="customisation">تخصيص</string>
     <string name="des_customisation">تخصيص بعض عناصر واجهة المستخدم إلى ما تحبه</string>
     <string name="subject_card_style">شكل بطاقة الموضوع</string>
@@ -71,12 +72,15 @@
     <string name="latest_version">أحدَثُ إصدار</string>
     <string name="current_version">الإصدار الحالي</string>
     <string name="download">تنزيل</string>
+    <string name="download_failed">Download failed</string>
     <string name="stable">مستقر</string>
     <string name="whats_new">ما الجديد!</string>
     <string name="no_update_available">لا يوجد تحديث متوفر</string>
     <string name="network_error">خطأ بالشبكة</string>
     <string name="request_timeout">إنتهت مهلة الطلب</string>
-    <string name="visit_repo_to_download">اضغط على زر التحميل للحصول على أحدث إصدار من Drifly من مستودع github</string>
+    <string name="enable_direct_download">Enable direct apk download</string>
+    <string name="des_enable_direct_download">When turned on, updates will be downloaded directly from Github inside the app. Turn off to visit the Github releases page for manual download instead.</string>
+    <string name="visit_repo_to_download">Click on the download button to get the latest version of Driftly from the github repository.</string>
     <string name="pre_release">إصدار غير مُستقرّ</string>
     <string name="pre_release_warning">الإصدارات التجريبية قد تكون غير مستقرة</string>
     <string name="behavior">السّلوك</string>
