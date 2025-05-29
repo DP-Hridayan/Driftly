@@ -59,6 +59,7 @@
     <string name="github" translatable="false">Github</string>
     <string name="des_github">Visit the github repository of the app</string>
     <string name="select">Select</string>
+    <string name="unknown_sources_install_permission_not_granted">Permission not granted. Please allow app installation from unknown sources.</string>
     <string name="customisation">Customisation</string>
     <string name="des_customisation">Customise certain UI elements to your liking</string>
     <string name="subject_card_style">Subject card style</string>

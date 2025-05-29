@@ -69,11 +69,11 @@ fun UpdateBottomSheet(
 
     val downloadState by viewModel.downloadState.collectAsState()
 
-    val apkFile = remember { File(context.cacheDir, "update.apk") }
+    val apkName = "update.apk"
+
+    val apkFile = remember { File(context.getExternalFilesDir(null), apkName) }
 
     var pendingInstall by rememberSaveable { mutableStateOf(false) }
-
-    val apkName = "update.apk"
 
     var permissionPromptShown by rememberSaveable { mutableStateOf(false) }
 
@@ -113,7 +113,7 @@ fun UpdateBottomSheet(
                 } else {
                     Toast.makeText(
                         context,
-                        "Permission not granted. Please allow app installation from unknown sources.",
+                        context.getString(R.string.unknown_sources_install_permission_not_granted),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
