@@ -34,7 +34,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.button.MonthNavigationButtons
 import `in`.hridayan.driftly.calender.presentation.components.color.getAttendanceColors
 import `in`.hridayan.driftly.calender.presentation.components.dialog.MonthYearPickerDialog
@@ -61,6 +63,7 @@ fun CalendarCanvas(
     onNavigate: (Int, Int) -> Unit,
     onResetMonth: () -> Unit,
 ) {
+    val context = LocalContext.current
     val weakHaptic = LocalWeakHaptic.current
     val yearMonth = YearMonth.of(year, month)
     val today = LocalDate.now()
@@ -68,13 +71,13 @@ fun CalendarCanvas(
     val isMondayFirstDay = LocalSettings.current.startWeekOnMonday
     val firstDayOfWeek =
         if (isMondayFirstDay) yearMonth.atDay(1).dayOfWeek.value - 1 else yearMonth.atDay(1).dayOfWeek.value % 7
-    val fullMonthName = yearMonth.month.name.lowercase().replaceFirstChar { it.uppercase() }
     val abbreviatedMonth = yearMonth.format(
         DateTimeFormatter.ofPattern("MMM").withLocale(Locale.getDefault())
     )
 
     var showMonthYearDialog by remember { mutableStateOf(false) }
     val showStreakModifier = LocalSettings.current.showAttendanceStreaks
+    val months: List<String> = context.resources.getStringArray(R.array.month_names).toList()
 
     Column(
         modifier = modifier
@@ -109,16 +112,18 @@ fun CalendarCanvas(
             MonthYearPicker(
                 modifier = Modifier
                     .padding(start = 15.dp),
-                fullMonthName = fullMonthName,
+                fullMonthName = months[month - 1],
                 year = year,
                 onClick = {
                     showMonthYearDialog = true
                     weakHaptic()
                 })
 
-            Spacer(modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth())
+            Spacer(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            )
 
             MonthNavigationButtons(
                 modifier = Modifier.padding(end = 20.dp),
