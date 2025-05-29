@@ -10,7 +10,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -18,9 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.toRoute
 import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCanvas
 import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
@@ -37,7 +33,6 @@ fun CalendarScreen(
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
     val navController = LocalNavController.current
-    val lifecycleOwner = LocalLifecycleOwner.current
     val args = navController.currentBackStackEntry?.toRoute<CalendarScreen>()
     val subjectId = args?.subjectId ?: 0
     val subject = args?.subject ?: ""
@@ -59,19 +54,6 @@ fun CalendarScreen(
     LaunchedEffect(savedYear, savedMonth, shouldRememberMonthYear) {
         if (savedYear != null && savedMonth != null && shouldRememberMonthYear) {
             viewModel.updateMonthYear(savedYear, savedMonth)
-        }
-    }
-
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_PAUSE) {
-                viewModel.saveMonthYearForSubject(subjectId)
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
 
@@ -102,8 +84,12 @@ fun CalendarScreen(
                 onStatusChange = onStatusChange,
                 onNavigate = { newYear, newMonth ->
                     viewModel.updateMonthYear(newYear, newMonth)
+                    viewModel.saveMonthYearForSubject(subjectId)
                 },
-                onResetMonth = { viewModel.resetYearMonthToCurrent() }
+                onResetMonth = {
+                    viewModel.resetYearMonthToCurrent()
+                    viewModel.saveMonthYearForSubject(subjectId)
+                }
             )
 
             AttendanceCardWithTabs(modifier = Modifier.weight(1f), subjectId = subjectId)

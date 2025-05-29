@@ -1,0 +1,8 @@
+
+* Switched some UI components to material expressive theme
+
+* Added option to make Monday as first day of the week in the Calendar
+
+* Added option to directly download the latest updated apk inside the app without the need to visit the Github repository
+
+* Fixed many UI inconsistencies
