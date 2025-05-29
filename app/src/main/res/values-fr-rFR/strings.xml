@@ -117,4 +117,5 @@
     <string name="changelogs_v1_1_0">Correction de certaines valeurs de couleur dans la sélection de la palette de couleurs\nCorrection de certaines marges de l\'interface utilisateur\nAjout du vérificateur de mise à jour de la version de pré-version</string>
     <string name="changelogs_v1_2_0">Schéma de couleurs amélioré dans le thème sombre à fort contraste\nAjout de la nouvelle page pour afficher les changelogs après une mise à jour\nOptimisation du code</string>
     <string name="changelogs_v1_3_0">Ajout de paramètres de comportement pour modifier le comportement de certaines applications\nAjout d\'une option pour se souvenir du dernier mois\nAjout d\'une option pour désactiver la série de présence dans le calendrier</string>
+    <string name="changelogs_v1_4_0">Switched some UI components to material expressive theme\nAdded option to make Monday as first day of the week in the Calendar\nAdded option to directly download the latest updated apk inside the app without the need to visit the Github repository\nFixed many UI inconsistencies</string>
 </resources>
