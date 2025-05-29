@@ -1,4 +1,4 @@
-name: Update bug report yml
+name: Update issue templates
 
 on:
   push:
@@ -49,9 +49,11 @@ jobs:
       - name: Modify bug report template using Python
         run: |
           python3 .github/scripts/update_bug_report_template.py
+          python3 .github/scripts/update_crash_report_template.py
 
       - name: Commit and Push
         run: |
           git add .github/ISSUE_TEMPLATE/bug_report.yml
+          git add .github/ISSUE_TEMPLATE/crash_report.yml
           git commit -m "Sync version dropdown: $VERSION" || echo "No changes to commit"
           git push origin master
