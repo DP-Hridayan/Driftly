@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -56,6 +57,7 @@ fun UpdateBottomSheet(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
     latestVersion: String = "",
+    apkUrl: String = "",
     viewModel: AutoUpdateViewModel = hiltViewModel()
 ) {
     val weakHaptic = LocalWeakHaptic.current
@@ -70,9 +72,6 @@ fun UpdateBottomSheet(
     val apkFile = remember { File(context.cacheDir, "update.apk") }
 
     var pendingInstall by rememberSaveable { mutableStateOf(false) }
-
-    val apkUrl =
-        "https://github.com/dp-hridayan/driftly/releases/download/v1.3.0/Driftly-v1.3.0-release.apk"
 
     val apkName = "update.apk"
 
@@ -143,6 +142,16 @@ fun UpdateBottomSheet(
         }
     }
 
+    val currentProgress = when (downloadState) {
+        is DownloadState.Progress -> (downloadState as DownloadState.Progress).percent
+        else -> 0f
+    }
+
+    val animatedProgress by animateFloatAsState(
+        targetValue = currentProgress,
+        animationSpec = androidx.compose.animation.core.tween(durationMillis = 300)
+    )
+
     ModalBottomSheet(
         modifier = modifier,
         sheetState = sheetState,
@@ -178,7 +187,7 @@ fun UpdateBottomSheet(
                 .height(100.dp)
         ) {
 
-            when (val state = downloadState) {
+            when (downloadState) {
                 is DownloadState.Started -> {
                     LoadingIndicator(
                         modifier = Modifier.align(Alignment.Center)
@@ -191,7 +200,7 @@ fun UpdateBottomSheet(
                             .fillMaxWidth()
                             .padding(horizontal = 20.dp)
                             .align(Alignment.Center),
-                        progress = { state.percent }
+                        progress = { animatedProgress }
                     )
                 }
 
@@ -240,11 +249,6 @@ fun UpdateBottomSheet(
             if (showDownloadButton)
                 Button(
                     onClick = {
-                        /* onDismiss()
-                         openUrl(
-                             "https://github.com/DP-Hridayan/Driftly/releases/tag/$latestVersion",
-                             context
-                         )*/
                         permissionPromptShown = false
                         viewModel.downloadApk(apkUrl, apkName)
                         weakHaptic()

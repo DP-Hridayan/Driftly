@@ -71,6 +71,7 @@
     <string name="latest_version">Latest version</string>
     <string name="current_version">Current version</string>
     <string name="download">Download</string>
+    <string name="download_failed">Download failed</string>
     <string name="stable">Stable</string>
     <string name="whats_new">What\'s new!</string>
     <string name="no_update_available">No update available</string>

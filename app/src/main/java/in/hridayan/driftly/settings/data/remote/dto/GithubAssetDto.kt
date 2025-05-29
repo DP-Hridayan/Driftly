@@ -4,10 +4,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GitHubReleaseDto(
-    @SerialName("tag_name")
-    val tagName: String,
+data class GitHubAssetDto(
+    @SerialName("name")
+    val name: String,
 
-    @SerialName("assets")
-val assets: List<GitHubAssetDto> = emptyList()
+    @SerialName("browser_download_url")
+    val browserDownloadUrl: String
 )

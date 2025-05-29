@@ -39,7 +39,7 @@ jobs:
       - name: Fetch and check out master as branch
         run: |
           git fetch origin master
-          git checkout -b master origin/master
+          git checkout master
 
       - name: Install dependencies
         run: |

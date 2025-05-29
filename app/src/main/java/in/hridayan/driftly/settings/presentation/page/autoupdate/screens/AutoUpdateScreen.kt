@@ -62,6 +62,7 @@ fun AutoUpdateScreen(
     var showLoading by rememberSaveable { mutableStateOf(false) }
     var showUpdateSheet by rememberSaveable { mutableStateOf(false) }
     var tagName by rememberSaveable { mutableStateOf(BuildConfig.VERSION_NAME) }
+    var apkUrl by rememberSaveable { mutableStateOf("") }
     val includePrerelease = LocalSettings.current.githubReleaseType == GithubReleaseType.PRE_RELEASE
     val noUpdateAvailable = stringResource(R.string.no_update_available)
     val networkError = stringResource(R.string.network_error)
@@ -76,6 +77,7 @@ fun AutoUpdateScreen(
                 is UpdateResult.Success -> {
                     if (result.isUpdateAvailable) {
                         tagName = result.release.tagName
+                        apkUrl = result.release.apkUrl.toString()
                         showUpdateSheet = true
                     } else {
                         Toast.makeText(context, noUpdateAvailable, Toast.LENGTH_SHORT).show()
@@ -214,7 +216,8 @@ fun AutoUpdateScreen(
     if (showUpdateSheet) {
         UpdateBottomSheet(
             onDismiss = { showUpdateSheet = false },
-            latestVersion = tagName
+            latestVersion = tagName,
+            apkUrl = apkUrl
         )
     }
 }

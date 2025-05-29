@@ -1,5 +1,6 @@
 package `in`.hridayan.driftly.core.presentation
 
+import android.util.Log
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,15 +25,18 @@ fun AppEntry(
     autoUpdateViewModel: AutoUpdateViewModel = hiltViewModel(),
     settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
-    var showUpdateSheet by rememberSaveable { mutableStateOf(true) }
+    var showUpdateSheet by rememberSaveable { mutableStateOf(false) }
     var showChangelogSheet by rememberSaveable { mutableStateOf(false) }
     var tagName by rememberSaveable { mutableStateOf(BuildConfig.VERSION_NAME) }
+    var apkUrl by rememberSaveable { mutableStateOf("") }
     val savedVersionCode = LocalSettings.current.savedVersionCode
 
     LaunchedEffect(Unit) {
         autoUpdateViewModel.updateEvents.collectLatest { result ->
             if (result is UpdateResult.Success && result.isUpdateAvailable) {
                 tagName = result.release.tagName
+                apkUrl = result.release.apkUrl.toString()
+                Log.d("AppEntry", result.release.apkUrl.toString())
                 showUpdateSheet = true
             }
         }
@@ -48,7 +52,8 @@ fun AppEntry(
         if (showUpdateSheet) {
             UpdateBottomSheet(
                 onDismiss = { showUpdateSheet = false },
-                latestVersion = tagName
+                latestVersion = tagName,
+                apkUrl = apkUrl,
             )
         }
 

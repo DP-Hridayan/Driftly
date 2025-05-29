@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -22,4 +24,11 @@ fun openUrl(url: String, context: Context) {
         context.startActivity(intent)
     } catch (ignored: ActivityNotFoundException) {
     }
+}
+
+fun isNetworkAvailable(context: Context): Boolean {
+    val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val network = cm.activeNetwork ?: return false
+    val actNw = cm.getNetworkCapabilities(network) ?: return false
+    return actNw.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
 }
