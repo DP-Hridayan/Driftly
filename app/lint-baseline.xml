@@ -36,50 +36,6 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;unknown_sources_install_permission_not_granted&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
-        errorLine1="    &lt;string name=&quot;unknown_sources_install_permission_not_granted&quot;>Permission not granted. Please allow app installation from unknown sources.&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="62"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;download_failed&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
-        errorLine1="    &lt;string name=&quot;download_failed&quot;>Download failed&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="75"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;enable_direct_download&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
-        errorLine1="    &lt;string name=&quot;enable_direct_download&quot;>Enable direct apk download&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="81"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;des_enable_direct_download&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
-        errorLine1="    &lt;string name=&quot;des_enable_direct_download&quot;>When turned on, updates will be downloaded directly from Github inside the app. Turn off to visit the Github releases page for manual download instead.&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="82"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
         message="&quot;changelogs_v1_4_0&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
         errorLine1="&lt;string name=&quot;changelogs_v1_4_0&quot;>Switched some UI components to material expressive theme\nAdded option to make Monday as first day of the week in the Calendar\nAdded option to directly download the latest updated apk inside the app without the need to visit the Github repository\nFixed many UI inconsistencies&lt;/string>"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
