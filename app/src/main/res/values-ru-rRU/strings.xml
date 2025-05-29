@@ -59,6 +59,7 @@
     <string name="des_license">Узнайте о лицензии, которую использует это приложение</string>
     <string name="des_github">Посетите github-репозиторий приложения</string>
     <string name="select">Выбрать</string>
+    <string name="unknown_sources_install_permission_not_granted">Permission not granted. Please allow app installation from unknown sources.</string>
     <string name="customisation">Кастомизация</string>
     <string name="des_customisation">Настройте некоторые элементы интерфейса по своему вкусу</string>
     <string name="subject_card_style">Стиль карточки занятия</string>
@@ -71,12 +72,15 @@
     <string name="latest_version">Последняя версия</string>
     <string name="current_version">Текущая версия</string>
     <string name="download">Скачать</string>
+    <string name="download_failed">Download failed</string>
     <string name="stable">Стабильный</string>
     <string name="whats_new">Что нового!</string>
     <string name="no_update_available">Нет доступных обновлений</string>
     <string name="network_error">Ошибка сети</string>
     <string name="request_timeout">Таймаут запроса</string>
-    <string name="visit_repo_to_download">Нажмите на кнопку загрузки, чтобы получить последнюю версию Driftly из репозитория github</string>
+    <string name="enable_direct_download">Enable direct apk download</string>
+    <string name="des_enable_direct_download">When turned on, updates will be downloaded directly from Github inside the app. Turn off to visit the Github releases page for manual download instead.</string>
+    <string name="visit_repo_to_download">Click on the download button to get the latest version of Driftly from the github repository.</string>
     <string name="pre_release">Предварительный</string>
     <string name="pre_release_warning">Предварительные сборки могут быть нестабильными</string>
     <string name="behavior">Поведение</string>
