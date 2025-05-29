@@ -11,7 +11,7 @@ Thanks to these translators and proofreaders, this project exists:
           <br />
           <sub><b>AlexeiCrystal (alex211952i)</b></sub></a>
         <br />
-        <sub><b>542 words</b></sub>
+        <sub><b>645 words</b></sub>
       </td>
       <td align="center" valign="top">
         <a href="https://crowdin.com/profile/louisgrasset"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16675791/medium/4f29a005a6ea0273f480c814708a7b80.png" />
