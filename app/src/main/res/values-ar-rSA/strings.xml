@@ -1,123 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Driftly</string>
-    <string name="field_blank_error">لا يمكن أن يكون الحقل فارغاً</string>
+    <string name="field_blank_error">لا يمكن ترك الحقل فارغًا</string>
     <string name="subject_already_exists">الموضوع موجود بالفعل</string>
     <string name="unknown_error">حدث خطأ غير معروف</string>
     <string name="error">خطأ</string>
     <string name="add_subject">إضافة موضوع</string>
-    <string name="add">أضف</string>
+    <string name="add">إضافة</string>
     <string name="cancel">إلغاء</string>
-    <string name="delete_subject">احذف الموضوع</string>
-    <string name="delete_confirmation">هل تريد فعلا القيام بالحذف؟</string>
+    <string name="delete_subject">حذف الموضوع</string>
+    <string name="delete_confirmation">هل تريد بالتأكيد حذف هذا الموضوع؟</string>
     <string name="confirm">تأكيد</string>
-    <string name="present">حاليًا</string>
+    <string name="present">حاضر</string>
     <string name="absent">غائب</string>
-    <string name="total">الإجمالي</string>
-    <string name="clear">تنظيف</string>
-    <string name="update">حدّث</string>
+    <string name="total">المجموع</string>
+    <string name="clear">مسح</string>
+    <string name="update">تحديث</string>
     <string name="update_subject">تحديث الموضوع</string>
     <string name="enter_subject_name">أدخل اسم الموضوع</string>
-    <string name="select_month_and_year">اختر الشهر &amp; سنة</string>
-    <string name="enter_new_name">أدخل اسم جديد</string>
-    <string name="no_attendance_yet">لم يُسجّل حضور. أضف لتَرى التقدم</string>
+    <string name="select_month_and_year">اختر الشهر والسنة</string>
+    <string name="enter_new_name">أدخل الاسم الجديد</string>
+    <string name="no_attendance_yet">لا توجد سجلات حضور بعد. أضف سجلات لرؤية التقدم</string>
     <string name="no_subject_yet">انقر على + لإضافة موضوع</string>
-    <string name="ok">حسناً</string>
+    <string name="ok">موافق</string>
     <string name="settings">الإعدادات</string>
-    <string name="look_and_feel">المظهر &amp; و الشكل</string>
-    <string name="des_look_and_feel">لون ديناميكي، السمة المظلمة، اللغة</string>
-    <string name="dark_theme">المظهر الداكن</string>
+    <string name="look_and_feel">المظهر والشكل</string>
+    <string name="des_look_and_feel">ألوان ديناميكية، الوضع المظلم، اللغة</string>
+    <string name="dark_theme">الوضع المظلم</string>
     <string name="system">النظام</string>
-    <string name="on">مفعل</string>
+    <string name="on">تشغيل</string>
     <string name="off">إيقاف</string>
     <string name="additional_settings">إعدادات إضافية</string>
     <string name="auto_update">تحديث تلقائي</string>
-    <string name="des_auto_update">التحقق من التحديثات تلقائياً</string>
-    <string name="about">حول</string>
+    <string name="des_auto_update">التحقق من التحديثات تلقائيًا</string>
+    <string name="about">حول التطبيق</string>
     <string name="des_about">المساهمون والدعم</string>
-    <string name="high_contrast_dark_mode">ثيم داكن ذو تباين عالٍ</string>
-    <string name="des_high_contrast_dark_mode">سمة سوداء نقيّة لأجهزة OLED</string>
+    <string name="high_contrast_dark_mode">وضع مظلم عالي التباين</string>
+    <string name="des_high_contrast_dark_mode">سمة سوداء خالصة لأجهزة OLED</string>
     <string name="dynamic_colors">ألوان ديناميكية</string>
-    <string name="des_dynamic_colors">تعيين سمة التطبيق تلقائيا وفقا لخلفية الجهاز</string>
-    <string name="haptics_and_vibration">الهدوء &amp; الإهتزاز</string>
-    <string name="des_haptics_and_vibration">اهتزاز تفاعلي يعطي رد فعل عند اللمس</string>
+    <string name="des_dynamic_colors">ضبط ألوان التطبيق تلقائيًا وفقًا لخلفية الجهاز</string>
+    <string name="haptics_and_vibration">الاهتزاز واللمس</string>
+    <string name="des_haptics_and_vibration">اهتزاز تفاعلي عند النقر</string>
     <string name="default_language">اللغة الافتراضية</string>
     <string name="des_default_language">اختر اللغة الافتراضية للتطبيق</string>
     <string name="lead_developer">المطور الرئيسي</string>
     <string name="des_hridayan">مجرد شخص يحب التطبيقات والتصميم</string>
-    <string name="support_bmc">هل أعجبك ما أفعله؟\nفكر في شراء لي قهوة</string>
-    <string name="app">تطبيق</string>
+    <string name="support_bmc">هل أعجبك ما أفعله؟\nيمكنك دعمي بشراء فنجان قهوة</string>
+    <string name="app">التطبيق</string>
     <string name="version">الإصدار</string>
-    <string name="changelogs">سجلات التغيير</string>
-    <string name="des_changelogs">سجل جميع التغييرات التي أجريت على التطبيق</string>
-    <string name="no_changelog_found">لم يتم العثور على سجل تغيير لهذا الإصدار</string>
-    <string name="feature_request">طلب ميزة</string>
-    <string name="des_feature_request">إذا كان لديك أي أفكار أو اقتراحات للتطبيق، أخبرنا</string>
+    <string name="changelogs">سجل التغييرات</string>
+    <string name="des_changelogs">سجل جميع التغييرات في التطبيق</string>
+    <string name="no_changelog_found">لا يوجد سجل تغييرات لهذا الإصدار</string>
+    <string name="feature_request">طلب ميزة جديدة</string>
+    <string name="des_feature_request">إذا كان لديك أفكار أو اقتراحات، أخبرنا بها</string>
     <string name="report_issue">الإبلاغ عن مشكلة</string>
-    <string name="des_report_issue">أبلغ عن أي مشكلة أو خطأ واجهته أثناء استخدام التطبيق</string>
+    <string name="des_report_issue">أبلغ عن أي مشكلة أو خطأ واجهته</string>
     <string name="license">الترخيص</string>
-    <string name="des_license">تعرف على الترخيص الذي يستخدمه هذا التطبيق</string>
-    <string name="des_github">زيارة مستودع github للتطبيق</string>
+    <string name="des_license">اطلع على ترخيص التطبيق</string>
+    <string name="des_github">زيارة مستودع التطبيق على GitHub</string>
     <string name="select">اختيار</string>
-    <string name="unknown_sources_install_permission_not_granted">Permission not granted. Please allow app installation from unknown sources.</string>
-    <string name="customisation">تخصيص</string>
-    <string name="des_customisation">تخصيص بعض عناصر واجهة المستخدم إلى ما تحبه</string>
-    <string name="subject_card_style">شكل بطاقة الموضوع</string>
+    <string name="unknown_sources_install_permission_not_granted">لم يتم منح الإذن. يرجى السماح بتثبيت التطبيقات من مصادر غير معروفة.</string>
+    <string name="customisation">التخصيص</string>
+    <string name="des_customisation">تخصيص عناصر واجهة المستخدم كما تفضل</string>
+    <string name="subject_card_style">نمط بطاقة الموضوع</string>
     <string name="subject_name">اسم الموضوع</string>
-    <string name="adjust_card_corner_radius">ضبط نصف قطر زاوية البطاقات</string>
+    <string name="adjust_card_corner_radius">ضبط زوايا البطاقات</string>
     <string name="enable_auto_update">تمكين التحديث التلقائي</string>
     <string name="update_channel">قناة التحديث</string>
-    <string name="check_for_updates">بحث عن تحديثات</string>
-    <string name="update_available">تحديث متاح!</string>
-    <string name="latest_version">أحدَثُ إصدار</string>
+    <string name="check_for_updates">التحقق من التحديثات</string>
+    <string name="update_available">يتوفر تحديث جديد!</string>
+    <string name="latest_version">أحدث إصدار</string>
     <string name="current_version">الإصدار الحالي</string>
     <string name="download">تنزيل</string>
-    <string name="download_failed">Download failed</string>
+    <string name="download_failed">فشل التنزيل</string>
     <string name="stable">مستقر</string>
     <string name="whats_new">ما الجديد!</string>
-    <string name="no_update_available">لا يوجد تحديث متوفر</string>
-    <string name="network_error">خطأ بالشبكة</string>
-    <string name="request_timeout">إنتهت مهلة الطلب</string>
-    <string name="enable_direct_download">Enable direct apk download</string>
-    <string name="des_enable_direct_download">When turned on, updates will be downloaded directly from Github inside the app. Turn off to visit the Github releases page for manual download instead.</string>
-    <string name="visit_repo_to_download">Click on the download button to get the latest version of Driftly from the github repository.</string>
-    <string name="pre_release">إصدار غير مُستقرّ</string>
+    <string name="no_update_available">لا تتوفر تحديثات</string>
+    <string name="network_error">خطأ في الشبكة</string>
+    <string name="request_timeout">انتهت مهلة الطلب</string>
+    <string name="enable_direct_download">تمكين التنزيل المباشر</string>
+    <string name="des_enable_direct_download">عند التمكين، سيتم تنزيل التحديثات مباشرة من GitHub داخل التطبيق. عند الإيقاف، ستتم إعادة التوجيه إلى صفحة الإصدارات على GitHub للتنزيل اليدوي.</string>
+    <string name="visit_repo_to_download">انقر على زر التنزيل للحصول على أحدث إصدار من درفتلي من مستودع GitHub.</string>
+    <string name="pre_release">إصدار تجريبي</string>
     <string name="pre_release_warning">الإصدارات التجريبية قد تكون غير مستقرة</string>
-    <string name="behavior">السّلوك</string>
-    <string name="remember_month_year">تذكر الشهر والعام التقويمي</string>
-    <string name="des_remember_month_year">Turn on this option to remember the last viewed month for every subject</string>
+    <string name="behavior">السلوك</string>
+    <string name="remember_month_year">تذكر الشهر والسنة</string>
+    <string name="des_remember_month_year">تمكين هذه الخيار لحفظ آخر شهر تم عرضه لكل موضوع</string>
     <string name="show_attendance_steaks">إظهار سلسلة الحضور</string>
-    <string name="des_show_attendance_streaks">في حالة التمكين، سيتم عرض سلسلة الحضور على التقويم</string>
-    <string name="des_behavior">تعديل سلوك معين في التطبيق</string>
-    <string name="reset_to_current_month">إعادة تعيين إلى الشهر الحالي</string>
+    <string name="des_show_attendance_streaks">عند التمكين، ستظهر سلسلة الحضور على التقويم</string>
+    <string name="des_behavior">تعديل سلوك التطبيق</string>
+    <string name="reset_to_current_month">العودة إلى الشهر الحالي</string>
     <string name="previous_month">الشهر السابق</string>
     <string name="next_month">الشهر التالي</string>
-    <string name="back_button">زر العودة</string>
-    <string name="this_month_data">This month data</string>
-    <string name="all_months_data">All months data</string>
+    <string name="back_button">عودة</string>
+    <string name="this_month_data">بيانات هذا الشهر</string>
+    <string name="all_months_data">بيانات جميع الأشهر</string>
     <string-array name="month_names">
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
+        <item>يناير</item>
+        <item>فبراير</item>
+        <item>مارس</item>
+        <item>أبريل</item>
+        <item>مايو</item>
+        <item>يونيو</item>
+        <item>يوليو</item>
+        <item>أغسطس</item>
+        <item>سبتمبر</item>
+        <item>أكتوبر</item>
+        <item>نوفمبر</item>
+        <item>ديسمبر</item>
     </string-array>
-    <string name="calendar">Calendar</string>
-    <string name="start_week_on_monday">Start week on Monday</string>
-    <string name="des_start_week_on_monday">Prefer seeing your week begin with Monday instead of Sunday? Enable this to shift the calendar layout so Monday becomes the first day of the week.</string>
-    <string name="pre_release_warning_description">\"هذه الإصدارات لا تزال قيد الاختبار وقد تحتوي على ميزات غير مكتملة أو أخطاء غير متوقعة. إذا اخترت التحديث إلى إصدار تجريبي، يرجى العلم بأن بعض الأمور قد لا تعمل بشكل صحيح أو قد تتصرف بطريقة غير معتادة.
-في حال واجهت أي مشاكل أو أعطال أو سلوك غريب، نرجو الإبلاغ عنها حتى نتمكن من إصلاحها وتحسين Driftly قبل الإصدار المستقر.
-شكرًا لمساعدتك في تطوير تجربة أفضل!\"</string>
-    <string name="changelogs_v1_0_0">Initial release\nAdded calendar to mark attendance status\nAdded per subject progress display\nAdded ability to add, remove and edit subjects\nAdded settings for customising user experience</string>
-    <string name="changelogs_v1_1_0">Fixed some color values in color palette selection\nFixed some UI margins\nAdded prerelease build update checker</string>
-    <string name="changelogs_v1_2_0">Improved color scheme in high contrast dark theme\nAdded what\'s new bottomsheet to show changelogs after an update\nCode optimisations</string>
-    <string name="changelogs_v1_3_0">Added behavior settings to modify certain app behavior\nAdded option to remember the last viewed month\nAdded option to turn off attendance streak visuals in calendar</string>
-    <string name="changelogs_v1_4_0">Switched some UI components to material expressive theme\nAdded option to make Monday as first day of the week in the Calendar\nAdded option to directly download the latest updated apk inside the app without the need to visit the Github repository\nFixed many UI inconsistencies</string>
+    <string name="calendar">التقويم</string>
+    <string name="start_week_on_monday">بدء الأسبوع من الاثنين</string>
+    <string name="des_start_week_on_monday">هل تفضل أن يبدأ الأسبوع يوم الاثنين بدلاً من الأحد؟ قم بتمكين هذا الخيار لتغيير تخطيط التقويم بحيث يصبح الاثنين أول أيام الأسبوع.</string>
+    <string name="pre_release_warning_description">هذه الإصدارات لا تزال قيد الاختبار وقد تحتوي على ميزات غير مكتملة أو أخطاء غير متوقعة. إذا اخترت التحديث إلى إصدار تجريبي، يرجى العلم بأن بعض الأمور قد لا تعمل بشكل صحيح أو قد تتصرف بطريقة غير معتادة.
+
+في حال واجهت أي مشاكل أو أعطال أو سلوك غريب، نرجو الإبلاغ عنها حتى نتمكن من إصلاحها وتحسين درفتلي قبل الإصدار المستقر.
+
+شكرًا لمساعدتك في تطوير تجربة أفضل!</string>
+    <string name="changelogs_v1_0_0">الإصدار الأولي\nتم إضافة التقويم لتسجيل الحضور\nتم إضافة عرض التقدم لكل موضوع\nتم إضافة القدرة على إضافة، حذف، وتعديل المواضيع\nتم إضافة إعدادات لتخصيص تجربة المستخدم</string>
+    <string name="changelogs_v1_1_0">تم إصلاح بعض قيم الألوان في لوحة الألوان\nتم إصلاح بعض الهوامش في الواجهة\nتم إضافة مدقق تحديثات الإصدارات التجريبية</string>
+    <string name="changelogs_v1_2_0">تم تحسين نظام الألوان في الوضع المظلم عالي التباين\nتم إضافة نافذة \"ما الجديد\" لعرض سجل التغييرات بعد التحديث\nتحسينات في الكود</string>
+    <string name="changelogs_v1_3_0">تم إضافة إعدادات السلوك لتعديل سلوك التطبيق\nتم إضافة خيار تذكر آخر شهر تم عرضه\nتم إضافة خيار إخفاء سلسلة الحضور في التقويم</string>
+    <string name="changelogs_v1_4_0">تم تغيير بعض مكونات الواجهة لاستخدام سمة Material التعبيرية\nتم إضافة خيار جعل الاثنين أول أيام الأسبوع في التقويم\nتم إضافة خيار تنزيل أحدث إصدار مباشرة داخل التطبيق دون الحاجة إلى زيارة مستودع GitHub\nتم إصلاح العديد من التناقضات في الواجهة</string>
 </resources>
