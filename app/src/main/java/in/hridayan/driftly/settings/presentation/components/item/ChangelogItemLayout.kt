@@ -31,6 +31,7 @@ fun ChangelogItemLayout(
         modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(25.dp)
     ) {
         AutoResizeableText(
+            modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.version) + "\t\t$versionName",
             style = if (isLatestVersion) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.headlineSmall,
             color = if (isLatestVersion) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
