@@ -1,17 +1,17 @@
-@file:SuppressLint("RestrictedApi")
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
 
 package `in`.hridayan.driftly.core.presentation.ui.theme
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import androidx.annotation.FloatRange
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.expressiveLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -23,7 +23,7 @@ import `in`.hridayan.driftly.core.utils.n1
 import `in`.hridayan.driftly.core.utils.n2
 
 fun lightColorSchemeFromSeed(): ColorScheme {
-    return lightColorScheme(
+    return expressiveLightColorScheme().copy(
         primary = 40.a1,
         primaryContainer = 90.a1,
         onPrimary = 100.a1,
