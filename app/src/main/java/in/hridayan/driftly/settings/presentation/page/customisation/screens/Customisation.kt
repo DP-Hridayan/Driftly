@@ -5,7 +5,6 @@ package `in`.hridayan.driftly.settings.presentation.page.customisation.screens
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -54,9 +53,7 @@ fun CustomisationScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .nestedScroll(topBarScrollBehavior.nestedScrollConnection),
-            contentPadding = PaddingValues(
-                top = innerPadding.calculateTopPadding()
-            )
+            contentPadding = innerPadding
         ) {
             item {
                 Text(

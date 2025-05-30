@@ -10,7 +10,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -126,15 +125,13 @@ fun HomeScreen(
         LazyColumn(
             modifier = modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(15.dp),
-            contentPadding = PaddingValues(
-                top = innerPadding.calculateTopPadding(), bottom = 25.dp, start = 25.dp, end = 25.dp
-            ),
+            contentPadding = innerPadding,
         ) {
             item {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 35.dp),
+                        .padding(start = 25.dp, end = 25.dp, top = 35.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -165,6 +162,7 @@ fun HomeScreen(
                     Box(
                         modifier
                             .fillMaxWidth()
+                            .padding(horizontal = 25.dp)
                             .then(
                                 if (subjectCount == 0) Modifier.height(400.dp)
                                 else Modifier.padding(vertical = 20.dp)
@@ -180,6 +178,7 @@ fun HomeScreen(
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .padding(horizontal = 25.dp)
                             .alpha(0.75f),
                         text = stringResource(R.string.no_subject_yet),
                         style = MaterialTheme.typography.bodyLarge,
@@ -193,7 +192,7 @@ fun HomeScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 40.dp, bottom = 20.dp)
+                            .padding(top = 35.dp, bottom = 20.dp, start = 25.dp, end = 25.dp)
                     ) {
                         AnimatedHalfCircleProgress(
                             progress = totalProgress,
@@ -217,28 +216,34 @@ fun HomeScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom = 10.dp),
+                            .padding(bottom = 10.dp, start = 25.dp, end = 25.dp),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Label(
                             text = "${stringResource(R.string.present)} : $totalPresent",
                             labelColor = MaterialTheme.colorScheme.primaryContainer,
                             strokeColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.weight(1f).padding(horizontal = 5.dp)
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 5.dp)
                         )
 
                         Label(
                             text = "${stringResource(R.string.absent)} : $totalAbsent",
                             labelColor = MaterialTheme.colorScheme.errorContainer,
                             strokeColor = MaterialTheme.colorScheme.onErrorContainer,
-                            modifier = Modifier.weight(1f).padding(horizontal = 5.dp)
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 5.dp)
                         )
 
                         Label(
                             text = "${stringResource(R.string.total)} : $totalCount",
                             labelColor = MaterialTheme.colorScheme.tertiaryContainer,
                             strokeColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                            modifier = Modifier.weight(1f).padding(horizontal = 5.dp)
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 5.dp)
                         )
                     }
                 }
@@ -252,6 +257,7 @@ fun HomeScreen(
                 val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
                 SubjectCard(
+                    modifier = Modifier.padding(horizontal = 25.dp).animateItem(),
                     cardStyle = LocalSettings.current.subjectCardStyle,
                     cornerRadius = subjectCardCornerRadius.dp,
                     subjectId = subjects[index].id,

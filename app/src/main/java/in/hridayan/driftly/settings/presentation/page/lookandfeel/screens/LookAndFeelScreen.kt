@@ -3,7 +3,6 @@
 package `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,12 +24,12 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
 import `in`.hridayan.driftly.navigation.LocalNavController
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.components.tab.ColorTabs
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
-import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 
 @Composable
 fun LookAndFeelScreen(
@@ -67,9 +66,7 @@ fun LookAndFeelScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .nestedScroll(topBarScrollBehavior.nestedScrollConnection),
-            contentPadding = PaddingValues(
-                top = innerPadding.calculateTopPadding()
-            )
+            contentPadding = innerPadding
         ) {
             item {
                 Image(

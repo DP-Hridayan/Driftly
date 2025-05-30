@@ -2,7 +2,6 @@
 
 package `in`.hridayan.driftly.settings.presentation.page.changelog.screens
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -37,9 +36,7 @@ fun ChangelogScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .nestedScroll(topBarScrollBehavior.nestedScrollConnection),
-            contentPadding = PaddingValues(
-                top = innerPadding.calculateTopPadding()
-            )
+            contentPadding = innerPadding
         ) {
             itemsIndexed(items = changelogs) { index, item ->
                 ChangelogItemLayout(
