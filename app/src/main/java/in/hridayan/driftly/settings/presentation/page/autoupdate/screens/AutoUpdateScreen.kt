@@ -45,6 +45,7 @@ import `in`.hridayan.driftly.core.presentation.components.bottomsheet.UpdateBott
 import `in`.hridayan.driftly.core.presentation.components.progress.LoadingSpinner
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
+import `in`.hridayan.driftly.settings.presentation.components.dialog.LatestVersionDialog
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.viewmodel.AutoUpdateViewModel
@@ -63,11 +64,11 @@ fun AutoUpdateScreen(
     var tagName by rememberSaveable { mutableStateOf(BuildConfig.VERSION_NAME) }
     var apkUrl by rememberSaveable { mutableStateOf("") }
     val includePrerelease = LocalSettings.current.githubReleaseType == GithubReleaseType.PRE_RELEASE
-    val noUpdateAvailable = stringResource(R.string.no_update_available)
     val networkError = stringResource(R.string.network_error)
     val requestTimeout = stringResource(R.string.request_timeout)
     val unKnownError = stringResource(R.string.unknown_error)
     val settings = settingsViewModel.autoUpdatePageList
+    var showLatestVersionDialog by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         autoUpdateViewModel.updateEvents.collect { result ->
@@ -79,7 +80,7 @@ fun AutoUpdateScreen(
                         apkUrl = result.release.apkUrl.toString()
                         showUpdateSheet = true
                     } else {
-                        Toast.makeText(context, noUpdateAvailable, Toast.LENGTH_SHORT).show()
+                        showLatestVersionDialog = true
                     }
                 }
 
@@ -192,6 +193,10 @@ fun AutoUpdateScreen(
             latestVersion = tagName,
             apkUrl = apkUrl
         )
+    }
+
+    if (showLatestVersionDialog) {
+        LatestVersionDialog(onDismiss = { showLatestVersionDialog = false })
     }
 }
 
