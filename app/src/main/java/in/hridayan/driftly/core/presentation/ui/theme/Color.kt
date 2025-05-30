@@ -5,12 +5,17 @@ package `in`.hridayan.driftly.core.presentation.ui.theme
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
+import androidx.annotation.FloatRange
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.core.graphics.ColorUtils
 import `in`.hridayan.driftly.core.utils.a1
 import `in`.hridayan.driftly.core.utils.a2
 import `in`.hridayan.driftly.core.utils.a3
@@ -122,3 +127,13 @@ fun highContrastDynamicDarkColorScheme(context: Context): ColorScheme {
     )
 }
 
+@Composable
+fun Color.harmonizeWithPrimary(
+    @FloatRange(from = 0.0, to = 1.0) fraction: Float = 0.2f
+): Color = blend(MaterialTheme.colorScheme.primary, fraction)
+
+
+fun Color.blend(
+    color: Color,
+    @FloatRange(from = 0.0, to = 1.0) fraction: Float = 0.2f
+): Color = Color(ColorUtils.blendARGB(this.toArgb(), color.toArgb(), fraction))
