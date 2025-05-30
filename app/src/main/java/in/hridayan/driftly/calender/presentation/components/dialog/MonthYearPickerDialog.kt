@@ -100,7 +100,7 @@ fun MonthYearPickerDialog(
                         onValueChange = {},
                         readOnly = true,
                         singleLine = true,
-                        label = { Text("Month") },
+                        label = { Text(stringResource(R.string.month)) },
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMonth)
                         },
@@ -147,7 +147,7 @@ fun MonthYearPickerDialog(
                         value = selectedYear.toString(),
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("Year") },
+                        label = { Text(stringResource(R.string.year)) },
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedYear)
                         },

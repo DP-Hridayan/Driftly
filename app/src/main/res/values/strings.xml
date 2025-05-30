@@ -95,6 +95,8 @@
     <string name="back_button">Back button</string>
     <string name="this_month_data">This month data</string>
     <string name="all_months_data">All months data</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
     <string-array name="month_names">
         <item>January</item>
         <item>February</item>
