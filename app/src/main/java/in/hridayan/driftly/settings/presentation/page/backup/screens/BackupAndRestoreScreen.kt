@@ -2,7 +2,6 @@
 
 package `in`.hridayan.driftly.settings.presentation.page.backup.screens
 
-import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
@@ -37,6 +36,7 @@ import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
+import `in`.hridayan.driftly.core.utils.showToast
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.dialog.ResetSettingsDialog
@@ -53,14 +53,13 @@ fun BackupAndRestoreScreen(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     backupAndRestoreViewModel: BackupAndRestoreViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     val settings = settingsViewModel.backupPageList
     var showResetDialog by rememberSaveable { mutableStateOf(false) }
     var showRestoreBackupDialog by rememberSaveable { mutableStateOf(false) }
     val backupTime by backupAndRestoreViewModel.backupTime.collectAsState()
     val lastBackupTime by settingsViewModel.getString(SettingsKeys.LAST_BACKUP_TIME)
         .collectAsState(initial = "")
-
-    val context = LocalContext.current
 
     var restoreFileUri by rememberSaveable { mutableStateOf("".toUri()) }
 
@@ -79,11 +78,7 @@ fun BackupAndRestoreScreen(
                 backupAndRestoreViewModel.loadBackupTime(it)
                 showRestoreBackupDialog = true
             } else {
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.pick_driftly_extension),
-                    Toast.LENGTH_SHORT
-                ).show()
+                showToast(context, context.getString(R.string.pick_driftly_extension))
             }
         }
     }
@@ -104,6 +99,15 @@ fun BackupAndRestoreScreen(
                     launcherRestore.launch(arrayOf("application/octet-stream"))
                 }
 
+                else -> {}
+            }
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        backupAndRestoreViewModel.uiEvent.collect { event ->
+            when (event) {
+                is SettingsUiEvent.ShowToast -> showToast(context, event.message)
                 else -> {}
             }
         }

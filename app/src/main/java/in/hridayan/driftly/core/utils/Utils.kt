@@ -6,12 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import android.widget.Toast
 import androidx.core.net.toUri
-import `in`.hridayan.driftly.R
 
 fun openUrl(url: String, context: Context) {
     try {
@@ -31,4 +27,8 @@ fun isNetworkAvailable(context: Context): Boolean {
     val network = cm.activeNetwork ?: return false
     val actNw = cm.getNetworkCapabilities(network) ?: return false
     return actNw.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+}
+
+fun showToast(context: Context, message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
