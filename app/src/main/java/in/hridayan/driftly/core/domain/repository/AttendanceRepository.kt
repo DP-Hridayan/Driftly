@@ -6,9 +6,12 @@ import kotlinx.coroutines.flow.Flow
 
 interface AttendanceRepository {
     suspend fun insertAttendance(attendance: AttendanceEntity)
+    suspend fun insertAllAttendances(attendances: List<AttendanceEntity>)
     suspend fun updateAttendance(attendance: AttendanceEntity)
     suspend fun deleteAttendance(subjectId: Int, date: String)
+    suspend fun deleteAllAttendances()
     suspend fun deleteAllAttendanceForSubject(subjectId: Int)
+    suspend fun getAllAttendancesOnce(): List<AttendanceEntity>
     fun getAttendanceForSubject(subjectId: Int): Flow<List<AttendanceEntity>>
     fun getTotalCountByStatus(status: AttendanceStatus): Flow<Int>
     fun getCountBySubjectAndStatus(subjectId: Int, status: AttendanceStatus): Flow<Int>

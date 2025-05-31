@@ -23,7 +23,7 @@ class SettingsRepositoryImpl(
     override fun getFloat(key: SettingsKeys): Flow<Float> = dataStore.floatFlow(key)
     override suspend fun setFloat(key: SettingsKeys, value: Float) = dataStore.setFloat(key, value)
 
-    override suspend fun getLookAndFeelPageList(): List<PreferenceGroup>{
+    override suspend fun getLookAndFeelPageList(): List<PreferenceGroup> {
         return SettingsProvider.lookAndFeelPageList
     }
 
@@ -50,4 +50,10 @@ class SettingsRepositoryImpl(
     override suspend fun getBackupPageList(): List<PreferenceGroup> {
         return SettingsProvider.backupPageList
     }
+
+    override fun getAllDefaultSettings(): Map<String, Any?> {
+        return dataStore.getAllDefaultSettings()
+    }
+
+    override suspend fun resetAndRestoreDefaults() = dataStore.resetAndRestoreDefaults()
 }

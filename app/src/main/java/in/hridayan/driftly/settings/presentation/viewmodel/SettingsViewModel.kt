@@ -160,8 +160,18 @@ class SettingsViewModel @Inject constructor(
                     SettingsUiEvent.Navigate(DarkThemeScreen)
                 )
 
+                SettingsKeys.RESET_APP_SETTINGS -> _uiEvent.emit(
+                    SettingsUiEvent.ShowDialog(SettingsKeys.RESET_APP_SETTINGS)
+                )
+
                 else -> {}
             }
+        }
+    }
+
+    fun resetSettingsToDefault() {
+        viewModelScope.launch {
+            settingsRepository.resetAndRestoreDefaults()
         }
     }
 

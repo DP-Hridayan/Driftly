@@ -10,6 +10,8 @@ import `in`.hridayan.driftly.settings.data.local.datastore.SettingsDataStore
 import `in`.hridayan.driftly.settings.data.local.repository.SettingsRepositoryImpl
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
+import kotlinx.serialization.json.Json
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -26,4 +28,12 @@ object SettingsModule {
     @Provides
     fun provideToggleSettingUseCase(repo: SettingsRepository): ToggleSettingUseCase =
         ToggleSettingUseCase(repo)
+
+    @Provides
+    @Singleton
+    fun provideJson(): Json = Json {
+        prettyPrint = true
+        isLenient = true
+        ignoreUnknownKeys = true
+    }
 }

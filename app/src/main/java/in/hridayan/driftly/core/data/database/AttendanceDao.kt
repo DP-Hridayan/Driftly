@@ -16,14 +16,23 @@ interface AttendanceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAttendance(attendance: AttendanceEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllAttendances(attendances: List<AttendanceEntity>)
+
     @Update
     suspend fun updateAttendance(attendance: AttendanceEntity)
 
     @Delete
     suspend fun deleteAttendance(attendance: AttendanceEntity)
 
+    @Query("DELETE FROM attendance")
+    suspend fun deleteAllAttendances()
+
     @Query("DELETE FROM attendance WHERE subjectId = :subjectId")
     suspend fun deleteAllAttendanceForSubject(subjectId: Int)
+
+    @Query("SELECT * FROM attendance")
+    suspend fun getAllAttendancesOnce(): List<AttendanceEntity>
 
     @Query("SELECT * FROM attendance WHERE subjectId = :subjectId")
     fun getAttendanceForSubjectFlow(subjectId: Int): Flow<List<AttendanceEntity>>

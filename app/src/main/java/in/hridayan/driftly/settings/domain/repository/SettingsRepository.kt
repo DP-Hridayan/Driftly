@@ -24,4 +24,6 @@ interface SettingsRepository {
     suspend fun getBehaviorPageList(): List<PreferenceGroup>
     suspend fun getBackupPageList(): List<PreferenceGroup>
 
+    fun getAllDefaultSettings() : Map<String, Any?>
+    suspend fun resetAndRestoreDefaults()
 }

@@ -21,6 +21,10 @@ class SubjectRepositoryImpl @Inject constructor(
         subjectDao.insertSubject(subject)
     }
 
+    override suspend fun insertAllSubjects(subjects: List<SubjectEntity>) {
+        subjectDao.insertAllSubjects(subjects)
+    }
+
     override suspend fun updateSubject(subjectId: Int, newName: String) {
         subjectDao.updateSubject(subjectId, newName)
     }
@@ -28,6 +32,13 @@ class SubjectRepositoryImpl @Inject constructor(
     override suspend fun deleteSubject(subjectId: Int) {
         subjectDao.deleteSubject(subjectId)
     }
+
+    override suspend fun deleteAllSubjects() {
+        subjectDao.deleteAllSubjects()
+    }
+
+    override suspend fun getAllSubjectsOnce(): List<SubjectEntity> =
+        subjectDao.getAllSubjectsOnce()
 
     override fun getSubjectCount(): Flow<Int> =
         subjectDao.getSubjectCount()

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package `in`.hridayan.driftly.home.presentation.components.dialog
 
 import androidx.compose.foundation.layout.Column
@@ -5,6 +7,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -57,6 +61,7 @@ fun NoAttendanceDialog(
 
                 TextButton(
                     modifier = Modifier.align(Alignment.End),
+                    shapes = ButtonDefaults.shapes(),
                     onClick = {
                         weakHaptic()
                         onDismiss()

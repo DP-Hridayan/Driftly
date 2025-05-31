@@ -85,4 +85,21 @@ class SettingsDataStore @Inject constructor(
             prefs[preferencesKey] = value
         }
     }
+
+    fun getAllDefaultSettings(): Map<String, Any?> {
+        return SettingsKeys.entries.associate { key -> key.name to key.default }
+    }
+
+    suspend fun resetAndRestoreDefaults() {
+        ds.edit { it.clear() }
+        ds.edit { prefs ->
+            SettingsKeys.entries.forEach { key ->
+                when(val defaultValue = key.default) {
+                    is Boolean -> prefs[booleanPreferencesKey(key.name)] = defaultValue
+                    is Int -> prefs[intPreferencesKey(key.name)] = defaultValue
+                    is Float -> prefs[floatPreferencesKey(key.name)] = defaultValue
+                }
+            }
+        }
+    }
 }
