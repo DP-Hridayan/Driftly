@@ -62,7 +62,9 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
                             text = stringResource(group.categoryNameResId),
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
+                            modifier = Modifier
+                                .animateItem()
+                                .padding(horizontal = 20.dp, vertical = 25.dp)
                         )
                         group.items.forEach { item ->
                             PreferenceItemView(item = item, modifier = modifier.animateItem())
