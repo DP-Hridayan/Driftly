@@ -124,12 +124,26 @@ class SettingsDataStore @Inject constructor(
     }
 
     suspend fun resetAndRestoreDefaults() {
-        val preserveKeys = setOf(SettingsKeys.LAST_BACKUP_TIME.name)
+        val preserveKeys = setOf(
+            SettingsKeys.LAST_BACKUP_TIME.name,
+            SettingsKeys.SAVED_VERSION_CODE.name
+        )
 
         val currentPrefs = ds.data.first()
 
-        val preservedValues = preserveKeys.associateWith { key ->
-            currentPrefs[stringPreferencesKey(key)]
+        val preservedValues: Map<String, Any?> = preserveKeys.associateWith { keyName ->
+
+            val settingsKey = SettingsKeys.entries.find { it.name == keyName }
+
+            settingsKey?.let { key ->
+                when (key.default) {
+                    is Boolean -> currentPrefs[booleanPreferencesKey(keyName)]
+                    is Int -> currentPrefs[intPreferencesKey(keyName)]
+                    is Float -> currentPrefs[floatPreferencesKey(keyName)]
+                    is String -> currentPrefs[stringPreferencesKey(keyName)]
+                    else -> null
+                }
+            }
         }
 
         ds.edit { prefs ->
@@ -150,8 +164,17 @@ class SettingsDataStore @Inject constructor(
                     }
                 }
 
-            preservedValues.forEach { (key, value) ->
-                if (value != null) prefs[stringPreferencesKey(key)] = value
+            preservedValues.forEach { (keyName, value) ->
+                val settingsKey = SettingsKeys.entries.find { it.name == keyName }
+                if (settingsKey != null && value != null) {
+                    when (value) {
+                        is Boolean -> prefs[booleanPreferencesKey(keyName)] = value
+                        is Int -> prefs[intPreferencesKey(keyName)] = value
+                        is Float -> prefs[floatPreferencesKey(keyName)] = value
+                        is String -> prefs[stringPreferencesKey(keyName)] = value
+                        else -> {}
+                    }
+                }
             }
         }
     }
