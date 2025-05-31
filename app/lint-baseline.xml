@@ -190,23 +190,12 @@
 
     <issue
         id="UnusedResources"
-        message="The resource `R.string.no_update_available` appears to be unused"
-        errorLine1="    &lt;string name=&quot;no_update_available&quot;>No update available&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="78"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
         message="The resource `R.string.reset_to_current_month` appears to be unused"
         errorLine1="    &lt;string name=&quot;reset_to_current_month&quot;>Reset to current month&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="92"
+            line="91"
             column="13"/>
     </issue>
 
@@ -217,7 +206,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="93"
+            line="92"
             column="13"/>
     </issue>
 
@@ -228,18 +217,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="94"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.choose_backup_file` appears to be unused"
-        errorLine1="    &lt;string name=&quot;choose_backup_file&quot;>Choose the saved backup file&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="135"
+            line="93"
             column="13"/>
     </issue>
 
@@ -250,7 +228,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="147"
+            line="145"
             column="13"/>
     </issue>
 
@@ -261,7 +239,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="148"
+            line="146"
             column="13"/>
     </issue>
 
@@ -272,7 +250,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="149"
+            line="147"
             column="13"/>
     </issue>
 
@@ -283,7 +261,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="150"
+            line="148"
             column="13"/>
     </issue>
 
@@ -294,7 +272,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="151"
+            line="149"
             column="13"/>
     </issue>
 
@@ -305,7 +283,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="152"
+            line="150"
             column="13"/>
     </issue>
 
