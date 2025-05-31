@@ -1,21 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="260" style="background:#ffffff">
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="260" style="background:#00000000">
 <style>text { font-family: sans-serif; font-size: 14px; fill: #1C1B1F; }</style>
 <text x="140" y="25" text-anchor="end"><![CDATA[Arabic]]></text>
 <rect x="150" y="11" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="11" width="300" height="14" fill="#0f6b0f" rx="8" ry="8" />
-<text x="460" y="25" text-anchor="start">100%</text>
+<rect x="150" y="11" width="294" height="14" fill="#12690f" rx="8" ry="8" />
+<text x="460" y="25" text-anchor="start">98%</text>
 <text x="140" y="55" text-anchor="end"><![CDATA[German]]></text>
 <rect x="150" y="41" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="41" width="138" height="14" fill="#674517" rx="8" ry="8" />
-<text x="460" y="55" text-anchor="start">46%</text>
+<rect x="150" y="41" width="135" height="14" fill="#694517" rx="8" ry="8" />
+<text x="460" y="55" text-anchor="start">45%</text>
 <text x="140" y="85" text-anchor="end"><![CDATA[French]]></text>
 <rect x="150" y="71" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="71" width="225" height="14" fill="#385912" rx="8" ry="8" />
-<text x="460" y="85" text-anchor="start">75%</text>
+<rect x="150" y="71" width="222" height="14" fill="#395912" rx="8" ry="8" />
+<text x="460" y="85" text-anchor="start">74%</text>
 <text x="140" y="115" text-anchor="end"><![CDATA[Japanese]]></text>
 <rect x="150" y="101" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="101" width="222" height="14" fill="#395912" rx="8" ry="8" />
-<text x="460" y="115" text-anchor="start">74%</text>
+<rect x="150" y="101" width="219" height="14" fill="#3b5813" rx="8" ry="8" />
+<text x="460" y="115" text-anchor="start">73%</text>
 <text x="140" y="145" text-anchor="end"><![CDATA[Portuguese, Brazilian]]></text>
 <rect x="150" y="131" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
 <rect x="150" y="131" width="0" height="14" fill="#b3261e" rx="8" ry="8" />
