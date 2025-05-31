@@ -38,4 +38,5 @@ enum class SettingsKeys(val default: Any?) {
     BACKUP_APP_DATA(null),
     RESTORE_APP_DATA(null),
     RESET_APP_SETTINGS(null),
+    LAST_BACKUP_TIME("")
 }

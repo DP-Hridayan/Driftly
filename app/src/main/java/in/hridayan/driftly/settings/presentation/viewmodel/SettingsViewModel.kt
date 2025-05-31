@@ -23,6 +23,7 @@ import `in`.hridayan.driftly.navigation.DarkThemeScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.domain.model.BackupOption
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
@@ -58,6 +59,26 @@ class SettingsViewModel @Inject constructor(
 
     var backupPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
         private set
+
+    fun loadSettings() {
+        viewModelScope.launch {
+            val lookAndFeel = settingsRepository.getLookAndFeelPageList()
+            val settings = settingsRepository.getSettingsPageList()
+            val about = settingsRepository.getAboutPageList()
+            val autoUpdate = settingsRepository.getAutoUpdatePageList()
+            val behavior = settingsRepository.getBehaviorPageList()
+            val darkTheme = settingsRepository.getDarkThemePageList()
+            val backup = settingsRepository.getBackupPageList()
+
+            settingsPageList = settings
+            autoUpdatePageList = autoUpdate
+            lookAndFeelPageList = lookAndFeel
+            aboutPageList = about
+            behaviorPageList = behavior
+            darkThemePageList = darkTheme
+            backupPageList = backup
+        }
+    }
 
     private val _uiEvent = MutableSharedFlow<SettingsUiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
@@ -164,6 +185,22 @@ class SettingsViewModel @Inject constructor(
                     SettingsUiEvent.ShowDialog(SettingsKeys.RESET_APP_SETTINGS)
                 )
 
+                SettingsKeys.BACKUP_APP_SETTINGS -> _uiEvent.emit(
+                    SettingsUiEvent.RequestDocumentUriForBackup(BackupOption.SETTINGS_ONLY)
+                )
+
+                SettingsKeys.BACKUP_APP_DATABASE -> _uiEvent.emit(
+                    SettingsUiEvent.RequestDocumentUriForBackup(BackupOption.DATABASE_ONLY)
+                )
+
+                SettingsKeys.BACKUP_APP_DATA -> _uiEvent.emit(
+                    SettingsUiEvent.RequestDocumentUriForBackup(BackupOption.SETTINGS_AND_DATABASE)
+                )
+
+                SettingsKeys.RESTORE_APP_DATA -> _uiEvent.emit(
+                    SettingsUiEvent.RequestDocumentUriForRestore
+                )
+
                 else -> {}
             }
         }
@@ -172,26 +209,6 @@ class SettingsViewModel @Inject constructor(
     fun resetSettingsToDefault() {
         viewModelScope.launch {
             settingsRepository.resetAndRestoreDefaults()
-        }
-    }
-
-    fun loadSettings() {
-        viewModelScope.launch {
-            val lookAndFeel = settingsRepository.getLookAndFeelPageList()
-            val settings = settingsRepository.getSettingsPageList()
-            val about = settingsRepository.getAboutPageList()
-            val autoUpdate = settingsRepository.getAutoUpdatePageList()
-            val behavior = settingsRepository.getBehaviorPageList()
-            val darkTheme = settingsRepository.getDarkThemePageList()
-            val backup = settingsRepository.getBackupPageList()
-
-            settingsPageList = settings
-            autoUpdatePageList = autoUpdate
-            lookAndFeelPageList = lookAndFeel
-            aboutPageList = about
-            behaviorPageList = behavior
-            darkThemePageList = darkTheme
-            backupPageList = backup
         }
     }
 }

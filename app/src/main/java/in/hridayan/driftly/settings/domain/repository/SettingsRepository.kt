@@ -16,6 +16,9 @@ interface SettingsRepository {
     fun getFloat(key: SettingsKeys): Flow<Float>
     suspend fun setFloat(key: SettingsKeys, value: Float)
 
+    fun getString(key: SettingsKeys): Flow<String>
+    suspend fun setString(key: SettingsKeys, value: String)
+
     suspend fun getSettingsPageList(): List<PreferenceGroup>
     suspend fun getLookAndFeelPageList(): List<PreferenceGroup>
     suspend fun getAboutPageList(): List<PreferenceGroup>
@@ -24,6 +27,7 @@ interface SettingsRepository {
     suspend fun getBehaviorPageList(): List<PreferenceGroup>
     suspend fun getBackupPageList(): List<PreferenceGroup>
 
-    fun getAllDefaultSettings() : Map<String, Any?>
+    fun getAllDefaultSettings(): Map<String, Any?>
+    suspend fun getCurrentSettings(): Map<String, Any?>
     suspend fun resetAndRestoreDefaults()
 }

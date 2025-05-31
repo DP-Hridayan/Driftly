@@ -95,6 +95,9 @@
     <string name="back_button">Back button</string>
     <string name="this_month_data">This month data</string>
     <string name="all_months_data">All months data</string>
+    <string name="last_backup_time">Last backup time</string>
+    <string name="backup_date">Backup date</string>
+    <string name="backup_time">Backup time</string>
     <string name="already_latest_version">You are using the latest version</string>
     <string name="month">Month</string>
     <string name="year">Year</string>
@@ -124,7 +127,7 @@
     <string name="backup_all_data">Backup all data</string>
     <string name="des_backup_all_data">Backup all data of the app</string>
     <string name="restore_app_data">Restore app data</string>
-    <string name="des_restore_app_data">Restore app data from the saved backup file</string>
+    <string name="des_restore_app_data">Restore app data from the saved backup file.\nThe saved database will overwrite the current database</string>
     <string name="choose_backup_file">Choose the saved backup file</string>
     <string name="reset">Reset</string>
     <string name="irreversible_action_warning">This action is irreversible!</string>

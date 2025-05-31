@@ -5,6 +5,7 @@ import android.net.Uri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.BackupData
 import `in`.hridayan.driftly.settings.domain.model.BackupOption
 import `in`.hridayan.driftly.settings.domain.repository.BackupAndRestoreRepository
@@ -12,6 +13,7 @@ import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class BackupAndRestoreRepositoryImpl @Inject constructor(
@@ -26,10 +28,14 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 val backupData = getBackupData(option)
+
                 context.contentResolver.openOutputStream(uri)?.use { outputStream ->
                     val jsonData = json.encodeToString(BackupData.serializer(), backupData)
                     outputStream.write(jsonData.toByteArray())
                 }
+
+                settingsRepository.setString(SettingsKeys.LAST_BACKUP_TIME, backupData.backupTime)
+
                 true
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -55,17 +61,37 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
         val settings =
             if (option == BackupOption.SETTINGS_ONLY || option == BackupOption.SETTINGS_AND_DATABASE)
                 getSettingsMap() else null
+
         val attendance =
             if (option == BackupOption.DATABASE_ONLY || option == BackupOption.SETTINGS_AND_DATABASE)
                 attendanceRepository.getAllAttendancesOnce() else null
+
         val subjects =
             if (option == BackupOption.DATABASE_ONLY || option == BackupOption.SETTINGS_AND_DATABASE)
                 subjectRepository.getAllSubjectsOnce() else null
-        return BackupData(settings, attendance, subjects)
+
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+
+        val backupTime = java.time.LocalDateTime.now().format(formatter)
+
+        return BackupData(settings, attendance, subjects, backupTime)
     }
 
-    private fun getSettingsMap(): Map<String, String?> {
-        val prefs = settingsRepository.getAllDefaultSettings()
+    override suspend fun getBackupTimeFromFile(uri: Uri): String? = withContext(Dispatchers.IO) {
+        return@withContext try {
+            val inputStream = context.contentResolver.openInputStream(uri)
+            val jsonString = inputStream?.bufferedReader()?.readText() ?: return@withContext null
+            val data = json.decodeFromString(BackupData.serializer(), jsonString)
+            data.backupTime
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+
+    private suspend fun getSettingsMap(): Map<String, String?> {
+        val prefs = settingsRepository.getCurrentSettings()
         return prefs.mapValues { it.value?.toString() }
     }
 
@@ -81,16 +107,30 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
         data.settings?.let { restoreSettings(it) }
     }
 
-    private fun restoreSettings(settings: Map<String, String?>) {
-        val prefs = context.getSharedPreferences("app_settings", Context.MODE_PRIVATE)
-        val editor = prefs.edit().clear()
+    private suspend fun restoreSettings(settings: Map<String, String?>) {
+        settingsRepository.resetAndRestoreDefaults()
+
         settings.forEach { (key, value) ->
-            if (value == null) {
-                editor.remove(key)
-            } else {
-                editor.putString(key, value)
+            val settingKey = SettingsKeys.entries.find { it.name == key } ?: return@forEach
+
+            value?.let {
+                when (settingKey.default) {
+                    is Boolean -> settingsRepository.setBoolean(
+                        settingKey,
+                        it.toBooleanStrictOrNull() ?: return@forEach
+                    )
+
+                    is Int -> settingsRepository.setInt(
+                        settingKey,
+                        it.toIntOrNull() ?: return@forEach
+                    )
+
+                    is Float -> settingsRepository.setFloat(
+                        settingKey,
+                        it.toFloatOrNull() ?: return@forEach
+                    )
+                }
             }
         }
-        editor.apply()
     }
 }

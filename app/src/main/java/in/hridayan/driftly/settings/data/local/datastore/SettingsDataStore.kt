@@ -6,10 +6,12 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.data.local.settingsDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -86,15 +88,46 @@ class SettingsDataStore @Inject constructor(
         }
     }
 
+    private fun SettingsKeys.toStringKey(): Preferences.Key<String> =
+        stringPreferencesKey(this.name)
+
+    fun stringFlow(key: SettingsKeys): Flow<String> {
+        val preferencesKey = key.toStringKey()
+        val default = key.default as? String ?: ""
+        return ds.data
+            .map { prefs -> prefs[preferencesKey] ?: default }
+    }
+
+    suspend fun setString(key: SettingsKeys, value: String) {
+        val preferencesKey = key.toStringKey()
+        ds.edit { prefs ->
+            prefs[preferencesKey] = value
+        }
+    }
+
     fun getAllDefaultSettings(): Map<String, Any?> {
         return SettingsKeys.entries.associate { key -> key.name to key.default }
+    }
+
+    suspend fun getCurrentSettings(): Map<String, Any?> {
+        val prefs = ds.data.first()
+
+        return SettingsKeys.entries.associate { key ->
+            val value = when (val default = key.default) {
+                is Boolean -> prefs[booleanPreferencesKey(key.name)] ?: default
+                is Int -> prefs[intPreferencesKey(key.name)] ?: default
+                is Float -> prefs[floatPreferencesKey(key.name)] ?: default
+                else -> null
+            }
+            key.name to value
+        }
     }
 
     suspend fun resetAndRestoreDefaults() {
         ds.edit { it.clear() }
         ds.edit { prefs ->
             SettingsKeys.entries.forEach { key ->
-                when(val defaultValue = key.default) {
+                when (val defaultValue = key.default) {
                     is Boolean -> prefs[booleanPreferencesKey(key.name)] = defaultValue
                     is Int -> prefs[intPreferencesKey(key.name)] = defaultValue
                     is Float -> prefs[floatPreferencesKey(key.name)] = defaultValue

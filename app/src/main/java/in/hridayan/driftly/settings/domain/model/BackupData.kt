@@ -8,5 +8,6 @@ import kotlinx.serialization.Serializable
 data class BackupData(
     val settings: Map<String, String?>? = null,
     val attendance: List<AttendanceEntity>? = null,
-    val subjects: List<SubjectEntity>? = null
+    val subjects: List<SubjectEntity>? = null,
+    val backupTime: String
 )
