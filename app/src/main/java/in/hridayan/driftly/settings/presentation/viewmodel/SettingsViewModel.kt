@@ -15,22 +15,17 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.core.common.constants.UrlConst
 import `in`.hridayan.driftly.navigation.AboutScreen
 import `in`.hridayan.driftly.navigation.AutoUpdateScreen
+import `in`.hridayan.driftly.navigation.BackupAndRestoreScreen
 import `in`.hridayan.driftly.navigation.BehaviorScreen
 import `in`.hridayan.driftly.navigation.ChangelogScreen
 import `in`.hridayan.driftly.navigation.CustomisationScreen
 import `in`.hridayan.driftly.navigation.DarkThemeScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
+import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
-import `in`.hridayan.driftly.settings.domain.usecase.GetAboutPageListUseCase
-import `in`.hridayan.driftly.settings.domain.usecase.GetAutoUpdatePageListUseCase
-import `in`.hridayan.driftly.settings.domain.usecase.GetBehaviorPageListUseCase
-import `in`.hridayan.driftly.settings.domain.usecase.GetDarkThemePageListUseCase
-import `in`.hridayan.driftly.settings.domain.usecase.GetLookAndFeelPageListUseCase
-import `in`.hridayan.driftly.settings.domain.usecase.GetSettingsPageListUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -42,12 +37,6 @@ class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val settingsRepository: SettingsRepository,
     private val toggleSettingUseCase: ToggleSettingUseCase,
-    private val getSettingsPageListUseCase: GetSettingsPageListUseCase,
-    private val getLookAndFeelPageListUseCase: GetLookAndFeelPageListUseCase,
-    private val getAboutPageListUseCase: GetAboutPageListUseCase,
-    private val getAutoUpdatePageListUseCase: GetAutoUpdatePageListUseCase,
-    private val getDarkThemePageListUseCase: GetDarkThemePageListUseCase,
-    private val getBehaviorPageListUseCase: GetBehaviorPageListUseCase
 ) : ViewModel() {
     var settingsPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
         private set
@@ -65,6 +54,9 @@ class SettingsViewModel @Inject constructor(
         private set
 
     var behaviorPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
+        private set
+
+    var backupPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
         private set
 
     private val _uiEvent = MutableSharedFlow<SettingsUiEvent>()
@@ -126,6 +118,10 @@ class SettingsViewModel @Inject constructor(
                     SettingsUiEvent.Navigate(BehaviorScreen)
                 )
 
+                SettingsKeys.BACKUP_AND_RESTORE -> _uiEvent.emit(
+                    SettingsUiEvent.Navigate(BackupAndRestoreScreen)
+                )
+
                 SettingsKeys.ABOUT -> _uiEvent.emit(
                     SettingsUiEvent.Navigate(AboutScreen)
                 )
@@ -171,12 +167,13 @@ class SettingsViewModel @Inject constructor(
 
     fun loadSettings() {
         viewModelScope.launch {
-            val lookAndFeel = getLookAndFeelPageListUseCase()
-            val settings = getSettingsPageListUseCase()
-            val about = getAboutPageListUseCase()
-            val autoUpdate = getAutoUpdatePageListUseCase()
-            val behavior = getBehaviorPageListUseCase()
-            val darkTheme = getDarkThemePageListUseCase()
+            val lookAndFeel = settingsRepository.getLookAndFeelPageList()
+            val settings = settingsRepository.getSettingsPageList()
+            val about = settingsRepository.getAboutPageList()
+            val autoUpdate = settingsRepository.getAutoUpdatePageList()
+            val behavior = settingsRepository.getBehaviorPageList()
+            val darkTheme = settingsRepository.getDarkThemePageList()
+            val backup = settingsRepository.getBackupPageList()
 
             settingsPageList = settings
             autoUpdatePageList = autoUpdate
@@ -184,6 +181,7 @@ class SettingsViewModel @Inject constructor(
             aboutPageList = about
             behaviorPageList = behavior
             darkThemePageList = darkTheme
+            backupPageList = backup
         }
     }
 }

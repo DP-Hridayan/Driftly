@@ -7,11 +7,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import `in`.hridayan.driftly.calender.presentation.screens.CalendarScreen
 import `in`.hridayan.driftly.home.presentation.screens.HomeScreen
-import `in`.hridayan.driftly.settings.presentation.page.customisation.screens.CustomisationScreen
 import `in`.hridayan.driftly.settings.presentation.page.about.screens.AboutScreen
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.screens.AutoUpdateScreen
+import `in`.hridayan.driftly.settings.presentation.page.backup.screens.BackupAndRestoreScreen
 import `in`.hridayan.driftly.settings.presentation.page.behavior.screens.BehaviorScreen
 import `in`.hridayan.driftly.settings.presentation.page.changelog.screens.ChangelogScreen
+import `in`.hridayan.driftly.settings.presentation.page.customisation.screens.CustomisationScreen
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.DarkThemeScreen
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.presentation.page.mainscreen.screen.SettingsScreen
@@ -101,6 +102,13 @@ fun Navigation() {
             ) {
                 AutoUpdateScreen()
             }
+
+            composable<BackupAndRestoreScreen>(
+                enterTransition = { slideFadeInFromRight() },
+                popExitTransition = { slideFadeOutToRight() }
+            ) {
+                BackupAndRestoreScreen()
+            }
         }
     }
 }
@@ -136,3 +144,6 @@ object CustomisationScreen
 
 @Serializable
 object BehaviorScreen
+
+@Serializable
+object BackupAndRestoreScreen

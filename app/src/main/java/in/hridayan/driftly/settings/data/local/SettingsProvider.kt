@@ -14,6 +14,7 @@ import androidx.compose.material.icons.rounded.Downloading
 import androidx.compose.material.icons.rounded.EventAvailable
 import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.SentimentNeutral
+import androidx.compose.material.icons.rounded.SettingsBackupRestore
 import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material.icons.rounded.Vibration
@@ -59,6 +60,12 @@ object SettingsProvider {
                 titleResId = R.string.auto_update,
                 descriptionResId = R.string.des_auto_update,
                 iconVector = Icons.Rounded.Update
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.BACKUP_AND_RESTORE,
+                titleResId = R.string.backup_and_restore,
+                descriptionResId = R.string.des_backup_and_restore,
+                iconVector = Icons.Rounded.SettingsBackupRestore
             ),
             nullPreferenceItem(
                 key = SettingsKeys.ABOUT,
@@ -215,6 +222,28 @@ object SettingsProvider {
                 titleResId = R.string.start_week_on_monday,
                 descriptionResId = R.string.des_start_week_on_monday,
                 iconVector = Icons.Rounded.CalendarViewWeek
+            )
+        )
+    )
+
+    val backupPageList: List<PreferenceGroup> = listOf(
+        categorizedItems(
+            categoryNameResId = R.string.restore,
+            nullPreferenceItem(
+                key = SettingsKeys.BACKUP_AND_RESTORE,
+                titleResId = R.string.backup_and_restore,
+                descriptionResId = R.string.des_backup_and_restore,
+                iconResId = R.drawable.ic_restore_page
+            )
+        )
+        ,
+        categorizedItems(
+            categoryNameResId = R.string.reset,
+            nullPreferenceItem(
+                key = SettingsKeys.RESET_APP_SETTINGS,
+                titleResId = R.string.reset_app_settings,
+                descriptionResId = R.string.des_reset_app_settings,
+                iconResId = R.drawable.ic_reset_settings
             )
         )
     )

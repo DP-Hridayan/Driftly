@@ -113,6 +113,22 @@
         <item>December</item>
     </string-array>
     <string name="calendar">Calendar</string>
+    <string name="backup_and_restore">Backup and restore</string>
+    <string name="des_backup_and_restore">Backup and restore app settings and other data</string>
+    <string name="backup_settings">Backup app settings</string>
+    <string name="des_backup_settings">Backup app settings preferences only</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
+    <string name="backup_calendar">Backup calendar data</string>
+    <string name="des_backup_calendar">Backup calendar data such as subject attendance records</string>
+    <string name="backup_all_data">Backup all data</string>
+    <string name="des_backup_all_data">Backup all data of the app</string>
+    <string name="restore_app_data">Restore app data</string>
+    <string name="des_restore_app_data">Restore app data from the saved backup file</string>
+    <string name="choose_backup_file">Choose the saved backup file</string>
+    <string name="reset">Reset</string>
+    <string name="reset_app_settings">Reset app settings</string>
+    <string name="des_reset_app_settings">Reset app settings to default values</string>
     <string name="start_week_on_monday">Start week on Monday</string>
     <string name="des_start_week_on_monday">Prefer seeing your week begin with Monday instead of Sunday? Enable this to shift the calendar layout so Monday becomes the first day of the week.</string>
     <string name="pre_release_warning_description">These versions are still in testing and may contain unfinished features or unexpected bugs. If you choose to update to a pre-release, please be aware that things might break or behave strangely.\nIf you encounter any issues, crashes, or weird behavior, please report them so we can fix and improve Driftly before the stable release.\nThanks for helping us build better!</string>

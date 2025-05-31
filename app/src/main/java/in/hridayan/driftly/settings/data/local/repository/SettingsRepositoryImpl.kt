@@ -46,4 +46,8 @@ class SettingsRepositoryImpl(
     override suspend fun getSettingsPageList(): List<PreferenceGroup> {
         return SettingsProvider.settingsPageList
     }
+
+    override suspend fun getBackupPageList(): List<PreferenceGroup> {
+        return SettingsProvider.backupPageList
+    }
 }

@@ -31,5 +31,7 @@ enum class SettingsKeys(val default: Any?) {
     SAVED_VERSION_CODE(0),
     REMEMBER_CALENDAR_MONTH_YEAR(false),
     START_WEEK_ON_MONDAY(false),
-    ENABLE_DIRECT_DOWNLOAD(true)
+    ENABLE_DIRECT_DOWNLOAD(true),
+    BACKUP_AND_RESTORE(null),
+    RESET_APP_SETTINGS(null)
 }
