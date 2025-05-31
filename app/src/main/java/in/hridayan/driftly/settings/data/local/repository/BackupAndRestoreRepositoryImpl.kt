@@ -118,6 +118,8 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
         settingsRepository.resetAndRestoreDefaults()
 
         settings.forEach { (key, value) ->
+            if (key == SettingsKeys.SAVED_VERSION_CODE.name) return@forEach
+
             val settingKey = SettingsKeys.entries.find { it.name == key } ?: return@forEach
 
             value?.let {

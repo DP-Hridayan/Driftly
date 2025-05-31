@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 8.10.0" type="baseline" client="gradle" dependencies="false" name="AGP (8.10.0)" variant="all" version="8.10.0">
+<issues format="6" by="lint 8.10.1" type="baseline" client="gradle" dependencies="false" name="AGP (8.10.1)" variant="all" version="8.10.1">
 
     <issue
         id="VectorRaster"
@@ -24,14 +24,311 @@
     </issue>
 
     <issue
-        id="AndroidGradlePluginVersion"
-        message="A newer version of com.android.application than 8.10.0 is available: 8.10.1"
-        errorLine1="agp = &quot;8.10.0&quot;"
-        errorLine2="      ~~~~~~~~">
+        id="MissingTranslation"
+        message="&quot;last_backup_time&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;last_backup_time&quot;>Last backup time&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="$HOME/StudioProjects/Driftly/gradle/libs.versions.toml"
-            line="2"
-            column="7"/>
+            file="src/main/res/values/strings.xml"
+            line="98"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;last_backup_date&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;last_backup_date&quot;>Last backup date&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="99"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;pick_driftly_extension&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;pick_driftly_extension&quot;>Please pick a file with .driftly extension&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="100"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;backup_found&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;backup_found&quot;>Backup found&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="101"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;restore_dialog_message&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;restore_dialog_message&quot;>The data in the saved file will override the current data.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="102"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;backup_date&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;backup_date&quot;>Backup date&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="103"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;backup_time&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;backup_time&quot;>Backup time&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="104"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;already_latest_version&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;already_latest_version&quot;>You are using the latest version&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="105"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;month&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;month&quot;>Month&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="106"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;year&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;year&quot;>Year&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="107"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;backup_and_restore&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;backup_and_restore&quot;>Backup and restore&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="123"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;des_backup_and_restore&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;des_backup_and_restore&quot;>Backup and restore app settings and other data&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="124"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;backup_settings&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;backup_settings&quot;>Backup app settings&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="125"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;des_backup_settings&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;des_backup_settings&quot;>Backup app settings preferences only&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="126"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;backup&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;backup&quot;>Backup&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="127"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;restore&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;restore&quot;>Restore&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="128"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;backup_app_database&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;backup_app_database&quot;>Backup app database&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="129"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;des_backup_app_database&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;des_backup_app_database&quot;>Backup app database which includes the subjects data including their attendance records&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="130"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;backup_all_data&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;backup_all_data&quot;>Backup all data&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="131"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;des_backup_all_data&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;des_backup_all_data&quot;>Backup all data of the app&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="132"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;restore_app_data&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;restore_app_data&quot;>Restore app data&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="133"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;des_restore_app_data&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;des_restore_app_data&quot;>Restore app data from the saved backup file.\nThe saved database will overwrite the current database&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="134"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;choose_backup_file&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;choose_backup_file&quot;>Choose the saved backup file&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="135"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;reset&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;reset&quot;>Reset&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="136"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;irreversible_action_warning&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;irreversible_action_warning&quot;>This action is irreversible!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="137"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;reset_app_settings&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;reset_app_settings&quot;>Reset app settings&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="138"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;des_reset_app_settings&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;des_reset_app_settings&quot;>Reset app settings to default values&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="139"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;changelogs_v1_5_0&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;ja&quot; (Japanese), &quot;fr&quot; (French), &quot;tr&quot; (Turkish), &quot;zh&quot; (Chinese)"
+        errorLine1="    &lt;string name=&quot;changelogs_v1_5_0&quot;>Added option to backup and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="148"
+            column="13"/>
     </issue>
 
     <issue
@@ -102,6 +399,17 @@
 
     <issue
         id="VectorPath"
+        message="Very long vector path (914 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M480,840Q329,840 224.5,793.5Q120,747 120,680L120,280Q120,214 225.5,167Q331,120 480,120Q629,120 734.5,167Q840,214 840,280L840,680Q840,747 735.5,793.5Q631,840 480,840ZM480,361Q569,361 659,335.5Q749,310 760,281Q749,252 659.5,226Q570,200 480,200Q389,200 301.5,225.5Q214,251 200,281Q214,311 301.5,336Q389,361 480,361ZM480,560Q522,560 561,556Q600,552 635.5,544.5Q671,537 702.5,526Q734,515 760,501L760,381Q734,395 702.5,406Q671,417 635.5,424.5Q600,432 561,436Q522,440 480,440Q438,440 398,436Q358,432 322.5,424.5Q287,417 256,406Q225,395 200,381L200,501Q225,515 256,526Q287,537 322.5,544.5Q358,552 398,556Q438,560 480,560ZM480,760Q526,760 573.5,753Q621,746 661,734.5Q701,723 728,708.5Q755,694 760,679L760,581Q734,595 702.5,606Q671,617 635.5,624.5Q600,632 561,636Q522,640 480,640Q438,640 398,636Q358,632 322.5,624.5Q287,617 256,606Q225,595 200,581L200,680Q205,695 231.5,709Q258,723 298,734.5Q338,746 386,753Q434,760 480,760Z&quot; />"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_database.xml"
+            line="9"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
         message="Very long vector path (852 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
         errorLine1="        android:pathData=&quot;M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427 0.49 3.316-1.059 3.316-2.362 0-1.141-0.08-5.052-0.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015 0.324-3.015 0.324-3.015 4.934 0.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074 0.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-0.485-1.222-2.184-6.275 0.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33 0.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763 0.97 11.816 0.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-0.08 11.897-0.08 13.526 0 1.304 0.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z&quot; />"
         errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
@@ -135,12 +443,45 @@
 
     <issue
         id="VectorPath"
+        message="Very long vector path (1405 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M550,570L650,570Q663,570 671.5,578.5Q680,587 680,600Q680,613 671.5,621.5Q663,630 650,630L550,630Q537,630 528.5,621.5Q520,613 520,600Q520,587 528.5,578.5Q537,570 550,570ZM580,810L580,790L550,790Q537,790 528.5,781.5Q520,773 520,760Q520,747 528.5,738.5Q537,730 550,730L580,730L580,710Q580,697 588.5,688.5Q597,680 610,680Q623,680 631.5,688.5Q640,697 640,710L640,810Q640,823 631.5,831.5Q623,840 610,840Q597,840 588.5,831.5Q580,823 580,810ZM710,730L810,730Q823,730 831.5,738.5Q840,747 840,760Q840,773 831.5,781.5Q823,790 810,790L710,790Q697,790 688.5,781.5Q680,773 680,760Q680,747 688.5,738.5Q697,730 710,730ZM720,650L720,550Q720,537 728.5,528.5Q737,520 750,520Q763,520 771.5,528.5Q780,537 780,550L780,570L810,570Q823,570 831.5,578.5Q840,587 840,600Q840,613 831.5,621.5Q823,630 810,630L780,630L780,650Q780,663 771.5,671.5Q763,680 750,680Q737,680 728.5,671.5Q720,663 720,650ZM480,200Q363,200 281.5,281.5Q200,363 200,480Q200,552 232.5,612Q265,672 320,710L320,640Q320,623 331.5,611.5Q343,600 360,600Q377,600 388.5,611.5Q400,623 400,640L400,800Q400,817 388.5,828.5Q377,840 360,840L200,840Q183,840 171.5,828.5Q160,817 160,800Q160,783 171.5,771.5Q183,760 200,760L254,760Q192,710 156,637.5Q120,565 120,480Q120,405 148.5,339.5Q177,274 225.5,225.5Q274,177 339.5,148.5Q405,120 480,120Q593,120 683.5,183Q774,246 814,345Q820,361 814,376Q808,391 792,397Q776,403 760.5,397Q745,391 739,375Q708,297 638.5,248.5Q569,200 480,200Z&quot; />"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_reset_settings.xml"
+            line="9"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1054 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M388,430Q405,412 429,401Q453,390 480,390Q534,390 572,428Q610,466 610,520Q610,574 572,612Q534,650 480,650Q444,650 414.5,632Q385,614 368,585Q362,574 350.5,570.5Q339,567 328,572Q316,577 311.5,589.5Q307,602 314,613Q338,657 382,683.5Q426,710 480,710Q558,710 614,654Q670,598 670,520Q670,442 614,386Q558,330 480,330Q442,330 409,344Q376,358 350,382L350,350Q350,337 341.5,328.5Q333,320 320,320Q307,320 298.5,328.5Q290,337 290,350L290,460Q290,473 298.5,481.5Q307,490 320,490L430,490Q443,490 451.5,481.5Q460,473 460,460Q460,447 451.5,438.5Q443,430 430,430L388,430ZM240,880Q207,880 183.5,856.5Q160,833 160,800L160,160Q160,127 183.5,103.5Q207,80 240,80L527,80Q543,80 557.5,86Q572,92 583,103L777,297Q788,308 794,322.5Q800,337 800,353L800,800Q800,833 776.5,856.5Q753,880 720,880L240,880ZM240,800L720,800Q720,800 720,800Q720,800 720,800L720,354L526,160L240,160Q240,160 240,160Q240,160 240,160L240,800Q240,800 240,800Q240,800 240,800ZM240,800Q240,800 240,800Q240,800 240,800L240,160Q240,160 240,160Q240,160 240,160L240,160L240,354L240,800Q240,800 240,800Q240,800 240,800Z&quot; />"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_restore_page.xml"
+            line="9"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
         message="Very long vector path (1776 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
         errorLine1="        android:pathData=&quot;M433,880Q406,880 386.5,862Q367,844 363,818L354,752Q341,747 329.5,740Q318,733 307,725L245,751Q220,762 195,753Q170,744 156,721L109,639Q95,616 101,590Q107,564 128,547L181,507Q180,500 180,493.5Q180,487 180,480Q180,473 180,466.5Q180,460 181,453L128,413Q107,396 101,370Q95,344 109,321L156,239Q170,216 195,207Q220,198 245,209L307,235Q318,227 330,220Q342,213 354,208L363,142Q367,116 386.5,98Q406,80 433,80L527,80Q554,80 573.5,98Q593,116 597,142L606,208Q619,213 630.5,220Q642,227 653,235L715,209Q740,198 765,207Q790,216 804,239L851,321Q865,344 859,370Q853,396 832,413L779,453Q780,460 780,466.5Q780,473 780,480Q780,487 780,493.5Q780,500 778,507L831,547Q852,564 858,590Q864,616 850,639L802,721Q788,744 763,753Q738,762 713,751L653,725Q642,733 630,740Q618,747 606,752L597,818Q593,844 573.5,862Q554,880 527,880L433,880ZM440,800L519,800L533,694Q564,686 590.5,670.5Q617,655 639,633L738,674L777,606L691,541Q696,527 698,511.5Q700,496 700,480Q700,464 698,448.5Q696,433 691,419L777,354L738,286L639,328Q617,305 590.5,289.5Q564,274 533,266L520,160L441,160L427,266Q396,274 369.5,289.5Q343,305 321,327L222,286L183,354L269,418Q264,433 262,448Q260,463 260,480Q260,496 262,511Q264,526 269,541L183,606L222,674L321,632Q343,655 369.5,670.5Q396,686 427,694L440,800ZM482,620Q540,620 581,579Q622,538 622,480Q622,422 581,381Q540,340 482,340Q423,340 382.5,381Q342,422 342,480Q342,538 382.5,579Q423,620 482,620ZM480,480L480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480L480,480Z&quot;/>"
         errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/drawable/ic_settings.xml"
             line="8"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1022 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="        android:pathData=&quot;M440,593L440,720Q440,737 451.5,748.5Q463,760 480,760Q497,760 508.5,748.5Q520,737 520,720L520,593L556,629Q562,635 569.5,638Q577,641 584.5,640.5Q592,640 599,637Q606,634 612,628Q623,616 623.5,600Q624,584 612,572L508,468Q502,462 495,459.5Q488,457 480,457Q472,457 465,459.5Q458,462 452,468L348,572Q336,584 336.5,600Q337,616 349,628Q361,639 377,639.5Q393,640 405,628L440,593ZM240,880Q207,880 183.5,856.5Q160,833 160,800L160,160Q160,127 183.5,103.5Q207,80 240,80L527,80Q543,80 557.5,86Q572,92 583,103L777,297Q788,308 794,322.5Q800,337 800,353L800,800Q800,833 776.5,856.5Q753,880 720,880L240,880ZM520,320L520,160L240,160Q240,160 240,160Q240,160 240,160L240,800Q240,800 240,800Q240,800 240,800L720,800Q720,800 720,800Q720,800 720,800L720,360L560,360Q543,360 531.5,348.5Q520,337 520,320ZM240,160L240,160L240,320Q240,337 240,348.5Q240,360 240,360L240,360L240,160L240,320Q240,337 240,348.5Q240,360 240,360L240,360L240,800Q240,800 240,800Q240,800 240,800L240,800Q240,800 240,800Q240,800 240,800L240,160Q240,160 240,160Q240,160 240,160Z&quot; />"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_upload_file.xml"
+            line="9"
             column="27"/>
     </issue>
 
@@ -153,6 +494,17 @@
             file="src/main/res/drawable/bear_with_white.xml"
             line="1"
             column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.no_update_available` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no_update_available&quot;>No update available&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="78"
+            column="13"/>
     </issue>
 
     <issue
@@ -190,12 +542,23 @@
 
     <issue
         id="UnusedResources"
+        message="The resource `R.string.choose_backup_file` appears to be unused"
+        errorLine1="    &lt;string name=&quot;choose_backup_file&quot;>Choose the saved backup file&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="135"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
         message="The resource `R.string.changelogs_v1_0_0` appears to be unused"
         errorLine1="    &lt;string name=&quot;changelogs_v1_0_0&quot;>Initial release\nAdded calendar to mark attendance status\nAdded per subject progress display\nAdded ability to add, remove and edit subjects\nAdded settings for customising user experience&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="116"
+            line="143"
             column="13"/>
     </issue>
 
@@ -206,7 +569,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="117"
+            line="144"
             column="13"/>
     </issue>
 
@@ -217,7 +580,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="118"
+            line="145"
             column="13"/>
     </issue>
 
@@ -228,19 +591,30 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="119"
+            line="146"
             column="13"/>
     </issue>
 
     <issue
         id="UnusedResources"
         message="The resource `R.string.changelogs_v1_4_0` appears to be unused"
-        errorLine1="&lt;string name=&quot;changelogs_v1_4_0&quot;>Switched some UI components to material expressive theme\nAdded option to make Monday as first day of the week in the Calendar\nAdded option to directly download the latest updated apk inside the app without the need to visit the Github repository\nFixed many UI inconsistencies&lt;/string>"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    &lt;string name=&quot;changelogs_v1_4_0&quot;>Switched some UI components to material expressive theme\nAdded option to make Monday as first day of the week in the Calendar\nAdded option to directly download the latest updated apk inside the app without the need to visit the Github repository\nFixed many UI inconsistencies&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="120"
-            column="9"/>
+            line="147"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.changelogs_v1_5_0` appears to be unused"
+        errorLine1="    &lt;string name=&quot;changelogs_v1_5_0&quot;>Added option to backup and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="148"
+            column="13"/>
     </issue>
 
 </issues>
