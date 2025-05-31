@@ -1,0 +1,6 @@
+
+* Added option to backup and restore app data locally
+
+* Localised hardcoded strings
+
+* Minor ui improvements

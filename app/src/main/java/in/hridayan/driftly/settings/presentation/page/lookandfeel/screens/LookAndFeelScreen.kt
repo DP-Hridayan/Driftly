@@ -92,13 +92,13 @@ fun LookAndFeelScreen(
                             modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
                         )
                         group.items.forEach { item ->
-                            PreferenceItemView(item)
+                            PreferenceItemView(item = item, modifier = modifier.animateItem())
                         }
                     }
 
                     is PreferenceGroup.Items -> {
                         group.items.forEach { item ->
-                            PreferenceItemView(item)
+                            PreferenceItemView(item = item, modifier = modifier.animateItem())
                         }
                     }
 

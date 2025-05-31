@@ -18,10 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
-import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 import `in`.hridayan.driftly.settings.domain.model.getResolvedDescription
 import `in`.hridayan.driftly.settings.domain.model.getResolvedIcon
 import `in`.hridayan.driftly.settings.domain.model.getResolvedTitle
+import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 fun NullPreferenceItemView(
