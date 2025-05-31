@@ -148,4 +148,5 @@
     <string name="changelogs_v1_3_0">Ajout de paramètres de comportement pour modifier le comportement de certaines applications\nAjout d\'une option pour se souvenir du dernier mois\nAjout d\'une option pour désactiver la série de présence dans le calendrier</string>
     <string name="changelogs_v1_4_0">Switched some UI components to material expressive theme\nAdded option to make Monday as first day of the week in the Calendar\nAdded option to directly download the latest updated apk inside the app without the need to visit the Github repository\nFixed many UI inconsistencies</string>
     <string name="changelogs_v1_5_0">Added option to backup and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
+    <string name="changelogs_v1_5_1">Fixed an issue where restoring backup failed in some devices</string>
 </resources>
