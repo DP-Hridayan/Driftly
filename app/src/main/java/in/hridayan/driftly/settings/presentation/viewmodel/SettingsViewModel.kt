@@ -120,6 +120,14 @@ class SettingsViewModel @Inject constructor(
 
     fun getFloat(key: SettingsKeys): Flow<Float> = settingsRepository.getFloat(key)
 
+    fun setString(key: SettingsKeys, value: String) {
+        viewModelScope.launch {
+            settingsRepository.setString(key, value)
+        }
+    }
+
+    fun getString(key: SettingsKeys): Flow<String> = settingsRepository.getString(key)
+
     fun onItemClicked(key: SettingsKeys) {
         viewModelScope.launch {
             when (key) {

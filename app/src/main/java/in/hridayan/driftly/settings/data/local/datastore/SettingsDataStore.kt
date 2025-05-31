@@ -124,14 +124,34 @@ class SettingsDataStore @Inject constructor(
     }
 
     suspend fun resetAndRestoreDefaults() {
-        ds.edit { it.clear() }
+        val preserveKeys = setOf(SettingsKeys.LAST_BACKUP_TIME.name)
+
+        val currentPrefs = ds.data.first()
+
+        val preservedValues = preserveKeys.associateWith { key ->
+            currentPrefs[stringPreferencesKey(key)]
+        }
+
         ds.edit { prefs ->
-            SettingsKeys.entries.forEach { key ->
-                when (val defaultValue = key.default) {
-                    is Boolean -> prefs[booleanPreferencesKey(key.name)] = defaultValue
-                    is Int -> prefs[intPreferencesKey(key.name)] = defaultValue
-                    is Float -> prefs[floatPreferencesKey(key.name)] = defaultValue
+            prefs.asMap().keys
+                .filterNot { it.name in preserveKeys }
+                .forEach { prefs.remove(it) }
+        }
+
+        ds.edit { prefs ->
+            SettingsKeys.entries
+                .filterNot { it.name in preserveKeys }
+                .forEach { key ->
+                    when (val defaultValue = key.default) {
+                        is Boolean -> prefs[booleanPreferencesKey(key.name)] = defaultValue
+                        is Int -> prefs[intPreferencesKey(key.name)] = defaultValue
+                        is Float -> prefs[floatPreferencesKey(key.name)] = defaultValue
+                        is String -> prefs[stringPreferencesKey(key.name)] = defaultValue
+                    }
                 }
+
+            preservedValues.forEach { (key, value) ->
+                if (value != null) prefs[stringPreferencesKey(key)] = value
             }
         }
     }

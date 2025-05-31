@@ -249,6 +249,9 @@ object SettingsProvider {
                 iconResId = R.drawable.ic_upload_file
             )
         ),
+
+        customComposable("last_backup_time"),
+
         categorizedItems(
             categoryNameResId = R.string.restore,
             nullPreferenceItem(
