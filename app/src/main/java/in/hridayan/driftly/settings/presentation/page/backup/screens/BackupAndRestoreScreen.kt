@@ -36,6 +36,7 @@ import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
+import `in`.hridayan.driftly.core.utils.getFileNameFromUri
 import `in`.hridayan.driftly.core.utils.showToast
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
@@ -73,7 +74,8 @@ fun BackupAndRestoreScreen(
         contract = ActivityResultContracts.OpenDocument()
     ) { uri ->
         uri?.let {
-            if (it.toString().endsWith(".driftly")) {
+            val fileName = getFileNameFromUri(context, it)
+            if (fileName?.endsWith(".driftly") == true) {
                 restoreFileUri = it
                 backupAndRestoreViewModel.loadBackupTime(it)
                 showRestoreBackupDialog = true
