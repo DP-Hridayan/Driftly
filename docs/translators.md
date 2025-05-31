@@ -18,7 +18,7 @@ Thanks to these translators and proofreaders, this project exists:
           <br />
           <sub><b>Hussain (Hussain69o)</b></sub></a>
         <br />
-        <sub><b>627 words</b></sub>
+        <sub><b>766 words</b></sub>
       </td>
       <td align="center" valign="top">
         <a href="https://crowdin.com/profile/louisgrasset"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16675791/medium/4f29a005a6ea0273f480c814708a7b80.png" />
@@ -40,6 +40,13 @@ Thanks to these translators and proofreaders, this project exists:
           <sub><b>Stzyxh</b></sub></a>
         <br />
         <sub><b>298 words</b></sub>
+      </td>
+      <td align="center" valign="top">
+        <a href="https://crowdin.com/profile/DP-Hridayan"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16319000/medium/83750741692d1ecb16b7de139291cb30.png" />
+          <br />
+          <sub><b>Hridayan (DP-Hridayan)</b></sub></a>
+        <br />
+        <sub><b>10 words</b></sub>
       </td>
     </tr>
   </tbody>
