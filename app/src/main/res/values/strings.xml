@@ -119,8 +119,8 @@
     <string name="des_backup_settings">Backup app settings preferences only</string>
     <string name="backup">Backup</string>
     <string name="restore">Restore</string>
-    <string name="backup_calendar">Backup calendar data</string>
-    <string name="des_backup_calendar">Backup calendar data such as subject attendance records</string>
+    <string name="backup_app_database">Backup app database</string>
+    <string name="des_backup_app_database">Backup app database which includes the subjects data including their attendance records</string>
     <string name="backup_all_data">Backup all data</string>
     <string name="des_backup_all_data">Backup all data of the app</string>
     <string name="restore_app_data">Restore app data</string>

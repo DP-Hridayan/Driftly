@@ -12,6 +12,7 @@ import androidx.compose.material.icons.rounded.Contrast
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Downloading
 import androidx.compose.material.icons.rounded.EventAvailable
+import androidx.compose.material.icons.rounded.Handyman
 import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.SentimentNeutral
 import androidx.compose.material.icons.rounded.SettingsBackupRestore
@@ -228,15 +229,35 @@ object SettingsProvider {
 
     val backupPageList: List<PreferenceGroup> = listOf(
         categorizedItems(
+            categoryNameResId = R.string.backup,
+            nullPreferenceItem(
+                key = SettingsKeys.BACKUP_APP_SETTINGS,
+                titleResId = R.string.backup_settings,
+                descriptionResId = R.string.des_backup_settings,
+                iconVector = Icons.Rounded.Handyman
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.BACKUP_APP_DATABASE,
+                titleResId = R.string.backup_app_database,
+                descriptionResId = R.string.des_backup_app_database,
+                iconResId = R.drawable.ic_database
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.BACKUP_APP_DATA,
+                titleResId = R.string.backup_all_data,
+                descriptionResId = R.string.des_backup_all_data,
+                iconResId = R.drawable.ic_upload_file
+            )
+        ),
+        categorizedItems(
             categoryNameResId = R.string.restore,
             nullPreferenceItem(
-                key = SettingsKeys.BACKUP_AND_RESTORE,
-                titleResId = R.string.backup_and_restore,
-                descriptionResId = R.string.des_backup_and_restore,
+                key = SettingsKeys.RESTORE_APP_DATA,
+                titleResId = R.string.restore_app_data,
+                descriptionResId = R.string.des_restore_app_data,
                 iconResId = R.drawable.ic_restore_page
             )
-        )
-        ,
+        ),
         categorizedItems(
             categoryNameResId = R.string.reset,
             nullPreferenceItem(

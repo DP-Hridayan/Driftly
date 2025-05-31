@@ -46,7 +46,7 @@ fun NullPreferenceItemView(
                     weakHaptic()
                     settingsViewModel.onItemClicked(item.key)
                 })
-            .padding(horizontal = 15.dp, vertical = 17.dp),
+            .padding(horizontal = 20.dp, vertical = 17.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     ) {
