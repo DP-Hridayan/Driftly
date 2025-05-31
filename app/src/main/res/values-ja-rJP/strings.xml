@@ -75,7 +75,6 @@
     <string name="download_failed">Download failed</string>
     <string name="stable">Stable</string>
     <string name="whats_new">更新内容！</string>
-    <string name="no_update_available">更新はありません</string>
     <string name="network_error">ネットワークエラー</string>
     <string name="request_timeout">リクエストがタイムアウトしました</string>
     <string name="enable_direct_download">Enable direct apk download</string>
@@ -132,7 +131,6 @@
     <string name="des_backup_all_data">Backup all data of the app</string>
     <string name="restore_app_data">Restore app data</string>
     <string name="des_restore_app_data">Restore app data from the saved backup file.\nThe saved database will overwrite the current database</string>
-    <string name="choose_backup_file">Choose the saved backup file</string>
     <string name="reset">Reset</string>
     <string name="irreversible_action_warning">This action is irreversible!</string>
     <string name="reset_app_settings">Reset app settings</string>

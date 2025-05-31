@@ -75,7 +75,6 @@
     <string name="download_failed">Не удалось скачать</string>
     <string name="stable">Стабильный</string>
     <string name="whats_new">Что нового!</string>
-    <string name="no_update_available">Нет доступных обновлений</string>
     <string name="network_error">Ошибка сети</string>
     <string name="request_timeout">Таймаут запроса</string>
     <string name="enable_direct_download">Включить загрузку apk напрямую</string>
@@ -132,7 +131,6 @@
     <string name="des_backup_all_data">Сделать резервную копию всех данных приложения</string>
     <string name="restore_app_data">Восстановить данные приложения</string>
     <string name="des_restore_app_data">Восстановите данные приложения из сохраненного файла резервной копии.\nСохраненная база данных перезапишет текущую базу данных</string>
-    <string name="choose_backup_file">Выберите файл резервной копии</string>
     <string name="reset">Сбросить</string>
     <string name="irreversible_action_warning">Это действие необратимо!</string>
     <string name="reset_app_settings">Сбросить настройки приложения</string>
