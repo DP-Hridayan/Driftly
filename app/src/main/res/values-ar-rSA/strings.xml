@@ -95,6 +95,16 @@
     <string name="back_button">عودة</string>
     <string name="this_month_data">بيانات هذا الشهر</string>
     <string name="all_months_data">بيانات جميع الأشهر</string>
+    <string name="last_backup_time">Last backup time</string>
+    <string name="last_backup_date">Last backup date</string>
+    <string name="pick_driftly_extension">Please pick a file with .driftly extension</string>
+    <string name="backup_found">Backup found</string>
+    <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
+    <string name="backup_date">Backup date</string>
+    <string name="backup_time">Backup time</string>
+    <string name="already_latest_version">You are using the latest version</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
     <string-array name="month_names">
         <item>يناير</item>
         <item>فبراير</item>
@@ -110,6 +120,27 @@
         <item>ديسمبر</item>
     </string-array>
     <string name="calendar">التقويم</string>
+    <string name="backup_and_restore">Backup and restore</string>
+    <string name="des_backup_and_restore">Backup and restore app settings and other data</string>
+    <string name="backup_settings">Backup app settings</string>
+    <string name="des_backup_settings">Backup app settings preferences only</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
+    <string name="backup_app_database">Backup app database</string>
+    <string name="des_backup_app_database">Backup app database which includes the subjects data including their attendance records</string>
+    <string name="backup_all_data">Backup all data</string>
+    <string name="des_backup_all_data">Backup all data of the app</string>
+    <string name="restore_app_data">Restore app data</string>
+    <string name="des_restore_app_data">Restore app data from the saved backup file.\nThe saved database will overwrite the current database</string>
+    <string name="choose_backup_file">Choose the saved backup file</string>
+    <string name="reset">Reset</string>
+    <string name="irreversible_action_warning">This action is irreversible!</string>
+    <string name="reset_app_settings">Reset app settings</string>
+    <string name="des_reset_app_settings">Reset app settings to default values</string>
+    <string name="backup_successful">Backup successful</string>
+    <string name="backup_failed">Backup failed</string>
+    <string name="restore_successful">Restore successful</string>
+    <string name="restore_failed">Restore failed</string>
     <string name="start_week_on_monday">بدء الأسبوع من الاثنين</string>
     <string name="des_start_week_on_monday">هل تفضل أن يبدأ الأسبوع يوم الاثنين بدلاً من الأحد؟ قم بتمكين هذا الخيار لتغيير تخطيط التقويم بحيث يصبح الاثنين أول أيام الأسبوع.</string>
     <string name="pre_release_warning_description">هذه الإصدارات لا تزال قيد الاختبار وقد تحتوي على ميزات غير مكتملة أو أخطاء غير متوقعة. إذا اخترت التحديث إلى إصدار تجريبي، يرجى العلم بأن بعض الأمور قد لا تعمل بشكل صحيح أو قد تتصرف بطريقة غير معتادة.
@@ -122,4 +153,5 @@
     <string name="changelogs_v1_2_0">تم تحسين نظام الألوان في الوضع المظلم عالي التباين\nتم إضافة نافذة \"ما الجديد\" لعرض سجل التغييرات بعد التحديث\nتحسينات في الكود</string>
     <string name="changelogs_v1_3_0">تم إضافة إعدادات السلوك لتعديل سلوك التطبيق\nتم إضافة خيار تذكر آخر شهر تم عرضه\nتم إضافة خيار إخفاء سلسلة الحضور في التقويم</string>
     <string name="changelogs_v1_4_0">تم تغيير بعض مكونات الواجهة لاستخدام سمة Material التعبيرية\nتم إضافة خيار جعل الاثنين أول أيام الأسبوع في التقويم\nتم إضافة خيار تنزيل أحدث إصدار مباشرة داخل التطبيق دون الحاجة إلى زيارة مستودع GitHub\nتم إصلاح العديد من التناقضات في الواجهة</string>
+    <string name="changelogs_v1_5_0">Added option to backup and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
 </resources>
