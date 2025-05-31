@@ -1,11 +1,13 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 
 package `in`.hridayan.driftly.settings.presentation.page.backup.screens
 
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +17,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
@@ -171,45 +173,52 @@ fun BackupAndRestoreScreen(
 
 @Composable
 private fun LastBackupTimeCard(modifier: Modifier = Modifier, lastBackupTime: String) {
-    val weakHaptic = LocalWeakHaptic.current
+
     val (date, time) = (lastBackupTime).split(" ").let {
         Pair(
-            it.getOrNull(0) ?: stringResource(R.string.none),
-            it.getOrNull(1) ?: stringResource(R.string.none)
+            it.getOrNull(0) ?: "",
+            it.getOrNull(1) ?: ""
         )
     }
 
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp, top = 15.dp, bottom = 20.dp)
-            .clip(
-                MaterialTheme.shapes.large
-            )
-            .clickable(enabled = true, onClick = { weakHaptic() }),
-        shape = MaterialTheme.shapes.large,
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-            contentColor = MaterialTheme.colorScheme.onSurface
+    AnimatedVisibility(
+        visible = date.isNotEmpty() && time.isNotEmpty(),
+        enter = scaleIn(
+            animationSpec = MaterialTheme.motionScheme.slowEffectsSpec(),
         ),
-        border = CardDefaults.outlinedCardBorder()
+        exit = scaleOut(animationSpec = MaterialTheme.motionScheme.slowEffectsSpec())
     ) {
-        AutoResizeableText(
-            text = stringResource(R.string.last_backup_time) + " : " + time,
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(horizontal = 25.dp, vertical = 15.dp)
-        )
-
-        AutoResizeableText(
-            text = stringResource(R.string.last_backup_date) + " : " + date,
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(
-                start = 25.dp,
-                end = 25.dp,
-                bottom = 20.dp
+        Card(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, top = 15.dp, bottom = 20.dp)
+                .clip(
+                    MaterialTheme.shapes.large
+                ),
+            shape = MaterialTheme.shapes.large,
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onSurface
+            ),
+            border = CardDefaults.outlinedCardBorder()
+        ) {
+            AutoResizeableText(
+                text = stringResource(R.string.last_backup_time) + " : " + time,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(horizontal = 25.dp, vertical = 15.dp)
             )
-        )
+
+            AutoResizeableText(
+                text = stringResource(R.string.last_backup_date) + " : " + date,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(
+                    start = 25.dp,
+                    end = 25.dp,
+                    bottom = 20.dp
+                )
+            )
+        }
     }
 }

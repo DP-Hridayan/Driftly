@@ -100,7 +100,6 @@
     <string name="pick_driftly_extension">Please pick a file with .driftly extension</string>
     <string name="backup_found">Backup found</string>
     <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
-    <string name="none">None</string>
     <string name="backup_date">Backup date</string>
     <string name="backup_time">Backup time</string>
     <string name="already_latest_version">You are using the latest version</string>

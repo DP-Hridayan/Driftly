@@ -1,73 +1,45 @@
 package `in`.hridayan.driftly.core.utils
 
-import android.security.keystore.KeyGenParameterSpec
-import android.security.keystore.KeyProperties
-import java.nio.ByteBuffer
-import java.security.KeyStore
 import javax.crypto.Cipher
-import javax.crypto.KeyGenerator
-import javax.crypto.SecretKey
-import javax.crypto.spec.GCMParameterSpec
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.SecretKeySpec
+import kotlin.random.Random
 
 object EncryptionHelper {
+    private const val ALGORITHM = "AES/CBC/PKCS5Padding"
 
-    private const val KEY_ALIAS = "backup_encryption_key"
-    private const val ANDROID_KEYSTORE = "AndroidKeyStore"
-    private const val AES_MODE = "AES/GCM/NoPadding"
-    private const val IV_SIZE = 12
-    private const val TAG_SIZE = 128
+    private const val SECRET_KEY =
+        "your_32_byte_secret_key_string_here!" // security is not the main goal here
 
-    private lateinit var secretKey: SecretKey
+    private val keySpec get() = normalizeKey(SECRET_KEY)
 
-    fun init() {
-        secretKey = getOrCreateSecretKey()
+    fun encrypt(data: ByteArray): ByteArray {
+        val cipher = Cipher.getInstance(ALGORITHM)
+        val iv = Random.Default.nextBytes(16)
+        cipher.init(Cipher.ENCRYPT_MODE, keySpec, IvParameterSpec(iv))
+        val encrypted = cipher.doFinal(data)
+        return iv + encrypted
     }
 
-    private fun getOrCreateSecretKey(): SecretKey {
-        val keyStore = KeyStore.getInstance(ANDROID_KEYSTORE).apply { load(null) }
-        val existingKey = keyStore.getKey(KEY_ALIAS, null) as? SecretKey
-        if (existingKey != null) return existingKey
-
-        val keyGenerator = KeyGenerator.getInstance(
-            KeyProperties.KEY_ALGORITHM_AES, ANDROID_KEYSTORE
-        )
-        val keyGenParameterSpec = KeyGenParameterSpec.Builder(
-            KEY_ALIAS,
-            KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
-        )
-            .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-            .setKeySize(256)
-            .setRandomizedEncryptionRequired(true)
-            .build()
-
-        keyGenerator.init(keyGenParameterSpec)
-        return keyGenerator.generateKey()
+    fun decrypt(data: ByteArray): ByteArray {
+        if (data.size < 16) throw IllegalArgumentException("Invalid encrypted data")
+        val iv = data.copyOfRange(0, 16)
+        val encryptedData = data.copyOfRange(16, data.size)
+        val cipher = Cipher.getInstance(ALGORITHM)
+        cipher.init(Cipher.DECRYPT_MODE, keySpec, IvParameterSpec(iv))
+        return cipher.doFinal(encryptedData)
     }
 
-    fun encrypt(plaintext: ByteArray): ByteArray {
-        val cipher = Cipher.getInstance(AES_MODE)
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey)
+    private fun normalizeKey(key: String, desiredLength: Int = 32): SecretKeySpec {
+        require(desiredLength == 16 || desiredLength == 24 || desiredLength == 32) {
+            "AES only supports 16, 24, or 32 byte keys"
+        }
 
-        val iv = cipher.iv
-        val cipherText = cipher.doFinal(plaintext)
+        val keyBytes = key.toByteArray(Charsets.UTF_8)
 
-        val byteBuffer = ByteBuffer.allocate(IV_SIZE + cipherText.size)
-        byteBuffer.put(iv)
-        byteBuffer.put(cipherText)
-        return byteBuffer.array()
-    }
+        val normalizedKey = ByteArray(desiredLength)
+        System.arraycopy(keyBytes, 0, normalizedKey, 0, keyBytes.size.coerceAtMost(desiredLength))
 
-    fun decrypt(cipherMessage: ByteArray): ByteArray {
-        val byteBuffer = ByteBuffer.wrap(cipherMessage)
-        val iv = ByteArray(IV_SIZE)
-        byteBuffer.get(iv)
-        val cipherText = ByteArray(byteBuffer.remaining())
-        byteBuffer.get(cipherText)
-
-        val cipher = Cipher.getInstance(AES_MODE)
-        val spec = GCMParameterSpec(TAG_SIZE, iv)
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, spec)
-        return cipher.doFinal(cipherText)
+        return SecretKeySpec(normalizedKey, "AES")
     }
 }
