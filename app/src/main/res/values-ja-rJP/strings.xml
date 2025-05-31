@@ -95,6 +95,16 @@
     <string name="back_button">戻る</string>
     <string name="this_month_data">This month data</string>
     <string name="all_months_data">All months data</string>
+    <string name="last_backup_time">Last backup time</string>
+    <string name="last_backup_date">Last backup date</string>
+    <string name="pick_driftly_extension">Please pick a file with .driftly extension</string>
+    <string name="backup_found">Backup found</string>
+    <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
+    <string name="backup_date">Backup date</string>
+    <string name="backup_time">Backup time</string>
+    <string name="already_latest_version">You are using the latest version</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
     <string-array name="month_names">
         <item>January</item>
         <item>February</item>
@@ -110,6 +120,27 @@
         <item>December</item>
     </string-array>
     <string name="calendar">Calendar</string>
+    <string name="backup_and_restore">Backup and restore</string>
+    <string name="des_backup_and_restore">Backup and restore app settings and other data</string>
+    <string name="backup_settings">Backup app settings</string>
+    <string name="des_backup_settings">Backup app settings preferences only</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
+    <string name="backup_app_database">Backup app database</string>
+    <string name="des_backup_app_database">Backup app database which includes the subjects data including their attendance records</string>
+    <string name="backup_all_data">Backup all data</string>
+    <string name="des_backup_all_data">Backup all data of the app</string>
+    <string name="restore_app_data">Restore app data</string>
+    <string name="des_restore_app_data">Restore app data from the saved backup file.\nThe saved database will overwrite the current database</string>
+    <string name="choose_backup_file">Choose the saved backup file</string>
+    <string name="reset">Reset</string>
+    <string name="irreversible_action_warning">This action is irreversible!</string>
+    <string name="reset_app_settings">Reset app settings</string>
+    <string name="des_reset_app_settings">Reset app settings to default values</string>
+    <string name="backup_successful">Backup successful</string>
+    <string name="backup_failed">Backup failed</string>
+    <string name="restore_successful">Restore successful</string>
+    <string name="restore_failed">Restore failed</string>
     <string name="start_week_on_monday">Start week on Monday</string>
     <string name="des_start_week_on_monday">Prefer seeing your week begin with Monday instead of Sunday? Enable this to shift the calendar layout so Monday becomes the first day of the week.</string>
     <string name="pre_release_warning_description">これらのバージョンはまだテスト段階であり、未完成の機能や予期せぬバグが含まれている可能性があります。プレリリース版にアップデートする場合は、不具合が発生したり、動作が不安定になったりする可能性があることにご注意ください。\n問題、クラッシュ、または奇妙な動作に遭遇した場合は、安定版リリース前にDriftlyを修正して改善できるように報告してください。\nアプリをより良くするために協力してくれてありがとう！</string>
@@ -118,4 +149,5 @@
     <string name="changelogs_v1_2_0">高コントラストダークテーマの配色を改善\nアップデート後の変更履歴を表示するためのシートを追加\nコードの最適化</string>
     <string name="changelogs_v1_3_0">特定のアプリの動作を変更するための動作設定を追加\n最後に表示した月を記憶するオプションを追加\nカレンダーの出席記録の表示をオフにするオプションを追加</string>
     <string name="changelogs_v1_4_0">Switched some UI components to material expressive theme\nAdded option to make Monday as first day of the week in the Calendar\nAdded option to directly download the latest updated apk inside the app without the need to visit the Github repository\nFixed many UI inconsistencies</string>
+    <string name="changelogs_v1_5_0">Added option to backup and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
 </resources>
