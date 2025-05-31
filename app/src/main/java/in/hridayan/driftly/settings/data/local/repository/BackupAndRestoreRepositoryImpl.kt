@@ -5,6 +5,7 @@ import android.net.Uri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
+import `in`.hridayan.driftly.core.utils.EncryptionHelper
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.BackupData
 import `in`.hridayan.driftly.settings.domain.model.BackupOption
@@ -28,10 +29,11 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 val backupData = getBackupData(option)
+                val jsonData = json.encodeToString(BackupData.serializer(), backupData)
+                val encryptedBytes = EncryptionHelper.encrypt(jsonData.toByteArray())
 
                 context.contentResolver.openOutputStream(uri)?.use { outputStream ->
-                    val jsonData = json.encodeToString(BackupData.serializer(), backupData)
-                    outputStream.write(jsonData.toByteArray())
+                    outputStream.write(encryptedBytes)
                 }
 
                 settingsRepository.setString(SettingsKeys.LAST_BACKUP_TIME, backupData.backupTime)
@@ -45,8 +47,11 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
 
     override suspend fun restoreDataFromFile(uri: Uri): Boolean = withContext(Dispatchers.IO) {
         try {
-            val inputStream = context.contentResolver.openInputStream(uri)
-            val jsonString = inputStream?.bufferedReader()?.readText() ?: return@withContext false
+            val inputStream =
+                context.contentResolver.openInputStream(uri) ?: return@withContext false
+            val encryptedBytes = inputStream.readBytes()
+            val decryptedBytes = EncryptionHelper.decrypt(encryptedBytes)
+            val jsonString = decryptedBytes.toString(Charsets.UTF_8)
             val restoredData = json.decodeFromString(BackupData.serializer(), jsonString)
 
             saveRestoredData(restoredData)
@@ -79,8 +84,11 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
 
     override suspend fun getBackupTimeFromFile(uri: Uri): String? = withContext(Dispatchers.IO) {
         return@withContext try {
-            val inputStream = context.contentResolver.openInputStream(uri)
-            val jsonString = inputStream?.bufferedReader()?.readText() ?: return@withContext null
+            val inputStream =
+                context.contentResolver.openInputStream(uri) ?: return@withContext null
+            val encryptedBytes = inputStream.readBytes()
+            val decryptedBytes = EncryptionHelper.decrypt(encryptedBytes)
+            val jsonString = decryptedBytes.toString(Charsets.UTF_8)
             val data = json.decodeFromString(BackupData.serializer(), jsonString)
             data.backupTime
         } catch (e: Exception) {
@@ -88,7 +96,6 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
             null
         }
     }
-
 
     private suspend fun getSettingsMap(): Map<String, String?> {
         val prefs = settingsRepository.getCurrentSettings()

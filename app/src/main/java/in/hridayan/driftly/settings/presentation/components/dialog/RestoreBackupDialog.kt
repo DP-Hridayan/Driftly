@@ -58,7 +58,7 @@ fun RestoreBackupDialog(
                     .widthIn(min = 280.dp)
             ) {
                 AutoResizeableText(
-                    text = stringResource(R.string.restore_app_data),
+                    text = stringResource(R.string.backup_found),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                 )
@@ -66,7 +66,7 @@ fun RestoreBackupDialog(
 
                 Text(
                     modifier = Modifier.padding(vertical = 16.dp),
-                    text = stringResource(R.string.des_restore_app_data) + "\n" + stringResource(R.string.irreversible_action_warning),
+                    text = stringResource(R.string.restore_dialog_message) + "\n" + stringResource(R.string.irreversible_action_warning),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
