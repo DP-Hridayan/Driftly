@@ -39,7 +39,6 @@ class MainActivity : ComponentActivity() {
 
             if (autoUpdateEnabled) {
                 autoUpdateViewModel.checkForUpdates(
-                    currentVersion = BuildConfig.VERSION_NAME,
                     includePrerelease = includePrerelease
                 )
             }

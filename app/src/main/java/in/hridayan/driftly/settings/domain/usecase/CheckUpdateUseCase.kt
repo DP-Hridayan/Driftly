@@ -22,7 +22,7 @@ class CheckUpdateUseCase @Inject constructor(
 
     private fun isNewerVersion(latest: String, current: String): Boolean {
         val latestParts = latest.trimStart('v').split(".")
-        val currentParts = current.trimStart('v').split(".")
+        val currentParts = current.removeSuffix("-debug").trimStart('v').split(".")
 
         for (i in 0 until maxOf(latestParts.size, currentParts.size)) {
             val l = latestParts.getOrNull(i)?.toIntOrNull() ?: 0

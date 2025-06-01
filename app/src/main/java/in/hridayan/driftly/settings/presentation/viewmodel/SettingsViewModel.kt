@@ -12,7 +12,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import `in`.hridayan.driftly.core.common.constants.NotificationTags
 import `in`.hridayan.driftly.core.common.constants.UrlConst
+import `in`.hridayan.driftly.core.notification.scheduler.WorkScheduler
+import `in`.hridayan.driftly.core.utils.createAppNotificationSettingsIntent
+import `in`.hridayan.driftly.core.utils.isNotificationPermissionGranted
 import `in`.hridayan.driftly.navigation.AboutScreen
 import `in`.hridayan.driftly.navigation.AutoUpdateScreen
 import `in`.hridayan.driftly.navigation.BackupAndRestoreScreen
@@ -21,15 +25,22 @@ import `in`.hridayan.driftly.navigation.ChangelogScreen
 import `in`.hridayan.driftly.navigation.CustomisationScreen
 import `in`.hridayan.driftly.navigation.DarkThemeScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
+import `in`.hridayan.driftly.navigation.NotificationScreen
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.model.BackupOption
+import `in`.hridayan.driftly.settings.domain.model.NotificationState
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
+import `in`.hridayan.driftly.settings.domain.usecase.CheckUpdateUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,6 +49,7 @@ class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val settingsRepository: SettingsRepository,
     private val toggleSettingUseCase: ToggleSettingUseCase,
+    private val checkUpdateUseCase: CheckUpdateUseCase
 ) : ViewModel() {
     var settingsPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
         private set
@@ -60,6 +72,9 @@ class SettingsViewModel @Inject constructor(
     var backupPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
         private set
 
+    var notificationsPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
+        private set
+
     fun loadSettings() {
         viewModelScope.launch {
             val lookAndFeel = settingsRepository.getLookAndFeelPageList()
@@ -69,6 +84,7 @@ class SettingsViewModel @Inject constructor(
             val behavior = settingsRepository.getBehaviorPageList()
             val darkTheme = settingsRepository.getDarkThemePageList()
             val backup = settingsRepository.getBackupPageList()
+            val notifications = settingsRepository.getNotificationsPageList()
 
             settingsPageList = settings
             autoUpdatePageList = autoUpdate
@@ -77,6 +93,7 @@ class SettingsViewModel @Inject constructor(
             behaviorPageList = behavior
             darkThemePageList = darkTheme
             backupPageList = backup
+            notificationsPageList = notifications
         }
     }
 
@@ -86,6 +103,7 @@ class SettingsViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             loadSettings()
+            observeNotificationFlags()
         }
     }
 
@@ -141,6 +159,10 @@ class SettingsViewModel @Inject constructor(
 
                 SettingsKeys.AUTO_UPDATE -> _uiEvent.emit(
                     SettingsUiEvent.Navigate(AutoUpdateScreen)
+                )
+
+                SettingsKeys.NOTIFICATION_SETTINGS -> _uiEvent.emit(
+                    SettingsUiEvent.Navigate(NotificationScreen)
                 )
 
                 SettingsKeys.BEHAVIOR -> _uiEvent.emit(
@@ -210,6 +232,116 @@ class SettingsViewModel @Inject constructor(
                 )
 
                 else -> {}
+            }
+        }
+    }
+
+    private val _notificationPermissionGranted = MutableStateFlow(
+        isNotificationPermissionGranted(context)
+    )
+    val notificationPermissionGranted: StateFlow<Boolean> = _notificationPermissionGranted
+
+    fun refreshNotificationPermissionState() {
+        _notificationPermissionGranted.value = isNotificationPermissionGranted(context)
+    }
+
+    fun isItemChecked(key: SettingsKeys): Flow<Boolean> {
+        return when (key) {
+            SettingsKeys.ENABLE_NOTIFICATIONS -> {
+                combine(
+                    getBoolean(key),
+                    notificationPermissionGranted
+                ) { enabled, permissionGranted ->
+                    enabled && permissionGranted
+                }
+            }
+
+            else -> getBoolean(key)
+        }
+    }
+
+    fun isItemEnabled(key: SettingsKeys): Flow<Boolean> {
+        val notificationsEnabled = combine(
+            getBoolean(SettingsKeys.ENABLE_NOTIFICATIONS),
+            notificationPermissionGranted
+        ) { notificationsEnabled, permissionGranted ->
+            notificationsEnabled && permissionGranted
+        }
+
+        return when (key) {
+            SettingsKeys.REMINDER_MARK_ATTENDANCE -> notificationsEnabled
+            SettingsKeys.NOTIFY_MISSED_ATTENDANCE -> notificationsEnabled
+            SettingsKeys.UPDATE_AVAILABLE_NOTIFICATION -> notificationsEnabled
+
+            else -> flowOf(true)
+        }
+    }
+
+    fun onBooleanItemClicked(key: SettingsKeys) {
+        viewModelScope.launch {
+            when (key) {
+                SettingsKeys.ENABLE_NOTIFICATIONS -> {
+                    if (isNotificationPermissionGranted(context)) onToggle(key)
+                    else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        _uiEvent.emit(SettingsUiEvent.RequestPermission(android.Manifest.permission.POST_NOTIFICATIONS))
+                    } else {
+                        val intent = createAppNotificationSettingsIntent(context)
+                        _uiEvent.emit(SettingsUiEvent.LaunchIntent(intent))
+                    }
+                }
+
+                else -> onToggle(key)
+            }
+        }
+    }
+
+    private fun observeNotificationFlags() {
+        viewModelScope.launch {
+            combine(
+                settingsRepository.getBoolean(SettingsKeys.ENABLE_NOTIFICATIONS),
+                settingsRepository.getBoolean(SettingsKeys.REMINDER_MARK_ATTENDANCE),
+                settingsRepository.getBoolean(SettingsKeys.NOTIFY_MISSED_ATTENDANCE),
+                settingsRepository.getBoolean(SettingsKeys.UPDATE_AVAILABLE_NOTIFICATION),
+            ) { enableAll, markReminder, missedNotify, updateAvailable ->
+                NotificationState(
+                    enableNotifications = enableAll,
+                    markAttendance = markReminder,
+                    missedAttendance = missedNotify,
+                    updateAvailable = updateAvailable
+                )
+            }.collect { state ->
+
+                if (!state.enableNotifications || !isNotificationPermissionGranted(context)) {
+                    WorkScheduler.cancelAllNotificationWork(context)
+                } else {
+
+                    if (state.markAttendance) {
+                        WorkScheduler.scheduleAttendanceReminder(context)
+                    } else {
+                        WorkScheduler.cancelNotificationWork(
+                            context,
+                            NotificationTags.REMINDER_TO_MARK_ATTENDANCE
+                        )
+                    }
+
+                    if (state.missedAttendance) {
+                        WorkScheduler.scheduleMissedAttendanceAlert(context)
+                    } else {
+                        WorkScheduler.cancelNotificationWork(
+                            context,
+                            NotificationTags.NOTIFY_WHEN_MISSED_ATTENDANCE
+                        )
+                    }
+
+                    if (state.updateAvailable) {
+                        WorkScheduler.scheduleDailyUpdateCheck(context)
+                    } else {
+                        WorkScheduler.cancelNotificationWork(
+                            context,
+                            NotificationTags.NOTIFY_WHEN_UPDATE_AVAILABLE
+                        )
+                    }
+                }
             }
         }
     }

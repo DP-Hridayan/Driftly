@@ -38,10 +38,10 @@ fun intPreferenceItem(
     radioOptions: List<RadioButtonOptions> = emptyList(),
     isLayoutVisible: Boolean = true,
     titleString: String = "",
-    titleResId: Int = 0,
+    titleResId: Int? = null,
     descriptionString: String = "",
-    descriptionResId: Int = 0,
-    iconResId: Int = 0,
+    descriptionResId: Int? = null,
+    iconResId: Int? = null,
     iconVector: ImageVector? = null,
     type: SettingsType = SettingsType.None
 ) = PreferenceItem.IntPreferenceItem(
@@ -61,10 +61,10 @@ fun boolPreferenceItem(
     key: SettingsKeys,
     isLayoutVisible: Boolean = true,
     titleString: String = "",
-    titleResId: Int = 0,
+    titleResId: Int? = null,
     descriptionString: String = "",
-    descriptionResId: Int = 0,
-    iconResId: Int = 0,
+    descriptionResId: Int? = null,
+    iconResId: Int? = null,
     iconVector: ImageVector? = null,
     type: SettingsType = SettingsType.Switch
 ) = PreferenceItem.BoolPreferenceItem(
@@ -76,17 +76,17 @@ fun boolPreferenceItem(
     descriptionResId = descriptionResId,
     iconResId = iconResId,
     iconVector = iconVector,
-    type = type
+    type = type,
 )
 
 fun stringPreferenceItem(
     key: SettingsKeys,
     isLayoutVisible: Boolean = true,
     titleString: String = "",
-    titleResId: Int = 0,
+    titleResId: Int? = null,
     descriptionString: String = "",
-    descriptionResId: Int = 0,
-    iconResId: Int = 0,
+    descriptionResId: Int? = null,
+    iconResId: Int? = null,
     iconVector: ImageVector? = null,
     type: SettingsType = SettingsType.None
 ) = PreferenceItem.StringPreferenceItem(
@@ -105,10 +105,10 @@ fun floatPreferenceItem(
     key: SettingsKeys,
     isLayoutVisible: Boolean = true,
     titleString: String = "",
-    titleResId: Int = 0,
+    titleResId: Int? = null,
     descriptionString: String = "",
-    descriptionResId: Int = 0,
-    iconResId: Int = 0,
+    descriptionResId: Int? = null,
+    iconResId: Int? = null,
     iconVector: ImageVector? = null,
     type: SettingsType = SettingsType.None
 ) = PreferenceItem.FloatPreferenceItem(
@@ -127,10 +127,10 @@ fun nullPreferenceItem(
     key: SettingsKeys,
     isLayoutVisible: Boolean = true,
     titleString: String = "",
-    titleResId: Int = 0,
+    titleResId: Int? = null,
     descriptionString: String = "",
-    descriptionResId: Int = 0,
-    iconResId: Int = 0,
+    descriptionResId: Int? = null,
+    iconResId: Int? = null,
     iconVector: ImageVector? = null,
     type: SettingsType = SettingsType.None
 ) = PreferenceItem.NullPreferenceItem(
@@ -148,12 +148,11 @@ fun nullPreferenceItem(
 
 @Composable
 fun PreferenceItem.getResolvedTitle(): String {
-    return when {
-        titleResId != 0 -> runCatching { stringResource(titleResId) }.getOrElse { "" }
-        titleString.isNotBlank() -> titleString
-        else -> ""
-    }
+    return titleResId?.let {
+        runCatching { stringResource(it) }.getOrElse { titleString.ifBlank { "" } }
+    } ?: titleString.ifBlank { "" }
 }
+
 
 @Composable
 fun PreferenceItem.getResolvedIcon(): ImageVector? {
@@ -164,7 +163,7 @@ fun PreferenceItem.getResolvedIcon(): ImageVector? {
         if (darkMode) Icons.Outlined.DarkMode
         else Icons.Rounded.LightMode
     } else {
-        iconVector ?: iconResId.takeIf { it != 0 }?.let {
+        iconVector ?: iconResId?.let {
             runCatching { ImageVector.vectorResource(id = it) }.getOrNull()
         }
     }
@@ -172,19 +171,22 @@ fun PreferenceItem.getResolvedIcon(): ImageVector? {
 
 @Composable
 fun PreferenceItem.getResolvedDescription(): String {
-
     val themeMode = LocalSettings.current.themeMode
 
-    return when {
-        key == SettingsKeys.DARK_THEME -> when (themeMode) {
+    return if (key == SettingsKeys.DARK_THEME) {
+        when (themeMode) {
             AppCompatDelegate.MODE_NIGHT_YES -> stringResource(R.string.on)
             AppCompatDelegate.MODE_NIGHT_NO -> stringResource(R.string.off)
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> stringResource(R.string.system)
             else -> ""
         }
-
-        descriptionResId != 0 -> runCatching { stringResource(descriptionResId) }.getOrElse { "" }
-        descriptionString.isNotBlank() -> descriptionString
-        else -> ""
+    } else {
+        descriptionResId?.let {
+            runCatching { stringResource(it) }.getOrElse {
+                descriptionString.takeIf { it.isNotBlank() } ?: ""
+            }
+        } ?: descriptionString.takeIf { it.isNotBlank() } ?: ""
     }
 }
+
+

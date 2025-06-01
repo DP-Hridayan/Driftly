@@ -40,6 +40,9 @@ class AttendanceRepositoryImpl @Inject constructor(
     override suspend fun getAllAttendancesOnce(): List<AttendanceEntity> =
         dao.getAllAttendancesOnce()
 
+    override suspend fun hasUnmarkedAttendanceForDate(date: String): Boolean =
+        dao.hasUnmarkedAttendanceForDate(date)
+
     override fun getAttendanceForSubject(subjectId: Int): Flow<List<AttendanceEntity>> =
         dao.getAttendanceForSubjectFlow(subjectId)
 

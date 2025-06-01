@@ -24,11 +24,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
-import `in`.hridayan.driftly.settings.presentation.components.switch.SettingsSwitch
-import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 import `in`.hridayan.driftly.settings.domain.model.getResolvedDescription
 import `in`.hridayan.driftly.settings.domain.model.getResolvedIcon
 import `in`.hridayan.driftly.settings.domain.model.getResolvedTitle
+import `in`.hridayan.driftly.settings.presentation.components.switch.SettingsSwitch
+import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 fun BooleanPreferenceItemView(
@@ -45,8 +45,17 @@ fun BooleanPreferenceItemView(
     val titleText = item.getResolvedTitle()
     val descriptionText = item.getResolvedDescription()
 
-    val checked by settingsViewModel.getBoolean(item.key)
+    val checked by settingsViewModel.isItemChecked(item.key)
         .collectAsState(initial = item.key.default as Boolean)
+
+    val enabled by settingsViewModel.isItemEnabled(item.key).collectAsState(initial = true)
+
+    val onClick: () -> Unit = {
+        if (enabled) {
+            settingsViewModel.onBooleanItemClicked(item.key)
+            weakHaptic()
+        }
+    }
 
     if (item.type == SettingsType.SwitchBanner) {
         Card(
@@ -54,10 +63,7 @@ fun BooleanPreferenceItemView(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp, vertical = 25.dp)
                 .clip(MaterialTheme.shapes.extraLarge)
-                .clickable(enabled = true, onClick = {
-                    weakHaptic()
-                    settingsViewModel.onToggle(item.key)
-                }),
+                .clickable(enabled = enabled, onClick = onClick),
             shape = MaterialTheme.shapes.extraLarge,
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -79,8 +85,7 @@ fun BooleanPreferenceItemView(
                 SettingsSwitch(
                     checked = checked,
                     onCheckedChange = {
-                        weakHaptic()
-                        settingsViewModel.onToggle(item.key)
+                        onClick()
                     })
             }
         }
@@ -91,11 +96,11 @@ fun BooleanPreferenceItemView(
             modifier = modifier
                 .fillMaxWidth()
                 .clickable(
-                    enabled = true, onClick = {
-                        weakHaptic()
-                        settingsViewModel.onToggle(item.key)
-                    })
-                .padding(horizontal = 20.dp, vertical = 17.dp),
+                    enabled = enabled,
+                    onClick = onClick
+                )
+                .padding(horizontal = 20.dp, vertical = 17.dp)
+                .alpha(if (enabled) 1f else 0.5f),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
@@ -130,9 +135,9 @@ fun BooleanPreferenceItemView(
 
             SettingsSwitch(
                 checked = checked,
+                enabled = enabled,
                 onCheckedChange = {
-                    weakHaptic()
-                    settingsViewModel.onToggle(item.key)
+                    onClick()
                 })
         }
     }

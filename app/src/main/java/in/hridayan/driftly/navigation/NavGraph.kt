@@ -16,6 +16,7 @@ import `in`.hridayan.driftly.settings.presentation.page.customisation.screens.Cu
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.DarkThemeScreen
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.screens.LookAndFeelScreen
 import `in`.hridayan.driftly.settings.presentation.page.mainscreen.screen.SettingsScreen
+import `in`.hridayan.driftly.settings.presentation.page.notification.screens.NotificationScreen
 import kotlinx.serialization.Serializable
 
 @Composable
@@ -109,6 +110,13 @@ fun Navigation() {
             ) {
                 BackupAndRestoreScreen()
             }
+
+            composable<NotificationScreen>(
+                enterTransition = { slideFadeInFromRight() },
+                popExitTransition = { slideFadeOutToRight() }
+            ) {
+                NotificationScreen()
+            }
         }
     }
 }
@@ -147,3 +155,6 @@ object BehaviorScreen
 
 @Serializable
 object BackupAndRestoreScreen
+
+@Serializable
+object NotificationScreen

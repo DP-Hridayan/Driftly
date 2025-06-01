@@ -26,6 +26,7 @@ interface SettingsRepository {
     suspend fun getDarkThemePageList(): List<PreferenceGroup>
     suspend fun getBehaviorPageList(): List<PreferenceGroup>
     suspend fun getBackupPageList(): List<PreferenceGroup>
+    suspend fun getNotificationsPageList(): List<PreferenceGroup>
 
     fun getAllDefaultSettings(): Map<String, Any?>
     suspend fun getCurrentSettings(): Map<String, Any?>

@@ -14,9 +14,12 @@ import androidx.compose.material.icons.rounded.Downloading
 import androidx.compose.material.icons.rounded.EventAvailable
 import androidx.compose.material.icons.rounded.Handyman
 import androidx.compose.material.icons.rounded.Language
+import androidx.compose.material.icons.rounded.NotificationImportant
+import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material.icons.rounded.SentimentNeutral
 import androidx.compose.material.icons.rounded.SettingsBackupRestore
 import androidx.compose.material.icons.rounded.Tune
+import androidx.compose.material.icons.rounded.Upcoming
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material.icons.rounded.Vibration
 import `in`.hridayan.driftly.BuildConfig
@@ -34,6 +37,7 @@ import `in`.hridayan.driftly.settings.domain.model.uncategorizedItems
 
 val isMiUi = MiUiCheck.isMiui
 val isSdkLowerThan13 = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+val isSdkLowerThan12 = Build.VERSION.SDK_INT < Build.VERSION_CODES.S
 
 object SettingsProvider {
     val settingsPageList: List<PreferenceGroup> = listOf(
@@ -55,6 +59,12 @@ object SettingsProvider {
                 titleResId = R.string.behavior,
                 descriptionResId = R.string.des_behavior,
                 iconVector = Icons.Rounded.SentimentNeutral
+            ),
+            nullPreferenceItem(
+                key = SettingsKeys.NOTIFICATION_SETTINGS,
+                titleResId = R.string.notifications,
+                descriptionResId = R.string.des_notifications,
+                iconVector = Icons.Rounded.NotificationsActive
             ),
             nullPreferenceItem(
                 key = SettingsKeys.AUTO_UPDATE,
@@ -103,6 +113,7 @@ object SettingsProvider {
                 titleResId = R.string.dynamic_colors,
                 descriptionResId = R.string.des_dynamic_colors,
                 iconVector = Icons.Rounded.Colorize,
+                isLayoutVisible = !isSdkLowerThan12
             )
         ),
         categorizedItems(
@@ -268,6 +279,40 @@ object SettingsProvider {
                 titleResId = R.string.reset_app_settings,
                 descriptionResId = R.string.des_reset_app_settings,
                 iconResId = R.drawable.ic_reset_settings
+            )
+        )
+    )
+
+    val notificationsPageList: List<PreferenceGroup> = listOf(
+        uncategorizedItems(
+            boolPreferenceItem(
+                key = SettingsKeys.ENABLE_NOTIFICATIONS,
+                titleResId = R.string.enable_notifications,
+                type = SettingsType.SwitchBanner
+            )
+        ),
+        categorizedItems(
+            categoryNameResId = R.string.attendance,
+            boolPreferenceItem(
+                key = SettingsKeys.REMINDER_MARK_ATTENDANCE,
+                titleResId = R.string.reminder_to_mark_attendance,
+                descriptionResId = R.string.des_reminder_to_mark_attendance,
+                iconVector = Icons.Rounded.Upcoming
+            ),
+            boolPreferenceItem(
+                key = SettingsKeys.NOTIFY_MISSED_ATTENDANCE,
+                titleResId = R.string.notify_missed_attendance,
+                descriptionResId = R.string.des_notify_missed_attendance,
+                iconVector = Icons.Rounded.NotificationImportant
+            )
+        ),
+        categorizedItems(
+            categoryNameResId = R.string.updates,
+            boolPreferenceItem(
+                key = SettingsKeys.UPDATE_AVAILABLE_NOTIFICATION,
+                titleResId = R.string.notify_update_available,
+                descriptionResId = R.string.des_notify_update_available,
+                iconResId = R.drawable.ic_release_alert
             )
         )
     )

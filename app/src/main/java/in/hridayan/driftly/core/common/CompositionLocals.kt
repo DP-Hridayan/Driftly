@@ -9,11 +9,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.core.utils.HapticUtils.strongHaptic
 import `in`.hridayan.driftly.core.utils.HapticUtils.weakHaptic
+import `in`.hridayan.driftly.core.utils.isNotificationPermissionGranted
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
@@ -29,12 +31,19 @@ val LocalSeedColor = staticCompositionLocalOf<Int> {
 val LocalTonalPalette = staticCompositionLocalOf<List<SeedColors>> {
     error("No tonal palette provided")
 }
+val LocalNotificationPermission = staticCompositionLocalOf<Boolean> {
+    error("No notification preference provided")
+}
 
 @Composable
 fun CompositionLocals(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     content: @Composable () -> Unit
 ) {
+    val view = LocalView.current
+
+    val context = LocalContext.current
+
     val autoUpdate by settingsViewModel.booleanState(SettingsKeys.AUTO_UPDATE)
 
     val themeMode by settingsViewModel.intState(SettingsKeys.THEME_MODE)
@@ -63,6 +72,8 @@ fun CompositionLocals(
 
     val enableDirectDownload by settingsViewModel.booleanState(SettingsKeys.ENABLE_DIRECT_DOWNLOAD)
 
+    val notificationPreference by settingsViewModel.booleanState(SettingsKeys.ENABLE_NOTIFICATIONS)
+
     val state =
         remember(
             autoUpdate,
@@ -78,7 +89,8 @@ fun CompositionLocals(
             showAttendanceStreaks,
             rememberCalendarMonthYear,
             startWeekOnMonday,
-            enableDirectDownload
+            enableDirectDownload,
+            notificationPreference,
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -94,7 +106,8 @@ fun CompositionLocals(
                 showAttendanceStreaks = showAttendanceStreaks,
                 rememberCalendarMonthYear = rememberCalendarMonthYear,
                 startWeekOnMonday = startWeekOnMonday,
-                enableDirectDownload = enableDirectDownload
+                enableDirectDownload = enableDirectDownload,
+                notificationPreference = notificationPreference
             )
         }
 
@@ -103,6 +116,9 @@ fun CompositionLocals(
         AppCompatDelegate.MODE_NIGHT_NO -> false
         else -> isSystemInDarkTheme()
     }
+
+    val isNotificationEnabledAndPermitted =
+        notificationPreference && isNotificationPermissionGranted(context)
 
     val tonalPalette = listOf<SeedColors>(
         SeedColors.Blue,
@@ -115,8 +131,6 @@ fun CompositionLocals(
         SeedColors.Teal,
         SeedColors.Green
     )
-
-    val view = LocalView.current
 
     val weakHaptic = remember(isHapticEnabled, view) {
         {
@@ -141,6 +155,7 @@ fun CompositionLocals(
         LocalSeedColor provides seedColor,
         LocalDarkMode provides isDarkTheme,
         LocalTonalPalette provides tonalPalette,
+        LocalNotificationPermission provides isNotificationEnabledAndPermitted
     ) {
         content()
     }

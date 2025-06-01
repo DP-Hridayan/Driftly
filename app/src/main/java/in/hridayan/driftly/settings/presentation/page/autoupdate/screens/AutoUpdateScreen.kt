@@ -140,7 +140,6 @@ fun AutoUpdateScreen(
                                 onClick = {
                                     weakHaptic()
                                     autoUpdateViewModel.checkForUpdates(
-                                        currentVersion = BuildConfig.VERSION_NAME,
                                         includePrerelease = includePrerelease
                                     )
                                     showLoading = true

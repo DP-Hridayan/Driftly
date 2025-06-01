@@ -77,5 +77,21 @@ interface AttendanceDao {
     """
     )
     fun getTotalCountForMonth(subjectId: Int, year: Int, month: Int): Flow<Int>
+
+    @Query(
+        """
+    SELECT EXISTS (
+        SELECT 1
+        FROM subjects s
+        LEFT JOIN attendance a ON s.id = a.subjectId AND a.date = :date
+        WHERE a.subjectId IS NULL OR a.status = :status
+    )
+    """
+    )
+    suspend fun hasUnmarkedAttendanceForDate(
+        date: String,
+        status: AttendanceStatus = AttendanceStatus.UNMARKED
+    ): Boolean
+
 }
 

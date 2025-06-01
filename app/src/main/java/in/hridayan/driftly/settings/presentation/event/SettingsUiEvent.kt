@@ -10,6 +10,7 @@ sealed class SettingsUiEvent {
     data class ShowDialog(val key : SettingsKeys) : SettingsUiEvent()
     data class OpenUrl(val url:String) : SettingsUiEvent()
     data class LaunchIntent(val intent: Intent) : SettingsUiEvent()
+    data class RequestPermission(val permission: String) : SettingsUiEvent()
 
     data class RequestDocumentUriForBackup(val backupOption: BackupOption) : SettingsUiEvent()
     object RequestDocumentUriForRestore : SettingsUiEvent()

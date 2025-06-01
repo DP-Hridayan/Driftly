@@ -15,4 +15,5 @@ data class SettingsState(
     val rememberCalendarMonthYear: Boolean,
     val startWeekOnMonday: Boolean,
     val enableDirectDownload: Boolean,
+    val notificationPreference : Boolean
 )

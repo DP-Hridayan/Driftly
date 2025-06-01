@@ -12,6 +12,7 @@ interface AttendanceRepository {
     suspend fun deleteAllAttendances()
     suspend fun deleteAllAttendanceForSubject(subjectId: Int)
     suspend fun getAllAttendancesOnce(): List<AttendanceEntity>
+    suspend fun hasUnmarkedAttendanceForDate(date: String): Boolean
     fun getAttendanceForSubject(subjectId: Int): Flow<List<AttendanceEntity>>
     fun getTotalCountByStatus(status: AttendanceStatus): Flow<Int>
     fun getCountBySubjectAndStatus(subjectId: Int, status: AttendanceStatus): Flow<Int>

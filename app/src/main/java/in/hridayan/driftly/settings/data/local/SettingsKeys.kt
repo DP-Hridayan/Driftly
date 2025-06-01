@@ -38,5 +38,10 @@ enum class SettingsKeys(val default: Any?) {
     BACKUP_APP_DATA(null),
     RESTORE_APP_DATA(null),
     RESET_APP_SETTINGS(null),
-    LAST_BACKUP_TIME("")
+    LAST_BACKUP_TIME(""),
+    NOTIFICATION_SETTINGS(null),
+    REMINDER_MARK_ATTENDANCE(true),
+    NOTIFY_MISSED_ATTENDANCE(true),
+    ENABLE_NOTIFICATIONS(true),
+    UPDATE_AVAILABLE_NOTIFICATION(true)
 }

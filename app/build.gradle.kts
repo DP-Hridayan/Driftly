@@ -98,6 +98,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.navigation.compose)
     implementation(libs.core.splashscreen)
 
@@ -113,6 +114,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.android.compiler)
     kapt(libs.hilt.compiler)
+    implementation(libs.hilt.work)
 
     implementation(libs.serialization.json)
     implementation(libs.gson)
