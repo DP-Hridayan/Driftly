@@ -6,16 +6,16 @@
 <text x="460" y="25" text-anchor="start">98%</text>
 <text x="140" y="55" text-anchor="end"><![CDATA[German]]></text>
 <rect x="150" y="41" width="300" height="14" fill="#2C2F33" rx="8" ry="8" />
-<rect x="150" y="41" width="135" height="14" fill="#d3caa4" rx="8" ry="8" />
-<text x="460" y="55" text-anchor="start">45%</text>
+<rect x="150" y="41" width="108" height="14" fill="#dcc6a5" rx="8" ry="8" />
+<text x="460" y="55" text-anchor="start">36%</text>
 <text x="140" y="85" text-anchor="end"><![CDATA[French]]></text>
 <rect x="150" y="71" width="300" height="14" fill="#2C2F33" rx="8" ry="8" />
-<rect x="150" y="71" width="222" height="14" fill="#b7d9a0" rx="8" ry="8" />
-<text x="460" y="85" text-anchor="start">74%</text>
+<rect x="150" y="71" width="180" height="14" fill="#c4d2a2" rx="8" ry="8" />
+<text x="460" y="85" text-anchor="start">60%</text>
 <text x="140" y="115" text-anchor="end"><![CDATA[Japanese]]></text>
 <rect x="150" y="101" width="300" height="14" fill="#2C2F33" rx="8" ry="8" />
-<rect x="150" y="101" width="219" height="14" fill="#b8d8a0" rx="8" ry="8" />
-<text x="460" y="115" text-anchor="start">73%</text>
+<rect x="150" y="101" width="177" height="14" fill="#c5d1a2" rx="8" ry="8" />
+<text x="460" y="115" text-anchor="start">59%</text>
 <text x="140" y="145" text-anchor="end"><![CDATA[Portuguese, Brazilian]]></text>
 <rect x="150" y="131" width="300" height="14" fill="#2C2F33" rx="8" ry="8" />
 <rect x="150" y="131" width="0" height="14" fill="#ffb4ab" rx="8" ry="8" />
