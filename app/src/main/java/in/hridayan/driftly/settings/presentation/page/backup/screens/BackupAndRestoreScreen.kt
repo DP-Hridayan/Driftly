@@ -167,7 +167,7 @@ fun BackupAndRestoreScreen(
     if (showResetDialog) {
         ResetSettingsDialog(
             onDismiss = { showResetDialog = false },
-            onConfirm = { settingsViewModel.resetSettingsToDefault() })
+            onConfirm = { backupAndRestoreViewModel.resetSettingsToDefault() })
     }
 
     if (showRestoreBackupDialog) {

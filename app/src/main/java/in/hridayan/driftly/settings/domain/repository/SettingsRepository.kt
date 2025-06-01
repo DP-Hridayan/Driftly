@@ -29,5 +29,5 @@ interface SettingsRepository {
 
     fun getAllDefaultSettings(): Map<String, Any?>
     suspend fun getCurrentSettings(): Map<String, Any?>
-    suspend fun resetAndRestoreDefaults()
+    suspend fun resetAndRestoreDefaults(): Boolean
 }

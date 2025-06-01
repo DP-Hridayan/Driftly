@@ -1,6 +1,7 @@
 package `in`.hridayan.driftly.settings.data.local.datastore
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
@@ -123,7 +124,7 @@ class SettingsDataStore @Inject constructor(
         }
     }
 
-    suspend fun resetAndRestoreDefaults() {
+    suspend fun resetAndRestoreDefaults(): Boolean {
         val preserveKeys = setOf(
             SettingsKeys.LAST_BACKUP_TIME.name,
             SettingsKeys.SAVED_VERSION_CODE.name
@@ -146,36 +147,42 @@ class SettingsDataStore @Inject constructor(
             }
         }
 
-        ds.edit { prefs ->
-            prefs.asMap().keys
-                .filterNot { it.name in preserveKeys }
-                .forEach { prefs.remove(it) }
-        }
+        try {
+            ds.edit { prefs ->
+                prefs.asMap().keys
+                    .filterNot { it.name in preserveKeys }
+                    .forEach { prefs.remove(it) }
+            }
 
-        ds.edit { prefs ->
-            SettingsKeys.entries
-                .filterNot { it.name in preserveKeys }
-                .forEach { key ->
-                    when (val defaultValue = key.default) {
-                        is Boolean -> prefs[booleanPreferencesKey(key.name)] = defaultValue
-                        is Int -> prefs[intPreferencesKey(key.name)] = defaultValue
-                        is Float -> prefs[floatPreferencesKey(key.name)] = defaultValue
-                        is String -> prefs[stringPreferencesKey(key.name)] = defaultValue
+            ds.edit { prefs ->
+                SettingsKeys.entries
+                    .filterNot { it.name in preserveKeys }
+                    .forEach { key ->
+                        when (val defaultValue = key.default) {
+                            is Boolean -> prefs[booleanPreferencesKey(key.name)] = defaultValue
+                            is Int -> prefs[intPreferencesKey(key.name)] = defaultValue
+                            is Float -> prefs[floatPreferencesKey(key.name)] = defaultValue
+                            is String -> prefs[stringPreferencesKey(key.name)] = defaultValue
+                        }
                     }
-                }
 
-            preservedValues.forEach { (keyName, value) ->
-                val settingsKey = SettingsKeys.entries.find { it.name == keyName }
-                if (settingsKey != null && value != null) {
-                    when (value) {
-                        is Boolean -> prefs[booleanPreferencesKey(keyName)] = value
-                        is Int -> prefs[intPreferencesKey(keyName)] = value
-                        is Float -> prefs[floatPreferencesKey(keyName)] = value
-                        is String -> prefs[stringPreferencesKey(keyName)] = value
-                        else -> {}
+                preservedValues.forEach { (keyName, value) ->
+                    val settingsKey = SettingsKeys.entries.find { it.name == keyName }
+                    if (settingsKey != null && value != null) {
+                        when (value) {
+                            is Boolean -> prefs[booleanPreferencesKey(keyName)] = value
+                            is Int -> prefs[intPreferencesKey(keyName)] = value
+                            is Float -> prefs[floatPreferencesKey(keyName)] = value
+                            is String -> prefs[stringPreferencesKey(keyName)] = value
+                            else -> {}
+                        }
                     }
                 }
             }
+            return true
+        } catch (e: Exception) {
+            return false
+            Log.e("Settings Datastore", e.message ?: "")
         }
     }
 }

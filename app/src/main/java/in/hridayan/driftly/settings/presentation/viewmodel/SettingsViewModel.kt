@@ -213,10 +213,4 @@ class SettingsViewModel @Inject constructor(
             }
         }
     }
-
-    fun resetSettingsToDefault() {
-        viewModelScope.launch {
-            settingsRepository.resetAndRestoreDefaults()
-        }
-    }
 }

@@ -139,6 +139,8 @@
     <string name="backup_failed">Backup failed</string>
     <string name="restore_successful">Restore successful</string>
     <string name="restore_failed">Restore failed</string>
+    <string name="reset_settings_successful">Reset settings successful</string>
+    <string name="reset_settings_failed">Reset settings failed</string>
     <string name="start_week_on_monday">Start week on Monday</string>
     <string name="des_start_week_on_monday">Prefer seeing your week begin with Monday instead of Sunday? Enable this to shift the calendar layout so Monday becomes the first day of the week.</string>
     <string name="pre_release_warning_description">These versions are still in testing and may contain unfinished features or unexpected bugs. If you choose to update to a pre-release, please be aware that things might break or behave strangely.\nIf you encounter any issues, crashes, or weird behavior, please report them so we can fix and improve Driftly before the stable release.\nThanks for helping us build better!</string>

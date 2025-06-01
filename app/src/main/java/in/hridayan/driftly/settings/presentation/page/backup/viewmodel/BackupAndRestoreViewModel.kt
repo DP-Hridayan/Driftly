@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.domain.model.BackupOption
 import `in`.hridayan.driftly.settings.domain.repository.BackupAndRestoreRepository
+import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BackupAndRestoreViewModel @Inject constructor(
     private val backupAndRestoreRepository: BackupAndRestoreRepository,
+    private val settingsRepository: SettingsRepository,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
     private val _uiEvent = MutableSharedFlow<SettingsUiEvent>()
@@ -54,6 +56,18 @@ class BackupAndRestoreViewModel @Inject constructor(
         }
     }
 
+    fun resetSettingsToDefault() {
+        viewModelScope.launch {
+            val success = settingsRepository.resetAndRestoreDefaults()
+
+            val message =
+                if (success) context.getString(R.string.reset_settings_successful) else context.getString(
+                    R.string.reset_settings_failed
+                )
+
+            _uiEvent.emit(SettingsUiEvent.ShowToast(message))
+        }
+    }
 
     fun loadBackupTime(uri: Uri) {
         viewModelScope.launch {
