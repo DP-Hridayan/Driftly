@@ -43,11 +43,10 @@ fun SubjectCard(
     subject: String,
     progress: Float,
     isTotalCountZero: Boolean = false,
+    selectedCardsCount: Int = 0,
     navigate: () -> Unit = {},
     onClick: () -> Unit = {},
     onLongClicked: (Boolean) -> Unit = {},
-    onDeleteConfirmed: () -> Unit = {},
-    onUpdateConfirmed: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel(),
     isDemoCard: Boolean = false,
     cornerRadius: Dp = 15.dp,
@@ -69,7 +68,7 @@ fun SubjectCard(
 
     val handleClick = {
         onClick()
-        if (isLongClicked) {
+        if (isLongClicked || selectedCardsCount != 0) {
             handleLongClick()
         } else {
             navigate()
@@ -80,10 +79,8 @@ fun SubjectCard(
     val handleDeleteConfirmation = {
         viewModel.deleteSubject(subjectId, onSuccess = {
             viewModel.deleteAllAttendanceForSubject(subjectId)
-            onLongClicked(isLongClicked)
-            isLongClicked = false
+            onLongClicked(false)
             isDeleteDialogVisible = false
-            onDeleteConfirmed()
         })
     }
 
@@ -148,8 +145,8 @@ fun SubjectCard(
             subject = subject,
             onDismiss = {
                 isLongClicked = false
+                onLongClicked(false)
                 isUpdateDialogVisible = false
-                onUpdateConfirmed()
             })
     }
 

@@ -30,6 +30,7 @@ import androidx.compose.material3.animateFloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -86,9 +87,9 @@ fun HomeScreen(
         fraction = totalProgress.coerceIn(0f, 1f)
     )
 
-    var showAddButton by rememberSaveable { mutableStateOf(true) }
-
     val subjectCardCornerRadius = LocalSettings.current.subjectCardCornerRadius
+
+    var selectedCardsCount by remember { mutableIntStateOf(0) }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -98,7 +99,7 @@ fun HomeScreen(
                 modifier = Modifier.Companion
                     .padding(bottom = 10.dp)
                     .animateFloatingActionButton(
-                        visible = showAddButton,
+                        visible = selectedCardsCount == 0,
                         alignment = Alignment.Center,
                         targetScale = 0f,
                         scaleAnimationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
@@ -107,7 +108,7 @@ fun HomeScreen(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 onClick = {
-                    if (!showAddButton) return@FloatingActionButton
+                    if (selectedCardsCount != 0) return@FloatingActionButton
                     isDialogOpen = true
                     weakHaptic()
                 },
@@ -257,13 +258,16 @@ fun HomeScreen(
                 val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
                 SubjectCard(
-                    modifier = Modifier.padding(horizontal = 25.dp).animateItem(),
+                    modifier = Modifier
+                        .padding(horizontal = 25.dp)
+                        .animateItem(),
                     cardStyle = LocalSettings.current.subjectCardStyle,
                     cornerRadius = subjectCardCornerRadius.dp,
                     subjectId = subjects[index].id,
                     subject = subjects[index].subject,
                     progress = progress,
                     isTotalCountZero = counts.totalCount == 0,
+                    selectedCardsCount = selectedCardsCount,
                     navigate = {
                         navController.navigate(
                             CalendarScreen(
@@ -272,10 +276,9 @@ fun HomeScreen(
                         )
                     },
                     onLongClicked = { isLongClicked ->
-                        showAddButton = !isLongClicked
+                        if (isLongClicked) selectedCardsCount++ else selectedCardsCount--
                     },
-                    onDeleteConfirmed = { showAddButton = true },
-                    onUpdateConfirmed = { showAddButton = true })
+                )
             }
 
             item {
