@@ -31,8 +31,8 @@ object WorkScheduler {
 
     fun scheduleMissedAttendanceAlert(
         context: Context,
-        hour: Int = 22,
-        minute: Int = 45
+        hour: Int = 16,
+        minute: Int = 0
     ) {
         scheduleWork(
             workerClass = MissedAttendanceAlertWorker::class.java,
