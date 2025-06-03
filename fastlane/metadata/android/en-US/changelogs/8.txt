@@ -1,0 +1,6 @@
+
+* Added notification alerts for various events like attendance reminder, missed attendance alert and notification alert when new version of the app is detected
+
+* Improved the batch selection of subject cards in home screen with support to dismiss selection by back press
+
+* Fixed system bars colors in android 11 and below
