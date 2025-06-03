@@ -1,6 +1,7 @@
 package `in`.hridayan.driftly.home.presentation.screens
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -90,6 +91,8 @@ fun HomeScreen(
     val subjectCardCornerRadius = LocalSettings.current.subjectCardCornerRadius
 
     var selectedCardsCount by remember { mutableIntStateOf(0) }
+
+    BackHandler(enabled = selectedCardsCount > 0) { selectedCardsCount = 0 }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),

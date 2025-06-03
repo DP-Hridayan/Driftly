@@ -99,6 +99,8 @@ fun SubjectCard(
         isNoAttendanceDialogVisible = true
     }
 
+    if (selectedCardsCount == 0 && isLongClicked) isLongClicked = false
+
     BaseCard(
         modifier = modifier,
         cornerRadius = cornerRadius,
