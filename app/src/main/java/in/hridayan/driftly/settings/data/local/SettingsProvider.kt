@@ -4,7 +4,6 @@ import android.os.Build
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.Palette
-import androidx.compose.material.icons.rounded.AddComment
 import androidx.compose.material.icons.rounded.CalendarViewWeek
 import androidx.compose.material.icons.rounded.ChangeHistory
 import androidx.compose.material.icons.rounded.Colorize
@@ -12,14 +11,10 @@ import androidx.compose.material.icons.rounded.Contrast
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Downloading
 import androidx.compose.material.icons.rounded.EventAvailable
-import androidx.compose.material.icons.rounded.Handyman
 import androidx.compose.material.icons.rounded.Language
-import androidx.compose.material.icons.rounded.NotificationImportant
-import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material.icons.rounded.SentimentNeutral
 import androidx.compose.material.icons.rounded.SettingsBackupRestore
 import androidx.compose.material.icons.rounded.Tune
-import androidx.compose.material.icons.rounded.Upcoming
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material.icons.rounded.Vibration
 import `in`.hridayan.driftly.BuildConfig
@@ -64,7 +59,7 @@ object SettingsProvider {
                 key = SettingsKeys.NOTIFICATION_SETTINGS,
                 titleResId = R.string.notifications,
                 descriptionResId = R.string.des_notifications,
-                iconVector = Icons.Rounded.NotificationsActive
+                iconResId = R.drawable.ic_notifications
             ),
             nullPreferenceItem(
                 key = SettingsKeys.AUTO_UPDATE,
@@ -197,7 +192,7 @@ object SettingsProvider {
                 key = SettingsKeys.FEATURE_REQUEST,
                 titleResId = R.string.feature_request,
                 descriptionResId = R.string.des_feature_request,
-                iconVector = Icons.Rounded.AddComment,
+                iconResId = R.drawable.ic_add_comment
             ),
             nullPreferenceItem(
                 key = SettingsKeys.GITHUB,
@@ -245,7 +240,7 @@ object SettingsProvider {
                 key = SettingsKeys.BACKUP_APP_SETTINGS,
                 titleResId = R.string.backup_settings,
                 descriptionResId = R.string.des_backup_settings,
-                iconVector = Icons.Rounded.Handyman
+                iconResId = R.drawable.ic_handyman
             ),
             nullPreferenceItem(
                 key = SettingsKeys.BACKUP_APP_DATABASE,
@@ -297,13 +292,13 @@ object SettingsProvider {
                 key = SettingsKeys.REMINDER_MARK_ATTENDANCE,
                 titleResId = R.string.reminder_to_mark_attendance,
                 descriptionResId = R.string.des_reminder_to_mark_attendance,
-                iconVector = Icons.Rounded.Upcoming
+                iconResId = R.drawable.ic_upcoming
             ),
             boolPreferenceItem(
                 key = SettingsKeys.NOTIFY_MISSED_ATTENDANCE,
                 titleResId = R.string.notify_missed_attendance,
                 descriptionResId = R.string.des_notify_missed_attendance,
-                iconVector = Icons.Rounded.NotificationImportant
+                iconResId = R.drawable.ic_notifications_important
             )
         ),
         categorizedItems(
