@@ -158,6 +158,9 @@
     <string name="notify_update_available">Notify when update available</string>
     <string name="des_notify_update_available">Receive notifications when a newer version of Driftly is released</string>
     <string name="des_update_available">A newer version of Driftly has been released!</string>
+    <string name="request_permission">Request permission</string>
+    <string name="grant_permission">Grant permission</string>
+    <string name="des_grant_notification_permission">Do you want to get alerts when you forget to mark your attendance?\n\nGrant notification access!</string>
     <string name="des_start_week_on_monday">Prefer seeing your week begin with Monday instead of Sunday? Enable this to shift the calendar layout so Monday becomes the first day of the week.</string>
     <string name="pre_release_warning_description">Ces versions sont encore en phase de test et peuvent contenir des fonctionnalités inachevées ou des bogues inattendus. Si vous choisissez de mettre à jour une pré-version, soyez conscient que des choses peuvent se casser ou se comporter bizarrement.\nSi vous rencontrez des problèmes, des crashs, ou des comportements bizarres, merci de les rapporter afin que nous puissions corriger et améliorer Driftly avant la version stable.\nMerci de nous aider à construire mieux !</string>
     <string name="changelogs_v1_0_0">Version initiale\nCalendrier ajouté pour marquer le statut de présence\nAjouté par sujet affichage de la progression\nAjout de la possibilité d\'ajouter, supprimer et modifier les sujets\nParamètres ajoutés pour personnaliser l\'expérience utilisateur</string>
