@@ -2,6 +2,8 @@ package `in`.hridayan.driftly.home.presentation.screens
 
 import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -29,6 +31,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.animateFloatingActionButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -42,6 +45,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -52,7 +56,9 @@ import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
+import `in`.hridayan.driftly.core.presentation.components.dialog.NotificationPermDialog
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
+import `in`.hridayan.driftly.core.utils.isNotificationPermissionGranted
 import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
 import `in`.hridayan.driftly.home.presentation.components.dialog.AddSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.image.UndrawRelaxedReading
@@ -61,6 +67,9 @@ import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.navigation.SettingsScreen
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
+import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
+import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @SuppressLint("DefaultLocale")
@@ -68,7 +77,9 @@ import `in`.hridayan.driftly.navigation.SettingsScreen
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
+    settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val subjects by viewModel.subjectList.collectAsState(initial = emptyList())
@@ -89,8 +100,63 @@ fun HomeScreen(
     )
 
     val subjectCardCornerRadius = LocalSettings.current.subjectCardCornerRadius
+    var selectedCardsCount by rememberSaveable { mutableIntStateOf(0) }
+    var showNotificationPermissionDialog by rememberSaveable { mutableStateOf(false) }
+    val notificationsEnabled by rememberSaveable {
+        mutableStateOf(
+            isNotificationPermissionGranted(
+                context
+            )
+        )
+    }
 
-    var selectedCardsCount by remember { mutableIntStateOf(0) }
+    val notificationPreference = LocalSettings.current.notificationPreference
+
+    val launcherReqPerm = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted ->
+
+            settingsViewModel.setBoolean(
+                key = SettingsKeys.ENABLE_NOTIFICATIONS,
+                value = isGranted || notificationPreference
+            )
+
+            settingsViewModel.refreshNotificationPermissionState()
+        }
+    )
+
+    val launcherIntent = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = {
+            val isGranted = isNotificationPermissionGranted(context)
+
+            settingsViewModel.setBoolean(
+                key = SettingsKeys.ENABLE_NOTIFICATIONS,
+                value = isGranted || notificationPreference
+            )
+
+            settingsViewModel.refreshNotificationPermissionState()
+        }
+    )
+
+    val notificationPermDialogShown = LocalSettings.current.notificationPermissionDialogShown
+
+    LaunchedEffect(notificationsEnabled, notificationPermDialogShown, totalCount) {
+        showNotificationPermissionDialog =
+            !notificationsEnabled && !notificationPermDialogShown && totalCount != 0
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is SettingsUiEvent.RequestPermission -> launcherReqPerm.launch(event.permission)
+
+                is SettingsUiEvent.LaunchIntent -> launcherIntent.launch(event.intent)
+
+                else -> {}
+            }
+        }
+    }
 
     BackHandler(enabled = selectedCardsCount > 0) { selectedCardsCount = 0 }
 
@@ -274,7 +340,8 @@ fun HomeScreen(
                     navigate = {
                         navController.navigate(
                             CalendarScreen(
-                                subjectId = subjects[index].id, subject = subjects[index].subject
+                                subjectId = subjects[index].id,
+                                subject = subjects[index].subject
                             )
                         )
                     },
@@ -298,6 +365,25 @@ fun HomeScreen(
         AddSubjectDialog(
             onDismiss = {
                 isDialogOpen = false
+            })
+    }
+
+    if (showNotificationPermissionDialog) {
+        NotificationPermDialog(
+            onDismiss = {
+                showNotificationPermissionDialog = false
+                settingsViewModel.setBoolean(
+                    SettingsKeys.NOTIFICATION_PERMISSION_DIALOG_SHOWN,
+                    true
+                )
+            },
+            onConfirm = {
+                viewModel.requestNotificationPermission()
+                showNotificationPermissionDialog = false
+                settingsViewModel.setBoolean(
+                    SettingsKeys.NOTIFICATION_PERMISSION_DIALOG_SHOWN,
+                    true
+                )
             })
     }
 }

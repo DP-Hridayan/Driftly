@@ -1,8 +1,11 @@
 package `in`.hridayan.driftly.home.presentation.viewmodel
 
+import android.content.Context
+import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.core.data.model.SubjectEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
@@ -10,10 +13,14 @@ import `in`.hridayan.driftly.core.domain.model.SubjectError
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
+import `in`.hridayan.driftly.core.utils.createAppNotificationSettingsIntent
+import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
@@ -22,9 +29,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val subjectRepository: SubjectRepository,
     private val attendanceRepository: AttendanceRepository
 ) : ViewModel() {
+    private val _uiEvent = MutableSharedFlow<SettingsUiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
+
     private val _subject = MutableStateFlow("")
     val subject: StateFlow<String> = _subject
 
@@ -87,7 +98,10 @@ class HomeViewModel @Inject constructor(
             if (isSubjectExists) {
                 _subjectError.value = SubjectError.AlreadyExists
             } else {
-                subjectRepository.updateSubject(subjectId = subjectId, newName = _subject.value.trim())
+                subjectRepository.updateSubject(
+                    subjectId = subjectId,
+                    newName = _subject.value.trim()
+                )
                 _subject.value = ""
                 onSuccess()
             }
@@ -136,6 +150,17 @@ class HomeViewModel @Inject constructor(
                 totalAbsent = absent,
                 totalCount = present + absent
             )
+        }
+    }
+
+    fun requestNotificationPermission() {
+        viewModelScope.launch {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                _uiEvent.emit(SettingsUiEvent.RequestPermission(android.Manifest.permission.POST_NOTIFICATIONS))
+            } else {
+                val intent = createAppNotificationSettingsIntent(context)
+                _uiEvent.emit(SettingsUiEvent.LaunchIntent(intent))
+            }
         }
     }
 }

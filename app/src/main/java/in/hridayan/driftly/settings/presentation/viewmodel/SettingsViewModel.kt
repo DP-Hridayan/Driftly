@@ -31,7 +31,6 @@ import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.model.BackupOption
 import `in`.hridayan.driftly.settings.domain.model.NotificationState
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
-import `in`.hridayan.driftly.settings.domain.usecase.CheckUpdateUseCase
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.Flow
@@ -49,7 +48,6 @@ class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val settingsRepository: SettingsRepository,
     private val toggleSettingUseCase: ToggleSettingUseCase,
-    private val checkUpdateUseCase: CheckUpdateUseCase
 ) : ViewModel() {
     var settingsPageList by mutableStateOf<List<PreferenceGroup>>(emptyList())
         private set

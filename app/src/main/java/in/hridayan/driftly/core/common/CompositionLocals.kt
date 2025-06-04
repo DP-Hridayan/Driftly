@@ -74,6 +74,8 @@ fun CompositionLocals(
 
     val notificationPreference by settingsViewModel.booleanState(SettingsKeys.ENABLE_NOTIFICATIONS)
 
+    val notificationPermissionDialogShown by settingsViewModel.booleanState(SettingsKeys.NOTIFICATION_PERMISSION_DIALOG_SHOWN)
+
     val state =
         remember(
             autoUpdate,
@@ -91,6 +93,7 @@ fun CompositionLocals(
             startWeekOnMonday,
             enableDirectDownload,
             notificationPreference,
+            notificationPermissionDialogShown
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -107,7 +110,8 @@ fun CompositionLocals(
                 rememberCalendarMonthYear = rememberCalendarMonthYear,
                 startWeekOnMonday = startWeekOnMonday,
                 enableDirectDownload = enableDirectDownload,
-                notificationPreference = notificationPreference
+                notificationPreference = notificationPreference,
+                notificationPermissionDialogShown = notificationPermissionDialogShown
             )
         }
 
