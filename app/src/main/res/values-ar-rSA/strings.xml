@@ -159,6 +159,9 @@
     <string name="notify_update_available">Notify when update available</string>
     <string name="des_notify_update_available">Receive notifications when a newer version of Driftly is released</string>
     <string name="des_update_available">A newer version of Driftly has been released!</string>
+    <string name="request_permission">Request permission</string>
+    <string name="grant_permission">Grant permission</string>
+    <string name="des_grant_notification_permission">Do you want to get alerts when you forget to mark your attendance?\n\nGrant notification access!</string>
     <string name="des_start_week_on_monday">هل تفضل أن يبدأ الأسبوع يوم الاثنين بدلاً من الأحد؟ قم بتمكين هذا الخيار لتغيير تخطيط التقويم بحيث يصبح الاثنين أول أيام الأسبوع.</string>
     <string name="pre_release_warning_description">هذه الإصدارات لا تزال قيد الاختبار وقد تحتوي على ميزات غير مكتملة أو أخطاء غير متوقعة. إذا اخترت التحديث إلى إصدار تجريبي، يرجى العلم بأن بعض الأمور قد لا تعمل بشكل صحيح أو قد تتصرف بطريقة غير معتادة.
 
