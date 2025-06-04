@@ -15,7 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.constants.SeedColors
 import `in`.hridayan.driftly.core.utils.HapticUtils.strongHaptic
 import `in`.hridayan.driftly.core.utils.HapticUtils.weakHaptic
-import `in`.hridayan.driftly.core.utils.isNotificationPermissionGranted
+import `in`.hridayan.driftly.notification.isNotificationPermissionGranted
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel

@@ -1,10 +1,10 @@
-package `in`.hridayan.driftly.core.notification
+package `in`.hridayan.driftly.notification
 
 import android.Manifest
 import android.content.Context
 import androidx.annotation.RequiresPermission
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.notification.helper.NotificationHelper
+import `in`.hridayan.driftly.notification.helper.NotificationHelper
 
 object NotificationSetup {
     const val ATTENDANCE_CHANNEL_ID = "attendance_channel"

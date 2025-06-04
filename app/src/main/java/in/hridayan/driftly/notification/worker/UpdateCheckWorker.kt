@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.core.notification.worker
+package `in`.hridayan.driftly.notification.worker
 
 import android.Manifest
 import android.content.Context
@@ -7,33 +7,32 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.android.qualifiers.ApplicationContext
+import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.core.di.entry.WorkerEntryPoint
-import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
-import `in`.hridayan.driftly.core.notification.NotificationSetup
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import `in`.hridayan.driftly.notification.NotificationSetup
+import `in`.hridayan.driftly.settings.domain.model.UpdateResult
+import `in`.hridayan.driftly.settings.domain.usecase.CheckUpdateUseCase
 
-class MissedAttendanceAlertWorker(
+class UpdateCheckWorker(
     @ApplicationContext private val context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
 
-    private val attendanceRepository: AttendanceRepository by lazy {
+    private val checkUpdateUseCase: CheckUpdateUseCase by lazy {
         EntryPointAccessors.fromApplication(
             applicationContext,
             WorkerEntryPoint::class.java
-        ).attendanceRepository()
+        ).checkUpdateUseCase()
     }
 
     @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     override suspend fun doWork(): Result {
+
         return try {
-            val today = LocalDate.now().format(DateTimeFormatter.ISO_DATE)
+            val result = checkUpdateUseCase(BuildConfig.VERSION_NAME, false)
 
-            val hasUnmarked = attendanceRepository.hasUnmarkedAttendanceForDate(today)
-
-            if (hasUnmarked) {
-                NotificationSetup.showMissedAttendanceNotification(applicationContext)
+            if (result is UpdateResult.Success && result.isUpdateAvailable) {
+                NotificationSetup.showUpdateAvailableNotification(applicationContext)
             }
 
             Result.success()

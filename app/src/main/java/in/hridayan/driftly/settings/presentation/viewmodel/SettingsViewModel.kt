@@ -14,9 +14,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.core.common.constants.NotificationTags
 import `in`.hridayan.driftly.core.common.constants.UrlConst
-import `in`.hridayan.driftly.core.notification.scheduler.WorkScheduler
-import `in`.hridayan.driftly.core.utils.createAppNotificationSettingsIntent
-import `in`.hridayan.driftly.core.utils.isNotificationPermissionGranted
+import `in`.hridayan.driftly.notification.scheduler.WorkScheduler
+import `in`.hridayan.driftly.notification.createAppNotificationSettingsIntent
+import `in`.hridayan.driftly.notification.isNotificationPermissionGranted
 import `in`.hridayan.driftly.navigation.AboutScreen
 import `in`.hridayan.driftly.navigation.AutoUpdateScreen
 import `in`.hridayan.driftly.navigation.BackupAndRestoreScreen

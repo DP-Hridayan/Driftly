@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.core.notification.helper
+package `in`.hridayan.driftly.notification.helper
 
 import android.Manifest
 import android.app.NotificationChannel

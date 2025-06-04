@@ -58,7 +58,7 @@ import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.presentation.components.dialog.NotificationPermDialog
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
-import `in`.hridayan.driftly.core.utils.isNotificationPermissionGranted
+import `in`.hridayan.driftly.notification.isNotificationPermissionGranted
 import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
 import `in`.hridayan.driftly.home.presentation.components.dialog.AddSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.image.UndrawRelaxedReading

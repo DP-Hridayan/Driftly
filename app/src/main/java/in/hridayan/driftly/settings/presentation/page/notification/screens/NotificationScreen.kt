@@ -26,7 +26,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalSettings
-import `in`.hridayan.driftly.core.utils.isNotificationPermissionGranted
+import `in`.hridayan.driftly.notification.isNotificationPermissionGranted
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView

@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.core.notification.scheduler
+package `in`.hridayan.driftly.notification.scheduler
 
 import android.content.Context
 import androidx.work.Data
@@ -7,9 +7,9 @@ import androidx.work.ListenableWorker
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import `in`.hridayan.driftly.core.common.constants.NotificationTags
-import `in`.hridayan.driftly.core.notification.worker.AttendanceReminderWorker
-import `in`.hridayan.driftly.core.notification.worker.MissedAttendanceAlertWorker
-import `in`.hridayan.driftly.core.notification.worker.UpdateCheckWorker
+import `in`.hridayan.driftly.notification.worker.AttendanceReminderWorker
+import `in`.hridayan.driftly.notification.worker.MissedAttendanceAlertWorker
+import `in`.hridayan.driftly.notification.worker.UpdateCheckWorker
 import java.time.Duration
 import java.util.Calendar
 

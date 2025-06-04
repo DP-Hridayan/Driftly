@@ -13,7 +13,7 @@ import `in`.hridayan.driftly.core.domain.model.SubjectError
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
-import `in`.hridayan.driftly.core.utils.createAppNotificationSettingsIntent
+import `in`.hridayan.driftly.notification.createAppNotificationSettingsIntent
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow

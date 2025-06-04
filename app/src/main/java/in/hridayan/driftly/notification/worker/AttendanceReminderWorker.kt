@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.core.notification.worker
+package `in`.hridayan.driftly.notification.worker
 
 import android.Manifest
 import android.content.Context
@@ -6,7 +6,7 @@ import androidx.annotation.RequiresPermission
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import dagger.hilt.android.qualifiers.ApplicationContext
-import `in`.hridayan.driftly.core.notification.NotificationSetup
+import `in`.hridayan.driftly.notification.NotificationSetup
 
 class AttendanceReminderWorker(
     @ApplicationContext private val context: Context,
