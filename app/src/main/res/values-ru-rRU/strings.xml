@@ -167,4 +167,5 @@
     <string name="changelogs_v1_4_0">Переход некоторых компонентов интерфейса на тему Material Expressive\nДобавлена возможность сделать понедельник первым днем недели в календаре\nДобавлена возможность прямой загрузки последних обновленных apk внутри приложения без необходимости посещения репозитория Github\nИсправлено множество несоответствий интерфейса</string>
     <string name="changelogs_v1_5_0">Добавлена возможность локального резервного копирования и восстановления данных приложения\nЛокализация некоторых строк\nНезначительные улучшения интерфейса</string>
     <string name="changelogs_v1_5_1">Исправлена проблема восстановления резервной копии на некоторых устройствах</string>
+    <string name="changelogs_v1_6_0">Added notification alerts for various events like attendance reminder, missed attendance alert and notification alert when new version of the app is detected\nImproved the batch selection of subject cards in home screen with support to dismiss selection by back press\nFixed system bars colors in android 11 and below</string>
 </resources>
