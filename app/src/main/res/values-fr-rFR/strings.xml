@@ -119,7 +119,7 @@
         <item>December</item>
     </string-array>
     <string name="calendar">Calendar</string>
-    <string name="backup_and_restore">Backup and restore</string>
+    <string name="backup_and_restore">Backup &amp; restore</string>
     <string name="des_backup_and_restore">Backup and restore app settings and other data</string>
     <string name="backup_settings">Backup app settings</string>
     <string name="des_backup_settings">Backup app settings preferences only</string>
