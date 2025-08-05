@@ -6,8 +6,8 @@
 <text x="460" y="25" text-anchor="start">93%</text>
 <text x="140" y="55" text-anchor="end"><![CDATA[German]]></text>
 <rect x="150" y="41" width="300" height="14" fill="#2C2F33" rx="8" ry="8" />
-<rect x="150" y="41" width="90" height="14" fill="#e1c3a6" rx="8" ry="8" />
-<text x="460" y="55" text-anchor="start">30%</text>
+<rect x="150" y="41" width="174" height="14" fill="#c6d1a2" rx="8" ry="8" />
+<text x="460" y="55" text-anchor="start">58%</text>
 <text x="140" y="85" text-anchor="end"><![CDATA[French]]></text>
 <rect x="150" y="71" width="300" height="14" fill="#2C2F33" rx="8" ry="8" />
 <rect x="150" y="71" width="147" height="14" fill="#cfcca4" rx="8" ry="8" />
