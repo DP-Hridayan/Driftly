@@ -45,4 +45,6 @@ enum class SettingsKeys(val default: Any?) {
     ENABLE_NOTIFICATIONS(true),
     UPDATE_AVAILABLE_NOTIFICATION(true),
     NOTIFICATION_PERMISSION_DIALOG_SHOWN(false),
+
+    SHOW_GITHUB_WARNING_DIALOG(true)
 }

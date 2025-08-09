@@ -76,6 +76,8 @@ fun CompositionLocals(
 
     val notificationPermissionDialogShown by settingsViewModel.booleanState(SettingsKeys.NOTIFICATION_PERMISSION_DIALOG_SHOWN)
 
+    val showGithubWarningDialog by settingsViewModel.booleanState(SettingsKeys.SHOW_GITHUB_WARNING_DIALOG)
+
     val state =
         remember(
             autoUpdate,
@@ -93,7 +95,8 @@ fun CompositionLocals(
             startWeekOnMonday,
             enableDirectDownload,
             notificationPreference,
-            notificationPermissionDialogShown
+            notificationPermissionDialogShown,
+            showGithubWarningDialog
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -111,7 +114,8 @@ fun CompositionLocals(
                 startWeekOnMonday = startWeekOnMonday,
                 enableDirectDownload = enableDirectDownload,
                 notificationPreference = notificationPreference,
-                notificationPermissionDialogShown = notificationPermissionDialogShown
+                notificationPermissionDialogShown = notificationPermissionDialogShown,
+                showGithubWarningDialog = showGithubWarningDialog
             )
         }
 

@@ -5,6 +5,7 @@ package `in`.hridayan.driftly.core.presentation.components.bottomsheet
 import android.app.Activity
 import android.content.Intent
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,6 +38,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalGraphicsContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -47,6 +49,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.DownloadState
+import `in`.hridayan.driftly.core.presentation.components.dialog.GithubDownloadWarningDialog
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.core.utils.installApk
 import `in`.hridayan.driftly.core.utils.openUrl
@@ -73,7 +76,8 @@ fun UpdateBottomSheet(
     var pendingInstall by rememberSaveable { mutableStateOf(false) }
     var permissionPromptShown by rememberSaveable { mutableStateOf(false) }
     var showDownloadButton by rememberSaveable { mutableStateOf(true) }
-
+    var showGithubWarningDialog by rememberSaveable { mutableStateOf(false) }
+    val showDialogPreference = LocalSettings.current.showGithubWarningDialog
     val settingsLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -147,6 +151,18 @@ fun UpdateBottomSheet(
         animationSpec = androidx.compose.animation.core.tween(durationMillis = 300)
     )
 
+    val downloadButtonClickAction: () -> Unit = {
+        if (isDirectDownloadEnabled) {
+            permissionPromptShown = false
+            viewModel.downloadApk(apkUrl, apkName)
+        } else {
+            openUrl(
+                context = context,
+                url = "https://github.com/dp-hridayan/driftly/releases/tag/$latestVersion"
+            )
+        }
+    }
+
     ModalBottomSheet(
         modifier = modifier,
         sheetState = sheetState,
@@ -213,7 +229,6 @@ fun UpdateBottomSheet(
 
         }
 
-
         @Suppress("DEPRECATION")
         ButtonGroup(
             modifier = Modifier
@@ -243,15 +258,13 @@ fun UpdateBottomSheet(
             if (showDownloadButton)
                 Button(
                     onClick = {
-                        if (isDirectDownloadEnabled) {
-                            permissionPromptShown = false
-                            viewModel.downloadApk(apkUrl, apkName)
+                        Log.d("test", showDialogPreference.toString())
+                        if (showDialogPreference) {
+                            showGithubWarningDialog = true
                         } else {
-                            openUrl(
-                                context = context,
-                                url = "https://github.com/dp-hridayan/driftly/releases/tag/$latestVersion"
-                            )
+                            downloadButtonClickAction()
                         }
+
                         weakHaptic()
                     },
                     shapes = ButtonDefaults.shapes(),
@@ -263,5 +276,15 @@ fun UpdateBottomSheet(
                     Text(text = stringResource(R.string.download))
                 }
         }
+    }
+
+    if (showGithubWarningDialog) {
+        GithubDownloadWarningDialog(
+            onDismiss = { showGithubWarningDialog = false },
+            onConfirm = {
+                downloadButtonClickAction()
+                showGithubWarningDialog = false
+            }
+        )
     }
 }

@@ -101,6 +101,7 @@
     <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
     <string name="backup_date">Backup date</string>
     <string name="backup_time">Backup time</string>
+    <string name="warning">Warning</string>
     <string name="already_latest_version">You are using the latest version</string>
     <string name="month">Month</string>
     <string name="year">Year</string>
@@ -118,6 +119,7 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+    <string name="donot_show_again">Do not show again</string>
     <string name="calendar">Calendar</string>
     <string name="backup_and_restore">Backup &amp; restore</string>
     <string name="des_backup_and_restore">Backup and restore app settings and other data</string>
@@ -153,6 +155,7 @@
     <string name="des_notifications">Customise notification settings of the app</string>
     <string name="enable_notifications">Enable notifications</string>
     <string name="notify_missed_attendance">Notify missed attendance</string>
+    <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>
     <string name="des_notify_missed_attendance">Receive notifications when an attendance is missed</string>
     <string name="start_week_on_monday">Start week on Monday</string>
     <string name="notify_update_available">Notify when update available</string>

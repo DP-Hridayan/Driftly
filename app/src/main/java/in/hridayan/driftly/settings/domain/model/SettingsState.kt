@@ -15,6 +15,7 @@ data class SettingsState(
     val rememberCalendarMonthYear: Boolean,
     val startWeekOnMonday: Boolean,
     val enableDirectDownload: Boolean,
-    val notificationPreference : Boolean,
-    val notificationPermissionDialogShown : Boolean
+    val notificationPreference: Boolean,
+    val notificationPermissionDialogShown: Boolean,
+    val showGithubWarningDialog: Boolean
 )

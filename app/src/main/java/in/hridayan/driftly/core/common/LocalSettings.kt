@@ -24,6 +24,7 @@ val LocalSettings = compositionLocalOf<SettingsState> {
         startWeekOnMonday = true,
         enableDirectDownload = true,
         notificationPreference = true,
-        notificationPermissionDialogShown = false
+        notificationPermissionDialogShown = false,
+        showGithubWarningDialog = true
     )
 }
