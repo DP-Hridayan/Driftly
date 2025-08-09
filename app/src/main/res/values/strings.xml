@@ -174,5 +174,5 @@
     <string name="changelogs_v1_5_0">Added option to backup and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
     <string name="changelogs_v1_5_1">Fixed an issue where restoring backup failed in some devices</string>
     <string name="changelogs_v1_6_0">Added notification alerts for various events like attendance reminder, missed attendance alert and notification alert when new version of the app is detected\nImproved the batch selection of subject cards in home screen with support to dismiss selection by back press\nFixed system bars colors in android 11 and below</string>
-
+    <string name="changelogs_v1_7_0">Added warning before downloading app updates from Github\nFixed some icons in the app UI</string>
 </resources>
