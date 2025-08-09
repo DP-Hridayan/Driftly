@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "in.hridayan.driftly"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "in.hridayan.driftly"
@@ -86,6 +86,11 @@ android {
     androidResources {
         @Suppress("UnstableApiUsage")
         generateLocaleConfig = true
+    }
+
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
     }
 }
 

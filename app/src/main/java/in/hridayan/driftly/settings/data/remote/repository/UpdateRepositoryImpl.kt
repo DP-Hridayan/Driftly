@@ -6,7 +6,8 @@ import `in`.hridayan.driftly.settings.data.remote.mapper.toDomain
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.domain.repository.UpdateRepository
 import io.ktor.client.network.sockets.SocketTimeoutException
-import io.ktor.utils.io.errors.IOException
+import kotlinx.io.IOException
+
 import java.net.ConnectException
 import java.net.UnknownHostException
 import java.nio.channels.UnresolvedAddressException
