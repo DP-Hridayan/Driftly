@@ -26,7 +26,7 @@ fun ChangelogItemLayout(
     versionName: String,
     changelog: List<String>,
 ) {
-    var isLatestVersion = versionName == BuildConfig.VERSION_NAME
+    val isLatestVersion = versionName == BuildConfig.VERSION_NAME
     Column(
         modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(25.dp)
     ) {

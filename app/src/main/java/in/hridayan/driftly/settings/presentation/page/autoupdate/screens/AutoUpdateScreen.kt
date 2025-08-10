@@ -20,7 +20,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -50,6 +49,7 @@ import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.presentation.components.dialog.LatestVersionDialog
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
+import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.viewmodel.AutoUpdateViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
@@ -120,16 +120,32 @@ fun AutoUpdateScreen(
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
                                 .animateItem()
-                                .padding(horizontal = 20.dp, vertical = 25.dp)
+                                .padding(start = 20.dp, end = 20.dp, top = 30.dp, bottom = 10.dp)
                         )
-                        group.items.forEach { item ->
-                            PreferenceItemView(item = item, modifier = modifier.animateItem())
+                        val visibleItems = group.items.filter { it.isLayoutVisible }
+
+                        visibleItems.forEachIndexed { i, item ->
+                            val shape = getRoundedShape(i, visibleItems.size)
+
+                            PreferenceItemView(
+                                item = item,
+                                modifier = Modifier.animateItem(),
+                                roundedShape = shape
+                            )
                         }
                     }
 
                     is PreferenceGroup.Items -> {
-                        group.items.forEach { item ->
-                            PreferenceItemView(item = item, modifier = modifier.animateItem())
+                        val visibleItems = group.items.filter { it.isLayoutVisible }
+
+                        visibleItems.forEachIndexed { i, item ->
+                            val shape = getRoundedShape(i, visibleItems.size)
+
+                            PreferenceItemView(
+                                item = item,
+                                modifier = Modifier.animateItem(),
+                                roundedShape = shape
+                            )
                         }
                     }
 
@@ -149,12 +165,7 @@ fun AutoUpdateScreen(
                         }
                     }
 
-                    is PreferenceGroup.HorizontalDivider -> {
-                        HorizontalDivider(
-                            modifier = modifier.fillMaxWidth(),
-                            thickness = 1.dp
-                        )
-                    }
+                    else -> {}
                 }
             }
 

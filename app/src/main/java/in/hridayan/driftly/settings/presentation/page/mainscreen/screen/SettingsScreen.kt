@@ -23,6 +23,7 @@ import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
+import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
@@ -41,8 +42,6 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
                 else -> {}
             }
         }
-
-        viewModel.loadSettings()
     }
 
     SettingsScaffold(
@@ -66,14 +65,23 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
                                 .animateItem()
                                 .padding(horizontal = 20.dp, vertical = 25.dp)
                         )
+
                         group.items.forEach { item ->
                             PreferenceItemView(item = item, modifier = modifier.animateItem())
                         }
                     }
 
                     is PreferenceGroup.Items -> {
-                        group.items.forEach { item ->
-                            PreferenceItemView(item = item, modifier = modifier.animateItem())
+                        val visibleItems = group.items.filter { it.isLayoutVisible }
+
+                        visibleItems.forEachIndexed { i, item ->
+                            val shape = getRoundedShape(i, visibleItems.size)
+
+                            PreferenceItemView(
+                                item = item,
+                                modifier = Modifier.animateItem(),
+                                roundedShape = shape
+                            )
                         }
                     }
 

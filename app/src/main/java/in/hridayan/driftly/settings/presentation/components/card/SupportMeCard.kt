@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.common.constants.UrlConst
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
@@ -38,14 +40,22 @@ import `in`.hridayan.driftly.core.utils.openUrl
 @Composable
 fun SupportMeCard(modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    val isDynamicColor = LocalSettings.current.isDynamicColor
+    val containerColor =
+        if (isDynamicColor) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.surfaceContainer
+    val contentColor =
+        if (isDynamicColor) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface
+
     Card(
         modifier = modifier
             .fillMaxWidth()
             .clip(MaterialTheme.shapes.large)
-            .background(
-                color = MaterialTheme.colorScheme.secondaryContainer
+            .clickable(enabled = true, onClick = {}),
+        colors = CardDefaults
+            .cardColors(
+                containerColor = containerColor,
+                contentColor = contentColor
             )
-            .clickable(enabled = true, onClick = {})
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()

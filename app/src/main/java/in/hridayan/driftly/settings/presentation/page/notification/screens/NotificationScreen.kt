@@ -31,6 +31,7 @@ import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
+import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
@@ -111,16 +112,32 @@ fun NotificationScreen(
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
                                 .animateItem()
-                                .padding(horizontal = 20.dp, vertical = 25.dp)
+                                .padding(start = 20.dp, end = 20.dp, top = 30.dp, bottom = 10.dp)
                         )
-                        group.items.forEach { item ->
-                            PreferenceItemView(item = item, modifier = modifier.animateItem())
+                        val visibleItems = group.items.filter { it.isLayoutVisible }
+
+                        visibleItems.forEachIndexed { i, item ->
+                            val shape = getRoundedShape(i, visibleItems.size)
+
+                            PreferenceItemView(
+                                item = item,
+                                modifier = Modifier.animateItem(),
+                                roundedShape = shape
+                            )
                         }
                     }
 
                     is PreferenceGroup.Items -> {
-                        group.items.forEach { item ->
-                            PreferenceItemView(item = item, modifier = modifier.animateItem())
+                        val visibleItems = group.items.filter { it.isLayoutVisible }
+
+                        visibleItems.forEachIndexed { i, item ->
+                            val shape = getRoundedShape(i, visibleItems.size)
+
+                            PreferenceItemView(
+                                item = item,
+                                modifier = Modifier.animateItem(),
+                                roundedShape = shape
+                            )
                         }
                     }
 

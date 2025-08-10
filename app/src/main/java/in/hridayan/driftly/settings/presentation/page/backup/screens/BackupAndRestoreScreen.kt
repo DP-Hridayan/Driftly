@@ -44,6 +44,7 @@ import `in`.hridayan.driftly.settings.presentation.components.dialog.ResetSettin
 import `in`.hridayan.driftly.settings.presentation.components.dialog.RestoreBackupDialog
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
+import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.page.backup.viewmodel.BackupAndRestoreViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
@@ -133,16 +134,32 @@ fun BackupAndRestoreScreen(
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
                                 .animateItem()
-                                .padding(horizontal = 20.dp, vertical = 25.dp)
+                                .padding(start = 20.dp, end = 20.dp, top = 30.dp, bottom = 10.dp)
                         )
-                        group.items.forEach { item ->
-                            PreferenceItemView(item = item, modifier = modifier.animateItem())
+                        val visibleItems = group.items.filter { it.isLayoutVisible }
+
+                        visibleItems.forEachIndexed { i, item ->
+                            val shape = getRoundedShape(i, visibleItems.size)
+
+                            PreferenceItemView(
+                                item = item,
+                                modifier = Modifier.animateItem(),
+                                roundedShape = shape
+                            )
                         }
                     }
 
                     is PreferenceGroup.Items -> {
-                        group.items.forEach { item ->
-                            PreferenceItemView(item = item, modifier = modifier.animateItem())
+                        val visibleItems = group.items.filter { it.isLayoutVisible }
+
+                        visibleItems.forEachIndexed { i, item ->
+                            val shape = getRoundedShape(i, visibleItems.size)
+
+                            PreferenceItemView(
+                                item = item,
+                                modifier = Modifier.animateItem(),
+                                roundedShape = shape
+                            )
                         }
                     }
 
@@ -199,7 +216,7 @@ private fun LastBackupTimeCard(modifier: Modifier = Modifier, lastBackupTime: St
         Card(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp, top = 15.dp, bottom = 20.dp)
+                .padding(10.dp)
                 .clip(
                     MaterialTheme.shapes.large
                 ),

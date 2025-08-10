@@ -182,7 +182,6 @@ class SettingsDataStore @Inject constructor(
             return true
         } catch (e: Exception) {
             return false
-            Log.e("Settings Datastore", e.message ?: "")
         }
     }
 }
