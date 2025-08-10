@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -93,65 +94,75 @@ fun NotificationScreen(
         }
     }
 
+    val listState = rememberLazyListState()
+
     SettingsScaffold(
         modifier = modifier,
-        topBarTitle = stringResource(R.string.notifications)
-    ) { innerPadding, topBarScrollBehavior ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .nestedScroll(topBarScrollBehavior.nestedScrollConnection),
-            contentPadding = innerPadding
-        ) {
-            itemsIndexed(settings) { index, group ->
-                when (group) {
-                    is PreferenceGroup.Category -> {
-                        Text(
-                            text = stringResource(group.categoryNameResId),
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier
-                                .animateItem()
-                                .padding(start = 20.dp, end = 20.dp, top = 30.dp, bottom = 10.dp)
-                        )
-                        val visibleItems = group.items.filter { it.isLayoutVisible }
-
-                        visibleItems.forEachIndexed { i, item ->
-                            val shape = getRoundedShape(i, visibleItems.size)
-
-                            PreferenceItemView(
-                                item = item,
-                                modifier = Modifier.animateItem(),
-                                roundedShape = shape
+        listState = listState,
+        topBarTitle = stringResource(R.string.notifications),
+        content = { innerPadding, topBarScrollBehavior ->
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .nestedScroll(topBarScrollBehavior.nestedScrollConnection),
+                state = listState,
+                contentPadding = innerPadding
+            ) {
+                itemsIndexed(settings) { index, group ->
+                    when (group) {
+                        is PreferenceGroup.Category -> {
+                            Text(
+                                text = stringResource(group.categoryNameResId),
+                                style = MaterialTheme.typography.labelLarge,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier
+                                    .animateItem()
+                                    .padding(
+                                        start = 20.dp,
+                                        end = 20.dp,
+                                        top = 30.dp,
+                                        bottom = 10.dp
+                                    )
                             )
+                            val visibleItems = group.items.filter { it.isLayoutVisible }
+
+                            visibleItems.forEachIndexed { i, item ->
+                                val shape = getRoundedShape(i, visibleItems.size)
+
+                                PreferenceItemView(
+                                    item = item,
+                                    modifier = Modifier.animateItem(),
+                                    roundedShape = shape
+                                )
+                            }
                         }
-                    }
 
-                    is PreferenceGroup.Items -> {
-                        val visibleItems = group.items.filter { it.isLayoutVisible }
+                        is PreferenceGroup.Items -> {
+                            val visibleItems = group.items.filter { it.isLayoutVisible }
 
-                        visibleItems.forEachIndexed { i, item ->
-                            val shape = getRoundedShape(i, visibleItems.size)
+                            visibleItems.forEachIndexed { i, item ->
+                                val shape = getRoundedShape(i, visibleItems.size)
 
-                            PreferenceItemView(
-                                item = item,
-                                modifier = Modifier.animateItem(),
-                                roundedShape = shape
-                            )
+                                PreferenceItemView(
+                                    item = item,
+                                    modifier = Modifier.animateItem(),
+                                    roundedShape = shape
+                                )
+                            }
                         }
-                    }
 
-                    else -> {}
+                        else -> {}
+                    }
+                }
+
+                item {
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(25.dp)
+                    )
                 }
             }
-
-            item {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(25.dp)
-                )
-            }
-        }
-    }
+        },
+        fabContent = {})
 }

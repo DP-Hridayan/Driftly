@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
@@ -45,96 +46,100 @@ fun CustomisationScreen(
     val currentCardStyle by customisationViewModel.cardStyle.collectAsState()
     val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
     val cardStyleList = listOf(SubjectCardStyle.CARD_STYLE_A, SubjectCardStyle.CARD_STYLE_B)
+    val listState = rememberLazyListState()
 
     SettingsScaffold(
         modifier = modifier,
-        topBarTitle = stringResource(R.string.customisation)
-    ) { innerPadding, topBarScrollBehavior ->
+        listState = listState,
+        topBarTitle = stringResource(R.string.customisation),
+        content = { innerPadding, topBarScrollBehavior ->
 
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .nestedScroll(topBarScrollBehavior.nestedScrollConnection),
-            contentPadding = innerPadding
-        ) {
-            item {
-                Text(
-                    text = stringResource(R.string.subject_card_style),
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
-                )
-            }
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .nestedScroll(topBarScrollBehavior.nestedScrollConnection),
+                state = listState,
+                contentPadding = innerPadding
+            ) {
+                item {
+                    Text(
+                        text = stringResource(R.string.subject_card_style),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
+                    )
+                }
 
-            item {
-                Column(modifier = Modifier.fillMaxWidth()) {
+                item {
+                    Column(modifier = Modifier.fillMaxWidth()) {
 
-                    cardStyleList.forEach { style ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 8.dp, bottom = 8.dp, start = 10.dp, end = 20.dp),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                selected = (style == currentCardStyle),
-                                onClick = {
-                                    customisationViewModel.select(style)
-                                    weakHaptic()
-                                }
-                            )
+                        cardStyleList.forEach { style ->
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 8.dp, bottom = 8.dp, start = 10.dp, end = 20.dp),
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                RadioButton(
+                                    selected = (style == currentCardStyle),
+                                    onClick = {
+                                        customisationViewModel.select(style)
+                                        weakHaptic()
+                                    }
+                                )
 
-                            SubjectCard(
-                                subject = stringResource(R.string.subject_name),
-                                subjectId = 999,
-                                progress = 0.67f,
-                                isDemoCard = true,
-                                cornerRadius = cardCornerSliderValue.value.dp,
-                                cardStyle = style,
-                                onClick = { customisationViewModel.select(style) }
-                            )
+                                SubjectCard(
+                                    subject = stringResource(R.string.subject_name),
+                                    subjectId = 999,
+                                    progress = 0.67f,
+                                    isDemoCard = true,
+                                    cornerRadius = cardCornerSliderValue.value.dp,
+                                    cardStyle = style,
+                                    onClick = { customisationViewModel.select(style) }
+                                )
+                            }
                         }
+
                     }
 
                 }
 
-            }
+                item {
+                    Text(
+                        text = stringResource(R.string.adjust_card_corner_radius),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
+                    )
+                }
 
-            item {
-                Text(
-                    text = stringResource(R.string.adjust_card_corner_radius),
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 25.dp)
-                )
-            }
+                item {
+                    Slider(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp),
+                        value = cardCornerSliderValue.value,
+                        onValueChange = {
+                            customisationViewModel.setSubjectCardCornerRadius(it)
+                            weakHaptic()
+                        },
+                        valueRange = 0f..36f,
+                        steps = 36,
+                        thumb = {
+                            SliderDefaults.Thumb(interactionSource = interactionSource)
+                        }
+                    )
+                }
 
-            item {
-                Slider(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp),
-                    value = cardCornerSliderValue.value,
-                    onValueChange = {
-                        customisationViewModel.setSubjectCardCornerRadius(it)
-                        weakHaptic()
-                    },
-                    valueRange = 0f..36f,
-                    steps = 36,
-                    thumb = {
-                        SliderDefaults.Thumb(interactionSource = interactionSource)
-                    }
-                )
+                item {
+                    Spacer(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(25.dp)
+                    )
+                }
             }
-
-            item {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(25.dp)
-                )
-            }
-        }
-    }
+        },
+        fabContent = {})
 }
