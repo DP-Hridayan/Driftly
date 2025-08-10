@@ -184,17 +184,19 @@ fun AutoUpdateScreen(
                         Icon(
                             painter = painterResource(R.drawable.ic_info),
                             contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurface
+                            tint = MaterialTheme.colorScheme.error,
                         )
 
                         Text(
                             text = stringResource(R.string.pre_release_warning),
-                            style = MaterialTheme.typography.titleSmall
+                            style = MaterialTheme.typography.titleSmall,
+                            color = MaterialTheme.colorScheme.error
                         )
                     }
                     Text(
                         text = stringResource(R.string.pre_release_warning_description),
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.error
                     )
                 }
             }
