@@ -1,7 +1,6 @@
 package `in`.hridayan.driftly.settings.presentation.components.card
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,7 +29,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.common.constants.UrlConst
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
@@ -40,11 +38,6 @@ import `in`.hridayan.driftly.core.utils.openUrl
 @Composable
 fun SupportMeCard(modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    val isDynamicColor = LocalSettings.current.isDynamicColor
-    val containerColor =
-        if (isDynamicColor) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.surfaceContainer
-    val contentColor =
-        if (isDynamicColor) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface
 
     Card(
         modifier = modifier
@@ -53,8 +46,8 @@ fun SupportMeCard(modifier: Modifier = Modifier) {
             .clickable(enabled = true, onClick = {}),
         colors = CardDefaults
             .cardColors(
-                containerColor = containerColor,
-                contentColor = contentColor
+                containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                contentColor = MaterialTheme.colorScheme.onSurface
             )
     ) {
         Column(
