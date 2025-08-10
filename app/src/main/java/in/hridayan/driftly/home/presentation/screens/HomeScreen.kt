@@ -328,7 +328,7 @@ fun HomeScreen(
 
                 SubjectCard(
                     modifier = Modifier
-                        .padding(horizontal = 25.dp)
+                        .padding(horizontal = 10.dp)
                         .animateItem(),
                     cardStyle = LocalSettings.current.subjectCardStyle,
                     cornerRadius = subjectCardCornerRadius.dp,
