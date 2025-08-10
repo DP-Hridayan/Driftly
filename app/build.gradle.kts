@@ -133,6 +133,8 @@ dependencies {
 
     implementation(libs.androidx.security.crypto)
 
+    implementation(libs.lottie.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
