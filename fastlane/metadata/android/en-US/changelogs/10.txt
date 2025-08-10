@@ -1,0 +1,4 @@
+
+* Revamped whole settings UI
+
+* Added background cards to settings items

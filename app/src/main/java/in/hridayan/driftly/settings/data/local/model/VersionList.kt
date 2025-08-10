@@ -1,6 +1,7 @@
 package `in`.hridayan.driftly.settings.data.local.model
 
 val versionList = listOf(
+    "v1.8.1",
     "v1.8.0",
     "v1.7.0",
     "v1.6.0",

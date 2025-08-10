@@ -1,0 +1,2 @@
+
+* Fixed card colors in dynamic theming
