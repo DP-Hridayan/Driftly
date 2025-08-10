@@ -64,7 +64,7 @@ fun BooleanPreferenceItemView(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, end = 20.dp, top = 25.dp, bottom = 15.dp)
+                .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 0.dp)
                 .clip(MaterialTheme.shapes.extraLarge)
                 .clickable(enabled = enabled, onClick = onClick),
             shape = MaterialTheme.shapes.extraLarge,
