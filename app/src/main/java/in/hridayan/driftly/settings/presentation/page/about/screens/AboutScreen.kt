@@ -109,7 +109,7 @@ fun AboutScreen(
                             fontStyle = FontStyle.Italic,
                         )
 
-                        SupportMeCard(modifier = modifier.padding(horizontal = 10.dp))
+                        SupportMeCard(modifier = modifier.padding(horizontal = 15.dp))
                     }
                 }
 

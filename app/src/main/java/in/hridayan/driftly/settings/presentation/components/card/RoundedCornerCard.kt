@@ -18,7 +18,7 @@ fun RoundedCornerCard(
 ) {
     Card(
         modifier = modifier
-            .padding(vertical = 1.dp, horizontal = 10.dp)
+            .padding(vertical = 1.dp, horizontal = 15.dp)
             .clip(roundedShape),
         shape = roundedShape,
         colors = CardDefaults.cardColors(
