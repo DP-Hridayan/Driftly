@@ -31,7 +31,7 @@ import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.card.SupportMeCard
-import `in`.hridayan.driftly.settings.presentation.components.image.ProfilePicCircular
+import `in`.hridayan.driftly.settings.presentation.components.image.ProfilePic
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape
@@ -92,7 +92,7 @@ fun AboutScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(15.dp)
                     ) {
-                        ProfilePicCircular(
+                        ProfilePic(
                             painter = painterResource(R.mipmap.dp_hridayan),
                             size = 150.dp,
                         )
