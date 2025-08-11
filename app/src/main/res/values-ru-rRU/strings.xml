@@ -67,7 +67,7 @@
     <string name="adjust_card_corner_radius">Настроить радиус углов</string>
     <string name="enable_auto_update">Включить автоматическое обновление</string>
     <string name="update_channel">Канал обновлений</string>
-    <string name="check_for_updates">Проверить обновления</string>
+    <string name="check_updates">Проверить обновления</string>
     <string name="update_available">Доступно обновление !</string>
     <string name="latest_version">Последняя версия</string>
     <string name="current_version">Текущая версия</string>

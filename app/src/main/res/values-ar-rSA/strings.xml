@@ -67,7 +67,7 @@
     <string name="adjust_card_corner_radius">ضبط زوايا البطاقات</string>
     <string name="enable_auto_update">تمكين التحديث التلقائي</string>
     <string name="update_channel">قناة التحديث</string>
-    <string name="check_for_updates">التحقق من التحديثات</string>
+    <string name="check_updates">التحقق من التحديثات</string>
     <string name="update_available">يتوفر تحديث جديد!</string>
     <string name="latest_version">أحدث إصدار</string>
     <string name="current_version">الإصدار الحالي</string>

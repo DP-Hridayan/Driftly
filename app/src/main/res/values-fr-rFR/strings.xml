@@ -67,7 +67,7 @@
     <string name="adjust_card_corner_radius">Ajuster le rayon des coins de la carte</string>
     <string name="enable_auto_update">Activer la mise à jour automatique</string>
     <string name="update_channel">Mettre à jour le canal</string>
-    <string name="check_for_updates">Vérifier les mises à jour</string>
+    <string name="check_updates">Vérifier les mises à jour</string>
     <string name="update_available">Mise à jour disponible !</string>
     <string name="latest_version">Dernière version</string>
     <string name="current_version">Version actuelle</string>

@@ -67,7 +67,7 @@
     <string name="adjust_card_corner_radius">カードの角を調整する</string>
     <string name="enable_auto_update">自動更新を有効にする</string>
     <string name="update_channel">チャンネルをアップデート</string>
-    <string name="check_for_updates">アップデートを確認</string>
+    <string name="check_updates">アップデートを確認</string>
     <string name="update_available">アップデートが利用可能です！</string>
     <string name="latest_version">最新バージョン</string>
     <string name="current_version">最近のバージョン</string>

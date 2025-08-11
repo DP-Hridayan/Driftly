@@ -47,6 +47,7 @@ import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
 import `in`.hridayan.driftly.core.presentation.components.bottomsheet.UpdateBottomSheet
 import `in`.hridayan.driftly.core.presentation.components.progress.LoadingSpinner
+import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.presentation.components.dialog.LatestVersionDialog
@@ -252,8 +253,8 @@ private fun CheckUpdateButton(
                 )
         },
         text = {
-            Text(
-                text = stringResource(R.string.check_for_updates),
+            AutoResizeableText(
+                text = stringResource(R.string.check_updates),
                 style = MaterialTheme.typography.labelLarge,
             )
         }
