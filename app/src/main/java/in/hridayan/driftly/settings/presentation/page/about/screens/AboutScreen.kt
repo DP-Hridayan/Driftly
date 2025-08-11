@@ -101,6 +101,7 @@ fun AboutScreen(
                             text = "Hridayan",
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
                         )
 
                         Text(
