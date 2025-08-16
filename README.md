@@ -19,6 +19,9 @@
   <a href="https://github.com/DP-Hridayan/Driftly/releases">
     <img alt="GitHub release" src="https://img.shields.io/github/v/release/DP-Hridayan/Driftly?style=for-the-badge&logo=github&label=Release" />
   </a>
+  <a href="https://shields.rbtlog.dev/in.hridayan.driftly">
+    <img alt="GitHub release" src="https://shields.rbtlog.dev/simple/in.hridayan.driftly?style=for-the-badge" />
+  </a>
   <a href="https://github.com/DP-Hridayan/Driftly/releases">
     <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/DP-Hridayan/Driftly/total?style=for-the-badge&logo=download&label=Downloads" />
   </a>
@@ -114,8 +117,8 @@
 
 <p align="start">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/translations-dark.svg?ts=1754877953">
-    <source media="(prefers-color-scheme: light)" srcset="docs/translations-light.svg?ts=1754877953">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/translations-dark.svg?ts=1755309087">
+    <source media="(prefers-color-scheme: light)" srcset="docs/translations-light.svg?ts=1755309087">
     <img src="translations-light.svg" alt="Translation Progress" />
   </picture>
 </p>
