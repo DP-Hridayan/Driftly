@@ -97,8 +97,12 @@
 ## Resources & Links
 
 <p align="start">
-  <a href="https://github.com/DP-Hridayan/Driftly/releases/latest/">
+<a href="https://github.com/DP-Hridayan/aShellYou/releases/latest/">
     <img src="assets/github.png" width="130" alt="GitHub" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://apt.izzysoft.de/fdroid/index/apk/in.hridayan.ashell">
+    <img src="assets/izzy.png" width="130" alt="F-Droid" />
   </a>
 </p>
 <p <p align="start">
