@@ -179,4 +179,5 @@
     <string name="changelogs_v1_8_0">Revamped whole settings UI.\nAdded background cards to settings items</string>
     <string name="changelogs_v1_8_1">Fixed card colors in dynamic theming</string>
     <string name="changelogs_v1_8_2">Fixed some UI margins</string>
+    <string name="changelogs_v1_8_3">Updated dependencies and fixed some issues</string>
 </resources>

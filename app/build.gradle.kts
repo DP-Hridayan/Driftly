@@ -16,8 +16,8 @@ android {
         applicationId = "in.hridayan.driftly"
         minSdk = 26
         targetSdk = 35
-        versionCode = 12
-        versionName = "v1.8.2"
+        versionCode = 13
+        versionName = "v1.8.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -70,12 +70,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin{
+        jvmToolchain(21)
     }
 
     buildFeatures {
