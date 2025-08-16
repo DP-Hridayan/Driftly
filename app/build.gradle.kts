@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId = "in.hridayan.driftly"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 13
         versionName = "v1.8.3"
 
