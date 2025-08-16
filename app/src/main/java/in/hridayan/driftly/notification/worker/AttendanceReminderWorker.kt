@@ -9,7 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.notification.NotificationSetup
 
 class AttendanceReminderWorker(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
 

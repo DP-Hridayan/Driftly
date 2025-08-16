@@ -29,7 +29,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
     private val subjectRepository: SubjectRepository,
     private val attendanceRepository: AttendanceRepository
 ) : ViewModel() {

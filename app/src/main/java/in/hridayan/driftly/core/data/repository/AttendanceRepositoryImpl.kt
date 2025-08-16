@@ -13,16 +13,16 @@ class AttendanceRepositoryImpl @Inject constructor(
     private val dao: AttendanceDao
 ) : AttendanceRepository {
 
-    override suspend fun insertAttendance(att: AttendanceEntity) {
-        dao.insertAttendance(att)
+    override suspend fun insertAttendance(attendance: AttendanceEntity) {
+        dao.insertAttendance(attendance)
     }
 
     override suspend fun insertAllAttendances(attendances: List<AttendanceEntity>) {
         dao.insertAllAttendances(attendances)
     }
 
-    override suspend fun updateAttendance(att: AttendanceEntity) {
-        dao.updateAttendance(att)
+    override suspend fun updateAttendance(attendance: AttendanceEntity) {
+        dao.updateAttendance(attendance)
     }
 
     override suspend fun deleteAttendance(subjectId: Int, date: String) {

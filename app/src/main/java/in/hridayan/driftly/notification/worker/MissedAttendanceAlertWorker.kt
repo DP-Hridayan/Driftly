@@ -14,7 +14,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class MissedAttendanceAlertWorker(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
 

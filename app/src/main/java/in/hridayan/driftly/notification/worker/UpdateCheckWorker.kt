@@ -14,7 +14,7 @@ import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.domain.usecase.CheckUpdateUseCase
 
 class UpdateCheckWorker(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
 
