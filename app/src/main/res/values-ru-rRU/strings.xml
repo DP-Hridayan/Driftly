@@ -101,6 +101,8 @@
     <string name="restore_dialog_message">Данные в сохраненном файле перезапишут текущие данные.</string>
     <string name="backup_date">Дата резервной копии</string>
     <string name="backup_time">Время резервной копии</string>
+    <string name="warning">Предупреждение</string>
+    <string name="tweak_your_experience">Улучшите свой опыт использования</string>
     <string name="already_latest_version">Вы используете последнюю версию</string>
     <string name="month">Месяц</string>
     <string name="year">Год</string>
@@ -118,6 +120,7 @@
         <item>Ноябрь</item>
         <item>Декабрь</item>
     </string-array>
+    <string name="donot_show_again">Не показывать снова</string>
     <string name="calendar">Календарь</string>
     <string name="backup_and_restore">Резервная копия и восстановление</string>
     <string name="des_backup_and_restore">Резервное копирование и восстановление настроек приложения и других данных</string>
@@ -153,6 +156,7 @@
     <string name="des_notifications">Настройте параметры уведомлений приложения</string>
     <string name="enable_notifications">Включить уведомления</string>
     <string name="notify_missed_attendance">Уведомлять о пропущенных посещениях</string>
+    <string name="warning_github_download">Вы собираетесь загружать обновления непосредственно с GitHub. В отличие от обновлений из магазинов приложений, они не проверяются на безопасность. Вы хотите продолжить?</string>
     <string name="des_notify_missed_attendance">Получайте уведомления о пропущенных посещениях</string>
     <string name="start_week_on_monday">Начало недели с понедельника</string>
     <string name="notify_update_available">Уведомлять когда доступно обновление</string>
@@ -171,4 +175,9 @@
     <string name="changelogs_v1_5_0">Добавлена возможность локального резервного копирования и восстановления данных приложения\nЛокализация некоторых строк\nНезначительные улучшения интерфейса</string>
     <string name="changelogs_v1_5_1">Исправлена проблема восстановления резервной копии на некоторых устройствах</string>
     <string name="changelogs_v1_6_0">Добавлены уведомления о различных событиях, таких как напоминание о посещаемости, предупреждение о пропуске занятий и уведомление об обнаружении новой версии приложения\nУлучшен выбор карточек предметов на главном экране с поддержкой отмены выбора обратным нажатием\nИсправлены цвета системных полос в Android 11 и ниже</string>
+    <string name="changelogs_v1_7_0">Добавлено предупреждение перед скачиванием обновлений приложения из Github\nИсправлены некоторые иконки в интерфейсе приложения</string>
+    <string name="changelogs_v1_8_0">Переработан интерфейс настроек\nДобавлены фоновые карточки к элементам настроек</string>
+    <string name="changelogs_v1_8_1">Исправлены цвета карточек в динамической теме</string>
+    <string name="changelogs_v1_8_2">Исправлены некоторые отступы в интерфейсе</string>
+    <string name="changelogs_v1_8_3">Updated dependencies and fixed some issues</string>
 </resources>

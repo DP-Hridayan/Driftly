@@ -67,7 +67,7 @@
     <string name="adjust_card_corner_radius">カードの角を調整する</string>
     <string name="enable_auto_update">自動更新を有効にする</string>
     <string name="update_channel">チャンネルをアップデート</string>
-    <string name="check_updates">アップデートを確認</string>
+    <string name="check_updates">Check updates</string>
     <string name="update_available">アップデートが利用可能です！</string>
     <string name="latest_version">最新バージョン</string>
     <string name="current_version">最近のバージョン</string>
@@ -101,6 +101,8 @@
     <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
     <string name="backup_date">Backup date</string>
     <string name="backup_time">Backup time</string>
+    <string name="warning">Warning</string>
+    <string name="tweak_your_experience">Tweak your experience</string>
     <string name="already_latest_version">You are using the latest version</string>
     <string name="month">Month</string>
     <string name="year">Year</string>
@@ -118,6 +120,7 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+    <string name="donot_show_again">Do not show again</string>
     <string name="calendar">Calendar</string>
     <string name="backup_and_restore">Backup &amp; restore</string>
     <string name="des_backup_and_restore">Backup and restore app settings and other data</string>
@@ -153,6 +156,7 @@
     <string name="des_notifications">Customise notification settings of the app</string>
     <string name="enable_notifications">Enable notifications</string>
     <string name="notify_missed_attendance">Notify missed attendance</string>
+    <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>
     <string name="des_notify_missed_attendance">Receive notifications when an attendance is missed</string>
     <string name="start_week_on_monday">Start week on Monday</string>
     <string name="notify_update_available">Notify when update available</string>
@@ -171,4 +175,9 @@
     <string name="changelogs_v1_5_0">Added option to backup and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
     <string name="changelogs_v1_5_1">Fixed an issue where restoring backup failed in some devices</string>
     <string name="changelogs_v1_6_0">Added notification alerts for various events like attendance reminder, missed attendance alert and notification alert when new version of the app is detected\nImproved the batch selection of subject cards in home screen with support to dismiss selection by back press\nFixed system bars colors in android 11 and below</string>
+    <string name="changelogs_v1_7_0">Added warning before downloading app updates from Github\nFixed some icons in the app UI</string>
+    <string name="changelogs_v1_8_0">Revamped whole settings UI.\nAdded background cards to settings items</string>
+    <string name="changelogs_v1_8_1">Fixed card colors in dynamic theming</string>
+    <string name="changelogs_v1_8_2">Fixed some UI margins</string>
+    <string name="changelogs_v1_8_3">Updated dependencies and fixed some issues</string>
 </resources>
