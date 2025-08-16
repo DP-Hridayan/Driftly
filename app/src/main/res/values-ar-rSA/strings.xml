@@ -67,7 +67,7 @@
     <string name="adjust_card_corner_radius">ضبط زوايا البطاقات</string>
     <string name="enable_auto_update">تمكين التحديث التلقائي</string>
     <string name="update_channel">قناة التحديث</string>
-    <string name="check_updates">التحقق من التحديثات</string>
+    <string name="check_updates">Check updates</string>
     <string name="update_available">يتوفر تحديث جديد!</string>
     <string name="latest_version">أحدث إصدار</string>
     <string name="current_version">الإصدار الحالي</string>
@@ -101,6 +101,8 @@
     <string name="restore_dialog_message">سيتم استبدال البيانات الحالية بالبيانات الموجودة في الملف المحفوظ.</string>
     <string name="backup_date">تاريخ النسخة الاحتياطية</string>
     <string name="backup_time">وقت النسخة الاحتياطية</string>
+    <string name="warning">Warning</string>
+    <string name="tweak_your_experience">Tweak your experience</string>
     <string name="already_latest_version">أنت تستخدم أحدث إصدار</string>
     <string name="month">شهر</string>
     <string name="year">سنة</string>
@@ -118,6 +120,7 @@
         <item>نوفمبر</item>
         <item>ديسمبر</item>
     </string-array>
+    <string name="donot_show_again">Do not show again</string>
     <string name="calendar">التقويم</string>
     <string name="backup_and_restore">Backup &amp; restore</string>
     <string name="des_backup_and_restore">النسخ الاحتياطي واستعادة إعدادات التطبيق وغيرها من البيانات</string>
@@ -154,6 +157,7 @@
     <string name="des_notifications">تخصيص إعدادات الإشعارات للتطبيق</string>
     <string name="enable_notifications">تمكين الإشعارات</string>
     <string name="notify_missed_attendance">إشعار الحضور المفقود</string>
+    <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>
     <string name="des_notify_missed_attendance">تلقي إشعارات عندما يكون الحضور مفقودا</string>
     <string name="start_week_on_monday">بدء الأسبوع من الاثنين</string>
     <string name="notify_update_available">إشعار عند توفر التحديث</string>
@@ -178,4 +182,9 @@
 تحسينات بسيطة في واجهة المستخدم</string>
     <string name="changelogs_v1_5_1">Fixed an issue where restoring backup failed in some devices</string>
     <string name="changelogs_v1_6_0">Added notification alerts for various events like attendance reminder, missed attendance alert and notification alert when new version of the app is detected\nImproved the batch selection of subject cards in home screen with support to dismiss selection by back press\nFixed system bars colors in android 11 and below</string>
+    <string name="changelogs_v1_7_0">Added warning before downloading app updates from Github\nFixed some icons in the app UI</string>
+    <string name="changelogs_v1_8_0">Revamped whole settings UI.\nAdded background cards to settings items</string>
+    <string name="changelogs_v1_8_1">Fixed card colors in dynamic theming</string>
+    <string name="changelogs_v1_8_2">Fixed some UI margins</string>
+    <string name="changelogs_v1_8_3">Updated dependencies and fixed some issues</string>
 </resources>
