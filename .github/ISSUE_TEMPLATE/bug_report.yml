@@ -62,7 +62,8 @@ body:
     label: Version
     description: What version of Driftly are you running?
     options:
-    - v1.8.2 (Latest)
+    - v1.8.3 (Latest)
+    - v1.8.2
     - v1.8.1
     - v1.8.0
     - v1.7.0
