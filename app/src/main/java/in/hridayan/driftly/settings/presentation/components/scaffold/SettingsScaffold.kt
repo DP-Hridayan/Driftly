@@ -30,7 +30,7 @@ fun SettingsScaffold(
     topBarTitle: String,
     listState: LazyListState,
     content: @Composable (innerPadding: PaddingValues, topBarScrollBehavior: TopAppBarScrollBehavior) -> Unit,
-    fabContent: @Composable (expanded: Boolean) -> Unit
+    fabContent: @Composable (expanded: Boolean) -> Unit = {}
 ) {
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())

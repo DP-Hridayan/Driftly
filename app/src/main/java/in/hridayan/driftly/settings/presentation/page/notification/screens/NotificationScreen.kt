@@ -164,5 +164,5 @@ fun NotificationScreen(
                 }
             }
         },
-        fabContent = {})
+        )
 }

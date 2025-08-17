@@ -72,5 +72,5 @@ fun ChangelogScreen(
                 }
             }
         },
-        fabContent = {})
+    )
 }

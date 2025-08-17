@@ -101,5 +101,5 @@ fun BehaviorScreen(
                 }
             }
         },
-        fabContent = {})
+    )
 }

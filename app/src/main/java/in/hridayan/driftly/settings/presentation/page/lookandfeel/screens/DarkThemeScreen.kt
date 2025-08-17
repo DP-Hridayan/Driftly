@@ -103,5 +103,5 @@ fun DarkThemeScreen(
                 }
             }
         },
-        fabContent = {})
+    )
 }

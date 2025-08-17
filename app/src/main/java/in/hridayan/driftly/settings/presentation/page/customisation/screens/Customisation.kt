@@ -41,7 +41,7 @@ fun CustomisationScreen(
     customisationViewModel: CustomisationViewModel = hiltViewModel()
 ) {
     val weakHaptic = LocalWeakHaptic.current
-    var cardCornerSliderValue =
+    val cardCornerSliderValue =
         customisationViewModel.subjectCardCornerRadius.collectAsState(initial = 8f)
     val currentCardStyle by customisationViewModel.cardStyle.collectAsState()
     val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
@@ -141,5 +141,5 @@ fun CustomisationScreen(
                 }
             }
         },
-        fabContent = {})
+    )
 }

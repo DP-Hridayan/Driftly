@@ -170,5 +170,5 @@ fun AboutScreen(
                 }
             }
         },
-        fabContent = {})
+    )
 }

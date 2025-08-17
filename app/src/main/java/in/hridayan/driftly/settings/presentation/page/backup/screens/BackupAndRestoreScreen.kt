@@ -191,7 +191,7 @@ fun BackupAndRestoreScreen(
                 }
             }
         },
-        fabContent = {})
+    )
 
     if (showResetDialog) {
         ResetSettingsDialog(
