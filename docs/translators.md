@@ -11,7 +11,7 @@ Thanks to these translators and proofreaders, this project exists:
           <br />
           <sub><b>AlexeiCrystal (alex211952i)</b></sub></a>
         <br />
-        <sub><b>1000 words</b></sub>
+        <sub><b>1006 words</b></sub>
       </td>
       <td align="center" valign="top">
         <a href="https://crowdin.com/profile/Hussain69o"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16090008/medium/cafaf425b5a021105b81001e23b51142.jpg" />
@@ -50,6 +50,13 @@ Thanks to these translators and proofreaders, this project exists:
       </td>
     </tr>
     <tr>
+      <td align="center" valign="top">
+        <a href="https://crowdin.com/profile/isotjs"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/17217646/medium/f5810d56693d19901222507ed90310be.jpeg" />
+          <br />
+          <sub><b>İsmail TİRYAKİ (isotjs)</b></sub></a>
+        <br />
+        <sub><b>163 words</b></sub>
+      </td>
       <td align="center" valign="top">
         <a href="https://crowdin.com/profile/DP-Hridayan"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16319000/medium/83750741692d1ecb16b7de139291cb30.png" />
           <br />
