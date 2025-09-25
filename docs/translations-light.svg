@@ -30,6 +30,6 @@
 <text x="460" y="205" text-anchor="start">16%</text>
 <text x="140" y="235" text-anchor="end"><![CDATA[Chinese Simplified]]></text>
 <rect x="150" y="221" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="221" width="0" height="14" fill="#b3261e" rx="8" ry="8" />
-<text x="460" y="235" text-anchor="start">0%</text>
+<rect x="150" y="221" width="9" height="14" fill="#ae281d" rx="8" ry="8" />
+<text x="460" y="235" text-anchor="start">3%</text>
 </svg>
