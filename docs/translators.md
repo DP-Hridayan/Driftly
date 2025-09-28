@@ -11,7 +11,14 @@ Thanks to these translators and proofreaders, this project exists:
           <br />
           <sub><b>AlexeiCrystal (alex211952i)</b></sub></a>
         <br />
-        <sub><b>1000 words</b></sub>
+        <sub><b>1006 words</b></sub>
+      </td>
+      <td align="center" valign="top">
+        <a href="https://crowdin.com/profile/isotjs"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/17217646/medium/f5810d56693d19901222507ed90310be.jpeg" />
+          <br />
+          <sub><b>İsmail TİRYAKİ (isotjs)</b></sub></a>
+        <br />
+        <sub><b>988 words</b></sub>
       </td>
       <td align="center" valign="top">
         <a href="https://crowdin.com/profile/Hussain69o"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16090008/medium/cafaf425b5a021105b81001e23b51142.jpg" />
@@ -41,6 +48,8 @@ Thanks to these translators and proofreaders, this project exists:
         <br />
         <sub><b>298 words</b></sub>
       </td>
+    </tr>
+    <tr>
       <td align="center" valign="top">
         <a href="https://crowdin.com/profile/Fuchs23"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/15483312/medium/482fe0daa2e15e452e97329353eaeb26_default.png" />
           <br />
@@ -48,14 +57,26 @@ Thanks to these translators and proofreaders, this project exists:
         <br />
         <sub><b>271 words</b></sub>
       </td>
-    </tr>
-    <tr>
       <td align="center" valign="top">
         <a href="https://crowdin.com/profile/DP-Hridayan"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/16319000/medium/83750741692d1ecb16b7de139291cb30.png" />
           <br />
           <sub><b>Hridayan (DP-Hridayan)</b></sub></a>
         <br />
         <sub><b>31 words</b></sub>
+      </td>
+      <td align="center" valign="top">
+        <a href="https://crowdin.com/profile/Seawen"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/17120088/medium/81459c0c997032397cfb94920c93b70d.png" />
+          <br />
+          <sub><b>陈海文（文） (Seawen)</b></sub></a>
+        <br />
+        <sub><b>23 words</b></sub>
+      </td>
+      <td align="center" valign="top">
+        <a href="https://crowdin.com/profile/the_ITWolf"><img alt="logo" style="width: 32px" src="https://crowdin-static.cf-downloads.crowdin.com/avatar/17339962/medium/e4ec115745583234f5599c86a2231036.png" />
+          <br />
+          <sub><b>the IT.Wolf (the_ITWolf)</b></sub></a>
+        <br />
+        <sub><b>7 words</b></sub>
       </td>
     </tr>
   </tbody>
