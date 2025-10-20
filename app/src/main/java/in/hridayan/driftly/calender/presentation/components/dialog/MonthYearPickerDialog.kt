@@ -2,6 +2,7 @@
 
 package `in`.hridayan.driftly.calender.presentation.components.dialog
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -46,6 +47,7 @@ import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import java.util.Calendar
 
+@SuppressLint("LocalContextResourcesRead")
 @Composable
 fun MonthYearPickerDialog(
     yearDisplayed: Int, monthDisplayed: Int, onDismiss: () -> Unit, onConfirm: (Int, Int) -> Unit
@@ -131,6 +133,7 @@ fun MonthYearPickerDialog(
                                     )
                                 },
                                 onClick = {
+                                    weakHaptic()
                                     selectedMonth = months.indexOf(month)
                                     expandedMonth = false
                                 })

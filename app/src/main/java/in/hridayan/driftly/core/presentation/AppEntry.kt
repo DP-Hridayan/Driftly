@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.presentation.components.bottomsheet.ChangelogBottomSheet
