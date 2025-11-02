@@ -179,5 +179,5 @@
     <string name="changelogs_v1_8_0">Переработан интерфейс настроек\nДобавлены фоновые карточки к элементам настроек</string>
     <string name="changelogs_v1_8_1">Исправлены цвета карточек в динамической теме</string>
     <string name="changelogs_v1_8_2">Исправлены некоторые отступы в интерфейсе</string>
-    <string name="changelogs_v1_8_3">Updated dependencies and fixed some issues</string>
+    <string name="changelogs_v1_8_3">Обновлены зависимости и исправлены некоторые проблемы</string>
 </resources>
