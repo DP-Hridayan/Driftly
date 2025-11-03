@@ -1,10 +1,12 @@
 package `in`.hridayan.driftly.settings.domain.model
 
+import `in`.hridayan.driftly.core.presentation.provider.SeedColor
+
 data class SettingsState(
     val isAutoUpdate: Boolean,
     val themeMode: Int,
     val isHighContrastDarkMode: Boolean,
-    val seedColor: Int,
+    val seedColor: SeedColor,
     val isDynamicColor: Boolean,
     val isHapticEnabled: Boolean,
     val subjectCardCornerRadius: Float,

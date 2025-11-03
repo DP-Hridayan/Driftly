@@ -45,7 +45,7 @@ import `in`.hridayan.driftly.settings.presentation.components.dialog.ResetSettin
 import `in`.hridayan.driftly.settings.presentation.components.dialog.RestoreBackupDialog
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
-import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape
+import `in`.hridayan.driftly.settings.presentation.components.shape.CardCornerShape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.page.backup.viewmodel.BackupAndRestoreViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel

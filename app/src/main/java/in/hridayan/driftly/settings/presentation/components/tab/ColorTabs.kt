@@ -24,6 +24,8 @@ import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalTonalPalette
 import `in`.hridayan.driftly.settings.presentation.components.button.PaletteWheel
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.LookAndFeelViewModel
+import kotlin.text.chunked
+import kotlin.text.forEach
 
 @Composable
 fun ColorTabs(
@@ -32,7 +34,6 @@ fun ColorTabs(
 ) {
     val tonalPalettes = LocalTonalPalette.current
     val groupedPalettes = tonalPalettes.chunked(4)
-
     val pagerState = rememberPagerState(initialPage = 0) { groupedPalettes.size }
 
     Column(modifier = modifier) {
@@ -46,19 +47,14 @@ fun ColorTabs(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 groupedPalettes[page].forEach { palette ->
-
-                    var isChecked = LocalSeedColor.current == palette.seed
+                    val isChecked = LocalSeedColor.current == palette.colors
                     val isDynamicColor = LocalSettings.current.isDynamicColor
 
                     PaletteWheel(
-                        seedColor = Color(palette.seed),
-                        primaryColor = palette.primary,
-                        secondaryColor = palette.secondary,
-                        tertiaryColor = palette.tertiary,
+                        seedColor = palette.colors,
                         onClick = {
-                            lookAndFeelViewModel.setSeedColor(seed = palette.seed)
+                            lookAndFeelViewModel.setSeedColor(seed = palette.colors)
                             lookAndFeelViewModel.disableDynamicColors()
-                            isChecked = !isChecked
                         },
                         isChecked = isChecked && !isDynamicColor,
                     )
@@ -88,3 +84,4 @@ fun ColorTabs(
         }
     }
 }
+

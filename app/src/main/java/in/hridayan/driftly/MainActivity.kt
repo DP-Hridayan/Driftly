@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import `in`.hridayan.driftly.core.common.CompositionLocals
 import `in`.hridayan.driftly.core.common.LocalSeedColor
-import `in`.hridayan.driftly.core.common.SeedColorProvider
-import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
+import `in`.hridayan.driftly.core.domain.provider.SeedColorProvider
+import `in`.hridayan.driftly.core.domain.model.GithubReleaseType
 import `in`.hridayan.driftly.core.presentation.AppEntry
 import `in`.hridayan.driftly.core.presentation.theme.DriftlyTheme
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CompositionLocals {
-                SeedColorProvider.seedColor = LocalSeedColor.current
+                SeedColorProvider.setSeedColor(LocalSeedColor.current)
 
                 DriftlyTheme {
                     Surface(

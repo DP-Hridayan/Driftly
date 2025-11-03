@@ -20,8 +20,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.settings.domain.model.PreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
-import `in`.hridayan.driftly.settings.presentation.components.card.RoundedCornerCard
-import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape
+import `in`.hridayan.driftly.core.presentation.components.card.RoundedCornerCard
+import `in`.hridayan.driftly.settings.presentation.components.shape.CardCornerShape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
@@ -50,7 +50,7 @@ fun IntPreferenceItemView(
 
                 RoundedCornerCard(
                     modifier = Modifier.fillMaxWidth(),
-                    roundedShape = shape
+                    roundedCornerShape = shape
                 )
                 {
                     Row(

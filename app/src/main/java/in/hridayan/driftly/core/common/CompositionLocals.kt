@@ -12,7 +12,8 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import `in`.hridayan.driftly.core.common.constants.SeedColors
+import `in`.hridayan.driftly.core.presentation.provider.AppSeedColors
+import `in`.hridayan.driftly.core.presentation.provider.SeedColor
 import `in`.hridayan.driftly.core.utils.HapticUtils.strongHaptic
 import `in`.hridayan.driftly.core.utils.HapticUtils.weakHaptic
 import `in`.hridayan.driftly.notification.isNotificationPermissionGranted
@@ -20,17 +21,18 @@ import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
-val LocalWeakHaptic = staticCompositionLocalOf<() -> Unit> { {} }
-val LocalStrongHaptic = staticCompositionLocalOf<() -> Unit> { {} }
+val LocalWeakHaptic = staticCompositionLocalOf { {} }
+val LocalStrongHaptic = staticCompositionLocalOf { {} }
 val LocalDarkMode = staticCompositionLocalOf<Boolean> {
     error("No dark mode provided")
 }
-val LocalSeedColor = staticCompositionLocalOf<Int> {
+val LocalSeedColor = staticCompositionLocalOf<SeedColor> {
     error("No seed color provided")
 }
-val LocalTonalPalette = staticCompositionLocalOf<List<SeedColors>> {
+val LocalTonalPalette = staticCompositionLocalOf<List<AppSeedColors>> {
     error("No tonal palette provided")
 }
+
 val LocalNotificationPermission = staticCompositionLocalOf<Boolean> {
     error("No notification preference provided")
 }
@@ -48,7 +50,13 @@ fun CompositionLocals(
 
     val themeMode by settingsViewModel.intState(SettingsKeys.THEME_MODE)
 
-    val seedColor by settingsViewModel.intState(SettingsKeys.SEED_COLOR)
+    val primarySeed by settingsViewModel.intState(SettingsKeys.PRIMARY_SEED)
+
+    val secondarySeed by settingsViewModel.intState(SettingsKeys.SECONDARY_SEED)
+
+    val tertiarySeed by settingsViewModel.intState(SettingsKeys.TERTIARY_SEED)
+
+    val seedColor = SeedColor(primarySeed, secondarySeed, tertiarySeed)
 
     val isDynamicColor by settingsViewModel.booleanState(SettingsKeys.DYNAMIC_COLORS)
 
@@ -128,16 +136,27 @@ fun CompositionLocals(
     val isNotificationEnabledAndPermitted =
         notificationPreference && isNotificationPermissionGranted(context)
 
-    val tonalPalette = listOf<SeedColors>(
-        SeedColors.Blue,
-        SeedColors.Indigo,
-        SeedColors.Purple,
-        SeedColors.Pink,
-        SeedColors.Red,
-        SeedColors.Orange,
-        SeedColors.Yellow,
-        SeedColors.Teal,
-        SeedColors.Green
+    val tonalPalette = listOf(
+        AppSeedColors.Color01,
+        AppSeedColors.Color02,
+        AppSeedColors.Color03,
+        AppSeedColors.Color04,
+        AppSeedColors.Color05,
+        AppSeedColors.Color06,
+        AppSeedColors.Color07,
+        AppSeedColors.Color08,
+        AppSeedColors.Color09,
+        AppSeedColors.Color10,
+        AppSeedColors.Color11,
+        AppSeedColors.Color12,
+        AppSeedColors.Color13,
+        AppSeedColors.Color14,
+        AppSeedColors.Color15,
+        AppSeedColors.Color16,
+        AppSeedColors.Color17,
+        AppSeedColors.Color18,
+        AppSeedColors.Color19,
+        AppSeedColors.Color20
     )
 
     val weakHaptic = remember(isHapticEnabled, view) {

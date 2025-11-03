@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -18,17 +17,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.card.PillShapedCard
+import `in`.hridayan.driftly.core.presentation.components.card.RoundedCornerCard
 import `in`.hridayan.driftly.settings.domain.model.PreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import `in`.hridayan.driftly.settings.domain.model.getResolvedDescription
 import `in`.hridayan.driftly.settings.domain.model.getResolvedIcon
 import `in`.hridayan.driftly.settings.domain.model.getResolvedTitle
-import `in`.hridayan.driftly.settings.presentation.components.card.RoundedCornerCard
 import `in`.hridayan.driftly.settings.presentation.components.switch.SettingsSwitch
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
@@ -61,13 +60,12 @@ fun BooleanPreferenceItemView(
     }
 
     if (item.type == SettingsType.SwitchBanner) {
-        Card(
+        PillShapedCard(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 0.dp)
-                .clip(MaterialTheme.shapes.extraLarge)
-                .clickable(enabled = enabled, onClick = onClick),
-            shape = MaterialTheme.shapes.extraLarge,
+                .padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 0.dp),
+            clickable = enabled,
+            onClick = onClick,
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -97,7 +95,7 @@ fun BooleanPreferenceItemView(
     if (item.type == SettingsType.Switch) {
         RoundedCornerCard(
             modifier = Modifier.fillMaxWidth(),
-            roundedShape = roundedShape
+            roundedCornerShape = roundedShape
         )
         {
             Row(

@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.core.common.constants
+package `in`.hridayan.driftly.core.domain.model
 
 object SubjectCardStyle {
     const val CARD_STYLE_A = 1

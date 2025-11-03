@@ -22,7 +22,7 @@ import `in`.hridayan.driftly.settings.domain.model.PreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.getResolvedDescription
 import `in`.hridayan.driftly.settings.domain.model.getResolvedIcon
 import `in`.hridayan.driftly.settings.domain.model.getResolvedTitle
-import `in`.hridayan.driftly.settings.presentation.components.card.RoundedCornerCard
+import `in`.hridayan.driftly.core.presentation.components.card.RoundedCornerCard
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
@@ -43,7 +43,7 @@ fun NullPreferenceItemView(
 
     RoundedCornerCard(
         modifier = Modifier.fillMaxWidth(),
-        roundedShape = roundedShape
+        roundedCornerShape = roundedShape
     )
     {
         Row(

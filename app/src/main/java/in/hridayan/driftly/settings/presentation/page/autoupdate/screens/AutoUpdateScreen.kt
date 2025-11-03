@@ -44,7 +44,7 @@ import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
-import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
+import `in`.hridayan.driftly.core.domain.model.GithubReleaseType
 import `in`.hridayan.driftly.core.presentation.components.bottomsheet.UpdateBottomSheet
 import `in`.hridayan.driftly.core.presentation.components.progress.LoadingSpinner
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
@@ -53,7 +53,7 @@ import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.presentation.components.dialog.LatestVersionDialog
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
-import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape
+import `in`.hridayan.driftly.settings.presentation.components.shape.CardCornerShape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.viewmodel.AutoUpdateViewModel
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 

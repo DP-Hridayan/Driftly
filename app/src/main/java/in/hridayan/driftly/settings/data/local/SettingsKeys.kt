@@ -1,9 +1,9 @@
 package `in`.hridayan.driftly.settings.data.local
 
 import androidx.appcompat.app.AppCompatDelegate
-import `in`.hridayan.driftly.core.common.SeedColorProvider
-import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
-import `in`.hridayan.driftly.core.common.constants.SubjectCardStyle
+import `in`.hridayan.driftly.core.domain.model.GithubReleaseType
+import `in`.hridayan.driftly.core.domain.model.SubjectCardStyle
+import `in`.hridayan.driftly.core.domain.provider.SeedColorProvider
 
 enum class SettingsKeys(val default: Any?) {
     LOOK_AND_FEEL(null),
@@ -15,7 +15,9 @@ enum class SettingsKeys(val default: Any?) {
     THEME_MODE(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM),
     DARK_THEME(null),
     HIGH_CONTRAST_DARK_MODE(false),
-    SEED_COLOR(SeedColorProvider.seedColor),
+    PRIMARY_SEED(SeedColorProvider.primary),
+    SECONDARY_SEED(SeedColorProvider.secondary),
+    TERTIARY_SEED(SeedColorProvider.tertiary),
     DYNAMIC_COLORS(true),
     HAPTICS_AND_VIBRATION(true),
     VERSION(null),

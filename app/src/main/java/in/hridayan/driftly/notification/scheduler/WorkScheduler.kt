@@ -6,7 +6,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ListenableWorker
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import `in`.hridayan.driftly.core.common.constants.NotificationTags
+import `in`.hridayan.driftly.core.domain.model.NotificationTags
 import `in`.hridayan.driftly.notification.worker.AttendanceReminderWorker
 import `in`.hridayan.driftly.notification.worker.MissedAttendanceAlertWorker
 import `in`.hridayan.driftly.notification.worker.UpdateCheckWorker

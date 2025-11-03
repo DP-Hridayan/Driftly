@@ -22,7 +22,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
-import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape
+import `in`.hridayan.driftly.settings.presentation.components.shape.CardCornerShape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable

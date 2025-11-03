@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
-import `in`.hridayan.driftly.core.common.constants.SubjectCardStyle
+import `in`.hridayan.driftly.core.domain.model.SubjectCardStyle
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog

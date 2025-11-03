@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.core.common.constants
+package `in`.hridayan.driftly.core.domain.model
 
 object NotificationTags {
     const val REMINDER_TO_MARK_ATTENDANCE = "reminder_to_mark_attendance"

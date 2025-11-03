@@ -3,6 +3,7 @@ package `in`.hridayan.driftly.settings.presentation.components.button
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,38 +23,47 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.domain.provider.SeedColorProvider
+import `in`.hridayan.driftly.core.presentation.provider.SeedColor
 
 @Composable
 fun PaletteWheel(
     modifier: Modifier = Modifier,
     size: Dp = 50.dp,
-    seedColor: Color = MaterialTheme.colorScheme.primary,
-    primaryColor: Color = MaterialTheme.colorScheme.primary,
-    secondaryColor: Color = MaterialTheme.colorScheme.secondary,
-    tertiaryColor: Color = MaterialTheme.colorScheme.tertiary,
+    seedColor: SeedColor = SeedColorProvider.seed,
     isChecked: Boolean = false,
     onClick: () -> Unit
 ) {
     val weakHaptic = LocalWeakHaptic.current
+
     val scale by animateFloatAsState(
         targetValue = if (isChecked) 1f else 0f,
         animationSpec = tween(durationMillis = 300),
         label = "Check Scale Animation"
     )
 
+    val primaryColor = modifyColorForDisplay(Color(seedColor.primary), toneFactor = 1f)
+    val secondaryColor = modifyColorForDisplay(Color(seedColor.secondary), toneFactor = 1.4f)
+    val tertiaryColor = modifyColorForDisplay(Color(seedColor.tertiary), toneFactor = 0.7f)
+
     Box(
         modifier = Modifier
             .clip(MaterialTheme.shapes.medium)
-            .background(
-                MaterialTheme.colorScheme.surfaceVariant
+            .border(
+                width = 1.dp,
+                shape = MaterialTheme.shapes.medium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
             )
-            .clickable(enabled = true, onClick = {
-                onClick()
-                weakHaptic()
-            })
+            .clickable(
+                enabled = true,
+                onClick = {
+                    onClick()
+                    weakHaptic()
+                })
     ) {
         Box(
             modifier = modifier
@@ -97,7 +107,7 @@ fun PaletteWheel(
                     .align(Alignment.Center)
                     .scale(scale)
                     .clip(CircleShape)
-                    .background(color = seedColor)
+                    .background(color = MaterialTheme.colorScheme.primaryContainer)
             ) {
                 Icon(
                     modifier = Modifier
@@ -105,9 +115,23 @@ fun PaletteWheel(
                         .align(Alignment.Center),
                     imageVector = Icons.Rounded.Check,
                     contentDescription = null,
-                    tint = primaryColor
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
         }
     }
+}
+
+fun modifyColorForDisplay(
+    color: Color,
+    toneFactor: Float = 1.2f,
+    chromaFactor: Float = 1.15f
+): Color {
+    val hsv = FloatArray(3)
+    android.graphics.Color.colorToHSV(color.toArgb(), hsv)
+
+    hsv[1] = (hsv[1] * chromaFactor).coerceIn(0f, 1f)
+    hsv[2] = (hsv[2] * toneFactor).coerceIn(0f, 1f)
+
+    return Color(android.graphics.Color.HSVToColor(hsv))
 }

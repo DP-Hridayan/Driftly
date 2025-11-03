@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import `in`.hridayan.driftly.core.common.constants.NotificationTags
+import `in`.hridayan.driftly.core.domain.model.NotificationTags
 import `in`.hridayan.driftly.core.common.constants.UrlConst
 import `in`.hridayan.driftly.notification.scheduler.WorkScheduler
 import `in`.hridayan.driftly.notification.createAppNotificationSettingsIntent
