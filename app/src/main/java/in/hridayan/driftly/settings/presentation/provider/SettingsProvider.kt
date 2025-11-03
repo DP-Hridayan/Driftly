@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.data.local
+package `in`.hridayan.driftly.settings.presentation.provider
 
 import android.os.Build
 import androidx.compose.material.icons.Icons
@@ -20,12 +20,12 @@ import androidx.compose.material.icons.rounded.Vibration
 import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.utils.MiUiCheck
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
+import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import `in`.hridayan.driftly.settings.domain.model.boolPreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.categorizedItems
 import `in`.hridayan.driftly.settings.domain.model.customComposable
-import `in`.hridayan.driftly.settings.domain.model.horizontalDivider
 import `in`.hridayan.driftly.settings.domain.model.intPreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.nullPreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.uncategorizedItems

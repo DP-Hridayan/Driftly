@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
+import `in`.hridayan.driftly.settings.domain.model.PreferenceItem
 import `in`.hridayan.driftly.settings.domain.model.SettingsType
 import `in`.hridayan.driftly.settings.presentation.components.card.RoundedCornerCard
 import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape

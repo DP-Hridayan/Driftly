@@ -4,7 +4,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
+import `in`.hridayan.driftly.settings.domain.model.PreferenceItem
 
 @Composable
 fun PreferenceItemView(

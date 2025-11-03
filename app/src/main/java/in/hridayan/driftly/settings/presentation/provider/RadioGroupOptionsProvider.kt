@@ -1,9 +1,9 @@
-package `in`.hridayan.driftly.settings.data.local
+package `in`.hridayan.driftly.settings.presentation.provider
 
 import androidx.appcompat.app.AppCompatDelegate
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.constants.GithubReleaseType
-import `in`.hridayan.driftly.settings.data.local.model.RadioButtonOptions
+import `in`.hridayan.driftly.settings.domain.model.RadioButtonOptions
 
 class RadioGroupOptionsProvider {
     companion object {

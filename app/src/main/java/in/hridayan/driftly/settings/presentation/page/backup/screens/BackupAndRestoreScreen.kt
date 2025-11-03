@@ -40,7 +40,7 @@ import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableTex
 import `in`.hridayan.driftly.core.utils.getFileNameFromUri
 import `in`.hridayan.driftly.core.utils.showToast
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.dialog.ResetSettingsDialog
 import `in`.hridayan.driftly.settings.presentation.components.dialog.RestoreBackupDialog
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView

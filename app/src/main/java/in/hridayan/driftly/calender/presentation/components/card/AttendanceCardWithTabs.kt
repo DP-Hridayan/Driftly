@@ -39,7 +39,7 @@ import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
-import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
+import `in`.hridayan.driftly.core.presentation.theme.Shape
 import `in`.hridayan.driftly.home.presentation.components.label.Label
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch

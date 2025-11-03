@@ -1,7 +1,7 @@
 package `in`.hridayan.driftly.settings.domain.repository
 
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {

@@ -25,7 +25,7 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.components.shape.getRoundedShape

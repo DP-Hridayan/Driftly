@@ -26,7 +26,7 @@ import androidx.compose.ui.window.DialogProperties
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
-import `in`.hridayan.driftly.core.presentation.ui.theme.Shape
+import `in`.hridayan.driftly.core.presentation.theme.Shape
 
 @Composable
 fun NotificationPermDialog(

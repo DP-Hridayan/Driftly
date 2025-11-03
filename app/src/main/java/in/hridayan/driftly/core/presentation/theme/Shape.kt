@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.core.presentation.ui.theme
+package `in`.hridayan.driftly.core.presentation.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.dp

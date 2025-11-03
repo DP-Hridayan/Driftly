@@ -29,7 +29,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.utils.openUrl
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.card.SupportMeCard
 import `in`.hridayan.driftly.settings.presentation.components.image.ProfilePic
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView

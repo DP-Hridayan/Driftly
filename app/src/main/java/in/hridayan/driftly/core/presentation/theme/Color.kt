@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
 
-package `in`.hridayan.driftly.core.presentation.ui.theme
+package `in`.hridayan.driftly.core.presentation.theme
 
 import android.content.Context
 import android.os.Build

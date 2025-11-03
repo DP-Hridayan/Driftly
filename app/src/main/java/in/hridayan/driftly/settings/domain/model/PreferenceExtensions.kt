@@ -12,9 +12,9 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceGroup
-import `in`.hridayan.driftly.settings.data.local.model.PreferenceItem
-import `in`.hridayan.driftly.settings.data.local.model.RadioButtonOptions
+import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.domain.model.PreferenceItem
+import `in`.hridayan.driftly.settings.domain.model.RadioButtonOptions
 
 fun categorizedItems(
     categoryNameResId: Int,
