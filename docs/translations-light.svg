@@ -1,35 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="260" style="background:#00000000">
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="290" style="background:#00000000">
 <style>text { font-family: sans-serif; font-size: 14px; fill: #1C1B1F; }</style>
 <text x="140" y="25" text-anchor="end"><![CDATA[Arabic]]></text>
 <rect x="150" y="11" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="11" width="258" height="14" fill="#256111" rx="8" ry="8" />
-<text x="460" y="25" text-anchor="start">86%</text>
-<text x="140" y="55" text-anchor="end"><![CDATA[German]]></text>
+<rect x="150" y="11" width="252" height="14" fill="#295f11" rx="8" ry="8" />
+<text x="460" y="25" text-anchor="start">84%</text>
+<text x="140" y="55" text-anchor="end"><![CDATA[Azerbaijani]]></text>
 <rect x="150" y="41" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="41" width="162" height="14" fill="#5a4b15" rx="8" ry="8" />
-<text x="460" y="55" text-anchor="start">54%</text>
-<text x="140" y="85" text-anchor="end"><![CDATA[French]]></text>
+<rect x="150" y="41" width="21" height="14" fill="#a72a1c" rx="8" ry="8" />
+<text x="460" y="55" text-anchor="start">7%</text>
+<text x="140" y="85" text-anchor="end"><![CDATA[German]]></text>
 <rect x="150" y="71" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="71" width="135" height="14" fill="#694517" rx="8" ry="8" />
-<text x="460" y="85" text-anchor="start">45%</text>
-<text x="140" y="115" text-anchor="end"><![CDATA[Japanese]]></text>
+<rect x="150" y="71" width="159" height="14" fill="#5c4a16" rx="8" ry="8" />
+<text x="460" y="85" text-anchor="start">53%</text>
+<text x="140" y="115" text-anchor="end"><![CDATA[French]]></text>
 <rect x="150" y="101" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
 <rect x="150" y="101" width="135" height="14" fill="#694517" rx="8" ry="8" />
 <text x="460" y="115" text-anchor="start">45%</text>
-<text x="140" y="145" text-anchor="end"><![CDATA[Portuguese, Brazilian]]></text>
+<text x="140" y="145" text-anchor="end"><![CDATA[Japanese]]></text>
 <rect x="150" y="131" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="131" width="0" height="14" fill="#b3261e" rx="8" ry="8" />
-<text x="460" y="145" text-anchor="start">0%</text>
-<text x="140" y="175" text-anchor="end"><![CDATA[Russian]]></text>
+<rect x="150" y="131" width="135" height="14" fill="#694517" rx="8" ry="8" />
+<text x="460" y="145" text-anchor="start">45%</text>
+<text x="140" y="175" text-anchor="end"><![CDATA[Portuguese, Brazilian]]></text>
 <rect x="150" y="161" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="161" width="300" height="14" fill="#0f6b0f" rx="8" ry="8" />
-<text x="460" y="175" text-anchor="start">100%</text>
-<text x="140" y="205" text-anchor="end"><![CDATA[Turkish]]></text>
+<rect x="150" y="161" width="0" height="14" fill="#b3261e" rx="8" ry="8" />
+<text x="460" y="175" text-anchor="start">0%</text>
+<text x="140" y="205" text-anchor="end"><![CDATA[Russian]]></text>
 <rect x="150" y="191" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="191" width="300" height="14" fill="#0f6b0f" rx="8" ry="8" />
-<text x="460" y="205" text-anchor="start">100%</text>
-<text x="140" y="235" text-anchor="end"><![CDATA[Chinese Simplified]]></text>
+<rect x="150" y="191" width="294" height="14" fill="#12690f" rx="8" ry="8" />
+<text x="460" y="205" text-anchor="start">98%</text>
+<text x="140" y="235" text-anchor="end"><![CDATA[Turkish]]></text>
 <rect x="150" y="221" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
-<rect x="150" y="221" width="9" height="14" fill="#ae281d" rx="8" ry="8" />
-<text x="460" y="235" text-anchor="start">3%</text>
+<rect x="150" y="221" width="300" height="14" fill="#0f6b0f" rx="8" ry="8" />
+<text x="460" y="235" text-anchor="start">100%</text>
+<text x="140" y="265" text-anchor="end"><![CDATA[Chinese Simplified]]></text>
+<rect x="150" y="251" width="300" height="14" fill="#E0E0E0" rx="8" ry="8" />
+<rect x="150" y="251" width="9" height="14" fill="#ae281d" rx="8" ry="8" />
+<text x="460" y="265" text-anchor="start">3%</text>
 </svg>
