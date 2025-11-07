@@ -166,6 +166,7 @@
     <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>
     <string name="whats_new">What\'s new!</string>
     <string name="year">Year</string>
+    <string name="attendance_overview">Attendance overview</string>
     <string-array name="month_names">
         <item>April</item>
         <item>August</item>

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package `in`.hridayan.driftly.calender.presentation.components.card
 
 import android.annotation.SuppressLint
@@ -14,8 +16,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
@@ -45,21 +49,110 @@ import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun AllMonthsView(viewModel: HomeViewModel = hiltViewModel(), subjectId: Int) {
+fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
+    val attendanceDataTabs =
+        listOf(
+            stringResource(R.string.this_month_data),
+            stringResource(R.string.all_months_data)
+        )
+
+    val pagerState = rememberPagerState(pageCount = { attendanceDataTabs.size })
+    val coroutineScope = rememberCoroutineScope()
+    val selectedTabIndex = remember { derivedStateOf { pagerState.currentPage } }
+    val weakHaptic = LocalWeakHaptic.current
+
+    Card(
+        modifier = modifier
+            .clip(Shape.cardCornerLarge)
+            .animateContentSize(
+                animationSpec = tween(
+                    durationMillis = 500,
+                    easing = FastOutSlowInEasing
+                )
+            ),
+        colors = CardDefaults.cardColors(containerColor = BottomSheetDefaults.ContainerColor)
+    ) {
+        Column {
+            PrimaryTabRow(
+                selectedTabIndex = selectedTabIndex.value,
+                containerColor = BottomSheetDefaults.ContainerColor,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                attendanceDataTabs.forEachIndexed { index, currentTab ->
+                    Tab(
+                        selected = index == selectedTabIndex.value,
+                        selectedContentColor = MaterialTheme.colorScheme.primaryContainer,
+                        unselectedContentColor = MaterialTheme.colorScheme.outline,
+                        onClick = {
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(attendanceDataTabs.indexOf(currentTab))
+                                weakHaptic()
+                            }
+                        },
+                        text = {
+                            Text(
+                                text = currentTab,
+                                color = if (index == selectedTabIndex.value) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
+                            )
+                        }
+                    )
+                }
+            }
+
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.fillMaxWidth()
+            ) { index ->
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    when (index) {
+                        0 -> ThisMonthView(
+                            modifier = Modifier.padding(25.dp),
+                            subjectId = subjectId
+                        )
+
+                        1 -> AllMonthsView(
+                            modifier = Modifier.padding(25.dp),
+                            subjectId = subjectId
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AllMonthsView(
+    modifier: Modifier = Modifier,
+    subjectId: Int,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
     val counts by viewModel.getSubjectAttendanceCounts(subjectId)
         .collectAsState(initial = SubjectAttendance())
 
     val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
     if (counts.totalCount == 0) {
-        UndrawDatePicker()
+        UndrawDatePicker(modifier = modifier)
     } else {
-        ProgressView(counts = counts, progress = progress)
+        ProgressView(
+            modifier = modifier,
+            counts = counts,
+            progress = progress
+        )
     }
 }
 
 @Composable
-fun ThisMonthView(viewModel: CalendarViewModel = hiltViewModel(), subjectId: Int) {
+private fun ThisMonthView(
+    modifier: Modifier = Modifier,
+    subjectId: Int,
+    viewModel: CalendarViewModel = hiltViewModel()
+) {
     val selectedMonthYear = viewModel.selectedMonthYear.value
     val counts by viewModel.getMonthlyAttendanceCounts(
         subjectId,
@@ -70,15 +163,19 @@ fun ThisMonthView(viewModel: CalendarViewModel = hiltViewModel(), subjectId: Int
     val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
     if (counts.totalCount == 0) {
-        UndrawDatePicker()
+        UndrawDatePicker(modifier = modifier)
     } else {
-        ProgressView(counts = counts, progress = progress)
+        ProgressView(
+            modifier = modifier,
+            counts = counts,
+            progress = progress
+        )
     }
 }
 
 @SuppressLint("DefaultLocale")
 @Composable
-fun ProgressView(
+private fun ProgressView(
     modifier: Modifier = Modifier,
     counts: SubjectAttendance,
     progress: Float
@@ -146,82 +243,6 @@ fun ProgressView(
                     .weight(1f)
                     .padding(horizontal = 5.dp)
             )
-        }
-
-    }
-}
-
-@Composable
-fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
-    val attendanceDataTabs =
-        listOf<String>(
-            stringResource(R.string.this_month_data),
-            stringResource(R.string.all_months_data)
-        )
-
-    val pagerState = rememberPagerState(pageCount = { attendanceDataTabs.size })
-    val coroutineScope = rememberCoroutineScope()
-    val selectedTabIndex = remember { derivedStateOf { pagerState.currentPage } }
-    val weakHaptic = LocalWeakHaptic.current
-
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(Shape.cardCornerLarge)
-            .animateContentSize(
-                animationSpec = tween(
-                    durationMillis = 500,
-                    easing = FastOutSlowInEasing
-                )
-            ),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
-        )
-    ) {
-        Column {
-            PrimaryTabRow(
-                selectedTabIndex = selectedTabIndex.value,
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                attendanceDataTabs.forEachIndexed { index, currentTab ->
-                    Tab(
-                        selected = index == selectedTabIndex.value,
-                        selectedContentColor = MaterialTheme.colorScheme.primaryContainer,
-                        unselectedContentColor = MaterialTheme.colorScheme.outline,
-                        onClick = {
-                            coroutineScope.launch {
-                                pagerState.animateScrollToPage(attendanceDataTabs.indexOf(currentTab))
-                                weakHaptic()
-                            }
-                        },
-                        text = {
-                            Text(
-                                text = currentTab,
-                                color = if (index == selectedTabIndex.value) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
-                            )
-                        }
-                    )
-                }
-            }
-
-            HorizontalPager(
-                state = pagerState,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-            ) { index ->
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    when (index) {
-                        0 -> ThisMonthView(subjectId = subjectId)
-                        1 -> AllMonthsView(subjectId = subjectId)
-                    }
-                }
-            }
         }
     }
 }

@@ -16,8 +16,8 @@ android {
         applicationId = "in.hridayan.driftly"
         minSdk = 26
         targetSdk = 36
-        versionCode = 13
-        versionName = "v1.8.3"
+        versionCode = 14
+        versionName = "v1.9.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
