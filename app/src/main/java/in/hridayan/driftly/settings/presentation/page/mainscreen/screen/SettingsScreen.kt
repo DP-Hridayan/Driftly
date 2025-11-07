@@ -25,10 +25,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
@@ -93,9 +91,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
                         .padding(top = 15.dp),
                     textAlign = TextAlign.Center,
                     text = stringResource(R.string.settings),
-                    fontSize = 33.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    letterSpacing = 0.05.em
+                    style = MaterialTheme.typography.displaySmallEmphasized
                 )
             }
 

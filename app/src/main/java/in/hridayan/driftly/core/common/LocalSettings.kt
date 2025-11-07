@@ -5,6 +5,7 @@ import androidx.compose.runtime.compositionLocalOf
 import `in`.hridayan.driftly.core.domain.model.GithubReleaseType
 import `in`.hridayan.driftly.core.domain.model.SubjectCardStyle
 import `in`.hridayan.driftly.core.domain.provider.SeedColorProvider
+import `in`.hridayan.driftly.settings.domain.model.CustomFontFamily
 import `in`.hridayan.driftly.settings.domain.model.SettingsState
 
 val LocalSettings = compositionLocalOf {
@@ -25,6 +26,7 @@ val LocalSettings = compositionLocalOf {
         enableDirectDownload = true,
         notificationPreference = true,
         notificationPermissionDialogShown = false,
-        showGithubWarningDialog = true
+        showGithubWarningDialog = true,
+        fontFamily = CustomFontFamily.SYSTEM_FONT
     )
 }

@@ -1,78 +1,59 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package `in`.hridayan.driftly.core.presentation.theme
 
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.em
-import androidx.compose.ui.unit.sp
+import `in`.hridayan.driftly.core.presentation.provider.getFontFamily
 
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    ),
+@Composable
+fun appTypography(fontFamily: Int): Typography {
+    val fontFamily = getFontFamily(fontFamily) ?: FontFamily.Default
+    val base = MaterialTheme.typography
 
-    bodyMedium = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        lineHeight = 20.sp,
-        letterSpacing = 0.5.sp
-    ),
+    return Typography(
+        displayLarge = base.displayLarge.copy(fontFamily = fontFamily),
+        displayMedium = base.displayMedium.copy(fontFamily = fontFamily),
+        displaySmall = base.displaySmall.copy(fontFamily = fontFamily),
 
-    bodySmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
-        lineHeight = 20.sp,
-        letterSpacing = 0.5.sp
-    ),
+        headlineLarge = base.headlineLarge.copy(fontFamily = fontFamily),
+        headlineMedium = base.headlineMedium.copy(fontFamily = fontFamily),
+        headlineSmall = base.headlineSmall.copy(fontFamily = fontFamily),
 
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 20.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
+        titleLarge = base.titleLarge.copy(fontFamily = fontFamily),
+        titleMedium = base.titleMedium.copy(fontFamily = fontFamily),
+        titleSmall = base.titleSmall.copy(fontFamily = fontFamily),
 
-    headlineLarge = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Normal,
-        fontSize = 33.sp,
-        letterSpacing = 0.05.em
-    ),
+        bodyLarge = base.bodyLarge.copy(fontFamily = fontFamily),
+        bodyMedium = base.bodyMedium.copy(fontFamily = fontFamily),
+        bodySmall = base.bodySmall.copy(fontFamily = fontFamily),
 
-    headlineMedium = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Normal,
-        fontSize = 28.sp,
-        letterSpacing = 0.1.em
-    ),
+        labelLarge = base.labelLarge.copy(fontFamily = fontFamily),
+        labelMedium = base.labelMedium.copy(fontFamily = fontFamily),
+        labelSmall = base.labelSmall.copy(fontFamily = fontFamily),
 
-    headlineSmall = TextStyle(
-        fontFamily = FontFamily.SansSerif,
-        fontWeight = FontWeight.Normal,
-        fontSize = 23.sp
-    ),
+        // Emphasized variants
+        displayLargeEmphasized = base.displayLargeEmphasized.copy(fontFamily = fontFamily),
+        displayMediumEmphasized = base.displayMediumEmphasized.copy(fontFamily = fontFamily),
+        displaySmallEmphasized = base.displaySmallEmphasized.copy(fontFamily = fontFamily),
 
-    labelLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 15.sp,
-        lineHeight = 20.sp,
-        letterSpacing = 0.5.sp
-    ),
+        headlineLargeEmphasized = base.headlineLargeEmphasized.copy(fontFamily = fontFamily),
+        headlineMediumEmphasized = base.headlineMediumEmphasized.copy(fontFamily = fontFamily),
+        headlineSmallEmphasized = base.headlineSmallEmphasized.copy(fontFamily = fontFamily),
 
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
+        titleLargeEmphasized = base.titleLargeEmphasized.copy(fontFamily = fontFamily),
+        titleMediumEmphasized = base.titleMediumEmphasized.copy(fontFamily = fontFamily),
+        titleSmallEmphasized = base.titleSmallEmphasized.copy(fontFamily = fontFamily),
+
+        bodyLargeEmphasized = base.bodyLargeEmphasized.copy(fontFamily = fontFamily),
+        bodyMediumEmphasized = base.bodyMediumEmphasized.copy(fontFamily = fontFamily),
+        bodySmallEmphasized = base.bodySmallEmphasized.copy(fontFamily = fontFamily),
+
+        labelLargeEmphasized = base.labelLargeEmphasized.copy(fontFamily = fontFamily),
+        labelMediumEmphasized = base.labelMediumEmphasized.copy(fontFamily = fontFamily),
+        labelSmallEmphasized = base.labelSmallEmphasized.copy(fontFamily = fontFamily),
     )
-)
+}

@@ -15,6 +15,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -25,7 +29,9 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
 import `in`.hridayan.driftly.navigation.LocalNavController
+import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.components.bottomsheet.FontStyleBottomSheet
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.components.shape.CardCornerShape.getRoundedShape
@@ -41,6 +47,7 @@ fun LookAndFeelScreen(
     val navController = LocalNavController.current
     val settings = settingsViewModel.lookAndFeelPageList
     val context = LocalContext.current
+    var showFontStyleBottomSheet by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         settingsViewModel.uiEvent.collect { event ->
@@ -51,6 +58,12 @@ fun LookAndFeelScreen(
 
                 is SettingsUiEvent.Navigate -> {
                     navController.navigate(event.route)
+                }
+
+                is SettingsUiEvent.ShowBottomSheet -> {
+                    if (event.key == SettingsKeys.FONT_FAMILY) {
+                        showFontStyleBottomSheet = true
+                    }
                 }
 
                 else -> {}
@@ -143,5 +156,9 @@ fun LookAndFeelScreen(
                 }
             }
         },
-        )
+    )
+
+    if (showFontStyleBottomSheet) {
+        FontStyleBottomSheet(onDismiss = { showFontStyleBottomSheet = false })
+    }
 }

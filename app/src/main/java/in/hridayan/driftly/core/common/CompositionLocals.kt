@@ -86,6 +86,8 @@ fun CompositionLocals(
 
     val showGithubWarningDialog by settingsViewModel.booleanState(SettingsKeys.SHOW_GITHUB_WARNING_DIALOG)
 
+    val fontStyle by settingsViewModel.intState(SettingsKeys.FONT_FAMILY)
+
     val state =
         remember(
             autoUpdate,
@@ -104,7 +106,8 @@ fun CompositionLocals(
             enableDirectDownload,
             notificationPreference,
             notificationPermissionDialogShown,
-            showGithubWarningDialog
+            showGithubWarningDialog,
+            fontStyle
         ) {
             SettingsState(
                 isAutoUpdate = autoUpdate,
@@ -123,7 +126,8 @@ fun CompositionLocals(
                 enableDirectDownload = enableDirectDownload,
                 notificationPreference = notificationPreference,
                 notificationPermissionDialogShown = notificationPermissionDialogShown,
-                showGithubWarningDialog = showGithubWarningDialog
+                showGithubWarningDialog = showGithubWarningDialog,
+                fontFamily = fontStyle
             )
         }
 
@@ -202,4 +206,3 @@ private fun SettingsViewModel.intState(key: SettingsKeys): State<Int> {
 private fun SettingsViewModel.floatState(key: SettingsKeys): State<Float> {
     return getFloat(key).collectAsState(initial = key.default as Float)
 }
-

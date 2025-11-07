@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import `in`.hridayan.driftly.core.domain.model.GithubReleaseType
 import `in`.hridayan.driftly.core.domain.model.SubjectCardStyle
 import `in`.hridayan.driftly.core.domain.provider.SeedColorProvider
+import `in`.hridayan.driftly.settings.domain.model.CustomFontFamily
 
 enum class SettingsKeys(val default: Any?) {
     LOOK_AND_FEEL(null),
@@ -47,6 +48,6 @@ enum class SettingsKeys(val default: Any?) {
     ENABLE_NOTIFICATIONS(true),
     UPDATE_AVAILABLE_NOTIFICATION(true),
     NOTIFICATION_PERMISSION_DIALOG_SHOWN(false),
-
-    SHOW_GITHUB_WARNING_DIALOG(true)
+    SHOW_GITHUB_WARNING_DIALOG(true),
+    FONT_FAMILY(CustomFontFamily.SYSTEM_FONT)
 }

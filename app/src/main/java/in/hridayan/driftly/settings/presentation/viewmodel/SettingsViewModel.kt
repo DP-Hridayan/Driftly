@@ -12,11 +12,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import `in`.hridayan.driftly.core.domain.model.NotificationTags
 import `in`.hridayan.driftly.core.common.constants.UrlConst
-import `in`.hridayan.driftly.notification.scheduler.WorkScheduler
-import `in`.hridayan.driftly.notification.createAppNotificationSettingsIntent
-import `in`.hridayan.driftly.notification.isNotificationPermissionGranted
+import `in`.hridayan.driftly.core.domain.model.NotificationTags
 import `in`.hridayan.driftly.navigation.AboutScreen
 import `in`.hridayan.driftly.navigation.AutoUpdateScreen
 import `in`.hridayan.driftly.navigation.BackupAndRestoreScreen
@@ -26,10 +23,13 @@ import `in`.hridayan.driftly.navigation.CustomisationScreen
 import `in`.hridayan.driftly.navigation.DarkThemeScreen
 import `in`.hridayan.driftly.navigation.LookAndFeelScreen
 import `in`.hridayan.driftly.navigation.NotificationScreen
+import `in`.hridayan.driftly.notification.createAppNotificationSettingsIntent
+import `in`.hridayan.driftly.notification.isNotificationPermissionGranted
+import `in`.hridayan.driftly.notification.scheduler.WorkScheduler
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.model.BackupOption
 import `in`.hridayan.driftly.settings.domain.model.NotificationState
+import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
@@ -193,6 +193,10 @@ class SettingsViewModel @Inject constructor(
 
                 SettingsKeys.GITHUB -> _uiEvent.emit(
                     SettingsUiEvent.OpenUrl(UrlConst.URL_GITHUB_REPO)
+                )
+
+                SettingsKeys.FONT_FAMILY -> _uiEvent.emit(
+                    SettingsUiEvent.ShowBottomSheet(SettingsKeys.FONT_FAMILY)
                 )
 
                 SettingsKeys.LANGUAGE -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

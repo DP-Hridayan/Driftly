@@ -27,6 +27,7 @@ fun DriftlyTheme(
     val darkTheme = LocalDarkMode.current
     val dynamicColor = LocalSettings.current.isDynamicColor
     val isHighContrastDarkTheme = LocalSettings.current.isHighContrastDarkMode
+    val fontFamily = LocalSettings.current.fontFamily
 
     LaunchedEffect(darkTheme) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
@@ -65,7 +66,7 @@ fun DriftlyTheme(
 
     MaterialExpressiveTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = appTypography(fontFamily),
         content = content
     )
 }

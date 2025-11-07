@@ -165,7 +165,7 @@ fun HomeScreen(
 
         floatingActionButton = {
             FloatingActionButton(
-                modifier = Modifier.Companion
+                modifier = Modifier
                     .padding(bottom = 10.dp)
                     .animateFloatingActionButton(
                         visible = selectedCardsCount == 0,
@@ -206,7 +206,7 @@ fun HomeScreen(
                 ) {
                     Text(
                         text = stringResource(R.string.app_name),
-                        style = MaterialTheme.typography.headlineLarge,
+                        style = MaterialTheme.typography.displaySmallEmphasized,
                         modifier = Modifier.alpha(0.95f)
                     )
 

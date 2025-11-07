@@ -19,5 +19,6 @@ data class SettingsState(
     val enableDirectDownload: Boolean,
     val notificationPreference: Boolean,
     val notificationPermissionDialogShown: Boolean,
-    val showGithubWarningDialog: Boolean
+    val showGithubWarningDialog: Boolean,
+    val fontFamily: Int
 )

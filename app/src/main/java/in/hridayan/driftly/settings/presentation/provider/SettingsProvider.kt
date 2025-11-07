@@ -126,6 +126,12 @@ object SettingsProvider {
                 iconVector = Icons.Rounded.Vibration,
             ),
             nullPreferenceItem(
+                key = SettingsKeys.FONT_FAMILY,
+                titleResId = R.string.font_family,
+                descriptionResId = R.string.des_font_family,
+                iconResId = R.drawable.ic_font_download
+            ),
+            nullPreferenceItem(
                 key = SettingsKeys.LANGUAGE,
                 isLayoutVisible = !isMiUi && !isSdkLowerThan13,
                 titleResId = R.string.default_language,
