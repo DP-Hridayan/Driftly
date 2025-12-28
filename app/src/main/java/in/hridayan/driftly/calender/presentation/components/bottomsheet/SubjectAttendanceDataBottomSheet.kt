@@ -25,7 +25,8 @@ fun SubjectAttendanceDataBottomSheet(
     ) {
         AttendanceCardWithTabs(
             modifier = Modifier.fillMaxWidth(),
-            subjectId = subjectId
+            subjectId = subjectId,
+            sheetState = sheetState
         )
     }
 }

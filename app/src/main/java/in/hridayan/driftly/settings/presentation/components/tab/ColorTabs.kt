@@ -1,22 +1,20 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package `in`.hridayan.driftly.settings.presentation.components.tab
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalSeedColor
@@ -24,8 +22,7 @@ import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalTonalPalette
 import `in`.hridayan.driftly.settings.presentation.components.button.PaletteWheel
 import `in`.hridayan.driftly.settings.presentation.page.lookandfeel.viewmodel.LookAndFeelViewModel
-import kotlin.text.chunked
-import kotlin.text.forEach
+import `in`.hridayan.shapeindicators.ShapeIndicatorRow
 
 @Composable
 fun ColorTabs(
@@ -62,26 +59,16 @@ fun ColorTabs(
             }
         }
 
-        Row(
+        Spacer(Modifier.height(12.dp))
+
+        ShapeIndicatorRow(
             modifier = Modifier
-                .padding(top = 12.dp)
+                .width(120.dp)
                 .align(Alignment.CenterHorizontally),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            repeat(groupedPalettes.size) { index ->
-                val isSelected = index == pagerState.currentPage
-                Box(
-                    modifier = Modifier
-                        .size(8.dp)
-                        .clip(CircleShape)
-                        .background(
-                            if (isSelected) MaterialTheme.colorScheme.primary
-                            else MaterialTheme.colorScheme.surfaceVariant
-                        )
-                )
-            }
-        }
+            pagerState = pagerState,
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            shuffleShapes = true
+        )
     }
 }
 

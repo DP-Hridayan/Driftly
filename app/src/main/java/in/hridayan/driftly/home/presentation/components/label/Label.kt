@@ -19,9 +19,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import `in`.hridayan.driftly.core.presentation.theme.Shape
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
+import `in`.hridayan.driftly.core.presentation.theme.Shape
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
@@ -31,18 +31,19 @@ fun Label(
     text: String,
     labelColor: Color,
     strokeColor: Color,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    animationDuration: Int = 600
 ) {
     val weakHaptic = LocalWeakHaptic.current
     val animatedScale = remember { Animatable(0f) }
     val randomDelay = remember { Random.nextInt(250, 750) }
 
     LaunchedEffect(text) {
-        delay(randomDelay.toLong())
+        if (animationDuration != 0) delay(randomDelay.toLong())
         animatedScale.animateTo(
             targetValue = 1f.coerceIn(0.3f, 1f),
             animationSpec = tween(
-                durationMillis = 600,
+                durationMillis = animationDuration,
                 easing = FastOutSlowInEasing
             )
         )

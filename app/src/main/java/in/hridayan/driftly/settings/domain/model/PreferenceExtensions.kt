@@ -12,9 +12,6 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
-import `in`.hridayan.driftly.settings.domain.model.PreferenceItem
-import `in`.hridayan.driftly.settings.domain.model.RadioButtonOptions
 
 fun categorizedItems(
     categoryNameResId: Int,
@@ -145,26 +142,23 @@ fun nullPreferenceItem(
     type = type
 )
 
-
 @Composable
 fun PreferenceItem.getResolvedTitle(): String {
-    return titleResId?.let {
-        runCatching { stringResource(it) }.getOrElse { titleString.ifBlank { "" } }
+    return titleResId?.let { resId ->
+        stringResource(resId)
     } ?: titleString.ifBlank { "" }
 }
 
-
 @Composable
 fun PreferenceItem.getResolvedIcon(): ImageVector? {
-
     val darkMode = LocalDarkMode.current
 
     return if (key == SettingsKeys.DARK_THEME) {
         if (darkMode) Icons.Outlined.DarkMode
         else Icons.Rounded.LightMode
     } else {
-        iconVector ?: iconResId?.let {
-            runCatching { ImageVector.vectorResource(id = it) }.getOrNull()
+        iconVector ?: iconResId?.let { resId ->
+            ImageVector.vectorResource(resId)
         }
     }
 }
@@ -181,10 +175,8 @@ fun PreferenceItem.getResolvedDescription(): String {
             else -> ""
         }
     } else {
-        descriptionResId?.let {
-            runCatching { stringResource(it) }.getOrElse {
-                descriptionString.takeIf { it.isNotBlank() } ?: ""
-            }
+        descriptionResId?.let { resId ->
+            stringResource(resId)
         } ?: descriptionString.takeIf { it.isNotBlank() } ?: ""
     }
 }

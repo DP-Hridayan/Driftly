@@ -22,12 +22,16 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -49,7 +53,11 @@ import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
+fun AttendanceCardWithTabs(
+    modifier: Modifier = Modifier,
+    subjectId: Int,
+    sheetState: SheetState
+) {
     val attendanceDataTabs =
         listOf(
             stringResource(R.string.this_month_data),
@@ -111,12 +119,14 @@ fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
                     when (index) {
                         0 -> ThisMonthView(
                             modifier = Modifier.padding(25.dp),
-                            subjectId = subjectId
+                            subjectId = subjectId,
+                            sheetState = sheetState
                         )
 
                         1 -> AllMonthsView(
                             modifier = Modifier.padding(25.dp),
-                            subjectId = subjectId
+                            subjectId = subjectId,
+                            sheetState = sheetState
                         )
                     }
                 }
@@ -129,6 +139,7 @@ fun AttendanceCardWithTabs(modifier: Modifier = Modifier, subjectId: Int) {
 private fun AllMonthsView(
     modifier: Modifier = Modifier,
     subjectId: Int,
+    sheetState: SheetState,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val counts by viewModel.getSubjectAttendanceCounts(subjectId)
@@ -142,7 +153,8 @@ private fun AllMonthsView(
         ProgressView(
             modifier = modifier,
             counts = counts,
-            progress = progress
+            progress = progress,
+            sheetState = sheetState
         )
     }
 }
@@ -151,6 +163,7 @@ private fun AllMonthsView(
 private fun ThisMonthView(
     modifier: Modifier = Modifier,
     subjectId: Int,
+    sheetState: SheetState,
     viewModel: CalendarViewModel = hiltViewModel()
 ) {
     val selectedMonthYear = viewModel.selectedMonthYear.value
@@ -168,7 +181,8 @@ private fun ThisMonthView(
         ProgressView(
             modifier = modifier,
             counts = counts,
-            progress = progress
+            progress = progress,
+            sheetState = sheetState
         )
     }
 }
@@ -178,14 +192,24 @@ private fun ThisMonthView(
 private fun ProgressView(
     modifier: Modifier = Modifier,
     counts: SubjectAttendance,
-    progress: Float
+    progress: Float,
+    sheetState: SheetState
 ) {
     val progressText = "${String.format("%.0f", progress * 100)}%"
+
     val progressColor = lerp(
         start = MaterialTheme.colorScheme.error,
         stop = MaterialTheme.colorScheme.primary,
         fraction = progress.coerceIn(0f, 1f)
     )
+
+    val showAnimation = remember { mutableStateOf(false) }
+
+    LaunchedEffect(sheetState) {
+        if (sheetState.currentValue == SheetValue.Expanded) {
+            showAnimation.value = true
+        }
+    }
 
     Column(
         modifier = modifier
@@ -200,7 +224,7 @@ private fun ProgressView(
                 modifier = Modifier
                     .height(100.dp)
                     .width(200.dp),
-                animationDuration = 3000
+                animationDuration = if (showAnimation.value) 3000 else 0
             )
 
             Text(
@@ -224,7 +248,8 @@ private fun ProgressView(
                 strokeColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(horizontal = 5.dp)
+                    .padding(horizontal = 5.dp),
+                animationDuration = if (showAnimation.value) 600 else 0
             )
             Label(
                 text = "${stringResource(R.string.absent)}: ${counts.absentCount}",
@@ -232,7 +257,8 @@ private fun ProgressView(
                 strokeColor = MaterialTheme.colorScheme.onErrorContainer,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(horizontal = 5.dp)
+                    .padding(horizontal = 5.dp),
+                animationDuration = if (showAnimation.value) 600 else 0
             )
 
             Label(
@@ -241,7 +267,8 @@ private fun ProgressView(
                 strokeColor = MaterialTheme.colorScheme.onTertiaryContainer,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(horizontal = 5.dp)
+                    .padding(horizontal = 5.dp),
+                animationDuration = if (showAnimation.value) 600 else 0
             )
         }
     }

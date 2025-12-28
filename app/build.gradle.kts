@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kapt)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -49,6 +48,19 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    kotlin {
+        jvmToolchain(21)
+    }
+
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
@@ -67,15 +79,6 @@ android {
             else
                 signingConfigs.getByName("debug")
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    kotlin{
-        jvmToolchain(21)
     }
 
     buildFeatures {
@@ -117,8 +120,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.android.compiler)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.work)
 
     implementation(libs.serialization.json)
@@ -134,6 +136,7 @@ dependencies {
     implementation(libs.androidx.security.crypto)
 
     implementation(libs.lottie.compose)
+    implementation(libs.shapeindicators)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
