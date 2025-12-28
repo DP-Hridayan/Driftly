@@ -1,178 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Driftly</string>
-    <string name="field_blank_error">لا يمكن ترك الحقل فارغًا</string>
-    <string name="subject_already_exists">الموضوع موجود بالفعل</string>
-    <string name="unknown_error">حدث خطأ غير معروف</string>
-    <string name="error">خطأ</string>
-    <string name="add_subject">إضافة موضوع</string>
-    <string name="add">إضافة</string>
-    <string name="cancel">إلغاء</string>
-    <string name="delete_subject">حذف الموضوع</string>
-    <string name="delete_confirmation">هل تريد بالتأكيد حذف هذا الموضوع؟</string>
-    <string name="confirm">تأكيد</string>
-    <string name="present">حاضر</string>
-    <string name="absent">غائب</string>
-    <string name="total">المجموع</string>
-    <string name="clear">مسح</string>
-    <string name="update">تحديث</string>
-    <string name="update_subject">تحديث الموضوع</string>
-    <string name="enter_subject_name">أدخل اسم الموضوع</string>
-    <string name="select_month_and_year">اختر الشهر والسنة</string>
-    <string name="enter_new_name">أدخل الاسم الجديد</string>
-    <string name="no_attendance_yet">لا توجد سجلات حضور بعد. أضف سجلات لرؤية التقدم</string>
-    <string name="no_subject_yet">انقر على + لإضافة موضوع</string>
-    <string name="ok">موافق</string>
-    <string name="settings">الإعدادات</string>
-    <string name="look_and_feel">المظهر والشكل</string>
-    <string name="des_look_and_feel">ألوان ديناميكية، الوضع المظلم، اللغة</string>
-    <string name="dark_theme">الوضع المظلم</string>
-    <string name="system">النظام</string>
-    <string name="on">تشغيل</string>
-    <string name="off">إيقاف</string>
-    <string name="additional_settings">إعدادات إضافية</string>
-    <string name="auto_update">تحديث تلقائي</string>
-    <string name="des_auto_update">التحقق من التحديثات تلقائيًا</string>
     <string name="about">حول التطبيق</string>
-    <string name="des_about">المساهمون والدعم</string>
-    <string name="high_contrast_dark_mode">وضع مظلم عالي التباين</string>
-    <string name="des_high_contrast_dark_mode">سمة سوداء خالصة لأجهزة OLED</string>
-    <string name="dynamic_colors">ألوان ديناميكية</string>
-    <string name="des_dynamic_colors">ضبط ألوان التطبيق تلقائيًا وفقًا لخلفية الجهاز</string>
-    <string name="haptics_and_vibration">الاهتزاز واللمس</string>
-    <string name="des_haptics_and_vibration">اهتزاز تفاعلي عند النقر</string>
-    <string name="default_language">اللغة الافتراضية</string>
-    <string name="des_default_language">اختر اللغة الافتراضية للتطبيق</string>
-    <string name="lead_developer">المطور الرئيسي</string>
-    <string name="des_hridayan">مجرد شخص يحب التطبيقات والتصميم</string>
-    <string name="support_bmc">هل أعجبك ما أفعله؟\nيمكنك دعمي بشراء فنجان قهوة</string>
-    <string name="app">التطبيق</string>
-    <string name="version">الإصدار</string>
-    <string name="changelogs">سجل التغييرات</string>
-    <string name="des_changelogs">سجل جميع التغييرات في التطبيق</string>
-    <string name="no_changelog_found">لا يوجد سجل تغييرات لهذا الإصدار</string>
-    <string name="feature_request">طلب ميزة جديدة</string>
-    <string name="des_feature_request">إذا كان لديك أفكار أو اقتراحات، أخبرنا بها</string>
-    <string name="report_issue">الإبلاغ عن مشكلة</string>
-    <string name="des_report_issue">أبلغ عن أي مشكلة أو خطأ واجهته</string>
-    <string name="license">الترخيص</string>
-    <string name="des_license">اطلع على ترخيص التطبيق</string>
-    <string name="des_github">زيارة مستودع التطبيق على GitHub</string>
-    <string name="select">اختيار</string>
-    <string name="unknown_sources_install_permission_not_granted">لم يتم منح الإذن. يرجى السماح بتثبيت التطبيقات من مصادر غير معروفة.</string>
-    <string name="customisation">التخصيص</string>
-    <string name="des_customisation">تخصيص عناصر واجهة المستخدم كما تفضل</string>
-    <string name="subject_card_style">نمط بطاقة الموضوع</string>
-    <string name="subject_name">اسم الموضوع</string>
+    <string name="absent">غائب</string>
+    <string name="add">إضافة</string>
+    <string name="add_subject">إضافة موضوع</string>
+    <string name="additional_settings">إعدادات إضافية</string>
     <string name="adjust_card_corner_radius">ضبط زوايا البطاقات</string>
-    <string name="enable_auto_update">تمكين التحديث التلقائي</string>
-    <string name="update_channel">قناة التحديث</string>
-    <string name="check_updates">Check updates</string>
-    <string name="update_available">يتوفر تحديث جديد!</string>
-    <string name="latest_version">أحدث إصدار</string>
-    <string name="current_version">الإصدار الحالي</string>
-    <string name="download">تنزيل</string>
-    <string name="download_failed">فشل التنزيل</string>
-    <string name="stable">مستقر</string>
-    <string name="whats_new">ما الجديد!</string>
-    <string name="network_error">خطأ في الشبكة</string>
-    <string name="request_timeout">انتهت مهلة الطلب</string>
-    <string name="enable_direct_download">تمكين التنزيل المباشر</string>
-    <string name="des_enable_direct_download">عند التمكين، سيتم تنزيل التحديثات مباشرة من GitHub داخل التطبيق. عند الإيقاف، ستتم إعادة التوجيه إلى صفحة الإصدارات على GitHub للتنزيل اليدوي.</string>
-    <string name="visit_repo_to_download">انقر على زر التنزيل للحصول على أحدث إصدار من درفتلي من مستودع GitHub.</string>
-    <string name="pre_release">إصدار تجريبي</string>
-    <string name="pre_release_warning">الإصدارات التجريبية قد تكون غير مستقرة</string>
-    <string name="behavior">السلوك</string>
-    <string name="remember_month_year">تذكر الشهر والسنة</string>
-    <string name="des_remember_month_year">تمكين هذه الخيار لحفظ آخر شهر تم عرضه لكل موضوع</string>
-    <string name="show_attendance_steaks">إظهار سلسلة الحضور</string>
-    <string name="des_show_attendance_streaks">عند التمكين، ستظهر سلسلة الحضور على التقويم</string>
-    <string name="des_behavior">تعديل سلوك التطبيق</string>
-    <string name="reset_to_current_month">العودة إلى الشهر الحالي</string>
-    <string name="previous_month">الشهر السابق</string>
-    <string name="next_month">الشهر التالي</string>
-    <string name="back_button">عودة</string>
-    <string name="this_month_data">بيانات هذا الشهر</string>
     <string name="all_months_data">بيانات جميع الأشهر</string>
-    <string name="last_backup_time">وقت النسخ الاحتياطي الأخير</string>
-    <string name="last_backup_date">تاريخ النسخ الاحتياطي الأخير</string>
-    <string name="pick_driftly_extension">الرجاء اختيار ملف مع امتداد .drifly</string>
-    <string name="backup_found">تم العثور على نسخة احتياطية</string>
-    <string name="restore_dialog_message">سيتم استبدال البيانات الحالية بالبيانات الموجودة في الملف المحفوظ.</string>
-    <string name="backup_date">تاريخ النسخة الاحتياطية</string>
-    <string name="backup_time">وقت النسخة الاحتياطية</string>
-    <string name="warning">Warning</string>
-    <string name="tweak_your_experience">Tweak your experience</string>
     <string name="already_latest_version">أنت تستخدم أحدث إصدار</string>
-    <string name="month">شهر</string>
-    <string name="year">سنة</string>
-    <string-array name="month_names">
-        <item>يناير</item>
-        <item>فبراير</item>
-        <item>مارس</item>
-        <item>أبريل</item>
-        <item>مايو</item>
-        <item>يونيو</item>
-        <item>يوليو</item>
-        <item>أغسطس</item>
-        <item>سبتمبر</item>
-        <item>أكتوبر</item>
-        <item>نوفمبر</item>
-        <item>ديسمبر</item>
-    </string-array>
-    <string name="donot_show_again">Do not show again</string>
-    <string name="calendar">التقويم</string>
-    <string name="backup_and_restore">Backup &amp; restore</string>
-    <string name="des_backup_and_restore">النسخ الاحتياطي واستعادة إعدادات التطبيق وغيرها من البيانات</string>
-    <string name="backup_settings">النسخ الاحتياطي لإعدادات التطبيق</string>
-    <string name="des_backup_settings">نسخ إعدادات التطبيق فقط احتياطيًا</string>
-    <string name="backup">نسخ احتياطي</string>
-    <string name="restore">إستعادة</string>
-    <string name="backup_app_database">النسخ الاحتياطي لقاعدة بيانات التطبيق</string>
-    <string name="des_backup_app_database">النسخ الاحتياطي لقاعدة بيانات التطبيقات التي تتضمن بيانات المواضيع بما في ذلك سجلات الحضور</string>
-    <string name="backup_all_data">نسخ احتياطي لجميع البيانات</string>
-    <string name="des_backup_all_data">النسخ الاحتياطي لجميع بيانات التطبيق</string>
-    <string name="restore_app_data">إستعادة بيانات التطبيق</string>
-    <string name="des_restore_app_data">استعادة بيانات التطبيق من ملف النسخة الاحتياطية المحفوظ.
-ستقوم قاعدة البيانات المحفوظة باستبدال القاعدة الحالية</string>
-    <string name="reset">إعادة ضبط</string>
-    <string name="irreversible_action_warning">هذا الاجراء لا يمكن التراجع عنه!</string>
-    <string name="reset_app_settings">إعادة تعيين إعدادات التطبيق</string>
-    <string name="des_reset_app_settings">إعادة تعيين إعدادات التطبيق للقيم الافتراضية</string>
-    <string name="backup_successful">تم النسخ الاحتياطي بنجاح</string>
-    <string name="backup_failed">فشلت عملية النسخ الاحتياطي!</string>
-    <string name="restore_successful">تمت الإستعادة بنجاح!</string>
-    <string name="restore_failed">فشلت الاستعادة</string>
-    <string name="updates">التحديثات</string>
-    <string name="reminder_to_mark_attendance">التذكير بوضع علامة على الحضور</string>
-    <string name="des_reminder_to_mark_attendance">تلقي إشعار يومي لتذكيرك بوضع علامة على حضورك</string>
-    <string name="des_attendance_missed">ربما قد نسيت أن تسجل حضورك اليوم!</string>
+    <string name="app">التطبيق</string>
+    <string name="app_name">Driftly</string>
     <string name="attendance">الحضور</string>
-    <string name="daily_reminder_to_mark_attendance">التذكير اليومي لوضع علامة الحضور</string>
-    <string name="mark_your_attendance">ضع علامة على حضورك</string>
-    <string name="des_mark_your_attendance">لا تنس أن تضع علامة على حضورك اليوم!</string>
-    <string name="reset_settings_successful">تمت إعادة تعيين الإعدادات بنجاح</string>
-    <string name="reset_settings_failed">فشل إعادة تعيين الإعدادات</string>
-    <string name="notifications">الإشعارَات</string>
-    <string name="des_notifications">تخصيص إعدادات الإشعارات للتطبيق</string>
-    <string name="enable_notifications">تمكين الإشعارات</string>
-    <string name="notify_missed_attendance">إشعار الحضور المفقود</string>
-    <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>
-    <string name="des_notify_missed_attendance">تلقي إشعارات عندما يكون الحضور مفقودا</string>
-    <string name="start_week_on_monday">بدء الأسبوع من الاثنين</string>
-    <string name="notify_update_available">إشعار عند توفر التحديث</string>
-    <string name="des_notify_update_available">تلقي إشعارات عند توفر إصدار جديد من Drifly</string>
-    <string name="des_update_available">تم إصدار نسخة أحدث من Drifly!</string>
-    <string name="request_permission">طلب صلاحيات</string>
-    <string name="grant_permission">منح الإذن</string>
-    <string name="des_grant_notification_permission">هل تريد الحصول على تنبيهات عندما تنسى تسجيل حضورك؟\n\nمنح الوصول للإشعار!</string>
-    <string name="des_start_week_on_monday">هل تفضل أن يبدأ الأسبوع يوم الاثنين بدلاً من الأحد؟ قم بتمكين هذا الخيار لتغيير تخطيط التقويم بحيث يصبح الاثنين أول أيام الأسبوع.</string>
-    <string name="pre_release_warning_description">هذه الإصدارات لا تزال قيد الاختبار وقد تحتوي على ميزات غير مكتملة أو أخطاء غير متوقعة. إذا اخترت التحديث إلى إصدار تجريبي، يرجى العلم بأن بعض الأمور قد لا تعمل بشكل صحيح أو قد تتصرف بطريقة غير معتادة.
-
-في حال واجهت أي مشاكل أو أعطال أو سلوك غريب، نرجو الإبلاغ عنها حتى نتمكن من إصلاحها وتحسين درفتلي قبل الإصدار المستقر.
-
-شكرًا لمساعدتك في تطوير تجربة أفضل!</string>
-    <string name="changelogs_v1_0_0">الإصدار الأولي\nتم إضافة التقويم لتسجيل الحضور\nتم إضافة عرض التقدم لكل موضوع\nتم إضافة القدرة على إضافة، حذف، وتعديل المواضيع\nتم إضافة إعدادات لتخصيص تجربة المستخدم</string>
+    <string name="auto_update">تحديث تلقائي</string>
+    <string name="back_button">عودة</string>
+    <string name="backup">نسخ احتياطي</string>
+    <string name="backup_all_data">نسخ احتياطي لجميع البيانات</string>
+    <string name="backup_and_restore">النسخ الاحتياطي والاستعادة</string>
+    <string name="backup_app_database">النسخ الاحتياطي لقاعدة بيانات التطبيق</string>
+    <string name="backup_date">تاريخ النسخة الاحتياطية</string>
+    <string name="backup_failed">فشلت عملية النسخ الاحتياطي!</string>
+    <string name="backup_found">تم العثور على نسخة احتياطية</string>
+    <string name="backup_settings">النسخ الاحتياطي لإعدادات التطبيق</string>
+    <string name="backup_successful">تم النسخ الاحتياطي بنجاح</string>
+    <string name="backup_time">وقت النسخة الاحتياطية</string>
+    <string name="behavior">السلوك</string>
+    <string name="calendar">التقويم</string>
+    <string name="cancel">إلغاء</string>
+    <string name="changelogs">سجل التغييرات</string>
     <string name="changelogs_v1_1_0">تم إصلاح بعض قيم الألوان في لوحة الألوان\nتم إصلاح بعض الهوامش في الواجهة\nتم إضافة مدقق تحديثات الإصدارات التجريبية</string>
     <string name="changelogs_v1_2_0">تم تحسين نظام الألوان في الوضع المظلم عالي التباين\nتم إضافة نافذة \"ما الجديد\" لعرض سجل التغييرات بعد التحديث\nتحسينات في الكود</string>
     <string name="changelogs_v1_3_0">تم إضافة إعدادات السلوك لتعديل سلوك التطبيق\nتم إضافة خيار تذكر آخر شهر تم عرضه\nتم إضافة خيار إخفاء سلسلة الحضور في التقويم</string>
@@ -180,11 +34,166 @@
     <string name="changelogs_v1_5_0">تمت إضافة خيار لنسخ بيانات التطبيق احتياطيًا واستعادتها محليًا
 تمت ترجمة العبارات النصية الثابتة
 تحسينات بسيطة في واجهة المستخدم</string>
-    <string name="changelogs_v1_5_1">Fixed an issue where restoring backup failed in some devices</string>
+    <string name="changelogs_v1_5_1">تم إصلاح مشكلة فشل استعادة النسخ الاحتياطي في بعض الأجهزة</string>
     <string name="changelogs_v1_6_0">Added notification alerts for various events like attendance reminder, missed attendance alert and notification alert when new version of the app is detected\nImproved the batch selection of subject cards in home screen with support to dismiss selection by back press\nFixed system bars colors in android 11 and below</string>
     <string name="changelogs_v1_7_0">Added warning before downloading app updates from Github\nFixed some icons in the app UI</string>
     <string name="changelogs_v1_8_0">Revamped whole settings UI.\nAdded background cards to settings items</string>
-    <string name="changelogs_v1_8_1">Fixed card colors in dynamic theming</string>
-    <string name="changelogs_v1_8_2">Fixed some UI margins</string>
-    <string name="changelogs_v1_8_3">Updated dependencies and fixed some issues</string>
+    <string name="changelogs_v1_8_1">تم إصلاح ألوان البطاقات في المظهر الديناميكي</string>
+    <string name="changelogs_v1_8_2">تم إصلاح بعض هوامش واجهة المستخدم</string>
+    <string name="changelogs_v1_8_3">تم تحديث التبعيات وإصلاح بعض المشاكل</string>
+    <string name="changelogs_v1_0_0">الإصدار الأولي\nتم إضافة التقويم لتسجيل الحضور\nتم إضافة عرض التقدم لكل موضوع\nتم إضافة القدرة على إضافة، حذف، وتعديل المواضيع\nتم إضافة إعدادات لتخصيص تجربة المستخدم</string>
+    <string name="check_updates">التحقق من التحديثات</string>
+    <string name="clear">مسح</string>
+    <string name="confirm">تأكيد</string>
+    <string name="current_version">الإصدار الحالي</string>
+    <string name="customisation">التخصيص</string>
+    <string name="daily_reminder_to_mark_attendance">التذكير اليومي لوضع علامة الحضور</string>
+    <string name="dark_theme">الوضع المظلم</string>
+    <string name="default_language">اللغة الافتراضية</string>
+    <string name="delete_confirmation">هل تريد بالتأكيد حذف هذا الموضوع؟</string>
+    <string name="delete_subject">حذف الموضوع</string>
+    <string name="des_about">المساهمون والدعم</string>
+    <string name="des_attendance_missed">ربما قد نسيت أن تسجل حضورك اليوم!</string>
+    <string name="des_auto_update">التحقق من التحديثات تلقائيًا</string>
+    <string name="des_backup_all_data">النسخ الاحتياطي لجميع بيانات التطبيق</string>
+    <string name="des_backup_and_restore">النسخ الاحتياطي واستعادة إعدادات التطبيق وغيرها من البيانات</string>
+    <string name="des_backup_app_database">النسخ الاحتياطي لقاعدة بيانات التطبيقات التي تتضمن بيانات المواضيع بما في ذلك سجلات الحضور</string>
+    <string name="des_backup_settings">نسخ إعدادات التطبيق فقط احتياطيًا</string>
+    <string name="des_behavior">تعديل سلوك التطبيق</string>
+    <string name="des_changelogs">سجل جميع التغييرات في التطبيق</string>
+    <string name="des_customisation">تخصيص عناصر واجهة المستخدم كما تفضل</string>
+    <string name="des_default_language">اختر اللغة الافتراضية للتطبيق</string>
+    <string name="des_dynamic_colors">ضبط ألوان التطبيق تلقائيًا وفقًا لخلفية الجهاز</string>
+    <string name="des_enable_direct_download">عند التمكين، سيتم تنزيل التحديثات مباشرة من GitHub داخل التطبيق. عند الإيقاف، ستتم إعادة التوجيه إلى صفحة الإصدارات على GitHub للتنزيل اليدوي.</string>
+    <string name="des_feature_request">إذا كان لديك أفكار أو اقتراحات، أخبرنا بها</string>
+    <string name="des_github">زيارة مستودع التطبيق على GitHub</string>
+    <string name="des_grant_notification_permission">هل تريد الحصول على تنبيهات عندما تنسى تسجيل حضورك؟\n\nمنح الوصول للإشعار!</string>
+    <string name="des_haptics_and_vibration">اهتزاز تفاعلي عند النقر</string>
+    <string name="des_high_contrast_dark_mode">سمة سوداء خالصة لأجهزة OLED</string>
+    <string name="des_hridayan">مجرد شخص يحب التطبيقات والتصميم</string>
+    <string name="des_license">اطلع على ترخيص التطبيق</string>
+    <string name="des_look_and_feel">ألوان ديناميكية، الوضع المظلم، اللغة</string>
+    <string name="des_mark_your_attendance">لا تنس أن تضع علامة على حضورك اليوم!</string>
+    <string name="des_notifications">تخصيص إعدادات الإشعارات للتطبيق</string>
+    <string name="des_notify_missed_attendance">تلقي إشعارات عندما يكون الحضور مفقودا</string>
+    <string name="des_notify_update_available">تلقي إشعارات عند توفر إصدار جديد من Drifly</string>
+    <string name="des_remember_month_year">تمكين هذه الخيار لحفظ آخر شهر تم عرضه لكل موضوع</string>
+    <string name="des_reminder_to_mark_attendance">تلقي إشعار يومي لتذكيرك بوضع علامة على حضورك</string>
+    <string name="des_report_issue">أبلغ عن أي مشكلة أو خطأ واجهته</string>
+    <string name="des_reset_app_settings">إعادة تعيين إعدادات التطبيق للقيم الافتراضية</string>
+    <string name="des_restore_app_data">استعادة بيانات التطبيق من ملف النسخة الاحتياطية المحفوظ.
+ستقوم قاعدة البيانات المحفوظة باستبدال القاعدة الحالية</string>
+    <string name="des_show_attendance_streaks">عند التمكين، ستظهر سلسلة الحضور على التقويم</string>
+    <string name="des_start_week_on_monday">هل تفضل أن يبدأ الأسبوع يوم الاثنين بدلاً من الأحد؟ قم بتمكين هذا الخيار لتغيير تخطيط التقويم بحيث يصبح الاثنين أول أيام الأسبوع.</string>
+    <string name="des_update_available">تم إصدار نسخة أحدث من Drifly!</string>
+    <string name="donot_show_again">عدم الإظهار مرة أخرى</string>
+    <string name="download">تنزيل</string>
+    <string name="download_failed">فشل التنزيل</string>
+    <string name="dynamic_colors">ألوان ديناميكية</string>
+    <string name="enable_auto_update">تمكين التحديث التلقائي</string>
+    <string name="enable_direct_download">تمكين التنزيل المباشر</string>
+    <string name="enable_notifications">تمكين الإشعارات</string>
+    <string name="enter_new_name">أدخل الاسم الجديد</string>
+    <string name="enter_subject_name">أدخل اسم الموضوع</string>
+    <string name="error">خطأ</string>
+    <string name="feature_request">طلب ميزة جديدة</string>
+    <string name="field_blank_error">لا يمكن ترك الحقل فارغًا</string>
+    <string name="grant_permission">منح الإذن</string>
+    <string name="haptics_and_vibration">الاهتزاز واللمس</string>
+    <string name="high_contrast_dark_mode">وضع مظلم عالي التباين</string>
+    <string name="irreversible_action_warning">هذا الاجراء لا يمكن التراجع عنه!</string>
+    <string name="last_backup_date">تاريخ النسخ الاحتياطي الأخير</string>
+    <string name="last_backup_time">وقت النسخ الاحتياطي الأخير</string>
+    <string name="latest_version">أحدث إصدار</string>
+    <string name="lead_developer">المطور الرئيسي</string>
+    <string name="license">الترخيص</string>
+    <string name="look_and_feel">المظهر والشكل</string>
+    <string name="mark_your_attendance">ضع علامة على حضورك</string>
+    <string name="month">شهر</string>
+    <string name="network_error">خطأ في الشبكة</string>
+    <string name="next_month">الشهر التالي</string>
+    <string name="no_attendance_yet">لا توجد سجلات حضور بعد. أضف سجلات لرؤية التقدم</string>
+    <string name="no_changelog_found">لا يوجد سجل تغييرات لهذا الإصدار</string>
+    <string name="no_subject_yet">انقر على + لإضافة موضوع</string>
+    <string name="notifications">الإشعارَات</string>
+    <string name="notify_missed_attendance">إشعار الحضور المفقود</string>
+    <string name="notify_update_available">إشعار عند توفر التحديث</string>
+    <string name="off">إيقاف</string>
+    <string name="ok">موافق</string>
+    <string name="on">تشغيل</string>
+    <string name="pick_driftly_extension">الرجاء اختيار ملف مع امتداد .drifly</string>
+    <string name="pre_release">إصدار تجريبي</string>
+    <string name="pre_release_warning">الإصدارات التجريبية قد تكون غير مستقرة</string>
+    <string name="pre_release_warning_description">هذه الإصدارات لا تزال قيد الاختبار وقد تحتوي على ميزات غير مكتملة أو أخطاء غير متوقعة. إذا اخترت التحديث إلى إصدار تجريبي، يرجى العلم بأن بعض الأمور قد لا تعمل بشكل صحيح أو قد تتصرف بطريقة غير معتادة.
+
+في حال واجهت أي مشاكل أو أعطال أو سلوك غريب، نرجو الإبلاغ عنها حتى نتمكن من إصلاحها وتحسين درفتلي قبل الإصدار المستقر.
+
+شكرًا لمساعدتك في تطوير تجربة أفضل!</string>
+    <string name="present">حاضر</string>
+    <string name="previous_month">الشهر السابق</string>
+    <string name="remember_month_year">تذكر الشهر والسنة</string>
+    <string name="reminder_to_mark_attendance">التذكير بوضع علامة على الحضور</string>
+    <string name="report_issue">الإبلاغ عن مشكلة</string>
+    <string name="request_permission">طلب صلاحيات</string>
+    <string name="request_timeout">انتهت مهلة الطلب</string>
+    <string name="reset">إعادة ضبط</string>
+    <string name="reset_app_settings">إعادة تعيين إعدادات التطبيق</string>
+    <string name="reset_settings_failed">فشل إعادة تعيين الإعدادات</string>
+    <string name="reset_settings_successful">تمت إعادة تعيين الإعدادات بنجاح</string>
+    <string name="reset_to_current_month">العودة إلى الشهر الحالي</string>
+    <string name="restore">إستعادة</string>
+    <string name="restore_app_data">إستعادة بيانات التطبيق</string>
+    <string name="restore_dialog_message">سيتم استبدال البيانات الحالية بالبيانات الموجودة في الملف المحفوظ.</string>
+    <string name="restore_failed">فشلت الاستعادة</string>
+    <string name="restore_successful">تمت الإستعادة بنجاح!</string>
+    <string name="select">اختيار</string>
+    <string name="select_month_and_year">اختر الشهر والسنة</string>
+    <string name="settings">الإعدادات</string>
+    <string name="show_attendance_steaks">إظهار سلسلة الحضور</string>
+    <string name="stable">مستقر</string>
+    <string name="start_week_on_monday">بدء الأسبوع من الاثنين</string>
+    <string name="subject_already_exists">الموضوع موجود بالفعل</string>
+    <string name="subject_card_style">نمط بطاقة الموضوع</string>
+    <string name="subject_name">اسم الموضوع</string>
+    <string name="support_bmc">هل أعجبك ما أفعله؟\nيمكنك دعمي بشراء فنجان قهوة</string>
+    <string name="system">النظام</string>
+    <string name="this_month_data">بيانات هذا الشهر</string>
+    <string name="total">المجموع</string>
+    <string name="tweak_your_experience">خصص تجربتك</string>
+    <string name="unknown_error">حدث خطأ غير معروف</string>
+    <string name="unknown_sources_install_permission_not_granted">لم يتم منح الإذن. يرجى السماح بتثبيت التطبيقات من مصادر غير معروفة.</string>
+    <string name="update">تحديث</string>
+    <string name="update_available">يتوفر تحديث جديد!</string>
+    <string name="update_channel">قناة التحديث</string>
+    <string name="update_subject">تحديث الموضوع</string>
+    <string name="updates">التحديثات</string>
+    <string name="version">الإصدار</string>
+    <string name="visit_repo_to_download">انقر على زر التنزيل للحصول على أحدث إصدار من درفتلي من مستودع GitHub.</string>
+    <string name="warning">تحذير</string>
+    <string name="warning_github_download">أنت على وشك تنزيل التحديثات مباشرة من GitHub. على عكس التحديثات من متاجر التطبيقات، لا تتم مراجعة هذه التحديثات لأسباب أمنية. هل تريد المتابعة؟</string>
+    <string name="whats_new">ما الجديد!</string>
+    <string name="year">سنة</string>
+    <string name="attendance_overview">نظرة عامة على الحضور</string>
+    <string name="font_family">عائلة الخط</string>
+    <string name="system_font">خط النظام</string>
+    <string name="des_font_family">اختر عائلة خط للتطبيق</string>
+    <string name="one_ui_sans">One UI Sans</string>
+    <string name="monospace">أحادي المسافة</string>
+    <string name="sans_serif">بدون زوائد</string>
+    <string name="font_display_text">أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ</string>
+    <string name="preview">معاينة</string>
+    <string-array name="month_names">
+        <item>أبريل</item>
+        <item>أغسطس</item>
+        <item>ديسمبر</item>
+        <item>فبراير</item>
+        <item>يناير</item>
+        <item>يوليو</item>
+        <item>يونيو</item>
+        <item>مارس</item>
+        <item>مايو</item>
+        <item>نوفمبر</item>
+        <item>أكتوبر</item>
+        <item>سبتمبر</item>
+    </string-array>
 </resources>
