@@ -176,17 +176,17 @@
     <string name="font_display_text">Pijamalı hasta yağız şoföre çabucak güvendi.</string>
     <string name="preview">Önizleme</string>
     <string-array name="month_names">
-        <item>Nisan</item>
-        <item>Ağustos</item>
-        <item>Aralık</item>
-        <item>Şubat</item>
         <item>Ocak</item>
-        <item>Temmuz</item>
-        <item>Haziran</item>
+        <item>Şubat</item>
         <item>Mart</item>
+        <item>Nisan</item>
         <item>Mayıs</item>
-        <item>Kasım</item>
-        <item>Ekim</item>
+        <item>Haziran</item>
+        <item>Temmuz</item>
+        <item>Ağustos</item>
         <item>Eylül</item>
+        <item>Ekim</item>
+        <item>Kasım</item>
+        <item>Aralık</item>
     </string-array>
 </resources>

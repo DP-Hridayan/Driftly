@@ -183,17 +183,17 @@
     <string name="font_display_text">أبجد هوز حطي كلمن سعفص قرشت ثخذ ضظغ</string>
     <string name="preview">معاينة</string>
     <string-array name="month_names">
-        <item>أبريل</item>
-        <item>أغسطس</item>
-        <item>ديسمبر</item>
-        <item>فبراير</item>
         <item>يناير</item>
-        <item>يوليو</item>
-        <item>يونيو</item>
+        <item>فبراير</item>
         <item>مارس</item>
+        <item>أبريل</item>
         <item>مايو</item>
-        <item>نوفمبر</item>
-        <item>أكتوبر</item>
+        <item>يونيو</item>
+        <item>يوليو</item>
+        <item>أغسطس</item>
         <item>سبتمبر</item>
+        <item>أكتوبر</item>
+        <item>نوفمبر</item>
+        <item>ديسمبر</item>
     </string-array>
 </resources>

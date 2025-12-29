@@ -176,17 +176,17 @@
     <string name="font_display_text">Zəfər, jaketini də papağını da götür, bu axşam hava çox soyuq olacaq.</string>
     <string name="preview">Önbaxış</string>
     <string-array name="month_names">
-        <item>Aprel</item>
-        <item>Avqust</item>
-        <item>Dekabr</item>
-        <item>Fevral</item>
         <item>Yanvar</item>
-        <item>İyul</item>
-        <item>İyun</item>
+        <item>Fevral</item>
         <item>Mart</item>
+        <item>Aprel</item>
         <item>May</item>
-        <item>Noyabr</item>
-        <item>Oktyabr</item>
+        <item>İyun</item>
+        <item>İyul</item>
+        <item>Avqust</item>
         <item>Sentyabr</item>
+        <item>Oktyabr</item>
+        <item>Noyabr</item>
+        <item>Dekabr</item>
     </string-array>
 </resources>

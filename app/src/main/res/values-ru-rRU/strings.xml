@@ -176,17 +176,17 @@
     <string name="font_display_text">В чащах юга жил бы цитрус? Да, но фальшивый экземпляр!</string>
     <string name="preview">Предпросмотр</string>
     <string-array name="month_names">
-        <item>Апрель</item>
-        <item>Август</item>
-        <item>Декабрь</item>
-        <item>Февраль</item>
         <item>Январь</item>
-        <item>Июль</item>
-        <item>Июнь</item>
+        <item>Февраль</item>
         <item>Март</item>
+        <item>Апрель</item>
         <item>Май</item>
-        <item>Ноябрь</item>
-        <item>Октябрь</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
         <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
     </string-array>
 </resources>
