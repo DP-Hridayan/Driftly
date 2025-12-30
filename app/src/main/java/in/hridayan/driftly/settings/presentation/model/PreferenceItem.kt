@@ -1,10 +1,9 @@
-package `in`.hridayan.driftly.settings.domain.model
+package `in`.hridayan.driftly.settings.presentation.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.domain.model.RadioButtonOptions
 
 sealed class PreferenceItem(
     open val key: SettingsKeys,

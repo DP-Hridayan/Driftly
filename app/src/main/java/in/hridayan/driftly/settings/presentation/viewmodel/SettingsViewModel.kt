@@ -29,10 +29,11 @@ import `in`.hridayan.driftly.notification.scheduler.WorkScheduler
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.domain.model.BackupOption
 import `in`.hridayan.driftly.settings.domain.model.NotificationState
-import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import `in`.hridayan.driftly.settings.domain.usecase.ToggleSettingUseCase
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
+import `in`.hridayan.driftly.settings.presentation.provider.SettingsProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -75,23 +76,23 @@ class SettingsViewModel @Inject constructor(
 
     fun loadSettings() {
         viewModelScope.launch {
-            val lookAndFeel = settingsRepository.getLookAndFeelPageList()
-            val settings = settingsRepository.getSettingsPageList()
-            val about = settingsRepository.getAboutPageList()
-            val autoUpdate = settingsRepository.getAutoUpdatePageList()
-            val behavior = settingsRepository.getBehaviorPageList()
-            val darkTheme = settingsRepository.getDarkThemePageList()
-            val backup = settingsRepository.getBackupPageList()
-            val notifications = settingsRepository.getNotificationsPageList()
+            val settings = SettingsProvider.settingsPageList
+            val lookAndFeel = SettingsProvider.lookAndFeelPageList
+            val darkTheme = SettingsProvider.darkThemePageList
+            val behavior = SettingsProvider.behaviorPageList
+            val notifications = SettingsProvider.notificationsPageList
+            val autoUpdate = SettingsProvider.autoUpdatePageList
+            val backup = SettingsProvider.backupPageList
+            val about = SettingsProvider.aboutPageList
 
             settingsPageList = settings
-            autoUpdatePageList = autoUpdate
             lookAndFeelPageList = lookAndFeel
-            aboutPageList = about
-            behaviorPageList = behavior
             darkThemePageList = darkTheme
-            backupPageList = backup
+            behaviorPageList = behavior
             notificationsPageList = notifications
+            autoUpdatePageList = autoUpdate
+            backupPageList = backup
+            aboutPageList = about
         }
     }
 

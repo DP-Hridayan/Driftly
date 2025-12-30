@@ -21,14 +21,14 @@ import `in`.hridayan.driftly.BuildConfig
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.utils.MiUiCheck
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
-import `in`.hridayan.driftly.settings.domain.model.SettingsType
-import `in`.hridayan.driftly.settings.domain.model.boolPreferenceItem
-import `in`.hridayan.driftly.settings.domain.model.categorizedItems
-import `in`.hridayan.driftly.settings.domain.model.customComposable
-import `in`.hridayan.driftly.settings.domain.model.intPreferenceItem
-import `in`.hridayan.driftly.settings.domain.model.nullPreferenceItem
-import `in`.hridayan.driftly.settings.domain.model.uncategorizedItems
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.model.SettingsType
+import `in`.hridayan.driftly.settings.presentation.util.boolPreferenceItem
+import `in`.hridayan.driftly.settings.presentation.util.categorizedItems
+import `in`.hridayan.driftly.settings.presentation.util.customComposable
+import `in`.hridayan.driftly.settings.presentation.util.intPreferenceItem
+import `in`.hridayan.driftly.settings.presentation.util.nullPreferenceItem
+import `in`.hridayan.driftly.settings.presentation.util.uncategorizedItems
 
 val isMiUi = MiUiCheck.isMiui
 val isSdkLowerThan13 = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU

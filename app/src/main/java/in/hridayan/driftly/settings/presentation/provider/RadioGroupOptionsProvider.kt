@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.domain.model.GithubReleaseType
 import `in`.hridayan.driftly.settings.domain.model.CustomFontFamily
-import `in`.hridayan.driftly.settings.domain.model.RadioButtonOptions
+import `in`.hridayan.driftly.settings.presentation.model.RadioButtonOptions
 
 class RadioGroupOptionsProvider {
     companion object {

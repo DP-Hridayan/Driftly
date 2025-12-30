@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.domain.model
+package `in`.hridayan.driftly.settings.presentation.model
 
 data class RadioButtonOptions(
     val value: Int,

@@ -30,7 +30,7 @@ import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageV
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.themePicker
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.bottomsheet.FontStyleBottomSheet
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold

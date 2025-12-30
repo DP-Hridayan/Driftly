@@ -1,4 +1,4 @@
-package `in`.hridayan.driftly.settings.domain.model
+package `in`.hridayan.driftly.settings.presentation.util
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.material.icons.Icons
@@ -12,6 +12,10 @@ import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalDarkMode
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceItem
+import `in`.hridayan.driftly.settings.presentation.model.RadioButtonOptions
+import `in`.hridayan.driftly.settings.presentation.model.SettingsType
 
 fun categorizedItems(
     categoryNameResId: Int,

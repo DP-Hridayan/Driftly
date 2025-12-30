@@ -1,7 +1,6 @@
-package `in`.hridayan.driftly.settings.domain.model
+package `in`.hridayan.driftly.settings.presentation.model
 
 import androidx.annotation.StringRes
-import `in`.hridayan.driftly.settings.domain.model.PreferenceItem
 
 sealed class PreferenceGroup {
     data class Category(

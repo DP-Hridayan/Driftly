@@ -1,7 +1,7 @@
 package `in`.hridayan.driftly.settings.domain.repository
 
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
-import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {
@@ -18,15 +18,6 @@ interface SettingsRepository {
 
     fun getString(key: SettingsKeys): Flow<String>
     suspend fun setString(key: SettingsKeys, value: String)
-
-    suspend fun getSettingsPageList(): List<PreferenceGroup>
-    suspend fun getLookAndFeelPageList(): List<PreferenceGroup>
-    suspend fun getAboutPageList(): List<PreferenceGroup>
-    suspend fun getAutoUpdatePageList(): List<PreferenceGroup>
-    suspend fun getDarkThemePageList(): List<PreferenceGroup>
-    suspend fun getBehaviorPageList(): List<PreferenceGroup>
-    suspend fun getBackupPageList(): List<PreferenceGroup>
-    suspend fun getNotificationsPageList(): List<PreferenceGroup>
 
     fun getAllDefaultSettings(): Map<String, Any?>
     suspend fun getCurrentSettings(): Map<String, Any?>

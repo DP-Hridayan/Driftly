@@ -34,7 +34,7 @@ import `in`.hridayan.driftly.core.presentation.components.button.BackButton
 import `in`.hridayan.driftly.core.presentation.components.lottie.SpinningGearsLottie
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.shape.CardCornerShape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent

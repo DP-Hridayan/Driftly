@@ -48,7 +48,7 @@ import `in`.hridayan.driftly.core.domain.model.GithubReleaseType
 import `in`.hridayan.driftly.core.presentation.components.bottomsheet.UpdateBottomSheet
 import `in`.hridayan.driftly.core.presentation.components.progress.LoadingSpinner
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
-import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.model.UpdateResult
 import `in`.hridayan.driftly.settings.presentation.components.dialog.LatestVersionDialog
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView

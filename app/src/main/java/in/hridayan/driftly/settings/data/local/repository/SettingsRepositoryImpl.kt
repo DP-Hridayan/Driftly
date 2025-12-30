@@ -3,7 +3,7 @@ package `in`.hridayan.driftly.settings.data.local.repository
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.presentation.provider.SettingsProvider
 import `in`.hridayan.driftly.settings.data.local.datastore.SettingsDataStore
-import `in`.hridayan.driftly.settings.domain.model.PreferenceGroup
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -26,38 +26,6 @@ class SettingsRepositoryImpl(
     override fun getString(key: SettingsKeys): Flow<String> = dataStore.stringFlow(key)
     override suspend fun setString(key: SettingsKeys, value: String) =
         dataStore.setString(key, value)
-
-    override suspend fun getLookAndFeelPageList(): List<PreferenceGroup> {
-        return SettingsProvider.lookAndFeelPageList
-    }
-
-    override suspend fun getDarkThemePageList(): List<PreferenceGroup> {
-        return SettingsProvider.darkThemePageList
-    }
-
-    override suspend fun getAboutPageList(): List<PreferenceGroup> {
-        return SettingsProvider.aboutPageList
-    }
-
-    override suspend fun getAutoUpdatePageList(): List<PreferenceGroup> {
-        return SettingsProvider.autoUpdatePageList
-    }
-
-    override suspend fun getBehaviorPageList(): List<PreferenceGroup> {
-        return SettingsProvider.behaviorPageList
-    }
-
-    override suspend fun getSettingsPageList(): List<PreferenceGroup> {
-        return SettingsProvider.settingsPageList
-    }
-
-    override suspend fun getBackupPageList(): List<PreferenceGroup> {
-        return SettingsProvider.backupPageList
-    }
-
-    override suspend fun getNotificationsPageList(): List<PreferenceGroup> {
-        return SettingsProvider.notificationsPageList
-    }
 
     override fun getAllDefaultSettings(): Map<String, Any?> {
         return dataStore.getAllDefaultSettings()

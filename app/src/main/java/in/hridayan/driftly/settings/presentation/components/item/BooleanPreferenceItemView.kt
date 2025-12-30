@@ -23,11 +23,11 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.card.PillShapedCard
 import `in`.hridayan.driftly.core.presentation.components.card.RoundedCornerCard
-import `in`.hridayan.driftly.settings.domain.model.PreferenceItem
-import `in`.hridayan.driftly.settings.domain.model.SettingsType
-import `in`.hridayan.driftly.settings.domain.model.getResolvedDescription
-import `in`.hridayan.driftly.settings.domain.model.getResolvedIcon
-import `in`.hridayan.driftly.settings.domain.model.getResolvedTitle
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceItem
+import `in`.hridayan.driftly.settings.presentation.model.SettingsType
+import `in`.hridayan.driftly.settings.presentation.util.getResolvedDescription
+import `in`.hridayan.driftly.settings.presentation.util.getResolvedIcon
+import `in`.hridayan.driftly.settings.presentation.util.getResolvedTitle
 import `in`.hridayan.driftly.settings.presentation.components.switch.SettingsSwitch
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
