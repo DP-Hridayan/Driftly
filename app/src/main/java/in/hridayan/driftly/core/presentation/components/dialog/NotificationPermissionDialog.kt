@@ -18,13 +18,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.core.presentation.theme.Shape
 
@@ -34,8 +35,6 @@ fun NotificationPermDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
-    val weakHaptic = LocalWeakHaptic.current
-
     Dialog(
         onDismissRequest = { onDismiss() },
         properties = DialogProperties(dismissOnClickOutside = true)
@@ -71,10 +70,11 @@ fun NotificationPermDialog(
                         .fillMaxWidth()
                         .padding(bottom = 4.dp)
                         .clip(Shape.cardTopCornersRounded)
-                        .clickable(enabled = true, onClick = {
-                            weakHaptic()
-                            onConfirm()
-                        }),
+                        .clickable(
+                            enabled = true,
+                            onClick = withHaptic(HapticFeedbackType.Confirm) {
+                                onConfirm()
+                            }),
                     shape = Shape.cardTopCornersRounded,
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -95,10 +95,11 @@ fun NotificationPermDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(Shape.cardBottomCornersRounded)
-                        .clickable(enabled = true, onClick = {
-                            weakHaptic()
-                            onDismiss()
-                        }),
+                        .clickable(
+                            enabled = true,
+                            onClick = withHaptic(HapticFeedbackType.Reject) {
+                                onDismiss()
+                            }),
                     shape = Shape.cardBottomCornersRounded,
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,

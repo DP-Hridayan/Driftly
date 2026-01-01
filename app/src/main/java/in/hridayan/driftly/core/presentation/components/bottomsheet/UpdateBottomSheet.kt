@@ -37,6 +37,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalGraphicsContext
 import androidx.compose.ui.res.stringResource
@@ -50,6 +51,7 @@ import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.DownloadState
 import `in`.hridayan.driftly.core.presentation.components.dialog.GithubDownloadWarningDialog
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.core.utils.installApk
 import `in`.hridayan.driftly.core.utils.openUrl
@@ -64,7 +66,6 @@ fun UpdateBottomSheet(
     apkUrl: String = "",
     viewModel: AutoUpdateViewModel = hiltViewModel()
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val context = LocalContext.current
     val activity = context as? Activity
@@ -236,8 +237,7 @@ fun UpdateBottomSheet(
                 .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
         ) {
             OutlinedButton(
-                onClick = {
-                    weakHaptic()
+                onClick = withHaptic(HapticFeedbackType.Reject){
                     permissionPromptShown = false
 
                     if (showDownloadButton) {
@@ -257,15 +257,13 @@ fun UpdateBottomSheet(
 
             if (showDownloadButton)
                 Button(
-                    onClick = {
+                    onClick = withHaptic(HapticFeedbackType.Confirm){
                         Log.d("test", showDialogPreference.toString())
                         if (showDialogPreference) {
                             showGithubWarningDialog = true
                         } else {
                             downloadButtonClickAction()
                         }
-
-                        weakHaptic()
                     },
                     shapes = ButtonDefaults.shapes(),
                     modifier = Modifier

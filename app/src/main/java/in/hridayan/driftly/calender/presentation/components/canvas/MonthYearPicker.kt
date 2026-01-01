@@ -16,18 +16,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 
 @Composable
 fun MonthYearPicker(
     modifier: Modifier = Modifier, fullMonthName: String, year: Int, onClick: () -> Unit
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     Row(
         modifier = modifier.clickable(
-            onClick = {
-                weakHaptic()
+            onClick = withHaptic {
                 onClick()
             },
             interactionSource = remember { MutableInteractionSource() },
@@ -39,8 +37,7 @@ fun MonthYearPicker(
         )
 
         IconButton(
-            onClick = {
-                weakHaptic()
+            onClick = withHaptic {
                 onClick()
             },
             shapes = IconButtonDefaults.shapes()

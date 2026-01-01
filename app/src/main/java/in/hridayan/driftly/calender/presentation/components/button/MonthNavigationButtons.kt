@@ -18,7 +18,8 @@ import androidx.compose.material3.IconButtonDefaults.extraSmallContainerSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 
 @Composable
 fun MonthNavigationButtons(
@@ -27,16 +28,13 @@ fun MonthNavigationButtons(
     onNavigateNext: () -> Unit,
     onReset: () -> Unit
 ) {
-    val weakHaptic = LocalWeakHaptic.current
-
     val interactionSources = remember { List(3) { MutableInteractionSource() } }
 
     @Suppress("DEPRECATION")
     ButtonGroup(modifier = modifier.wrapContentSize()) {
 
         FilledIconButton(
-            onClick = {
-                weakHaptic()
+            onClick = withHaptic(HapticFeedbackType.VirtualKey) {
                 onNavigatePrev()
             },
             shapes = IconButtonDefaults.shapes(),
@@ -53,8 +51,7 @@ fun MonthNavigationButtons(
         }
 
         FilledIconButton(
-            onClick = {
-                weakHaptic()
+            onClick = withHaptic(HapticFeedbackType.VirtualKey) {
                 onReset()
             },
             shapes = IconButtonDefaults.shapes(),
@@ -71,8 +68,7 @@ fun MonthNavigationButtons(
         }
 
         FilledIconButton(
-            onClick = {
-                weakHaptic()
+            onClick = withHaptic(HapticFeedbackType.VirtualKey) {
                 onNavigateNext()
             },
             shapes = IconButtonDefaults.shapes(),

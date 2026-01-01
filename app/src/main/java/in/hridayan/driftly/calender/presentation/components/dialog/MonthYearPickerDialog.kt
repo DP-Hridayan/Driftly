@@ -36,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -44,6 +45,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import java.util.Calendar
 
@@ -52,16 +54,16 @@ import java.util.Calendar
 fun MonthYearPickerDialog(
     yearDisplayed: Int, monthDisplayed: Int, onDismiss: () -> Unit, onConfirm: (Int, Int) -> Unit
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     val context = LocalContext.current
+    val weakHaptic = LocalWeakHaptic.current
 
     val months: List<String> = context.resources.getStringArray(R.array.month_names).toList()
 
     val currentYear = Calendar.getInstance().get(Calendar.YEAR)
     val years = (currentYear - 10..currentYear + 10).toList()
 
-    var expandedMonth by remember { mutableStateOf(false) }
-    var expandedYear by remember { mutableStateOf(false) }
+    var expandMonthMenu by remember { mutableStateOf(false) }
+    var expandYearMenu by remember { mutableStateOf(false) }
 
     var selectedMonth by remember { mutableIntStateOf(monthDisplayed - 1) }
     var selectedYear by remember { mutableIntStateOf(yearDisplayed) }
@@ -94,8 +96,11 @@ fun MonthYearPickerDialog(
                 val maxHeight = dropdownItemHeight * maxVisibleItems
 
                 ExposedDropdownMenuBox(
-                    expanded = expandedMonth,
-                    onExpandedChange = { expandedMonth = !expandedMonth },
+                    expanded = expandMonthMenu,
+                    onExpandedChange = {
+                        expandMonthMenu = it
+                        weakHaptic()
+                    },
                 ) {
                     OutlinedTextField(
                         value = months[selectedMonth],
@@ -104,7 +109,7 @@ fun MonthYearPickerDialog(
                         singleLine = true,
                         label = { Text(stringResource(R.string.month)) },
                         trailingIcon = {
-                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMonth)
+                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandMonthMenu)
                         },
                         modifier = Modifier.menuAnchor(
                             ExposedDropdownMenuAnchorType.PrimaryNotEditable, enabled = true
@@ -112,8 +117,8 @@ fun MonthYearPickerDialog(
                     )
 
                     ExposedDropdownMenu(
-                        expanded = expandedMonth,
-                        onDismissRequest = { expandedMonth = false },
+                        expanded = expandMonthMenu,
+                        onDismissRequest = { expandMonthMenu = false },
                         modifier = Modifier
                             .heightIn(max = maxHeight)
                             .verticalScroll(rememberScrollState())
@@ -132,10 +137,9 @@ fun MonthYearPickerDialog(
                                         )
                                     )
                                 },
-                                onClick = {
-                                    weakHaptic()
+                                onClick = withHaptic {
                                     selectedMonth = months.indexOf(month)
-                                    expandedMonth = false
+                                    expandMonthMenu = false
                                 })
                         }
                     }
@@ -143,8 +147,11 @@ fun MonthYearPickerDialog(
 
                 // Year Dropdown
                 ExposedDropdownMenuBox(
-                    expanded = expandedYear,
-                    onExpandedChange = { expandedYear = !expandedYear },
+                    expanded = expandYearMenu,
+                    onExpandedChange = {
+                        expandYearMenu = it
+                        weakHaptic()
+                    },
                 ) {
                     OutlinedTextField(
                         value = selectedYear.toString(),
@@ -152,7 +159,7 @@ fun MonthYearPickerDialog(
                         readOnly = true,
                         label = { Text(stringResource(R.string.year)) },
                         trailingIcon = {
-                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedYear)
+                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandYearMenu)
                         },
                         modifier = Modifier.menuAnchor(
                             ExposedDropdownMenuAnchorType.PrimaryNotEditable, enabled = true
@@ -162,15 +169,15 @@ fun MonthYearPickerDialog(
                     val scrollState = rememberScrollState()
                     val itemHeightPx = with(LocalDensity.current) { dropdownItemHeight.toPx() }
 
-                    LaunchedEffect(expandedYear) {
-                        if (expandedYear) {
+                    LaunchedEffect(expandYearMenu) {
+                        if (expandYearMenu) {
                             scrollState.scrollTo((10 * itemHeightPx).toInt())
                         }
                     }
 
                     ExposedDropdownMenu(
-                        expanded = expandedYear,
-                        onDismissRequest = { expandedYear = false },
+                        expanded = expandYearMenu,
+                        onDismissRequest = { expandYearMenu = false },
                         modifier = Modifier
                             .heightIn(max = maxHeight)
                             .verticalScroll(scrollState)
@@ -188,10 +195,9 @@ fun MonthYearPickerDialog(
                                         )
                                     )
                                 },
-                                onClick = {
-                                    weakHaptic()
+                                onClick = withHaptic {
                                     selectedYear = year
-                                    expandedYear = false
+                                    expandYearMenu = false
                                 })
                         }
                     }
@@ -201,8 +207,7 @@ fun MonthYearPickerDialog(
             @Suppress("DEPRECATION")
             ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                 OutlinedButton(
-                    onClick = {
-                        weakHaptic()
+                    onClick = withHaptic(HapticFeedbackType.Reject) {
                         onDismiss()
                     },
                     shapes = ButtonDefaults.shapes(),
@@ -215,8 +220,7 @@ fun MonthYearPickerDialog(
                 }
 
                 Button(
-                    onClick = {
-                        weakHaptic()
+                    onClick = withHaptic(HapticFeedbackType.Confirm) {
                         onConfirm(selectedMonth + 1, selectedYear)
                         onDismiss()
                     },

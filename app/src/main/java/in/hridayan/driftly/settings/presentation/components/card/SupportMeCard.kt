@@ -27,9 +27,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.common.constants.UrlConst
 import `in`.hridayan.driftly.core.presentation.components.card.RoundedCornerCard
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.svg.DynamicColorImageVectors
 import `in`.hridayan.driftly.core.presentation.components.svg.vectors.bmcLogo
 import `in`.hridayan.driftly.core.utils.openUrl
@@ -99,16 +99,16 @@ private fun ContactBox(
     text: String,
     onClick: () -> Unit = {}
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(5.dp),
         modifier = modifier
             .clip(MaterialTheme.shapes.extraLarge)
-            .clickable(enabled = true, onClick = {
-                onClick()
-                weakHaptic()
-            })
+            .clickable(
+                enabled = true,
+                onClick = withHaptic {
+                    onClick()
+                })
             .padding(vertical = 5.dp),
     ) {
         Image(
@@ -127,8 +127,6 @@ private fun ContactBox(
 
 @Composable
 private fun BuyMeACoffee(modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
-    val weakHaptic = LocalWeakHaptic.current
-
     RoundedCornerCard(
         modifier = modifier,
         roundedCornerShape = CardCornerShape.LAST_CARD,
@@ -138,10 +136,11 @@ private fun BuyMeACoffee(modifier: Modifier = Modifier, onClick: () -> Unit = {}
             horizontalArrangement = Arrangement.spacedBy(20.dp),
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .clickable(enabled = true, onClick = {
-                    onClick()
-                    weakHaptic()
-                })
+                .clickable(
+                    enabled = true,
+                    onClick = withHaptic {
+                        onClick()
+                    })
                 .padding(horizontal = 25.dp, vertical = 15.dp)
         ) {
             Spacer(modifier = Modifier.weight(0.4f))

@@ -26,8 +26,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.provider.SeedColorProvider
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.provider.SeedColor
 
 @Composable
@@ -38,8 +38,6 @@ fun PaletteWheel(
     isChecked: Boolean = false,
     onClick: () -> Unit
 ) {
-    val weakHaptic = LocalWeakHaptic.current
-
     val scale by animateFloatAsState(
         targetValue = if (isChecked) 1f else 0f,
         animationSpec = tween(durationMillis = 300),
@@ -60,10 +58,7 @@ fun PaletteWheel(
             )
             .clickable(
                 enabled = true,
-                onClick = {
-                    onClick()
-                    weakHaptic()
-                })
+                onClick = withHaptic { onClick() })
     ) {
         Box(
             modifier = modifier

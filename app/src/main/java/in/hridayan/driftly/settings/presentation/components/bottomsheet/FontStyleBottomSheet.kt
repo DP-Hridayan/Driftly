@@ -49,6 +49,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -58,9 +59,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.card.PillShapedCard
 import `in`.hridayan.driftly.core.presentation.components.card.RoundedCornerCard
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.core.presentation.provider.getFontFamily
 import `in`.hridayan.driftly.core.presentation.provider.oneUiSans
@@ -77,7 +78,6 @@ fun FontStyleBottomSheet(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     viewModel: LookAndFeelViewModel = hiltViewModel()
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scrollState = rememberScrollState()
     val interactionSources = remember { List(2) { MutableInteractionSource() } }
@@ -207,10 +207,9 @@ fun FontStyleBottomSheet(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable {
-                                    tempSelected = option.value
-                                    weakHaptic()
-                                }
+                                .clickable(
+                                    onClick = withHaptic { tempSelected = option.value }
+                                )
                                 .padding(vertical = 8.dp, horizontal = 20.dp)
                         ) {
                             Text(
@@ -224,9 +223,8 @@ fun FontStyleBottomSheet(
 
                             RadioButton(
                                 selected = (option.value == tempSelected),
-                                onClick = {
+                                onClick = withHaptic(if (selected) HapticFeedbackType.ToggleOn else HapticFeedbackType.ToggleOff) {
                                     tempSelected = option.value
-                                    weakHaptic()
                                 },
                                 colors = RadioButtonDefaults.colors(
                                     selectedColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -248,8 +246,7 @@ fun FontStyleBottomSheet(
                         .animateWidth(interactionSources[0]),
                     shapes = ButtonDefaults.shapes(),
                     interactionSource = interactionSources[0],
-                    onClick = {
-                        weakHaptic()
+                    onClick = withHaptic(HapticFeedbackType.Reject) {
                         onDismiss()
                     },
                     content = { Text(text = stringResource(R.string.cancel)) }
@@ -265,8 +262,7 @@ fun FontStyleBottomSheet(
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                     ),
                     interactionSource = interactionSources[1],
-                    onClick = {
-                        weakHaptic()
+                    onClick = withHaptic(HapticFeedbackType.Confirm) {
                         settingsViewModel.setInt(
                             key = SettingsKeys.FONT_FAMILY,
                             value = tempSelected
@@ -285,7 +281,6 @@ fun TextFormatUtilityRow(
     modifier: Modifier = Modifier,
     viewModel: LookAndFeelViewModel = hiltViewModel()
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     val isCheckedMatchCase by viewModel.isCheckedMatchCase.collectAsState()
     val isCheckedBold by viewModel.isCheckedBold.collectAsState()
     val isCheckedItalic by viewModel.isCheckedItalic.collectAsState()
@@ -320,8 +315,7 @@ fun TextFormatUtilityRow(
                     .background(if (isCheckedMatchCase) checkedContainerColor else unCheckedContainerColor)
                     .clickable(
                         enabled = true,
-                        onClick = {
-                            weakHaptic()
+                        onClick = withHaptic(HapticFeedbackType.VirtualKey) {
                             viewModel.toggleMatchCase()
                         }),
                 contentAlignment = Alignment.Center
@@ -343,8 +337,7 @@ fun TextFormatUtilityRow(
                     .background(if (isCheckedBold) checkedContainerColor else unCheckedContainerColor)
                     .clickable(
                         enabled = true,
-                        onClick = {
-                            weakHaptic()
+                        onClick = withHaptic(HapticFeedbackType.VirtualKey) {
                             viewModel.toggleBold()
                         }),
                 contentAlignment = Alignment.Center
@@ -366,8 +359,7 @@ fun TextFormatUtilityRow(
                     .background(if (isCheckedItalic) checkedContainerColor else unCheckedContainerColor)
                     .clickable(
                         enabled = true,
-                        onClick = {
-                            weakHaptic()
+                        onClick = withHaptic(HapticFeedbackType.VirtualKey) {
                             viewModel.toggleItalic()
                         }),
                 contentAlignment = Alignment.Center
@@ -389,8 +381,7 @@ fun TextFormatUtilityRow(
                     .background(if (isCheckedUnderline) checkedContainerColor else unCheckedContainerColor)
                     .clickable(
                         enabled = true,
-                        onClick = {
-                            weakHaptic()
+                        onClick = withHaptic(HapticFeedbackType.VirtualKey) {
                             viewModel.toggleUnderline()
                         }),
                 contentAlignment = Alignment.Center
@@ -411,8 +402,7 @@ fun TextFormatUtilityRow(
                     .fillMaxWidth()
                     .clickable(
                         enabled = true,
-                        onClick = {
-                            weakHaptic()
+                        onClick = withHaptic(HapticFeedbackType.VirtualKey) {
                             viewModel.formatClear()
                         }),
                 contentAlignment = Alignment.Center

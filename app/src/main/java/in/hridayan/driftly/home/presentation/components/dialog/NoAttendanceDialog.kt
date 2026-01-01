@@ -16,19 +16,19 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 
 @Composable
 fun NoAttendanceDialog(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     Dialog(
         onDismissRequest = { onDismiss() },
         properties = DialogProperties(dismissOnClickOutside = true)
@@ -62,8 +62,7 @@ fun NoAttendanceDialog(
                 TextButton(
                     modifier = Modifier.align(Alignment.End),
                     shapes = ButtonDefaults.shapes(),
-                    onClick = {
-                        weakHaptic()
+                    onClick = withHaptic(HapticFeedbackType.Confirm) {
                         onDismiss()
                     }
                 ) {

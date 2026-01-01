@@ -13,15 +13,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.card.RoundedCornerCard
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
+import `in`.hridayan.driftly.settings.presentation.components.shape.CardCornerShape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.model.PreferenceItem
 import `in`.hridayan.driftly.settings.presentation.model.SettingsType
-import `in`.hridayan.driftly.core.presentation.components.card.RoundedCornerCard
-import `in`.hridayan.driftly.settings.presentation.components.shape.CardCornerShape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
@@ -31,8 +32,6 @@ fun IntPreferenceItemView(
     settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
     if (!item.isLayoutVisible) return
-
-    val weakHaptic = LocalWeakHaptic.current
 
     val selected =
         settingsViewModel.getInt(key = item.key).collectAsState(initial = item.key.default as Int)
@@ -57,10 +56,9 @@ fun IntPreferenceItemView(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable {
+                            .clickable(onClick = withHaptic {
                                 onSelectedChange(option.value)
-                                weakHaptic()
-                            }
+                            })
                             .padding(vertical = 8.dp, horizontal = 20.dp)
                     ) {
                         Text(
@@ -73,9 +71,8 @@ fun IntPreferenceItemView(
 
                         RadioButton(
                             selected = (option.value == selected.value),
-                            onClick = {
+                            onClick = withHaptic(HapticFeedbackType.ToggleOn) {
                                 onSelectedChange(option.value)
-                                weakHaptic()
                             }
                         )
                     }

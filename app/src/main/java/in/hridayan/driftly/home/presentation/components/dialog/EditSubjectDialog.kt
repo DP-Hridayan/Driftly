@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -31,6 +32,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectError
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.core.presentation.theme.Shape
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
@@ -47,7 +49,6 @@ fun EditSubjectDialog(
         viewModel.setSubjectNamePlaceholder(subject)
     }
 
-    val weakHaptic = LocalWeakHaptic.current
     val subject by viewModel.subject.collectAsState()
     val subjectError by viewModel.subjectError.collectAsState()
 
@@ -95,8 +96,7 @@ fun EditSubjectDialog(
                 @Suppress("DEPRECATION")
                 ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
-                        onClick = {
-                            weakHaptic()
+                        onClick =withHaptic(HapticFeedbackType.Reject) {
                             viewModel.resetInputFields()
                             onDismiss()
                         },
@@ -113,8 +113,7 @@ fun EditSubjectDialog(
                     )
 
                     Button(
-                        onClick = {
-                            weakHaptic()
+                        onClick = withHaptic(HapticFeedbackType.Confirm){
                             viewModel.updateSubject(
                                 subjectId = subjectId,
                                 onSuccess = {

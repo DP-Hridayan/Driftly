@@ -53,12 +53,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalSettings
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.presentation.components.dialog.NotificationPermDialog
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.progress.AnimatedHalfCircleProgress
-import `in`.hridayan.driftly.notification.isNotificationPermissionGranted
 import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
 import `in`.hridayan.driftly.home.presentation.components.dialog.AddSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.image.UndrawRelaxedReading
@@ -67,6 +66,7 @@ import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
 import `in`.hridayan.driftly.navigation.SettingsScreen
+import `in`.hridayan.driftly.notification.isNotificationPermissionGranted
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
@@ -80,7 +80,6 @@ fun HomeScreen(
     settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val subjects by viewModel.subjectList.collectAsState(initial = emptyList())
     val subjectCount by viewModel.subjectCount.collectAsState(initial = 0)
@@ -176,10 +175,9 @@ fun HomeScreen(
                     ),
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                onClick = {
-                    if (selectedCardsCount != 0) return@FloatingActionButton
+                onClick = withHaptic {
+                    if (selectedCardsCount != 0) return@withHaptic
                     isDialogOpen = true
-                    weakHaptic()
                 },
             ) {
                 val rotationAngle by animateFloatAsState(if (isDialogOpen) 45f else 0f)
@@ -219,9 +217,8 @@ fun HomeScreen(
                         modifier = Modifier.clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
-                            onClick = {
+                            onClick = withHaptic {
                                 navController.navigate(SettingsScreen)
-                                weakHaptic()
                             })
                     )
                 }

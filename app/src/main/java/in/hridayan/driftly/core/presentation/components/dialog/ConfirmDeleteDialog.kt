@@ -20,12 +20,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 
 @Composable
@@ -34,8 +35,6 @@ fun ConfirmDeleteDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit
 ) {
-    val weakHaptic = LocalWeakHaptic.current
-
     val interactionSources = remember { List(2) { MutableInteractionSource() } }
 
     Dialog(
@@ -71,9 +70,8 @@ fun ConfirmDeleteDialog(
                 @Suppress("DEPRECATION")
                 ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
-                        onClick = {
+                        onClick = withHaptic(HapticFeedbackType.Reject) {
                             onDismiss()
-                            weakHaptic()
                         },
                         shapes = ButtonDefaults.shapes(),
                         modifier = Modifier
@@ -88,9 +86,8 @@ fun ConfirmDeleteDialog(
                     }
 
                     Button(
-                        onClick = {
+                        onClick = withHaptic(HapticFeedbackType.Confirm) {
                             onConfirm()
-                            weakHaptic()
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.errorContainer,

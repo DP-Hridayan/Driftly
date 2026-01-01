@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
@@ -44,9 +45,9 @@ import `in`.hridayan.driftly.calender.presentation.components.menu.AttendanceDro
 import `in`.hridayan.driftly.calender.presentation.components.modifiers.streakModifier
 import `in`.hridayan.driftly.calender.presentation.components.text.MonthYearHeader
 import `in`.hridayan.driftly.core.common.LocalSettings
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.StreakType
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -64,7 +65,6 @@ fun CalendarCanvas(
     onResetMonth: () -> Unit,
 ) {
     val context = LocalContext.current
-    val weakHaptic = LocalWeakHaptic.current
     val yearMonth = YearMonth.of(year, month)
     val today = LocalDate.now()
     val daysInMonth = yearMonth.lengthOfMonth()
@@ -114,9 +114,8 @@ fun CalendarCanvas(
                     .padding(start = 15.dp),
                 fullMonthName = months[month - 1],
                 year = year,
-                onClick = {
+                onClick = withHaptic {
                     showMonthYearDialog = true
-                    weakHaptic()
                 })
 
             Spacer(
@@ -195,10 +194,9 @@ fun CalendarCanvas(
                                 streakBandColor = foregroundColor,
                                 isToday = isToday
                             )
-                            .clickable {
+                            .clickable(onClick = withHaptic(HapticFeedbackType.VirtualKey) {
                                 expandedDateState.value = dateString
-                                weakHaptic()
-                            },
+                            }),
                         contentAlignment = Alignment.Center,
                     ) {
                         if (expandedDateState.value == dateString) {

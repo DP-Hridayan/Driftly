@@ -29,9 +29,9 @@ import `in`.hridayan.driftly.calender.presentation.components.bottomsheet.Subjec
 import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCanvas
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.common.LocalSettings
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.presentation.components.button.BackButton
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
@@ -41,7 +41,6 @@ import `in`.hridayan.driftly.navigation.LocalNavController
 fun CalendarScreen(
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     val navController = LocalNavController.current
     val args = navController.currentBackStackEntry?.toRoute<CalendarScreen>()
     val subjectId = args?.subjectId ?: 0
@@ -107,8 +106,7 @@ fun CalendarScreen(
                 modifier = Modifier
                     .padding(25.dp)
                     .align(Alignment.CenterHorizontally),
-                onClick = {
-                    weakHaptic()
+                onClick = withHaptic {
                     showSubjectAttendanceDataBottomSheet = true
                 }) {
                 AutoResizeableText(stringResource(R.string.attendance_overview))

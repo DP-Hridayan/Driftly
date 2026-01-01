@@ -24,14 +24,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.presentation.components.checkbox.CheckboxWithText
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
@@ -43,7 +44,6 @@ fun GithubDownloadWarningDialog(
     onConfirm: () -> Unit,
     settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     val interactionSources = remember { List(2) { MutableInteractionSource() } }
     var checkedState by rememberSaveable { mutableStateOf(false) }
 
@@ -92,10 +92,7 @@ fun GithubDownloadWarningDialog(
                 @Suppress("DEPRECATION")
                 ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
-                        onClick = {
-                            onDismiss()
-                            weakHaptic()
-                        },
+                        onClick = withHaptic(HapticFeedbackType.Reject) { onDismiss() },
                         shapes = ButtonDefaults.shapes(),
                         modifier = Modifier
                             .weight(1f)
@@ -109,13 +106,12 @@ fun GithubDownloadWarningDialog(
                     }
 
                     Button(
-                        onClick = {
+                        onClick = withHaptic(HapticFeedbackType.Confirm) {
                             onConfirm()
                             settingsViewModel.setBoolean(
                                 key = SettingsKeys.SHOW_GITHUB_WARNING_DIALOG,
                                 value = !checkedState
                             )
-                            weakHaptic()
                         },
                         modifier = Modifier
                             .weight(1f)

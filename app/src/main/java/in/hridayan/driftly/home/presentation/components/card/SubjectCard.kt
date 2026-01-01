@@ -26,12 +26,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectCardStyle
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
+import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
@@ -52,28 +53,25 @@ fun SubjectCard(
     cornerRadius: Dp = 15.dp,
     cardStyle: Int = SubjectCardStyle.CARD_STYLE_A,
 ) {
-    val weakHaptic = LocalWeakHaptic.current
     var isLongClicked by rememberSaveable { mutableStateOf(false) }
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isUpdateDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isNoAttendanceDialogVisible by rememberSaveable { mutableStateOf(false) }
 
-    val handleLongClick = {
+    val handleLongClick = withHaptic(HapticFeedbackType.LongPress) {
         if (!isDemoCard) {
             isLongClicked = !isLongClicked
             onLongClicked(isLongClicked)
-            weakHaptic()
         }
     }
 
-    val handleClick = {
+    val handleClick = withHaptic {
         onClick()
         if (isLongClicked || selectedCardsCount != 0) {
             handleLongClick()
         } else {
             navigate()
         }
-        weakHaptic()
     }
 
     val handleDeleteConfirmation = {
@@ -84,18 +82,15 @@ fun SubjectCard(
         })
     }
 
-    val onEditButtonClicked: () -> Unit = {
-        weakHaptic()
+    val onEditButtonClicked: () -> Unit = withHaptic(HapticFeedbackType.Confirm) {
         isUpdateDialogVisible = true
     }
 
-    val onDeleteButtonClicked: () -> Unit = {
-        weakHaptic()
+    val onDeleteButtonClicked: () -> Unit = withHaptic(HapticFeedbackType.Confirm) {
         isDeleteDialogVisible = true
     }
 
-    val onErrorIconClicked: () -> Unit = {
-        weakHaptic()
+    val onErrorIconClicked: () -> Unit = withHaptic {
         isNoAttendanceDialogVisible = true
     }
 
