@@ -176,17 +176,17 @@
     <string name="font_display_text">The quick brown fox jumps over the lazy dog</string>
     <string name="preview">Preview</string>
     <string-array name="month_names">
-        <item>Janvier</item>
-        <item>Février</item>
-        <item>Mars</item>
-        <item>Avril</item>
-        <item>Mai</item>
-        <item>Juin</item>
-        <item>Juillet</item>
-        <item>Août</item>
-        <item>Septembre</item>
-        <item>Octobre</item>
-        <item>Novembre</item>
-        <item>Décembre</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 </resources>
