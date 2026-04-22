@@ -10,5 +10,7 @@ data class SubjectEntity(
     @PrimaryKey(autoGenerate = true) val id:Int = 0,
     val subject:String,
     val savedMonth: Int? = null,
-    val savedYear: Int? = null
+    val savedYear: Int? = null,
+    val room: String? = null,
+
 )
