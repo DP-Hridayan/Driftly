@@ -42,6 +42,7 @@ fun AddSubjectDialog(
     onDismiss: () -> Unit
 ) {
     val subject by viewModel.subject.collectAsState()
+    val room by viewModel.room.collectAsState()
     val subjectError by viewModel.subjectError.collectAsState()
 
     val interactionSources = remember { List(2) { MutableInteractionSource() } }
@@ -83,6 +84,15 @@ fun AddSubjectDialog(
                     isError = subjectError != SubjectError.None,
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = label) },
+                )
+
+                OutlinedTextField(
+                    value = room,
+                    onValueChange = {
+                        viewModel.onRoomChange(it)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(text = stringResource(R.string.room)) },
                 )
 
                 @Suppress("DEPRECATION")

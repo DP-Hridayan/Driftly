@@ -338,7 +338,8 @@ fun HomeScreen(
                         navController.navigate(
                             CalendarScreen(
                                 subjectId = subjects[index].id,
-                                subject = subjects[index].subject
+                                subject = subjects[index].subject,
+                                room = subjects[index].room
                             )
                         )
                     },
