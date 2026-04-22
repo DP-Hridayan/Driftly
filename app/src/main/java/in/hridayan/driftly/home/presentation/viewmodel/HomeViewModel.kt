@@ -45,9 +45,12 @@ class HomeViewModel @Inject constructor(
     private val _subjectError = MutableStateFlow<SubjectError>(SubjectError.None)
     val subjectError: StateFlow<SubjectError> = _subjectError
 
-    fun setSubjectNamePlaceholder(value: String) {
+    fun setSubjectNamePlaceholder(value: String, roomValue: String?) {
         if (_subject.value.isBlank()) {
             _subject.value = value
+        }
+        if (_room.value.isBlank()) {
+            _room.value = roomValue ?: ""
         }
     }
 
@@ -110,9 +113,11 @@ class HomeViewModel @Inject constructor(
             } else {
                 subjectRepository.updateSubject(
                     subjectId = subjectId,
-                    newName = _subject.value.trim()
+                    newName = _subject.value.trim(),
+                    newRoom = _room.value.trim().ifBlank { null }
                 )
                 _subject.value = ""
+                _room.value = ""
                 onSuccess()
             }
         }
