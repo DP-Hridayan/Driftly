@@ -172,6 +172,8 @@
     <string name="update_subject">Update Subject</string>
     <string name="updates">Updates</string>
     <string name="version">Version</string>
+    <string name="version_code">Version code</string>
+    <string name="version_name">Version name</string>
     <string name="visit_repo_to_download">Click on the download button to get the latest version of Driftly from the github repository.</string>
     <string name="warning">Warning</string>
     <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>

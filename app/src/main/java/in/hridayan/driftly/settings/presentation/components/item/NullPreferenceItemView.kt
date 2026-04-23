@@ -79,7 +79,7 @@ fun NullPreferenceItemView(
                     Text(
                         text = descriptionText,
                         style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.alpha(0.90f)
+                        modifier = Modifier.alpha(0.6f)
                     )
                 }
             }
