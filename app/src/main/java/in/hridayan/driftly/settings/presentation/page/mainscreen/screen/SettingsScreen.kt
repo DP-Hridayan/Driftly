@@ -2,10 +2,20 @@
 
 package `in`.hridayan.driftly.settings.presentation.page.mainscreen.screen
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +23,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,23 +32,25 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.em
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.presentation.components.button.BackButton
-import `in`.hridayan.driftly.core.presentation.components.lottie.SpinningGearsLottie
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.navigation.LocalNavController
-import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.components.item.PreferenceItemView
 import `in`.hridayan.driftly.settings.presentation.components.shape.CardCornerShape.getRoundedShape
 import `in`.hridayan.driftly.settings.presentation.event.SettingsUiEvent
+import `in`.hridayan.driftly.settings.presentation.model.PreferenceGroup
 import `in`.hridayan.driftly.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
@@ -76,35 +89,36 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
             contentPadding = innerPadding
         ) {
             item {
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    SpinningGearsLottie(modifier = Modifier.size(175.dp))
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        SpinningGears(
+                            modifier = Modifier.size(175.dp)
+                        )
+                    }
+
+                    AutoResizeableText(
+                        modifier = Modifier
+                            .padding(top = 20.dp)
+                            .align(Alignment.CenterHorizontally),
+                        text = stringResource(R.string.settings),
+                        fontWeight = FontWeight.Black,
+                        style = MaterialTheme.typography.displayLargeEmphasized.copy(
+                            letterSpacing = 0.025.em,
+                        )
+                    )
+
+                    AutoResizeableText(
+                        modifier = Modifier
+                            .padding(top = 10.dp, bottom = 25.dp)
+                            .align(Alignment.CenterHorizontally),
+                        text = stringResource(R.string.tweak_your_experience),
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.labelLargeEmphasized
+                    )
                 }
-            }
-
-            item {
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 15.dp),
-                    textAlign = TextAlign.Center,
-                    text = stringResource(R.string.settings),
-                    style = MaterialTheme.typography.displaySmallEmphasized
-                )
-            }
-
-            item {
-                AutoResizeableText(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 10.dp, bottom = 25.dp),
-                    textAlign = TextAlign.Center,
-                    text = stringResource(R.string.tweak_your_experience),
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.labelLargeEmphasized
-                )
             }
 
             itemsIndexed(settings) { index, group ->
@@ -150,5 +164,89 @@ fun SettingsScreen(modifier: Modifier = Modifier, viewModel: SettingsViewModel =
                 )
             }
         }
+    }
+}
+
+
+@Composable
+private fun SpinningGears(modifier: Modifier = Modifier) {
+
+    val infiniteTransition = rememberInfiniteTransition(label = "gears")
+
+    val bigGearRotation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 10000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "bigGear"
+    )
+
+    val mediumGearRotation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 5000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "mediumGear"
+    )
+
+    val smallGearRotation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 3500, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "smallGear"
+    )
+
+    BoxWithConstraints(
+        modifier = modifier.aspectRatio(0.9f)
+    ) {
+        val base = minOf(maxWidth, maxHeight)
+
+        Icon(
+            modifier = Modifier
+                .size(base * 0.7f)
+                .align(Alignment.BottomStart)
+                .graphicsLayer {
+                    rotationZ = bigGearRotation
+                },
+            tint = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.9f),
+            painter = painterResource(R.drawable.ic_settings_filled),
+            contentDescription = null
+        )
+
+        Icon(
+            modifier = Modifier
+                .size(base * 0.35f)
+                .align(Alignment.TopEnd)
+                .offset(
+                    x = -base * 0.1f,
+                    y = base * 0.1f
+                )
+                .graphicsLayer {
+                    rotationZ = mediumGearRotation
+                },
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.75f),
+            painter = painterResource(R.drawable.ic_settings_filled),
+            contentDescription = null
+        )
+
+        Icon(
+            modifier = Modifier
+                .size(base * 0.18f)
+                .align(Alignment.CenterEnd)
+                .offset(y = base * 0.03f)
+                .graphicsLayer {
+                    rotationZ = smallGearRotation
+                },
+            tint = MaterialTheme.colorScheme.secondary.copy(alpha = 0.6f),
+            painter = painterResource(R.drawable.ic_settings_filled),
+            contentDescription = null
+        )
     }
 }
