@@ -60,8 +60,8 @@ fun AttendanceCardWithTabs(
 ) {
     val attendanceDataTabs =
         listOf(
-            stringResource(R.string.this_month_data),
-            stringResource(R.string.all_months_data)
+            stringResource(R.string.all_months_data),
+            stringResource(R.string.this_month_data)
         )
 
     val pagerState = rememberPagerState(pageCount = { attendanceDataTabs.size })
@@ -117,13 +117,13 @@ fun AttendanceCardWithTabs(
                     contentAlignment = Alignment.Center
                 ) {
                     when (index) {
-                        0 -> ThisMonthView(
+                        0 -> AllMonthsView(
                             modifier = Modifier.padding(25.dp),
                             subjectId = subjectId,
                             sheetState = sheetState
                         )
 
-                        1 -> AllMonthsView(
+                        1 -> ThisMonthView(
                             modifier = Modifier.padding(25.dp),
                             subjectId = subjectId,
                             sheetState = sheetState
