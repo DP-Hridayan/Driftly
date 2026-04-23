@@ -10,6 +10,7 @@
     <string name="app">App</string>
     <string name="app_name">Driftly</string>
     <string name="attendance">Attendance</string>
+    <string name="attendance_overview">Attendance overview</string>
     <string name="auto_update">Auto update</string>
     <string name="back_button">Back button</string>
     <string name="backup">Backup</string>
@@ -63,6 +64,7 @@
     <string name="des_dynamic_colors">Automatically set the app theme according to the device wallpaper</string>
     <string name="des_enable_direct_download">When turned on, updates will be downloaded directly from Github inside the app. Turn off to visit the Github releases page for manual download instead.</string>
     <string name="des_feature_request">If you have any ideas or suggestions for the app, let us know</string>
+    <string name="des_font_family">Choose a font family for the app</string>
     <string name="des_github">Visit the github repository of the app</string>
     <string name="des_grant_notification_permission">Do you want to get alerts when you forget to mark your attendance?\n\nGrant notification access!</string>
     <string name="des_haptics_and_vibration">Interactive haptics for touch feedback</string>
@@ -94,6 +96,8 @@
     <string name="error">Error</string>
     <string name="feature_request">Feature request</string>
     <string name="field_blank_error">Field cannot be blank</string>
+    <string name="font_display_text">The quick brown fox jumps over the lazy dog</string>
+    <string name="font_family">Font family</string>
     <string name="github" translatable="false">Github</string>
     <string name="grant_permission">Grant permission</string>
     <string name="haptics_and_vibration">Haptics &amp; Vibration</string>
@@ -106,6 +110,7 @@
     <string name="license">License</string>
     <string name="look_and_feel">Look &amp; Feel</string>
     <string name="mark_your_attendance">Mark your attendance</string>
+    <string name="monospace">Monospace</string>
     <string name="month">Month</string>
     <string name="network_error">Network error</string>
     <string name="next_month">Next month</string>
@@ -118,11 +123,14 @@
     <string name="off">Off</string>
     <string name="ok">OK</string>
     <string name="on">On</string>
+    <string name="one_ui_sans">One UI Sans</string>
+    <string name="optional">Optional</string>
     <string name="pick_driftly_extension">Please pick a file with .driftly extension</string>
     <string name="pre_release">Pre-release</string>
     <string name="pre_release_warning">Pre-release builds may be unstable</string>
     <string name="pre_release_warning_description">These versions are still in testing and may contain unfinished features or unexpected bugs. If you choose to update to a pre-release, please be aware that things might break or behave strangely.\nIf you encounter any issues, crashes, or weird behavior, please report them so we can fix and improve Driftly before the stable release.\nThanks for helping us build better!</string>
     <string name="present">Present</string>
+    <string name="preview">Preview</string>
     <string name="previous_month">Previous month</string>
     <string name="remember_month_year">Remember calendar month and year</string>
     <string name="reminder_to_mark_attendance">Reminder to mark attendance</string>
@@ -135,11 +143,12 @@
     <string name="reset_settings_successful">Reset settings successful</string>
     <string name="reset_to_current_month">Reset to current month</string>
     <string name="restore">Restore</string>
-    <string name="room">Room</string>
     <string name="restore_app_data">Restore app data</string>
     <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
     <string name="restore_failed">Restore failed</string>
     <string name="restore_successful">Restore successful</string>
+    <string name="room">Room</string>
+    <string name="sans_serif">Sans Serif</string>
     <string name="select">Select</string>
     <string name="select_month_and_year">Select Month &amp; Year</string>
     <string name="settings">Settings</string>
@@ -151,6 +160,7 @@
     <string name="subject_name">Subject name</string>
     <string name="support_bmc">Like what I do?\nConsider buying me a coffee</string>
     <string name="system">System</string>
+    <string name="system_font">System font</string>
     <string name="this_month_data">This month data</string>
     <string name="total">Total</string>
     <string name="tweak_your_experience">Tweak your experience</string>
@@ -167,15 +177,6 @@
     <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>
     <string name="whats_new">What\'s new!</string>
     <string name="year">Year</string>
-    <string name="attendance_overview">Attendance overview</string>
-    <string name="font_family">Font family</string>
-    <string name="system_font">System font</string>
-    <string name="des_font_family">Choose a font family for the app</string>
-    <string name="one_ui_sans">One UI Sans</string>
-    <string name="monospace">Monospace</string>
-    <string name="sans_serif">Sans Serif</string>
-    <string name="font_display_text">The quick brown fox jumps over the lazy dog</string>
-    <string name="preview">Preview</string>
     <string-array name="month_names">
         <item>January</item>
         <item>February</item>

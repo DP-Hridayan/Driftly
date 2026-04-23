@@ -107,10 +107,6 @@ class HomeViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim()).first()
-            if (isSubjectExists) {
-                _subjectError.value = SubjectError.AlreadyExists
-            } else {
                 subjectRepository.updateSubject(
                     subjectId = subjectId,
                     newName = _subject.value.trim(),
@@ -119,7 +115,6 @@ class HomeViewModel @Inject constructor(
                 _subject.value = ""
                 _room.value = ""
                 onSuccess()
-            }
         }
     }
 

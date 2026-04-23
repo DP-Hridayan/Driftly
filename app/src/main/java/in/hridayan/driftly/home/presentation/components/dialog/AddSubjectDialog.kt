@@ -92,7 +92,7 @@ fun AddSubjectDialog(
                         viewModel.onRoomChange(it)
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = stringResource(R.string.room)) },
+                    label = { Text(text = stringResource(R.string.room) + " (" + stringResource(R.string.optional) + ")") },
                 )
 
                 @Suppress("DEPRECATION")
