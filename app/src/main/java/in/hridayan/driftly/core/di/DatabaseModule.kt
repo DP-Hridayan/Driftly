@@ -25,7 +25,7 @@ object DatabaseModule {
             SubjectDatabase::class.java,
             "attendance_app_db"
         )
-            .addMigrations(MIGRATION_2_3)
+            .fallbackToDestructiveMigration()
             .build()
 
     @Provides

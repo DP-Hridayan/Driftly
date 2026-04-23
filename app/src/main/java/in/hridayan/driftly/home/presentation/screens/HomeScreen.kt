@@ -331,6 +331,7 @@ fun HomeScreen(
                     cornerRadius = subjectCardCornerRadius.dp,
                     subjectId = subjects[index].id,
                     subject = subjects[index].subject,
+                    room = subjects[index].room,
                     progress = progress,
                     isTotalCountZero = counts.totalCount == 0,
                     selectedCardsCount = selectedCardsCount,
@@ -338,7 +339,8 @@ fun HomeScreen(
                         navController.navigate(
                             CalendarScreen(
                                 subjectId = subjects[index].id,
-                                subject = subjects[index].subject
+                                subject = subjects[index].subject,
+                                room = subjects[index].room
                             )
                         )
                     },

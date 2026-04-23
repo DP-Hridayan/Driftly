@@ -39,18 +39,28 @@ class HomeViewModel @Inject constructor(
     private val _subject = MutableStateFlow("")
     val subject: StateFlow<String> = _subject
 
+    private val _room = MutableStateFlow("")
+    val room: StateFlow<String> = _room
+
     private val _subjectError = MutableStateFlow<SubjectError>(SubjectError.None)
     val subjectError: StateFlow<SubjectError> = _subjectError
 
-    fun setSubjectNamePlaceholder(value: String) {
+    fun setSubjectNamePlaceholder(value: String, roomValue: String?) {
         if (_subject.value.isBlank()) {
             _subject.value = value
+        }
+        if (_room.value.isBlank()) {
+            _room.value = roomValue ?: ""
         }
     }
 
     fun onSubjectChange(newValue: String) {
         _subject.value = newValue
         _subjectError.value = SubjectError.None
+    }
+
+    fun onRoomChange(newValue: String) {
+        _room.value = newValue
     }
 
     val subjectList: Flow<List<SubjectEntity>> = subjectRepository.getAllSubjects().stateIn(
@@ -72,10 +82,12 @@ class HomeViewModel @Inject constructor(
             } else {
                 subjectRepository.insertSubject(
                     SubjectEntity(
-                        subject = _subject.value.trim()
+                        subject = _subject.value.trim(),
+                        room = _room.value.trim().ifBlank { null }
                     )
                 )
                 _subject.value = ""
+                _room.value = ""
                 onSuccess()
             }
         }
@@ -83,6 +95,7 @@ class HomeViewModel @Inject constructor(
 
     fun resetInputFields() {
         _subject.value = ""
+        _room.value = ""
         _subjectError.value = SubjectError.None
     }
 
@@ -100,9 +113,11 @@ class HomeViewModel @Inject constructor(
             } else {
                 subjectRepository.updateSubject(
                     subjectId = subjectId,
-                    newName = _subject.value.trim()
+                    newName = _subject.value.trim(),
+                    newRoom = _room.value.trim().ifBlank { null }
                 )
                 _subject.value = ""
+                _room.value = ""
                 onSuccess()
             }
         }

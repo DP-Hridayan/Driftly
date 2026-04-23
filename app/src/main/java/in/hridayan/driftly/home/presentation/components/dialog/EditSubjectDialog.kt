@@ -42,14 +42,16 @@ fun EditSubjectDialog(
     modifier: Modifier = Modifier,
     subjectId: Int,
     subject: String,
+    room: String?,
     viewModel: HomeViewModel = hiltViewModel(),
     onDismiss: () -> Unit
 ) {
     LaunchedEffect(Unit) {
-        viewModel.setSubjectNamePlaceholder(subject)
+        viewModel.setSubjectNamePlaceholder(subject, room)
     }
 
-    val subject by viewModel.subject.collectAsState()
+    val subjectValue by viewModel.subject.collectAsState()
+    val roomValue by viewModel.room.collectAsState()
     val subjectError by viewModel.subjectError.collectAsState()
 
     val interactionSources = remember { List(2) { MutableInteractionSource() } }
@@ -84,13 +86,22 @@ fun EditSubjectDialog(
                 )
 
                 OutlinedTextField(
-                    value = subject,
+                    value = subjectValue,
                     onValueChange = {
                         viewModel.onSubjectChange(it)
                     },
                     isError = subjectError != SubjectError.None,
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = label) }
+                )
+
+                OutlinedTextField(
+                    value = roomValue,
+                    onValueChange = {
+                        viewModel.onRoomChange(it)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text(text = stringResource(R.string.room)) }
                 )
 
                 @Suppress("DEPRECATION")

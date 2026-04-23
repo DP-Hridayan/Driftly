@@ -42,6 +42,7 @@ fun SubjectCard(
     modifier: Modifier = Modifier,
     subjectId: Int,
     subject: String,
+    room: String? = null,
     progress: Float,
     isTotalCountZero: Boolean = false,
     selectedCardsCount: Int = 0,
@@ -106,6 +107,7 @@ fun SubjectCard(
             SubjectCardStyle.CARD_STYLE_A ->
                 CardStyleA(
                     subject = subject,
+                    room = room,
                     isLongClicked = isLongClicked,
                     isTotalCountZero = isTotalCountZero,
                     progress = progress,
@@ -117,6 +119,7 @@ fun SubjectCard(
             SubjectCardStyle.CARD_STYLE_B ->
                 CardStyleB(
                     subject = subject,
+                    room = room,
                     isLongClicked = isLongClicked,
                     isTotalCountZero = isTotalCountZero,
                     progress = progress,
@@ -140,6 +143,7 @@ fun SubjectCard(
         EditSubjectDialog(
             subjectId = subjectId,
             subject = subject,
+            room = room,
             onDismiss = {
                 isLongClicked = false
                 onLongClicked(false)

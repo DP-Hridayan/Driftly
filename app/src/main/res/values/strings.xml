@@ -135,6 +135,7 @@
     <string name="reset_settings_successful">Reset settings successful</string>
     <string name="reset_to_current_month">Reset to current month</string>
     <string name="restore">Restore</string>
+    <string name="room">Room</string>
     <string name="restore_app_data">Restore app data</string>
     <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
     <string name="restore_failed">Restore failed</string>
