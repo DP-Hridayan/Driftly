@@ -38,6 +38,7 @@ import `in`.hridayan.driftly.home.presentation.components.text.SubjectText
 fun CardStyleA(
     modifier: Modifier = Modifier,
     subject: String,
+    room: String? = null,
     progress: Float,
     isLongClicked: Boolean,
     isTotalCountZero: Boolean,
@@ -64,9 +65,21 @@ fun CardStyleA(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(15.dp)
     ) {
-        SubjectText(
-            modifier = Modifier.weight(1f), subject = subject, subjectTextColor = subjectTextColor
-        )
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.Center
+        ) {
+            SubjectText(
+                subject = subject, subjectTextColor = subjectTextColor
+            )
+            if (!room.isNullOrBlank()) {
+                Text(
+                    text = room,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = subjectTextColor.copy(alpha = 0.7f)
+                )
+            }
+        }
 
         if (isLongClicked) {
             UtilityRow(
@@ -86,6 +99,7 @@ fun CardStyleB(
     modifier: Modifier = Modifier,
     progress: Float,
     subject: String,
+    room: String? = null,
     isLongClicked: Boolean,
     isTotalCountZero: Boolean,
     onEditButtonClicked: () -> Unit,
@@ -127,9 +141,21 @@ fun CardStyleB(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(15.dp)
             ) {
-                SubjectText(
-                    modifier = Modifier.weight(1f), subject = subject
-                )
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    SubjectText(
+                        subject = subject
+                    )
+                    if (!room.isNullOrBlank()) {
+                        Text(
+                            text = room,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                        )
+                    }
+                }
 
                 if (isLongClicked) {
                     UtilityRow(
