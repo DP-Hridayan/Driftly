@@ -11,6 +11,7 @@
     <string name="app">Tətbiq</string>
     <string name="app_name">Driftly</string>
     <string name="attendance">Davamiyyət</string>
+    <string name="attendance_overview">Davamiyyət ümumi baxışı</string>
     <string name="auto_update">Avto-yenilənmə</string>
     <string name="back_button">Geri düyməsi</string>
     <string name="backup">Nüsxələ</string>
@@ -31,7 +32,7 @@
     <string name="changelogs_v1_2_0">Yüksək kontrastlı tünd rejimdə rəng sxemi yaxşılaşdırıldı\nYeniləmədən sonrakı dəyişiklikləri göstərən \"Yeniliklər\" adlı alt vərəq əlavə edildi\nKod üzrə optimizasiya işləri</string>
     <string name="changelogs_v1_3_0">Tətbiqin müəyyən davranışlarını dəyişdirmək üçün parametrlər əlavə edildi.\nTəqvimdə son baxdığınız ayı yadda saxlamaq funksiyası əlavə edildi.\nTəqvimdə davamiyyət seriyalarının görünüşünü deaktiv etmək seçimi əlavə olundu</string>
     <string name="changelogs_v1_4_0">Bəzi interfeys komponentləri Material Ekspressiv temaya keçdi\nTəqvimdə Bazar Ertəsini həftənin ilk günü kimi seçmək imkanı əlavə edildi\nƏn son versiya apk yenilənməsini GitHub səhifəsinə keçmədən birbaşa endirmək imkanı əlavə edildi\nBir çox interfeys uyğunsuzluğu düzəldildi</string>
-    <string name="changelogs_v1_5_0">Tətbiq məlumatlarını lokal olaraq nüsxələmək və bərpa etmək imkanı əlavə edildi\nKod daxilindəki sabit mətnlər lokallaşdırıldı\nXırda interfeys təkmilləşdirmələri</string>
+    <string name="changelogs_v1_5_0">Added option to back up and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
     <string name="changelogs_v1_5_1">Bəzi cihazlarda nüsxənin bərpasının uğursuzluğuna səbəb olan bir problem həll edildi</string>
     <string name="changelogs_v1_6_0">Müxtəlif hallar üçün bildirişlər əlavə olundu: davamiyyət xatırlatması, davamiyyət buraxıldıqda xəbərdarlıq və yeni versiya tapıldıqda bildiriş\nAna ekranda vərdiş kartlarının toplu seçimi yaxşılaşdırıldı; artıq \"geri\" düyməsinə basaraq seçimi ləğv etmək mümkündür\nAndroid 11 və daha köhnə versiyalar üçün sistem panellərinin rənglərindəki xəta aradan qaldırıldı</string>
     <string name="changelogs_v1_7_0">GitHub-dan yeniləmə endirilməzdən əvvəl xəbərdarlıq edən bir mesaj əlavə olundu\nİnterfeysdəki bəzi simgələrə düzəliş edildi</string>
@@ -39,6 +40,7 @@
     <string name="changelogs_v1_8_1">Dinamik temalar üçün sabit kart rəngləri</string>
     <string name="changelogs_v1_8_2">İnterfeysdəki bəzi kənar boşluqları düzəldildi</string>
     <string name="changelogs_v1_8_3">Asılılıqlar yeniləndi və bəzi xətalar aradan qaldırıldı</string>
+    <string name="changelogs_v1_9_0">Improved color palettes and color scheme\nAdded option to customise app font style\nAdded option to add room name per Subject</string>
     <string name="changelogs_v1_0_0">İlk versiya\nDavamiyyət vəziyyətini işarələmək üçün təqvim əlavə edildi\nHər vərdiş üzrə irəliləyişi göstərmək funksiyası əlavə edildi\nVərdişləri əlavə etmək, silmək və onlara düzəliş etmək imkanı əlavə edildi\nTətbiq interfeysini istifadəçinin özünə uyğunlaşdırması üçün fərdiləşdirmə parametrləri əlavə edildi</string>
     <string name="check_updates">Yeniləmələri yoxla</string>
     <string name="clear">Təmizlə</string>
@@ -64,6 +66,7 @@
     <string name="des_dynamic_colors">Tətbiqi divar kağızınızın rənglərinə avtomatik uyğunlaşdırın</string>
     <string name="des_enable_direct_download">Bu funksiya yanılı olanda, yeniləmələr avtomatik GitHub-dan endirilib tətbiqin özündə quraşdırılacaq. Söndürsəniz, özünüz yeniləməni endirmək üçün GitHub-un \"Releases\" səhifəsinə keçməli olacaqsınız.</string>
     <string name="des_feature_request">Tətbiq barədə ideya və təkliflərinizi eşitməyi çox istərdik</string>
+    <string name="des_font_family">Tətbiq üçün şrift ailəsi seçin</string>
     <string name="des_github">Tətbiqin GitHub mənbəyinə baxın</string>
     <string name="des_grant_notification_permission">Davamiyyəti qeyd etmədiyinizdə xəbərdar olmaq istəyirsiniz?\n\nBildirişlərə icazə verin!</string>
     <string name="des_haptics_and_vibration">İnteraktiv toxunuş reaksiyaları</string>
@@ -95,6 +98,8 @@
     <string name="error">Səhv</string>
     <string name="feature_request">Yeni funksiya təklifi</string>
     <string name="field_blank_error">Xana boş qoyula biləz</string>
+    <string name="font_display_text">Zəfər, jaketini də papağını da götür, bu axşam hava çox soyuq olacaq.</string>
+    <string name="font_family">Şrift ailəsi</string>
     <string name="grant_permission">Girişə icazə ver</string>
     <string name="haptics_and_vibration">Haptiklər və Vibrasiya</string>
     <string name="high_contrast_dark_mode">Yüksək kontrastlı tünd rejim</string>
@@ -106,6 +111,7 @@
     <string name="license">Lisenziya</string>
     <string name="look_and_feel">Görünüş və Təəssürat</string>
     <string name="mark_your_attendance">Davamiyyətinizi qeyd edin</string>
+    <string name="monospace">Sabit Enli</string>
     <string name="month">Ay</string>
     <string name="network_error">Şəbəkə xətası</string>
     <string name="next_month">Növbəti ay</string>
@@ -118,11 +124,14 @@
     <string name="off">Sönülü</string>
     <string name="ok">Yaxşı</string>
     <string name="on">Yanılı</string>
+    <string name="one_ui_sans">One UI Sans</string>
+    <string name="optional">Optional</string>
     <string name="pick_driftly_extension">Zəhmət olmasa .driftly tipli fayl seçin</string>
     <string name="pre_release">İlkin buraxılış</string>
     <string name="pre_release_warning">İlkin buraxılış versiyaları problemli ola bilər</string>
     <string name="pre_release_warning_description">Bu versiyalar hələ də test mərhələsindədir. Onlarda tam hazır olmayan funksiyalar və ya gözlənilməz problemlər ola bilər. İlkin buraxılışı seçsəniz, tətbiqin düzgün işləməmə və ya xarab olma ehtimalını da nəzərə alın.\nZəhmət olmasa tətbiqdə gördüyünüz nasazlıqlar, çökmələr (proqramdan atma) və ya qeyri-adi hallar haqqında bizə məlumat verin. Bunun köməkliyi ilə, stabil versiyanı buraxmazdan əvvəl Driftly-ni düzəldə və təkmilləşdirə biləcəyik.\nDaha yaxşı bir məhsul yaratmağımıza kömək etdiyiniz üçün təşəkkürlər!</string>
     <string name="present">Qeyd edildi</string>
+    <string name="preview">Önbaxış</string>
     <string name="previous_month">Əvvəlki ay</string>
     <string name="remember_month_year">Təqvimdəki ayı və ili yadında saxla</string>
     <string name="reminder_to_mark_attendance">Davamiyyət qeydini yadıma sal</string>
@@ -139,6 +148,8 @@
     <string name="restore_dialog_message">Saxlanılmış fayldakı məlumatlar hazırkı məlumatları əvəz edəcək.</string>
     <string name="restore_failed">Bərpa edilə bilmədi</string>
     <string name="restore_successful">Bərpa uğurla yerinə yetirildi</string>
+    <string name="room">Room</string>
+    <string name="sans_serif">Sans Serif</string>
     <string name="select">Seç</string>
     <string name="select_month_and_year">Günü və İli Seç</string>
     <string name="settings">Parametrlər</string>
@@ -150,6 +161,7 @@
     <string name="subject_name">Vərdiş adı</string>
     <string name="support_bmc">Əməyimi qiymətləndirirsinizsə, mənə dəstək ola bilərsiniz\nCəmi bir fincan kofe ilə</string>
     <string name="system">Sistem</string>
+    <string name="system_font">Sistem Şrifti</string>
     <string name="this_month_data">Bu ayın verilənləri</string>
     <string name="total">Cəmi</string>
     <string name="tweak_your_experience">Tətbiqi özünüz üçün uyğunlaşdırın</string>
@@ -161,32 +173,25 @@
     <string name="update_subject">Vərdişi Yenilə</string>
     <string name="updates">Yenilənmələr</string>
     <string name="version">Versiya</string>
+    <string name="version_code">Version code</string>
+    <string name="version_name">Version name</string>
     <string name="visit_repo_to_download">Drifty-nin ən son versiyasını GitHub mənbəyindən quraşdırmaq üçün \"Endir\" düyməsinə toxunun.</string>
     <string name="warning">Xəbərdarlıq</string>
     <string name="warning_github_download">Yenilənmələri birbaşa GitHub-dan yükləmək üzrəsiniz. Bilin ki, tətbiq mağazalarından fərqli olaraq, bunların təhlükəsizliyi yoxlanılmayıb. Davam edilsin?</string>
     <string name="whats_new">Nə yenilik var?</string>
     <string name="year">İl</string>
-    <string name="attendance_overview">Davamiyyət ümumi baxışı</string>
-    <string name="font_family">Şrift ailəsi</string>
-    <string name="system_font">Sistem Şrifti</string>
-    <string name="des_font_family">Tətbiq üçün şrift ailəsi seçin</string>
-    <string name="one_ui_sans">One UI Sans</string>
-    <string name="monospace">Sabit Enli</string>
-    <string name="sans_serif">Sans Serif</string>
-    <string name="font_display_text">Zəfər, jaketini də papağını da götür, bu axşam hava çox soyuq olacaq.</string>
-    <string name="preview">Önbaxış</string>
     <string-array name="month_names">
-        <item>Yanvar</item>
-        <item>Fevral</item>
-        <item>Mart</item>
-        <item>Aprel</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
         <item>May</item>
-        <item>İyun</item>
-        <item>İyul</item>
-        <item>Avqust</item>
-        <item>Sentyabr</item>
-        <item>Oktyabr</item>
-        <item>Noyabr</item>
-        <item>Dekabr</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 </resources>

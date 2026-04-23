@@ -11,6 +11,7 @@
     <string name="app">App</string>
     <string name="app_name">Driftly</string>
     <string name="attendance">Attendance</string>
+    <string name="attendance_overview">Attendance overview</string>
     <string name="auto_update">Mise à jour automatique</string>
     <string name="back_button">Bouton retour</string>
     <string name="backup">Backup</string>
@@ -31,7 +32,7 @@
     <string name="changelogs_v1_2_0">Schéma de couleurs amélioré dans le thème sombre à fort contraste\nAjout de la nouvelle page pour afficher les changelogs après une mise à jour\nOptimisation du code</string>
     <string name="changelogs_v1_3_0">Ajout de paramètres de comportement pour modifier le comportement de certaines applications\nAjout d\'une option pour se souvenir du dernier mois\nAjout d\'une option pour désactiver la série de présence dans le calendrier</string>
     <string name="changelogs_v1_4_0">Switched some UI components to material expressive theme\nAdded option to make Monday as first day of the week in the Calendar\nAdded option to directly download the latest updated apk inside the app without the need to visit the Github repository\nFixed many UI inconsistencies</string>
-    <string name="changelogs_v1_5_0">Added option to backup and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
+    <string name="changelogs_v1_5_0">Added option to back up and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
     <string name="changelogs_v1_5_1">Fixed an issue where restoring backup failed in some devices</string>
     <string name="changelogs_v1_6_0">Added notification alerts for various events like attendance reminder, missed attendance alert and notification alert when new version of the app is detected\nImproved the batch selection of subject cards in home screen with support to dismiss selection by back press\nFixed system bars colors in android 11 and below</string>
     <string name="changelogs_v1_7_0">Added warning before downloading app updates from Github\nFixed some icons in the app UI</string>
@@ -39,6 +40,7 @@
     <string name="changelogs_v1_8_1">Fixed card colors in dynamic theming</string>
     <string name="changelogs_v1_8_2">Fixed some UI margins</string>
     <string name="changelogs_v1_8_3">Updated dependencies and fixed some issues</string>
+    <string name="changelogs_v1_9_0">Improved color palettes and color scheme\nAdded option to customise app font style\nAdded option to add room name per Subject</string>
     <string name="changelogs_v1_0_0">Version initiale\nCalendrier ajouté pour marquer le statut de présence\nAjouté par sujet affichage de la progression\nAjout de la possibilité d\'ajouter, supprimer et modifier les sujets\nParamètres ajoutés pour personnaliser l\'expérience utilisateur</string>
     <string name="check_updates">Check updates</string>
     <string name="clear">Effacer</string>
@@ -64,6 +66,7 @@
     <string name="des_dynamic_colors">Définir automatiquement le thème de l\'application en fonction du fond d\'écran de l\'appareil</string>
     <string name="des_enable_direct_download">When turned on, updates will be downloaded directly from Github inside the app. Turn off to visit the Github releases page for manual download instead.</string>
     <string name="des_feature_request">Si vous avez des idées ou des suggestions pour l\'application, faites-le nous savoir</string>
+    <string name="des_font_family">Choose a font family for the app</string>
     <string name="des_github">Visitez le dépôt github de l\'app</string>
     <string name="des_grant_notification_permission">Do you want to get alerts when you forget to mark your attendance?\n\nGrant notification access!</string>
     <string name="des_haptics_and_vibration">Haptique interactive pour retour tactile</string>
@@ -95,6 +98,8 @@
     <string name="error">Erreur</string>
     <string name="feature_request">Demande de fonctionnalité</string>
     <string name="field_blank_error">Le champ ne peut pas être vide</string>
+    <string name="font_display_text">The quick brown fox jumps over the lazy dog</string>
+    <string name="font_family">Font family</string>
     <string name="grant_permission">Grant permission</string>
     <string name="haptics_and_vibration">Haptique &amp; vibration</string>
     <string name="high_contrast_dark_mode">Thème sombre à contraste élevé</string>
@@ -106,6 +111,7 @@
     <string name="license">Licence</string>
     <string name="look_and_feel">Apparence</string>
     <string name="mark_your_attendance">Mark your attendance</string>
+    <string name="monospace">Monospace</string>
     <string name="month">Month</string>
     <string name="network_error">Erreur réseau</string>
     <string name="next_month">Mois suivant</string>
@@ -118,11 +124,14 @@
     <string name="off">Désactivé</string>
     <string name="ok">OK</string>
     <string name="on">Activé</string>
+    <string name="one_ui_sans">One UI Sans</string>
+    <string name="optional">Optional</string>
     <string name="pick_driftly_extension">Please pick a file with .driftly extension</string>
     <string name="pre_release">Pré-version</string>
     <string name="pre_release_warning">Les pré-versions peuvent être instables</string>
     <string name="pre_release_warning_description">Ces versions sont encore en phase de test et peuvent contenir des fonctionnalités inachevées ou des bogues inattendus. Si vous choisissez de mettre à jour une pré-version, soyez conscient que des choses peuvent se casser ou se comporter bizarrement.\nSi vous rencontrez des problèmes, des crashs, ou des comportements bizarres, merci de les rapporter afin que nous puissions corriger et améliorer Driftly avant la version stable.\nMerci de nous aider à construire mieux !</string>
     <string name="present">Présent</string>
+    <string name="preview">Preview</string>
     <string name="previous_month">Mois précédent</string>
     <string name="remember_month_year">Mémoriser le mois et l\'année du calendrier</string>
     <string name="reminder_to_mark_attendance">Reminder to mark attendance</string>
@@ -139,6 +148,8 @@
     <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
     <string name="restore_failed">Restore failed</string>
     <string name="restore_successful">Restore successful</string>
+    <string name="room">Room</string>
+    <string name="sans_serif">Sans Serif</string>
     <string name="select">Sélectionner</string>
     <string name="select_month_and_year">Sélectionnez le Mois &amp; Année</string>
     <string name="settings">Paramètres</string>
@@ -150,6 +161,7 @@
     <string name="subject_name">Nom de la matière</string>
     <string name="support_bmc">Vous aimez ce que je fais ?\nEnvisagez de m\'offrir un café</string>
     <string name="system">Système</string>
+    <string name="system_font">System font</string>
     <string name="this_month_data">This month data</string>
     <string name="total">Total</string>
     <string name="tweak_your_experience">Tweak your experience</string>
@@ -161,32 +173,25 @@
     <string name="update_subject">Modifier la matière</string>
     <string name="updates">Updates</string>
     <string name="version">Version</string>
+    <string name="version_code">Version code</string>
+    <string name="version_name">Version name</string>
     <string name="visit_repo_to_download">Click on the download button to get the latest version of Driftly from the github repository.</string>
     <string name="warning">Warning</string>
     <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>
     <string name="whats_new">Nouveautés !</string>
     <string name="year">Year</string>
-    <string name="attendance_overview">Attendance overview</string>
-    <string name="font_family">Font family</string>
-    <string name="system_font">System font</string>
-    <string name="des_font_family">Choose a font family for the app</string>
-    <string name="one_ui_sans">One UI Sans</string>
-    <string name="monospace">Monospace</string>
-    <string name="sans_serif">Sans Serif</string>
-    <string name="font_display_text">The quick brown fox jumps over the lazy dog</string>
-    <string name="preview">Preview</string>
     <string-array name="month_names">
-        <item>Janvier</item>
-        <item>Février</item>
-        <item>Mars</item>
-        <item>Avril</item>
-        <item>Mai</item>
-        <item>Juin</item>
-        <item>Juillet</item>
-        <item>Août</item>
-        <item>Septembre</item>
-        <item>Octobre</item>
-        <item>Novembre</item>
-        <item>Décembre</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 </resources>
