@@ -86,7 +86,7 @@ class HomeViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim()).first()
+            val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim(), _classType.value).first()
             if (isSubjectExists) {
                 _subjectError.value = SubjectError.AlreadyExists
             } else {
@@ -97,9 +97,7 @@ class HomeViewModel @Inject constructor(
                         classType = _classType.value
                     )
                 )
-                _subject.value = ""
-                _room.value = ""
-                _classType.value = null
+                resetInputFields()
                 onSuccess()
             }
         }
@@ -120,7 +118,7 @@ class HomeViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim()).first()
+            val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim(), _classType.value).first()
             if (isSubjectExists) {
                 _subjectError.value = SubjectError.AlreadyExists
             } else {
@@ -130,9 +128,7 @@ class HomeViewModel @Inject constructor(
                     newRoom = _room.value.trim().ifBlank { null },
                     newClassType = _classType.value
                 )
-                _subject.value = ""
-                _room.value = ""
-                _classType.value = null
+                resetInputFields()
                 onSuccess()
             }
         }
@@ -194,5 +190,3 @@ class HomeViewModel @Inject constructor(
         }
     }
 }
-
-

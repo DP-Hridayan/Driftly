@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -67,16 +68,31 @@ fun CalendarScreen(
         }
     }
 
+    val classTypeTranslated = when (args?.classType) {
+        "Theoretical" -> stringResource(R.string.theoretical)
+        "Practical" -> stringResource(R.string.practical)
+        else -> null
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .basicMarquee(),
-                        text = subject, overflow = TextOverflow.Ellipsis, maxLines = 1
-                    )
+                    Column {
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .basicMarquee(),
+                            text = subject, overflow = TextOverflow.Ellipsis, maxLines = 1
+                        )
+                        if (classTypeTranslated != null) {
+                            Text(
+                                text = classTypeTranslated,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                            )
+                        }
+                    }
                 },
                 navigationIcon = { BackButton() },
             )

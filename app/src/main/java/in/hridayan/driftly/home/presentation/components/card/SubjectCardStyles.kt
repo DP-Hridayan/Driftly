@@ -39,6 +39,7 @@ fun CardStyleA(
     modifier: Modifier = Modifier,
     subject: String,
     room: String? = null,
+    classType: String? = null,
     progress: Float,
     isLongClicked: Boolean,
     isTotalCountZero: Boolean,
@@ -72,9 +73,16 @@ fun CardStyleA(
             SubjectText(
                 subject = subject, subjectTextColor = subjectTextColor
             )
-            if (!room.isNullOrBlank()) {
+            if (!room.isNullOrBlank() || !classType.isNullOrBlank()) {
+                val infoText = buildString {
+                    if (!room.isNullOrBlank()) append(room)
+                    if (!classType.isNullOrBlank()) {
+                        if (isNotEmpty()) append(" • ")
+                        append(classType)
+                    }
+                }
                 Text(
-                    text = room,
+                    text = infoText,
                     style = MaterialTheme.typography.bodySmall,
                     color = subjectTextColor.copy(alpha = 0.7f)
                 )
@@ -100,6 +108,7 @@ fun CardStyleB(
     progress: Float,
     subject: String,
     room: String? = null,
+    classType: String? = null,
     isLongClicked: Boolean,
     isTotalCountZero: Boolean,
     onEditButtonClicked: () -> Unit,
@@ -148,9 +157,16 @@ fun CardStyleB(
                     SubjectText(
                         subject = subject
                     )
-                    if (!room.isNullOrBlank()) {
+                    if (!room.isNullOrBlank() || !classType.isNullOrBlank()) {
+                        val infoText = buildString {
+                            if (!room.isNullOrBlank()) append(room)
+                            if (!classType.isNullOrBlank()) {
+                                if (isNotEmpty()) append(" • ")
+                                append(classType)
+                            }
+                        }
                         Text(
-                            text = room,
+                            text = infoText,
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                         )

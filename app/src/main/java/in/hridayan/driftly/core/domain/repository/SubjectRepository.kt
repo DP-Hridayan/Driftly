@@ -13,6 +13,6 @@ interface SubjectRepository {
     suspend fun deleteSubject(subjectId: Int)
     suspend fun deleteAllSubjects()
     fun getSubjectCount(): Flow<Int>
-    fun isSubjectExists(subject: String): Flow<Boolean>
+    fun isSubjectExists(subject: String, classType: String?): Flow<Boolean>
     suspend fun updateSavedMonthYear(subjectId: Int, month: Int, year: Int)
 }

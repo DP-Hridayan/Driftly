@@ -43,8 +43,8 @@ class SubjectRepositoryImpl @Inject constructor(
     override fun getSubjectCount(): Flow<Int> =
         subjectDao.getSubjectCount()
 
-    override fun isSubjectExists(subject: String): Flow<Boolean> =
-        subjectDao.isSubjectExists(subject)
+    override fun isSubjectExists(subject: String, classType: String?): Flow<Boolean> =
+        subjectDao.isSubjectExists(subject, classType)
 
     override suspend fun updateSavedMonthYear(subjectId: Int, month: Int, year: Int) {
         subjectDao.updateSavedMonthYear(subjectId, month, year)

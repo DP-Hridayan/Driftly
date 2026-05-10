@@ -37,8 +37,8 @@ interface SubjectDao {
     @Query("SELECT * FROM subjects ORDER BY subject ASC")
     suspend fun getAllSubjectsOnce(): List<SubjectEntity>
 
-    @Query("SELECT EXISTS(SELECT * FROM subjects WHERE subject = :subject)")
-    fun isSubjectExists(subject: String): Flow<Boolean>
+    @Query("SELECT EXISTS(SELECT * FROM subjects WHERE subject = :subject AND (classType = :classType OR (classType IS NULL AND :classType IS NULL)))")
+    fun isSubjectExists(subject: String, classType: String?): Flow<Boolean>
 
     @Query("UPDATE subjects SET savedMonth = :month, savedYear = :year WHERE id = :subjectId")
     suspend fun updateSavedMonthYear(subjectId: Int, month: Int, year: Int)

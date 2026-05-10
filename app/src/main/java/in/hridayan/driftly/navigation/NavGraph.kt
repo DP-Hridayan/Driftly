@@ -126,7 +126,10 @@ object HomeScreen
 
 @Serializable
 data class CalendarScreen(
-    val subjectId: Int, val subject: String, val room: String? = null
+    val subjectId: Int,
+    val subject: String,
+    val room: String? = null,
+    val classType: String? = null
 )
 
 @Serializable

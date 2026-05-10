@@ -92,6 +92,7 @@ fun CustomisationScreen(
                                 SubjectCard(
                                     subject = stringResource(R.string.subject_name),
                                     subjectId = 999,
+                                    classType = stringResource(R.string.theoretical),
                                     progress = 0.67f,
                                     isDemoCard = true,
                                     cornerRadius = cardCornerSliderValue.value.dp,

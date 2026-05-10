@@ -323,6 +323,12 @@ fun HomeScreen(
 
                 val progress = counts.presentCount.toFloat() / counts.totalCount.toFloat()
 
+                val classTypeTranslated = when (subjects[index].classType) {
+                    "Theoretical" -> stringResource(R.string.theoretical)
+                    "Practical" -> stringResource(R.string.practical)
+                    else -> null
+                }
+
                 SubjectCard(
                     modifier = Modifier
                         .padding(horizontal = 15.dp)
@@ -332,7 +338,7 @@ fun HomeScreen(
                     subjectId = subjects[index].id,
                     subject = subjects[index].subject,
                     room = subjects[index].room,
-                    classType = subjects[index].classType,
+                    classType = classTypeTranslated,
                     progress = progress,
                     isTotalCountZero = counts.totalCount == 0,
                     selectedCardsCount = selectedCardsCount,
@@ -341,7 +347,8 @@ fun HomeScreen(
                             CalendarScreen(
                                 subjectId = subjects[index].id,
                                 subject = subjects[index].subject,
-                                room = subjects[index].room
+                                room = subjects[index].room,
+                                classType = subjects[index].classType
                             )
                         )
                     },

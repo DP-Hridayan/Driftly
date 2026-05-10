@@ -109,6 +109,7 @@ fun SubjectCard(
                 CardStyleA(
                     subject = subject,
                     room = room,
+                    classType = classType,
                     isLongClicked = isLongClicked,
                     isTotalCountZero = isTotalCountZero,
                     progress = progress,
@@ -121,6 +122,7 @@ fun SubjectCard(
                 CardStyleB(
                     subject = subject,
                     room = room,
+                    classType = classType,
                     isLongClicked = isLongClicked,
                     isTotalCountZero = isTotalCountZero,
                     progress = progress,
