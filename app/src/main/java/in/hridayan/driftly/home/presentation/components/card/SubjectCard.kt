@@ -43,6 +43,7 @@ fun SubjectCard(
     subjectId: Int,
     subject: String,
     room: String? = null,
+    classType: String? = null,
     progress: Float,
     isTotalCountZero: Boolean = false,
     selectedCardsCount: Int = 0,
@@ -144,6 +145,7 @@ fun SubjectCard(
             subjectId = subjectId,
             subject = subject,
             room = room,
+            classType = classType,
             onDismiss = {
                 isLongClicked = false
                 onLongClicked(false)

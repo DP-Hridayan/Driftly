@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonGroup
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -43,6 +45,7 @@ fun AddSubjectDialog(
 ) {
     val subject by viewModel.subject.collectAsState()
     val room by viewModel.room.collectAsState()
+    val classType by viewModel.classType.collectAsState()
     val subjectError by viewModel.subjectError.collectAsState()
 
     val interactionSources = remember { List(2) { MutableInteractionSource() } }
@@ -94,6 +97,35 @@ fun AddSubjectDialog(
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = stringResource(R.string.room)) },
                 )
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.class_type),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        val types = listOf(
+                            stringResource(R.string.none) to null,
+                            stringResource(R.string.theoretical) to "Theoretical",
+                            stringResource(R.string.practical) to "Practical"
+                        )
+
+                        types.forEach { (label, value) ->
+                            FilterChip(
+                                selected = classType == value,
+                                onClick = { viewModel.onClassTypeChange(value) },
+                                label = { Text(text = label) }
+                            )
+                        }
+                    }
+                }
 
                 @Suppress("DEPRECATION")
                 ButtonGroup(modifier = Modifier.fillMaxWidth()) {
