@@ -42,6 +42,9 @@ class HomeViewModel @Inject constructor(
     private val _room = MutableStateFlow("")
     val room: StateFlow<String> = _room
 
+    private val _classType = MutableStateFlow<String?>(null)
+    val classType: StateFlow<String?> = _classType
+
     private val _subjectError = MutableStateFlow<SubjectError>(SubjectError.None)
     val subjectError: StateFlow<SubjectError> = _subjectError
 
@@ -61,6 +64,10 @@ class HomeViewModel @Inject constructor(
 
     fun onRoomChange(newValue: String) {
         _room.value = newValue
+    }
+
+    fun onClassTypeChange(newValue: String?) {
+        _classType.value = newValue
     }
 
     val subjectList: Flow<List<SubjectEntity>> = subjectRepository.getAllSubjects().stateIn(
@@ -83,11 +90,13 @@ class HomeViewModel @Inject constructor(
                 subjectRepository.insertSubject(
                     SubjectEntity(
                         subject = _subject.value.trim(),
-                        room = _room.value.trim().ifBlank { null }
+                        room = _room.value.trim().ifBlank { null },
+                        classType = _classType.value
                     )
                 )
                 _subject.value = ""
                 _room.value = ""
+                _classType.value = null
                 onSuccess()
             }
         }
@@ -96,6 +105,7 @@ class HomeViewModel @Inject constructor(
     fun resetInputFields() {
         _subject.value = ""
         _room.value = ""
+        _classType.value = null
         _subjectError.value = SubjectError.None
     }
 

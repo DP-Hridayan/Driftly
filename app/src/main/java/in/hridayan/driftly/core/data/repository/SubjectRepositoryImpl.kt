@@ -25,8 +25,8 @@ class SubjectRepositoryImpl @Inject constructor(
         subjectDao.insertAllSubjects(subjects)
     }
 
-    override suspend fun updateSubject(subjectId: Int, newName: String, newRoom: String?) {
-        subjectDao.updateSubject(subjectId, newName, newRoom)
+    override suspend fun updateSubject(subjectId: Int, newName: String, newRoom: String?, newClassType: String?) {
+        subjectDao.updateSubject(subjectId, newName, newRoom, newClassType)
     }
 
     override suspend fun deleteSubject(subjectId: Int) {
