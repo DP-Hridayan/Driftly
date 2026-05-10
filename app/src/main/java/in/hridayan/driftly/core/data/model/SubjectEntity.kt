@@ -12,5 +12,5 @@ data class SubjectEntity(
     val savedMonth: Int? = null,
     val savedYear: Int? = null,
     val room: String? = null,
-
+    val classType: String? = null,
 )
