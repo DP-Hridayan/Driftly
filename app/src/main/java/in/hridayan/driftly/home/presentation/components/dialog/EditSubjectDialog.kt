@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectError
 import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
@@ -105,7 +104,7 @@ fun EditSubjectDialog(
                         viewModel.onRoomChange(it)
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = stringResource(R.string.room)) }
+                    label = { Text(text = stringResource(R.string.room) + " (" + stringResource(R.string.optional) + ")") }
                 )
 
                 Column(
@@ -140,7 +139,7 @@ fun EditSubjectDialog(
                 @Suppress("DEPRECATION")
                 ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
-                        onClick =withHaptic(HapticFeedbackType.Reject) {
+                        onClick = withHaptic(HapticFeedbackType.Reject) {
                             viewModel.resetInputFields()
                             onDismiss()
                         },
@@ -157,7 +156,7 @@ fun EditSubjectDialog(
                     )
 
                     Button(
-                        onClick = withHaptic(HapticFeedbackType.Confirm){
+                        onClick = withHaptic(HapticFeedbackType.Confirm) {
                             viewModel.updateSubject(
                                 subjectId = subjectId,
                                 onSuccess = {

@@ -11,6 +11,7 @@
     <string name="app">Приложение</string>
     <string name="app_name">Driftly</string>
     <string name="attendance">Посещаемость</string>
+    <string name="attendance_overview">Обзор посещаемости</string>
     <string name="auto_update">Автоматическое обновление</string>
     <string name="back_button">Кнопка назад</string>
     <string name="backup">Резервная копия</string>
@@ -31,7 +32,7 @@
     <string name="changelogs_v1_2_0">Улучшена цветовая схема в высококонтрастной тёмной теме\nДобавлен раздел \"Что нового\" для отображения списка изменений после обновления\nОптимизация кода</string>
     <string name="changelogs_v1_3_0">Добавлены настройки поведения для изменения определенного поведения приложения\nДобавлена опция запоминания последнего просмотренного месяца\nДобавлена опция отключения визуального отображения серий посещаемости в календаре</string>
     <string name="changelogs_v1_4_0">Переход некоторых компонентов интерфейса на тему Material Expressive\nДобавлена возможность сделать понедельник первым днем недели в календаре\nДобавлена возможность прямой загрузки последних обновленных apk внутри приложения без необходимости посещения репозитория Github\nИсправлено множество несоответствий интерфейса</string>
-    <string name="changelogs_v1_5_0">Добавлена возможность локального резервного копирования и восстановления данных приложения\nЛокализация некоторых строк\nНезначительные улучшения интерфейса</string>
+    <string name="changelogs_v1_5_0">Added option to back up and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
     <string name="changelogs_v1_5_1">Исправлена проблема восстановления резервной копии на некоторых устройствах</string>
     <string name="changelogs_v1_6_0">Добавлены уведомления о различных событиях, таких как напоминание о посещаемости, предупреждение о пропуске занятий и уведомление об обнаружении новой версии приложения\nУлучшен выбор карточек предметов на главном экране с поддержкой отмены выбора обратным нажатием\nИсправлены цвета системных полос в Android 11 и ниже</string>
     <string name="changelogs_v1_7_0">Добавлено предупреждение перед скачиванием обновлений приложения из Github\nИсправлены некоторые иконки в интерфейсе приложения</string>
@@ -39,6 +40,7 @@
     <string name="changelogs_v1_8_1">Исправлены цвета карточек в динамической теме</string>
     <string name="changelogs_v1_8_2">Исправлены некоторые отступы в интерфейсе</string>
     <string name="changelogs_v1_8_3">Обновлены зависимости и исправлены некоторые проблемы</string>
+    <string name="changelogs_v1_9_0">Improved color palettes and color scheme\nAdded option to customise app font style\nAdded option to add room name per Subject</string>
     <string name="changelogs_v1_0_0">Первая версия\nДобавлен календарь для отметки статуса посещаемости\nДобавлено отображение прогресса по каждому занятию \nДобавлена возможность добавлять, удалять и редактировать занятия\nДобавлены настройки</string>
     <string name="check_updates">Проверить обновления</string>
     <string name="clear">Очистить</string>
@@ -64,6 +66,7 @@
     <string name="des_dynamic_colors">Автоматическая установка темы приложения в соответствии с обоями устройства</string>
     <string name="des_enable_direct_download">Когда включено, обновления будут загружаться непосредственно с Github внутри приложения. Выключите, чтобы посетить страницу релизов Github для загрузки вручную.</string>
     <string name="des_feature_request">Если у вас есть какие-либо идеи или предложения, дайте нам знать</string>
+    <string name="des_font_family">Выберите семейство шрифтов для приложения</string>
     <string name="des_github">Посетите github-репозиторий приложения</string>
     <string name="des_grant_notification_permission">Хотите получать оповещения, если забудете отметить свое присутствие?\n\nПредоставьте доступ к уведомлениям!</string>
     <string name="des_haptics_and_vibration">Тактильный отклик для сенсорной обратной связи</string>
@@ -95,6 +98,8 @@
     <string name="error">Ошибка</string>
     <string name="feature_request">Предложить функцию</string>
     <string name="field_blank_error">Поле не может быть пустым</string>
+    <string name="font_display_text">В чащах юга жил бы цитрус? Да, но фальшивый экземпляр!</string>
+    <string name="font_family">Семейство шрифтов</string>
     <string name="grant_permission">Предоставить разрешение</string>
     <string name="haptics_and_vibration">Тактильная отдача и вибрация</string>
     <string name="high_contrast_dark_mode">Высококонтрастная тёмная тема</string>
@@ -106,6 +111,7 @@
     <string name="license">Лицензия</string>
     <string name="look_and_feel">Оформление</string>
     <string name="mark_your_attendance">Отметьте свою посещаемость</string>
+    <string name="monospace">Моноширинный</string>
     <string name="month">Месяц</string>
     <string name="network_error">Ошибка сети</string>
     <string name="next_month">Следующий месяц</string>
@@ -118,11 +124,14 @@
     <string name="off">Выключить</string>
     <string name="ok">ОК</string>
     <string name="on">Включить</string>
+    <string name="one_ui_sans">One UI Sans</string>
+    <string name="optional">Optional</string>
     <string name="pick_driftly_extension">Пожалуйста выберите файл с расширением .driftly</string>
     <string name="pre_release">Предварительный</string>
     <string name="pre_release_warning">Предварительные сборки могут быть нестабильными</string>
     <string name="pre_release_warning_description">Эти версии находятся в стадии тестирования и могут содержать недоработанные функции или неожиданные ошибки. Если вы решили обновиться до предварительной версии, пожалуйста, имейте в виду, что что-то может сломаться или вести себя странно.\nЕсли вы столкнулись с какими-либо проблемами, сбоями или странным поведением, пожалуйста, сообщите о них, чтобы мы могли исправить и улучшить Driftly до стабильного релиза.\nСпасибо, что помогаете нам становиться лучше!</string>
     <string name="present">Присутствовал</string>
+    <string name="preview">Предпросмотр</string>
     <string name="previous_month">Предыдущий месяц</string>
     <string name="remember_month_year">Запоминать месяц и год в календаре</string>
     <string name="reminder_to_mark_attendance">Напоминать отметить посещаемость</string>
@@ -139,6 +148,8 @@
     <string name="restore_dialog_message">Данные в сохраненном файле перезапишут текущие данные.</string>
     <string name="restore_failed">Не удалось восстановить</string>
     <string name="restore_successful">Успешно восстановлено</string>
+    <string name="room">Room</string>
+    <string name="sans_serif">Рубленый</string>
     <string name="select">Выбрать</string>
     <string name="select_month_and_year">Выберите Месяц и Год</string>
     <string name="settings">Настройки</string>
@@ -150,6 +161,7 @@
     <string name="subject_name">Название занятия</string>
     <string name="support_bmc">Нравиться, чем я занимаюсь?\nУгостите меня кофе!</string>
     <string name="system">Как в системе</string>
+    <string name="system_font">Системный Шрифт</string>
     <string name="this_month_data">Данные этого месяца</string>
     <string name="total">Всего</string>
     <string name="tweak_your_experience">Улучшите свой опыт использования</string>
@@ -161,32 +173,25 @@
     <string name="update_subject">Обновить Занятие</string>
     <string name="updates">Обновления</string>
     <string name="version">Версия</string>
+    <string name="version_code">Version code</string>
+    <string name="version_name">Version name</string>
     <string name="visit_repo_to_download">Нажмите на кнопку скачивания, чтобы получить последнюю версию Driftly из репозитория github.</string>
     <string name="warning">Предупреждение</string>
     <string name="warning_github_download">Вы собираетесь загружать обновления непосредственно с GitHub. В отличие от обновлений из магазинов приложений, они не проверяются на безопасность. Вы хотите продолжить?</string>
     <string name="whats_new">Что нового!</string>
     <string name="year">Год</string>
-    <string name="attendance_overview">Обзор посещаемости</string>
-    <string name="font_family">Семейство шрифтов</string>
-    <string name="system_font">Системный Шрифт</string>
-    <string name="des_font_family">Выберите семейство шрифтов для приложения</string>
-    <string name="one_ui_sans">One UI Sans</string>
-    <string name="monospace">Моноширинный</string>
-    <string name="sans_serif">Рубленый</string>
-    <string name="font_display_text">В чащах юга жил бы цитрус? Да, но фальшивый экземпляр!</string>
-    <string name="preview">Предпросмотр</string>
     <string-array name="month_names">
-        <item>Январь</item>
-        <item>Февраль</item>
-        <item>Март</item>
-        <item>Апрель</item>
-        <item>Май</item>
-        <item>Июнь</item>
-        <item>Июль</item>
-        <item>Август</item>
-        <item>Сентябрь</item>
-        <item>Октябрь</item>
-        <item>Ноябрь</item>
-        <item>Декабрь</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 </resources>

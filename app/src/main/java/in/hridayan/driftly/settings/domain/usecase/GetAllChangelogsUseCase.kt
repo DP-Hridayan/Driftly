@@ -1,30 +1,23 @@
 package `in`.hridayan.driftly.settings.domain.usecase
 
-import android.annotation.SuppressLint
 import android.content.Context
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.settings.data.local.source.VersionToChangelogs
+import `in`.hridayan.driftly.settings.data.local.source.versionToChangelogsMap
 import `in`.hridayan.driftly.settings.domain.model.ChangelogItem
-import `in`.hridayan.driftly.settings.data.local.source.versionList
 
 class GetAllChangelogsUseCase(
     private val context: Context,
-    private val versions: List<String> = versionList
+    private val versionToChangelogs: List<VersionToChangelogs> = versionToChangelogsMap
 ) {
-    @SuppressLint("DiscouragedApi")
     operator fun invoke(): List<ChangelogItem> {
-        val res = context.resources
-        val pkg = context.packageName
-
-        return versions.map { version ->
-            val resourceName = "changelogs_" + version.replace('.', '_')
-
-            val resId = res.getIdentifier(resourceName, "string", pkg)
+        return versionToChangelogs.map { item ->
 
             val text = context.getString(
-                if (resId != 0) resId else R.string.no_changelog_found
+                if (item.changelogsResId != 0) item.changelogsResId else R.string.no_changelog_found
             )
 
-            ChangelogItem(versionName = version, changelog = text)
+            ChangelogItem(versionName = item.version, changelog = text)
         }
     }
 }

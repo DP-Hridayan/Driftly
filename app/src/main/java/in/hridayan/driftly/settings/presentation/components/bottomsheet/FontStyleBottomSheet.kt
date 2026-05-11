@@ -27,6 +27,7 @@ import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonGroup
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -59,7 +60,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.core.presentation.components.card.PillShapedCard
 import `in`.hridayan.driftly.core.presentation.components.card.RoundedCornerCard
 import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
@@ -291,8 +291,9 @@ fun TextFormatUtilityRow(
     val unCheckedContainerColor = BottomSheetDefaults.ContainerColor
     val unCheckedContentColor = MaterialTheme.colorScheme.onSurface
 
-    PillShapedCard(
+    Card(
         modifier = modifier,
+        shape = RoundedCornerShape(50),
         colors = CardDefaults.cardColors(
             containerColor = BottomSheetDefaults.ContainerColor,
             contentColor = MaterialTheme.colorScheme.onSurface
@@ -301,7 +302,6 @@ fun TextFormatUtilityRow(
             width = 1.dp,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
         ),
-        onClick = {}
     ) {
         Row(
             modifier = Modifier

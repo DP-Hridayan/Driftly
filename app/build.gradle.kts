@@ -1,6 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
@@ -9,7 +11,10 @@ plugins {
 
 android {
     namespace = "in.hridayan.driftly"
-    compileSdk = 36
+
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         applicationId = "in.hridayan.driftly"
@@ -49,16 +54,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    kotlin {
-        jvmToolchain(21)
-    }
-
-    ksp {
-        arg("room.schemaLocation", "$projectDir/schemas")
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildTypes {
@@ -94,6 +91,16 @@ android {
     dependenciesInfo {
         includeInApk = false
         includeInBundle = false
+    }
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 

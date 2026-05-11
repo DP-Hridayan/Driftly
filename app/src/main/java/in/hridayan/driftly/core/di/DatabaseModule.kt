@@ -8,8 +8,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import `in`.hridayan.driftly.core.data.database.AttendanceDao
-import `in`.hridayan.driftly.core.data.database.MIGRATION_2_3
 import `in`.hridayan.driftly.core.data.database.MIGRATION_4_5
+import `in`.hridayan.driftly.core.data.database.MIGRATION_SUBJECT_TABLE_2_3
+import `in`.hridayan.driftly.core.data.database.MIGRATION_SUBJECT_TABLE_3_4
 import `in`.hridayan.driftly.core.data.database.SubjectDao
 import `in`.hridayan.driftly.core.data.database.SubjectDatabase
 import javax.inject.Singleton
@@ -26,8 +27,11 @@ object DatabaseModule {
             SubjectDatabase::class.java,
             "attendance_app_db"
         )
-            .addMigrations(MIGRATION_4_5)
-            .fallbackToDestructiveMigration()
+            .addMigrations(
+                MIGRATION_SUBJECT_TABLE_2_3,
+                MIGRATION_SUBJECT_TABLE_3_4,
+                MIGRATION_4_5
+            )
             .build()
 
     @Provides

@@ -130,7 +130,6 @@ class HomeViewModel @Inject constructor(
                 )
                 resetInputFields()
                 onSuccess()
-            }
         }
     }
 
