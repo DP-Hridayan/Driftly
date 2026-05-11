@@ -6,18 +6,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonGroup
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -25,12 +26,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
 import `in`.hridayan.driftly.core.domain.model.SubjectError
+import `in`.hridayan.driftly.core.domain.provider.classTypeToString
 import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.core.presentation.theme.Shape
@@ -40,17 +44,13 @@ import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 fun EditSubjectDialog(
     modifier: Modifier = Modifier,
     subjectId: Int,
-    subject: String,
-    room: String?,
     viewModel: HomeViewModel = hiltViewModel(),
     onDismiss: () -> Unit
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.setSubjectNamePlaceholder(subject, room)
-    }
-
+    val context = LocalContext.current
     val subjectValue by viewModel.subject.collectAsState()
     val roomValue by viewModel.room.collectAsState()
+    val classType by viewModel.classType.collectAsState()
     val subjectError by viewModel.subjectError.collectAsState()
 
     val interactionSources = remember { List(2) { MutableInteractionSource() } }
@@ -103,6 +103,34 @@ fun EditSubjectDialog(
                     label = { Text(text = stringResource(R.string.room) + " (" + stringResource(R.string.optional) + ")") }
                 )
 
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.class_type),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalArrangement = Arrangement.spacedBy(5.dp),
+                    ) {
+                        SubjectClassType.entries.forEach { type ->
+                            val classTypeString = classTypeToString(context, type)
+
+                            FilterChip(
+                                selected = classType == type,
+                                onClick = withHaptic(HapticFeedbackType.VirtualKey) {
+                                    viewModel.onClassTypeChange(type)
+                                },
+                                label = { Text(text = classTypeString) }
+                            )
+                        }
+                    }
+                }
+
                 @Suppress("DEPRECATION")
                 ButtonGroup(modifier = Modifier.fillMaxWidth()) {
                     OutlinedButton(
@@ -124,7 +152,7 @@ fun EditSubjectDialog(
 
                     Button(
                         onClick = withHaptic(HapticFeedbackType.Confirm) {
-                            viewModel.updateSubject(
+                            viewModel.updateSubjectConditionally(
                                 subjectId = subjectId,
                                 onSuccess = {
                                     viewModel.resetInputFields()

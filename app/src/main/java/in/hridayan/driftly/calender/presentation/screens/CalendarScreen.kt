@@ -2,12 +2,14 @@ package `in`.hridayan.driftly.calender.presentation.screens
 
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -16,6 +18,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -25,6 +28,8 @@ import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCar
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
+import `in`.hridayan.driftly.core.domain.provider.classTypeToString
 import `in`.hridayan.driftly.core.presentation.components.button.BackButton
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
@@ -34,10 +39,12 @@ import `in`.hridayan.driftly.navigation.LocalNavController
 fun CalendarScreen(
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
+    val context = LocalContext.current
     val navController = LocalNavController.current
     val args = navController.currentBackStackEntry?.toRoute<CalendarScreen>()
     val subjectId = args?.subjectId ?: 0
     val subject = args?.subject ?: ""
+    val classType = args?.classType ?: SubjectClassType.NONE
     val markedDates by viewModel.markedDatesFlow.collectAsState()
     val streakMap by viewModel.streakMapFlow.collectAsState(initial = emptyMap())
     val subjectEntity = viewModel.getSubjectEntityById(subjectId).collectAsState(initial = null)
@@ -64,12 +71,23 @@ fun CalendarScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .basicMarquee(),
-                        text = subject, overflow = TextOverflow.Ellipsis, maxLines = 1
-                    )
+                    Column {
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .basicMarquee(),
+                            text = subject, overflow = TextOverflow.Ellipsis, maxLines = 1
+                        )
+                        val classTypeText = classTypeToString(context, classType)
+
+                        if (classType != SubjectClassType.NONE) {
+                            Text(
+                                text = classTypeText,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                            )
+                        }
+                    }
                 },
                 navigationIcon = { BackButton() },
             )

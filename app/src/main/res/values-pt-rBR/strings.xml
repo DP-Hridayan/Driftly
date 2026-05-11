@@ -147,10 +147,14 @@
     <string name="restore_app_data">Restore app data</string>
     <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
     <string name="restore_failed">Restore failed</string>
-    <string name="restore_successful">Restore successful</string>
-    <string name="room">Room</string>
+    <string name="restore_successful">Restaurado com sucesso</string>
+    <string name="room">Sala</string>
+    <string name="class_type">Tipo de aula</string>
+    <string name="theoretical">Teórica</string>
+    <string name="practical">Prática</string>
+    <string name="none">Nenhum</string>
+    <string name="select">Selecionar</string>
     <string name="sans_serif">Sans Serif</string>
-    <string name="select">Select</string>
     <string name="select_month_and_year">Select Month &amp; Year</string>
     <string name="settings">Settings</string>
     <string name="show_attendance_steaks">Show attendance streaks</string>

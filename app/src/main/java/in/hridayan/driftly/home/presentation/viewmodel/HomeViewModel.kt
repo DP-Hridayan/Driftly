@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.core.data.model.SubjectEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
 import `in`.hridayan.driftly.core.domain.model.SubjectError
 import `in`.hridayan.driftly.core.domain.model.TotalAttendance
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
@@ -42,16 +43,24 @@ class HomeViewModel @Inject constructor(
     private val _room = MutableStateFlow("")
     val room: StateFlow<String> = _room
 
+    private val _classType = MutableStateFlow(SubjectClassType.NONE)
+    val classType: StateFlow<SubjectClassType> = _classType
+
     private val _subjectError = MutableStateFlow<SubjectError>(SubjectError.None)
     val subjectError: StateFlow<SubjectError> = _subjectError
 
-    fun setSubjectNamePlaceholder(value: String, roomValue: String?) {
+    fun setFieldsForEdit(
+        subjectName: String,
+        roomName: String?,
+        subjectClassType: SubjectClassType
+    ) {
         if (_subject.value.isBlank()) {
-            _subject.value = value
+            _subject.value = subjectName
         }
         if (_room.value.isBlank()) {
-            _room.value = roomValue ?: ""
+            _room.value = roomName ?: ""
         }
+        _classType.value = subjectClassType
     }
 
     fun onSubjectChange(newValue: String) {
@@ -61,6 +70,10 @@ class HomeViewModel @Inject constructor(
 
     fun onRoomChange(newValue: String) {
         _room.value = newValue
+    }
+
+    fun onClassTypeChange(newValue: SubjectClassType) {
+        _classType.value = newValue
     }
 
     val subjectList: Flow<List<SubjectEntity>> = subjectRepository.getAllSubjects().stateIn(
@@ -76,18 +89,19 @@ class HomeViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            val isSubjectExists = subjectRepository.isSubjectExists(_subject.value.trim()).first()
+            val isSubjectExists =
+                subjectRepository.isSubjectExists(_subject.value.trim(), _classType.value).first()
             if (isSubjectExists) {
                 _subjectError.value = SubjectError.AlreadyExists
             } else {
                 subjectRepository.insertSubject(
                     SubjectEntity(
                         subject = _subject.value.trim(),
-                        room = _room.value.trim().ifBlank { null }
+                        room = _room.value.trim().ifBlank { null },
+                        classType = _classType.value
                     )
                 )
-                _subject.value = ""
-                _room.value = ""
+                resetInputFields()
                 onSuccess()
             }
         }
@@ -96,10 +110,11 @@ class HomeViewModel @Inject constructor(
     fun resetInputFields() {
         _subject.value = ""
         _room.value = ""
+        _classType.value = SubjectClassType.NONE
         _subjectError.value = SubjectError.None
     }
 
-    fun updateSubject(subjectId: Int, onSuccess: () -> Unit) {
+    fun updateSubjectConditionally(subjectId: Int, onSuccess: () -> Unit) {
         val isSubjectInvalid = _subject.value.trim().isBlank()
         if (isSubjectInvalid) {
             _subjectError.value = SubjectError.Empty
@@ -107,15 +122,37 @@ class HomeViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-                subjectRepository.updateSubject(
-                    subjectId = subjectId,
-                    newName = _subject.value.trim(),
-                    newRoom = _room.value.trim().ifBlank { null }
-                )
-                _subject.value = ""
-                _room.value = ""
-                onSuccess()
+            val subject = subjectRepository.getSubjectByIdOnce(subjectId)
+
+            val existingSubjectName = subject.subject
+            val existingRoom = subject.room
+            val existingSubjectClassType = subject.classType
+
+            val isSubjectExists =
+                subjectRepository.isSubjectExists(_subject.value.trim(), _classType.value).first()
+
+            if (existingSubjectName == _subject.value.trim()
+                && existingSubjectClassType == _classType.value
+                && existingRoom != _room.value.trim()
+            ) {
+                updateSubject(subjectId, onSuccess)
+            } else if (isSubjectExists) {
+                _subjectError.value = SubjectError.AlreadyExists
+            } else {
+                updateSubject(subjectId, onSuccess)
+            }
         }
+    }
+
+    private suspend fun updateSubject(subjectId: Int, onSuccess: () -> Unit) {
+        subjectRepository.updateSubject(
+            subjectId = subjectId,
+            newName = _subject.value.trim(),
+            newRoom = _room.value.trim().ifBlank { null },
+            newClassType = _classType.value
+        )
+        resetInputFields()
+        onSuccess()
     }
 
     fun deleteSubject(subjectId: Int, onSuccess: () -> Unit) {
@@ -174,5 +211,3 @@ class HomeViewModel @Inject constructor(
         }
     }
 }
-
-
