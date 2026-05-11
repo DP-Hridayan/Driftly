@@ -31,6 +31,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.core.common.LocalWeakHaptic
 import `in`.hridayan.driftly.core.domain.model.SubjectCardStyle
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
 import `in`.hridayan.driftly.home.presentation.components.card.SubjectCard
 import `in`.hridayan.driftly.settings.presentation.components.scaffold.SettingsScaffold
 import `in`.hridayan.driftly.settings.presentation.page.customisation.viewmodel.CustomisationViewModel
@@ -92,7 +93,7 @@ fun CustomisationScreen(
                                 SubjectCard(
                                     subject = stringResource(R.string.subject_name),
                                     subjectId = 999,
-                                    classType = stringResource(R.string.theoretical),
+                                    classType = SubjectClassType.THEORETICAL,
                                     progress = 0.67f,
                                     isDemoCard = true,
                                     cornerRadius = cardCornerSliderValue.value.dp,

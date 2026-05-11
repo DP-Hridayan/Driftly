@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.core.domain.model.SubjectCardStyle
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
 import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
@@ -43,7 +44,7 @@ fun SubjectCard(
     subjectId: Int,
     subject: String,
     room: String? = null,
-    classType: String? = null,
+    classType: SubjectClassType = SubjectClassType.NONE,
     progress: Float,
     isTotalCountZero: Boolean = false,
     selectedCardsCount: Int = 0,
@@ -57,7 +58,7 @@ fun SubjectCard(
 ) {
     var isLongClicked by rememberSaveable { mutableStateOf(false) }
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
-    var isUpdateDialogVisible by rememberSaveable { mutableStateOf(false) }
+    var isEditDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isNoAttendanceDialogVisible by rememberSaveable { mutableStateOf(false) }
 
     val handleLongClick = withHaptic(HapticFeedbackType.LongPress) {
@@ -85,7 +86,13 @@ fun SubjectCard(
     }
 
     val onEditButtonClicked: () -> Unit = withHaptic(HapticFeedbackType.Confirm) {
-        isUpdateDialogVisible = true
+        isEditDialogVisible = true
+
+        viewModel.setFieldsForEdit(
+            subjectName = subject,
+            roomName = room,
+            subjectClassType = classType
+        )
     }
 
     val onDeleteButtonClicked: () -> Unit = withHaptic(HapticFeedbackType.Confirm) {
@@ -142,16 +149,13 @@ fun SubjectCard(
         )
     }
 
-    if (isUpdateDialogVisible) {
+    if (isEditDialogVisible) {
         EditSubjectDialog(
             subjectId = subjectId,
-            subject = subject,
-            room = room,
-            classType = classType,
             onDismiss = {
                 isLongClicked = false
                 onLongClicked(false)
-                isUpdateDialogVisible = false
+                isEditDialogVisible = false
             })
     }
 

@@ -2,6 +2,7 @@ package `in`.hridayan.driftly.core.data.repository
 
 import `in`.hridayan.driftly.core.data.database.SubjectDao
 import `in`.hridayan.driftly.core.data.model.SubjectEntity
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -17,6 +18,10 @@ class SubjectRepositoryImpl @Inject constructor(
         return subjectDao.getSubjectById(id)
     }
 
+    override suspend fun getSubjectByIdOnce(id: Int): SubjectEntity {
+        return subjectDao.getSubjectByIdOnce(id)
+    }
+
     override suspend fun insertSubject(subject: SubjectEntity) {
         subjectDao.insertSubject(subject)
     }
@@ -25,7 +30,12 @@ class SubjectRepositoryImpl @Inject constructor(
         subjectDao.insertAllSubjects(subjects)
     }
 
-    override suspend fun updateSubject(subjectId: Int, newName: String, newRoom: String?, newClassType: String?) {
+    override suspend fun updateSubject(
+        subjectId: Int,
+        newName: String,
+        newRoom: String?,
+        newClassType: SubjectClassType
+    ) {
         subjectDao.updateSubject(subjectId, newName, newRoom, newClassType)
     }
 
@@ -43,7 +53,7 @@ class SubjectRepositoryImpl @Inject constructor(
     override fun getSubjectCount(): Flow<Int> =
         subjectDao.getSubjectCount()
 
-    override fun isSubjectExists(subject: String, classType: String?): Flow<Boolean> =
+    override fun isSubjectExists(subject: String, classType: SubjectClassType): Flow<Boolean> =
         subjectDao.isSubjectExists(subject, classType)
 
     override suspend fun updateSavedMonthYear(subjectId: Int, month: Int, year: Int) {
