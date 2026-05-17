@@ -144,6 +144,10 @@
     <string name="reset_settings_successful">Ayarları sıfırla başarılı</string>
     <string name="reset_to_current_month">Geçerli aya sıfırla</string>
     <string name="restore">Geri Yükle</string>
+    <string name="class_type">Class type</string>
+    <string name="theoretical">Theoretical</string>
+    <string name="practical">Practical</string>
+    <string name="none">None</string>
     <string name="restore_app_data">Uygulama verilerini geri yükle</string>
     <string name="restore_dialog_message">Kaydedilen dosyadaki veriler mevcut verilerin yerine geçecektir.</string>
     <string name="restore_failed">Geri yükleme başarısız oldu</string>

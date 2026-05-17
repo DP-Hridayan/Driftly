@@ -149,6 +149,10 @@
     <string name="reset_settings_successful">تمت إعادة تعيين الإعدادات بنجاح</string>
     <string name="reset_to_current_month">العودة إلى الشهر الحالي</string>
     <string name="restore">إستعادة</string>
+    <string name="class_type">Class type</string>
+    <string name="theoretical">Theoretical</string>
+    <string name="practical">Practical</string>
+    <string name="none">None</string>
     <string name="restore_app_data">إستعادة بيانات التطبيق</string>
     <string name="restore_dialog_message">سيتم استبدال البيانات الحالية بالبيانات الموجودة في الملف المحفوظ.</string>
     <string name="restore_failed">فشلت الاستعادة</string>
