@@ -144,6 +144,10 @@
     <string name="reset_settings_successful">Parametrlər ilkin vəziyyətə qaytarıldı</string>
     <string name="reset_to_current_month">İndiki aya sıfırla</string>
     <string name="restore">Bərpa Et</string>
+    <string name="class_type">Class type</string>
+    <string name="theoretical">Theoretical</string>
+    <string name="practical">Practical</string>
+    <string name="none">None</string>
     <string name="restore_app_data">Tətbiq verilənlərini bərpa et</string>
     <string name="restore_dialog_message">Saxlanılmış fayldakı məlumatlar hazırkı məlumatları əvəz edəcək.</string>
     <string name="restore_failed">Bərpa edilə bilmədi</string>

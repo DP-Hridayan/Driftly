@@ -144,6 +144,10 @@
     <string name="reset_settings_successful">Reset settings successful</string>
     <string name="reset_to_current_month">Auf aktuellen Monat zurücksetzen</string>
     <string name="restore">Wiederherstellen</string>
+    <string name="class_type">Class type</string>
+    <string name="theoretical">Theoretical</string>
+    <string name="practical">Practical</string>
+    <string name="none">None</string>
     <string name="restore_app_data">App-Daten wiederherstellen</string>
     <string name="restore_dialog_message">Die Daten in der gespeicherten Datei werden die aktuellen Daten überschreiben.</string>
     <string name="restore_failed">Wiederherstellen fehlgeschlagen</string>

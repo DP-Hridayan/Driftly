@@ -144,6 +144,10 @@
     <string name="reset_settings_successful">成功重置设置</string>
     <string name="reset_to_current_month">重置为当月</string>
     <string name="restore">恢复</string>
+    <string name="class_type">Class type</string>
+    <string name="theoretical">Theoretical</string>
+    <string name="practical">Practical</string>
+    <string name="none">None</string>
     <string name="restore_app_data">恢复应用数据</string>
     <string name="restore_dialog_message">保存文件中的数据将覆盖当前数据。</string>
     <string name="restore_failed">恢复失败</string>

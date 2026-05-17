@@ -144,6 +144,10 @@
     <string name="reset_settings_successful">Настройки сброшены успешно</string>
     <string name="reset_to_current_month">Вернуться к текущему месяцу</string>
     <string name="restore">Восстановить</string>
+    <string name="class_type">Class type</string>
+    <string name="theoretical">Theoretical</string>
+    <string name="practical">Practical</string>
+    <string name="none">None</string>
     <string name="restore_app_data">Восстановить данные приложения</string>
     <string name="restore_dialog_message">Данные в сохраненном файле перезапишут текущие данные.</string>
     <string name="restore_failed">Не удалось восстановить</string>
