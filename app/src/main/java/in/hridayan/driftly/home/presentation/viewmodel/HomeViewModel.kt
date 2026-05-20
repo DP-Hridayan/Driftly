@@ -45,10 +45,13 @@ class HomeViewModel @Inject constructor(
     private val _classType = MutableStateFlow<String?>(null)
     val classType: StateFlow<String?> = _classType
 
+    private val _daysOfWeek = MutableStateFlow<String?>(null)
+    val daysOfWeek: StateFlow<String?> = _daysOfWeek
+
     private val _subjectError = MutableStateFlow<SubjectError>(SubjectError.None)
     val subjectError: StateFlow<SubjectError> = _subjectError
 
-    fun setSubjectNamePlaceholder(value: String, roomValue: String?, classTypeValue: String?) {
+    fun setSubjectNamePlaceholder(value: String, roomValue: String?, classTypeValue: String?, daysOfWeekValue: String?) {
         if (_subject.value.isBlank()) {
             _subject.value = value
         }
@@ -57,6 +60,9 @@ class HomeViewModel @Inject constructor(
         }
         if (_classType.value == null) {
             _classType.value = classTypeValue
+        }
+        if (_daysOfWeek.value == null) {
+            _daysOfWeek.value = daysOfWeekValue
         }
     }
 
@@ -71,6 +77,10 @@ class HomeViewModel @Inject constructor(
 
     fun onClassTypeChange(newValue: String?) {
         _classType.value = newValue
+    }
+
+    fun onDaysOfWeekChange(newValue: String?) {
+        _daysOfWeek.value = newValue
     }
 
     val subjectList: Flow<List<SubjectEntity>> = subjectRepository.getAllSubjects().stateIn(
@@ -94,7 +104,8 @@ class HomeViewModel @Inject constructor(
                     SubjectEntity(
                         subject = _subject.value.trim(),
                         room = _room.value.trim().ifBlank { null },
-                        classType = _classType.value
+                        classType = _classType.value,
+                        daysOfWeek = _daysOfWeek.value
                     )
                 )
                 resetInputFields()
@@ -107,6 +118,7 @@ class HomeViewModel @Inject constructor(
         _subject.value = ""
         _room.value = ""
         _classType.value = null
+        _daysOfWeek.value = null
         _subjectError.value = SubjectError.None
     }
 
@@ -126,7 +138,8 @@ class HomeViewModel @Inject constructor(
                     subjectId = subjectId,
                     newName = _subject.value.trim(),
                     newRoom = _room.value.trim().ifBlank { null },
-                    newClassType = _classType.value
+                    newClassType = _classType.value,
+                    newDaysOfWeek = _daysOfWeek.value
                 )
                 resetInputFields()
                 onSuccess()

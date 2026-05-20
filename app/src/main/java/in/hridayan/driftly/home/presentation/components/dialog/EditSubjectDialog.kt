@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonGroup
@@ -39,6 +41,7 @@ import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableTex
 import `in`.hridayan.driftly.core.presentation.theme.Shape
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun EditSubjectDialog(
     modifier: Modifier = Modifier,
@@ -46,16 +49,18 @@ fun EditSubjectDialog(
     subject: String,
     room: String?,
     classType: String?,
+    daysOfWeek: String?,
     viewModel: HomeViewModel = hiltViewModel(),
     onDismiss: () -> Unit
 ) {
     LaunchedEffect(Unit) {
-        viewModel.setSubjectNamePlaceholder(subject, room, classType)
+        viewModel.setSubjectNamePlaceholder(subject, room, classType, daysOfWeek)
     }
 
     val subjectValue by viewModel.subject.collectAsState()
     val roomValue by viewModel.room.collectAsState()
     val classTypeValue by viewModel.classType.collectAsState()
+    val daysOfWeekValue by viewModel.daysOfWeek.collectAsState()
     val subjectError by viewModel.subjectError.collectAsState()
 
     val interactionSources = remember { List(2) { MutableInteractionSource() } }
@@ -131,6 +136,43 @@ fun EditSubjectDialog(
                             FilterChip(
                                 selected = classTypeValue == value,
                                 onClick = { viewModel.onClassTypeChange(value) },
+                                label = { Text(text = label) }
+                            )
+                        }
+                    }
+                }
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = "Days of Week",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        val days = listOf(
+                            "Mon" to 2, "Tue" to 3, "Wed" to 4, "Thu" to 5,
+                            "Fri" to 6, "Sat" to 7, "Sun" to 1
+                        )
+
+                        val selectedDays = daysOfWeekValue?.split(",")?.mapNotNull { it.trim().toIntOrNull() }?.toMutableList() ?: mutableListOf()
+
+                        days.forEach { (label, value) ->
+                            FilterChip(
+                                selected = selectedDays.contains(value),
+                                onClick = {
+                                    if (selectedDays.contains(value)) {
+                                        selectedDays.remove(value)
+                                    } else {
+                                        selectedDays.add(value)
+                                    }
+                                    viewModel.onDaysOfWeekChange(if (selectedDays.isEmpty()) null else selectedDays.sorted().joinToString(","))
+                                },
                                 label = { Text(text = label) }
                             )
                         }

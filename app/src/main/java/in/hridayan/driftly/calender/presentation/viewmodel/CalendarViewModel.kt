@@ -16,12 +16,16 @@ import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
+import java.util.Calendar
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,6 +46,9 @@ class CalendarViewModel @Inject constructor(
 
     private val _streakMap = MutableStateFlow<Map<LocalDate, StreakType>>(emptyMap())
     val streakMapFlow: StateFlow<Map<LocalDate, StreakType>> = _streakMap
+
+    private val _uiEvent = MutableSharedFlow<CalendarUiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
 
     init {
         savedStateHandle.get<Int>("subjectId")?.also { id ->
@@ -110,17 +117,36 @@ class CalendarViewModel @Inject constructor(
         }
     }
 
-    fun onStatusChange(subjectId: Int, date: String, newStatus: AttendanceStatus?) {
-        when (newStatus) {
-            AttendanceStatus.PRESENT, AttendanceStatus.ABSENT -> {
-                upsert(
-                    AttendanceEntity(subjectId = subjectId, date = date),
-                    newStatus
-                )
+    fun onStatusChange(subjectId: Int, date: String, newStatus: AttendanceStatus?, noClassScheduledMsg: String) {
+        viewModelScope.launch {
+            if (newStatus == AttendanceStatus.PRESENT || newStatus == AttendanceStatus.ABSENT) {
+                val subject = subjectRepository.getSubjectById(subjectId).first()
+                val daysOfWeek = subject.daysOfWeek
+                if (!daysOfWeek.isNullOrEmpty()) {
+                    val localDate = LocalDate.parse(date)
+                    val calendar = Calendar.getInstance().apply {
+                        set(localDate.year, localDate.monthValue - 1, localDate.dayOfMonth)
+                    }
+                    val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+                    val scheduledDays = daysOfWeek.split(",").mapNotNull { it.trim().toIntOrNull() }
+                    if (!scheduledDays.contains(dayOfWeek)) {
+                        _uiEvent.emit(CalendarUiEvent.ShowToast(noClassScheduledMsg))
+                        return@launch
+                    }
+                }
             }
 
-            AttendanceStatus.UNMARKED, null -> {
-                clear(subjectId, date)
+            when (newStatus) {
+                AttendanceStatus.PRESENT, AttendanceStatus.ABSENT -> {
+                    upsert(
+                        AttendanceEntity(subjectId = subjectId, date = date),
+                        newStatus
+                    )
+                }
+
+                AttendanceStatus.UNMARKED, null -> {
+                    clear(subjectId, date)
+                }
             }
         }
     }

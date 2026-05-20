@@ -44,6 +44,7 @@ fun SubjectCard(
     subject: String,
     room: String? = null,
     classType: String? = null,
+    daysOfWeek: String? = null,
     progress: Float,
     isTotalCountZero: Boolean = false,
     selectedCardsCount: Int = 0,
@@ -148,6 +149,7 @@ fun SubjectCard(
             subject = subject,
             room = room,
             classType = classType,
+            daysOfWeek = daysOfWeek,
             onDismiss = {
                 isLongClicked = false
                 onLongClicked(false)

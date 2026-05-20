@@ -137,6 +137,7 @@
     <string name="restore">Restore</string>
     <string name="room">Room</string>
     <string name="class_type">Class type</string>
+    <string name="days_of_week">Days of Week</string>
     <string name="theoretical">Theoretical</string>
     <string name="practical">Practical</string>
     <string name="none">None</string>
@@ -172,6 +173,7 @@
     <string name="whats_new">What\'s new!</string>
     <string name="year">Year</string>
     <string name="attendance_overview">Attendance overview</string>
+    <string name="no_class_scheduled">No class scheduled for this day</string>
     <string name="font_family">Font family</string>
     <string name="system_font">System font</string>
     <string name="des_font_family">Choose a font family for the app</string>
