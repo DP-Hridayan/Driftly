@@ -139,6 +139,7 @@ class HomeViewModel @Inject constructor(
 
             val existingSubjectName = subject.subject
             val existingRoom = subject.room
+            val existingDaysOfWeek = subject.daysOfWeek
             val existingSubjectClassType = subject.classType
 
             val isSubjectExists =
@@ -146,7 +147,7 @@ class HomeViewModel @Inject constructor(
 
             if (existingSubjectName == _subject.value.trim()
                 && existingSubjectClassType == _classType.value
-                && existingRoom != _room.value.trim()
+                && (existingRoom != _room.value.trim() || existingDaysOfWeek != _daysOfWeek.value)
             ) {
                 updateSubject(subjectId, onSuccess)
             } else if (isSubjectExists) {
