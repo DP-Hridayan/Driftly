@@ -27,9 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
+import `in`.hridayan.driftly.core.domain.provider.classTypeToString
 import `in`.hridayan.driftly.core.presentation.components.canvas.VerticalProgressWave
 import `in`.hridayan.driftly.core.presentation.components.progress.CircularProgressWithText
 import `in`.hridayan.driftly.home.presentation.components.text.SubjectText
@@ -39,7 +42,7 @@ fun CardStyleA(
     modifier: Modifier = Modifier,
     subject: String,
     room: String? = null,
-    classType: String? = null,
+    classType: SubjectClassType = SubjectClassType.NONE,
     progress: Float,
     isLongClicked: Boolean,
     isTotalCountZero: Boolean,
@@ -47,6 +50,7 @@ fun CardStyleA(
     onDeleteButtonClicked: () -> Unit,
     onErrorIconClicked: () -> Unit,
 ) {
+    val context = LocalContext.current
     val subjectTextColor =
         if (isLongClicked) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
 
@@ -57,7 +61,7 @@ fun CardStyleA(
         modifier = modifier
             .fillMaxWidth()
             .background(backgroundColor)
-            .padding(horizontal = 20.dp, vertical = 10.dp)
+            .padding(horizontal = 20.dp, vertical = 15.dp)
             .animateContentSize(
                 animationSpec = tween(
                     durationMillis = 500, easing = FastOutSlowInEasing
@@ -71,16 +75,23 @@ fun CardStyleA(
             verticalArrangement = Arrangement.Center
         ) {
             SubjectText(
-                subject = subject, subjectTextColor = subjectTextColor
+                subject = subject,
+                subjectTextColor = subjectTextColor
             )
-            if (!room.isNullOrBlank() || !classType.isNullOrBlank()) {
-                val infoText = buildString {
-                    if (!room.isNullOrBlank()) append(room)
-                    if (!classType.isNullOrBlank()) {
-                        if (isNotEmpty()) append(" • ")
-                        append(classType)
-                    }
-                }
+
+            val classTypeText = classTypeToString(
+                context,
+                classType
+            ).takeUnless { classType == SubjectClassType.NONE }
+
+            val roomText = room?.takeIf { it.isNotBlank() }
+
+            val infoText = listOfNotNull(
+                roomText,
+                classTypeText
+            ).joinToString(" | ")
+
+            if (infoText.isNotEmpty()) {
                 Text(
                     text = infoText,
                     style = MaterialTheme.typography.bodySmall,
@@ -108,13 +119,14 @@ fun CardStyleB(
     progress: Float,
     subject: String,
     room: String? = null,
-    classType: String? = null,
+    classType: SubjectClassType = SubjectClassType.NONE,
     isLongClicked: Boolean,
     isTotalCountZero: Boolean,
     onEditButtonClicked: () -> Unit,
     onDeleteButtonClicked: () -> Unit,
     onErrorIconClicked: () -> Unit,
 ) {
+    val context = LocalContext.current
     val progressText = "${String.format("%.0f", progress * 100)}%"
 
     var contentHeightPx by remember { mutableIntStateOf(0) }
@@ -157,14 +169,20 @@ fun CardStyleB(
                     SubjectText(
                         subject = subject
                     )
-                    if (!room.isNullOrBlank() || !classType.isNullOrBlank()) {
-                        val infoText = buildString {
-                            if (!room.isNullOrBlank()) append(room)
-                            if (!classType.isNullOrBlank()) {
-                                if (isNotEmpty()) append(" • ")
-                                append(classType)
-                            }
-                        }
+
+                    val classTypeText = classTypeToString(
+                        context,
+                        classType
+                    ).takeUnless { classType == SubjectClassType.NONE }
+
+                    val roomText = room?.takeIf { it.isNotBlank() }
+
+                    val infoText = listOfNotNull(
+                        roomText,
+                        classTypeText
+                    ).joinToString(" | ")
+
+                    if (infoText.isNotEmpty()) {
                         Text(
                             text = infoText,
                             style = MaterialTheme.typography.bodySmall,

@@ -4,8 +4,10 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -15,10 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -27,16 +25,16 @@ import androidx.compose.ui.unit.dp
 import android.widget.Toast
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.toRoute
-import `in`.hridayan.driftly.R
-import `in`.hridayan.driftly.calender.presentation.components.bottomsheet.SubjectAttendanceDataBottomSheet
 import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCanvas
+import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarUiEvent
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
+import `in`.hridayan.driftly.core.domain.provider.classTypeToString
 import `in`.hridayan.driftly.core.presentation.components.button.BackButton
-import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
-import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
 
@@ -45,10 +43,12 @@ import `in`.hridayan.driftly.navigation.LocalNavController
 fun CalendarScreen(
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
+    val context = LocalContext.current
     val navController = LocalNavController.current
     val args = navController.currentBackStackEntry?.toRoute<CalendarScreen>()
     val subjectId = args?.subjectId ?: 0
     val subject = args?.subject ?: ""
+    val classType = args?.classType ?: SubjectClassType.NONE
     val markedDates by viewModel.markedDatesFlow.collectAsState()
     val streakMap by viewModel.streakMapFlow.collectAsState(initial = emptyMap())
     val subjectEntity = viewModel.getSubjectEntityById(subjectId).collectAsState(initial = null)
@@ -58,9 +58,7 @@ fun CalendarScreen(
     val year = monthYear.year
     val month = monthYear.monthValue
     val shouldRememberMonthYear = LocalSettings.current.rememberCalendarMonthYear
-    var showSubjectAttendanceDataBottomSheet by rememberSaveable { mutableStateOf(false) }
-
-    val context = LocalContext.current
+    val listState = rememberLazyListState()
     val noClassScheduledMsg = stringResource(R.string.no_class_scheduled)
 
     val onStatusChange: (String, AttendanceStatus?) -> Unit =
@@ -84,12 +82,6 @@ fun CalendarScreen(
         }
     }
 
-    val classTypeTranslated = when (args?.classType) {
-        "Theoretical" -> stringResource(R.string.theoretical)
-        "Practical" -> stringResource(R.string.practical)
-        else -> null
-    }
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -101,9 +93,11 @@ fun CalendarScreen(
                                 .basicMarquee(),
                             text = subject, overflow = TextOverflow.Ellipsis, maxLines = 1
                         )
-                        if (classTypeTranslated != null) {
+                        val classTypeText = classTypeToString(context, classType)
+
+                        if (classType != SubjectClassType.NONE) {
                             Text(
-                                text = classTypeTranslated,
+                                text = classTypeText,
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                             )
@@ -112,43 +106,40 @@ fun CalendarScreen(
                 },
                 navigationIcon = { BackButton() },
             )
-        }) {
+        }) { innerPadding ->
 
-        Column(
-            modifier = Modifier.padding(it), verticalArrangement = Arrangement.spacedBy(20.dp)
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            state = listState,
+            contentPadding = innerPadding,
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            CalendarCanvas(
-                modifier = Modifier.padding(horizontal = 15.dp),
-                year = year,
-                month = month,
-                markedDates = markedDates,
-                streakMap = streakMap,
-                onStatusChange = onStatusChange,
-                onNavigate = { newYear, newMonth ->
-                    viewModel.updateMonthYear(newYear, newMonth)
-                    viewModel.saveMonthYearForSubject(subjectId)
-                },
-                onResetMonth = {
-                    viewModel.resetYearMonthToCurrent()
-                    viewModel.saveMonthYearForSubject(subjectId)
-                }
-            )
-
-            Button(
-                modifier = Modifier
-                    .padding(25.dp)
-                    .align(Alignment.CenterHorizontally),
-                onClick = withHaptic {
-                    showSubjectAttendanceDataBottomSheet = true
-                }) {
-                AutoResizeableText(stringResource(R.string.attendance_overview))
+            item {
+                CalendarCanvas(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 15.dp),
+                    year = year,
+                    month = month,
+                    markedDates = markedDates,
+                    streakMap = streakMap,
+                    onStatusChange = onStatusChange,
+                    onNavigate = { newYear, newMonth ->
+                        viewModel.updateMonthYear(newYear, newMonth)
+                        viewModel.saveMonthYearForSubject(subjectId)
+                    },
+                    onResetMonth = {
+                        viewModel.resetYearMonthToCurrent()
+                        viewModel.saveMonthYearForSubject(subjectId)
+                    }
+                )
             }
 
-            if (showSubjectAttendanceDataBottomSheet) {
-                SubjectAttendanceDataBottomSheet(
-                    onDismiss = {
-                        showSubjectAttendanceDataBottomSheet = false
-                    },
+            item {
+                AttendanceCardWithTabs(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(300.dp),
                     subjectId = subjectId
                 )
             }

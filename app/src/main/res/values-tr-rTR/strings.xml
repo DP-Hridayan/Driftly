@@ -11,6 +11,7 @@
     <string name="app">Uygulama</string>
     <string name="app_name">Driftly</string>
     <string name="attendance">Devamsızlık</string>
+    <string name="attendance_overview">Devamsızlık genel bakışı</string>
     <string name="auto_update">Otomatik güncelle</string>
     <string name="back_button">Geri tuşu</string>
     <string name="backup">Yedekle</string>
@@ -31,7 +32,7 @@
     <string name="changelogs_v1_2_0">Yüksek kontrastlı koyu temada iyileştirilmiş renk şeması\nGüncelleme sonrası değişiklik günlüğünü göstermek için yeni özellikler alt sayfası eklendi\nKod optimizasyonları</string>
     <string name="changelogs_v1_3_0">Belirli uygulama davranışlarını değiştirmek için davranış ayarları eklendi\nSon görüntülenen ayı hatırlama seçeneği eklendi\nTakvimde devamlılık serisi görsellerini kapatma seçeneği eklendi</string>
     <string name="changelogs_v1_4_0">Bazı UI bileşenlerini materyal ifade temasına geçirdik\nTakvimde pazartesi gününü haftanın ilk günü olarak ayarlama seçeneği ekledik\nGithub deposunu ziyaret etmeden uygulama içinden en son güncellenen apk\'yi doğrudan indirme seçeneği ekledik\nBirçok UI tutarsızlığını düzelttik</string>
-    <string name="changelogs_v1_5_0">Uygulama verilerini yerel olarak yedekleme ve geri yükleme seçeneği eklendi\nYerelleştirilmiş sabit kodlu dizeler\nKüçük kullanıcı arayüzü iyileştirmeleri</string>
+    <string name="changelogs_v1_5_0">Added option to back up and restore app data locally\nLocalised hardcoded strings\nMinor ui improvements</string>
     <string name="changelogs_v1_5_1">Bazı cihazlarda yedekleme geri yükleme işleminin başarısız olması sorunu düzeltildi.</string>
     <string name="changelogs_v1_6_0">Katılım hatırlatıcısı, kaçırılan katılım uyarısı ve uygulamanın yeni sürümü algılandığında bildirim uyarısı gibi çeşitli olaylar için bildirim uyarıları eklendi\nAna ekranda konu kartlarının toplu seçimi, geri tuşuna basarak seçimi iptal etme desteği ile iyileştirildi\nAndroid 11 ve önceki sürümlerde sistem çubuklarının renkleri düzeltildi</string>
     <string name="changelogs_v1_7_0">Github\'dan uygulama güncellemelerini indirmeden önce uyarı eklendi\nUygulama arayüzündeki bazı simgeler düzeltildi</string>
@@ -39,6 +40,7 @@
     <string name="changelogs_v1_8_1">Dinamik temalarda sabit kart renkleri</string>
     <string name="changelogs_v1_8_2">Bazı UI kenar boşlukları düzeltildi</string>
     <string name="changelogs_v1_8_3">Bağımlılıklar güncellendi ve bazı sorunlar giderildi.</string>
+    <string name="changelogs_v1_9_0">Improved color palettes and color scheme\nAdded option to customise app font style\nAdded option to add room name per Subject</string>
     <string name="changelogs_v1_0_0">İlk sürüm\nKatılım durumunu işaretlemek için takvim eklendi\nKonu başına ilerleme göstergesi eklendi\nKonu ekleme, kaldırma ve düzenleme özelliği eklendi\nKullanıcı deneyimini özelleştirmek için ayarlar eklendi</string>
     <string name="check_updates">Güncellemeleri kontrol et</string>
     <string name="clear">Temizle</string>
@@ -64,6 +66,7 @@
     <string name="des_dynamic_colors">Cihazın arkaplan resmine göre temayı otomatik seç</string>
     <string name="des_enable_direct_download">Açıldığında, güncellemeler doğrudan uygulama içinden Github\'dan indirilecektir. Kapatarak, manuel indirme için Github sürümleri sayfasını ziyaret edebilirsiniz.</string>
     <string name="des_feature_request">Aklınızda herhangi bir fikir veya öneri varsa, bize bildirin</string>
+    <string name="des_font_family">Uygulama için yazı tipi ailesi seçin</string>
     <string name="des_github">Uygulamanın Github repo\'sunu ziyaret edin</string>
     <string name="des_grant_notification_permission">Devamsızlığınızı işaretlemeyi unuttuğunuzda uyarı almak ister misiniz?\n\nBildirim erişim izni verin!</string>
     <string name="des_haptics_and_vibration">Dokunmatik geri bildirim için etkileşimli dokunsal geri bildirimler</string>
@@ -95,6 +98,8 @@
     <string name="error">Hata</string>
     <string name="feature_request">Özellik talebi</string>
     <string name="field_blank_error">Alan boş bırakılamaz</string>
+    <string name="font_display_text">Pijamalı hasta yağız şoföre çabucak güvendi.</string>
+    <string name="font_family">Yazı tipi ailesi</string>
     <string name="grant_permission">İzin ver</string>
     <string name="haptics_and_vibration">Dokunma &amp; Titreşim</string>
     <string name="high_contrast_dark_mode">Yüksel kontrastlı koyu mod</string>
@@ -106,6 +111,7 @@
     <string name="license">Lisans</string>
     <string name="look_and_feel">Görünüş Ayarları</string>
     <string name="mark_your_attendance">Devamsızlığını işaretle</string>
+    <string name="monospace">Eş Aralıklı</string>
     <string name="month">Ay</string>
     <string name="network_error">Ağ Bağlantısı Hatası</string>
     <string name="next_month">Gelecek ay</string>
@@ -118,11 +124,14 @@
     <string name="off">Kapalı</string>
     <string name="ok">Tamam</string>
     <string name="on">Açık</string>
+    <string name="one_ui_sans">One UI Sans</string>
+    <string name="optional">Optional</string>
     <string name="pick_driftly_extension">Lütfen .driftly uzantılı bir dosya seçin.</string>
     <string name="pre_release">Ön Sürüm</string>
     <string name="pre_release_warning">Ön sürümler kararsız olabilir</string>
     <string name="pre_release_warning_description">Bu sürümler hala test aşamasındadır ve tamamlanmamış özellikler veya beklenmedik hatalar içerebilir. Ön sürümüne güncelleme yapmayı seçerseniz, bazı şeylerin bozulabileceğini veya garip davranabileceğini lütfen unutmayın. Herhangi bir sorun, çökme veya garip davranışla karşılaşırsanız, bunları bize bildirerek Driftly\'yi kararlı sürüm yayınlanmadan önce düzeltip iyileştirmemize yardımcı olabilirsiniz. Daha iyi bir ürün geliştirmemize yardımcı olduğunuz için teşekkür ederiz!</string>
     <string name="present">Mevcut</string>
+    <string name="preview">Önizleme</string>
     <string name="previous_month">Geçtiğimiz ay</string>
     <string name="remember_month_year">Takvim ayı ve yılını hatırlayın</string>
     <string name="reminder_to_mark_attendance">Devamsızlık işaretleme hatırlatması</string>
@@ -139,6 +148,8 @@
     <string name="restore_dialog_message">Kaydedilen dosyadaki veriler mevcut verilerin yerine geçecektir.</string>
     <string name="restore_failed">Geri yükleme başarısız oldu</string>
     <string name="restore_successful">Geri yükleme başarılı</string>
+    <string name="room">Room</string>
+    <string name="sans_serif">Sans Serif</string>
     <string name="select">Seç</string>
     <string name="select_month_and_year">Gün ve Yıl seç</string>
     <string name="settings">Ayarlar</string>
@@ -150,6 +161,7 @@
     <string name="subject_name">Ders adı</string>
     <string name="support_bmc">Uygulamayı beğendin mi? \nO zaman bir kahve ısmarlarsın :)</string>
     <string name="system">Sistem</string>
+    <string name="system_font">Sistem Yazı Tipi</string>
     <string name="this_month_data">Bu ayın verisi</string>
     <string name="total">Toplam</string>
     <string name="tweak_your_experience">Deneyiminizi özelleştirin</string>
@@ -161,32 +173,25 @@
     <string name="update_subject">Dersi güncelle</string>
     <string name="updates">Güncellemeler</string>
     <string name="version">Versiyon</string>
+    <string name="version_code">Version code</string>
+    <string name="version_name">Version name</string>
     <string name="visit_repo_to_download">Github deposundan Driftly\'nin en son sürümünü indirmek için indirme düğmesine tıklayın.</string>
     <string name="warning">Uyarı</string>
     <string name="warning_github_download">GitHub\'dan doğrudan güncellemeleri indirmek üzeresiniz. Uygulama mağazalarındaki güncellemelerden farklı olarak, bunlar güvenlik açısından incelenmez. Devam etmek istiyor musunuz?</string>
     <string name="whats_new">Neler değişti?</string>
     <string name="year">Yıl</string>
-    <string name="attendance_overview">Devamsızlık genel bakışı</string>
-    <string name="font_family">Yazı tipi ailesi</string>
-    <string name="system_font">Sistem Yazı Tipi</string>
-    <string name="des_font_family">Uygulama için yazı tipi ailesi seçin</string>
-    <string name="one_ui_sans">One UI Sans</string>
-    <string name="monospace">Eş Aralıklı</string>
-    <string name="sans_serif">Sans Serif</string>
-    <string name="font_display_text">Pijamalı hasta yağız şoföre çabucak güvendi.</string>
-    <string name="preview">Önizleme</string>
     <string-array name="month_names">
-        <item>Ocak</item>
-        <item>Şubat</item>
-        <item>Mart</item>
-        <item>Nisan</item>
-        <item>Mayıs</item>
-        <item>Haziran</item>
-        <item>Temmuz</item>
-        <item>Ağustos</item>
-        <item>Eylül</item>
-        <item>Ekim</item>
-        <item>Kasım</item>
-        <item>Aralık</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
     </string-array>
 </resources>

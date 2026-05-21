@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -35,7 +34,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLocale
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.unit.dp
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.button.MonthNavigationButtons
@@ -51,7 +51,6 @@ import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @Composable
 fun CalendarCanvas(
@@ -64,7 +63,8 @@ fun CalendarCanvas(
     onNavigate: (Int, Int) -> Unit,
     onResetMonth: () -> Unit,
 ) {
-    val context = LocalContext.current
+    val locale = LocalLocale.current
+    val res = LocalResources.current
     val yearMonth = YearMonth.of(year, month)
     val today = LocalDate.now()
     val daysInMonth = yearMonth.lengthOfMonth()
@@ -72,12 +72,12 @@ fun CalendarCanvas(
     val firstDayOfWeek =
         if (isMondayFirstDay) yearMonth.atDay(1).dayOfWeek.value - 1 else yearMonth.atDay(1).dayOfWeek.value % 7
     val abbreviatedMonth = yearMonth.format(
-        DateTimeFormatter.ofPattern("MMM").withLocale(Locale.getDefault())
+        DateTimeFormatter.ofPattern("MMM").withLocale(locale.platformLocale)
     )
 
     var showMonthYearDialog by remember { mutableStateOf(false) }
     val showStreakModifier = LocalSettings.current.showAttendanceStreaks
-    val months: List<String> = context.resources.getStringArray(R.array.month_names).toList()
+    val months: List<String> = res.getStringArray(R.array.month_names).toList()
 
     Column(
         modifier = modifier
@@ -147,7 +147,7 @@ fun CalendarCanvas(
             columns = GridCells.Fixed(7),
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight(),
+                .aspectRatio(7f / 6f),
             userScrollEnabled = false
         ) {
             items((0 until totalCells).toList()) { index ->

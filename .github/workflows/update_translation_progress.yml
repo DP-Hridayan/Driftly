@@ -41,6 +41,10 @@ jobs:
 
       - name: Commit and Push
         run: |
+          if git diff --quiet -- ':!README.md'; then
+            echo "No changes to files other than README, skipping commit and push"
+            exit 0
+          fi
           git add docs/translations-light.svg docs/translations-dark.svg README.md
-          git commit -m "Update translation progress SVG and README cache-busting timestamp" || echo "No changes to commit"
+          git commit -m "Update translation progress SVG and README cache-busting timestamp"
           git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} HEAD:master

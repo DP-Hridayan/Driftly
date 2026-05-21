@@ -6,11 +6,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonGroup
@@ -28,12 +27,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import `in`.hridayan.driftly.R
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
 import `in`.hridayan.driftly.core.domain.model.SubjectError
+import `in`.hridayan.driftly.core.domain.provider.classTypeToString
 import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.core.presentation.components.text.AutoResizeableText
 import `in`.hridayan.driftly.core.presentation.theme.Shape
@@ -46,6 +48,7 @@ fun AddSubjectDialog(
     viewModel: HomeViewModel = hiltViewModel(),
     onDismiss: () -> Unit
 ) {
+    val context = LocalContext.current
     val subject by viewModel.subject.collectAsState()
     val room by viewModel.room.collectAsState()
     val classType by viewModel.classType.collectAsState()
@@ -99,7 +102,7 @@ fun AddSubjectDialog(
                         viewModel.onRoomChange(it)
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = stringResource(R.string.room)) },
+                    label = { Text(text = stringResource(R.string.room) + " (" + stringResource(R.string.optional) + ")") },
                 )
 
                 Column(
@@ -111,21 +114,20 @@ fun AddSubjectDialog(
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                    Row(
+                    FlowRow(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalArrangement = Arrangement.spacedBy(5.dp),
                     ) {
-                        val types = listOf(
-                            stringResource(R.string.none) to null,
-                            stringResource(R.string.theoretical) to "Theoretical",
-                            stringResource(R.string.practical) to "Practical"
-                        )
+                        SubjectClassType.entries.forEach { type ->
+                            val classTypeString = classTypeToString(context, type)
 
-                        types.forEach { (label, value) ->
                             FilterChip(
-                                selected = classType == value,
-                                onClick = { viewModel.onClassTypeChange(value) },
-                                label = { Text(text = label) }
+                                selected = classType == type,
+                                onClick = withHaptic(HapticFeedbackType.VirtualKey) {
+                                    viewModel.onClassTypeChange(type)
+                                },
+                                label = { Text(text = classTypeString) }
                             )
                         }
                     }

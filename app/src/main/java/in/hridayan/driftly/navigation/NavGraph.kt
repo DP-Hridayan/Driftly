@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import `in`.hridayan.driftly.calender.presentation.screens.CalendarScreen
+import `in`.hridayan.driftly.core.domain.model.SubjectClassType
 import `in`.hridayan.driftly.home.presentation.screens.HomeScreen
 import `in`.hridayan.driftly.settings.presentation.page.about.screens.AboutScreen
 import `in`.hridayan.driftly.settings.presentation.page.autoupdate.screens.AutoUpdateScreen
@@ -129,7 +130,7 @@ data class CalendarScreen(
     val subjectId: Int,
     val subject: String,
     val room: String? = null,
-    val classType: String? = null
+    val classType: SubjectClassType = SubjectClassType.NONE
 )
 
 @Serializable
