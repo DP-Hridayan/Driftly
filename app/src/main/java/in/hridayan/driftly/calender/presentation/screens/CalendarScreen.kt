@@ -19,12 +19,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import android.widget.Toast
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.toRoute
 import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCanvas
+import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
+import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarUiEvent
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.common.LocalSettings
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
@@ -55,11 +59,22 @@ fun CalendarScreen(
     val month = monthYear.monthValue
     val shouldRememberMonthYear = LocalSettings.current.rememberCalendarMonthYear
     val listState = rememberLazyListState()
+    val noClassScheduledMsg = stringResource(R.string.no_class_scheduled)
 
     val onStatusChange: (String, AttendanceStatus?) -> Unit =
         { date, status ->
-            viewModel.onStatusChange(subjectId, date, status)
+            viewModel.onStatusChange(subjectId, date, status, noClassScheduledMsg)
         }
+
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
+                is CalendarUiEvent.ShowToast -> {
+                    Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     LaunchedEffect(savedYear, savedMonth, shouldRememberMonthYear) {
         if (savedYear != null && savedMonth != null && shouldRememberMonthYear) {

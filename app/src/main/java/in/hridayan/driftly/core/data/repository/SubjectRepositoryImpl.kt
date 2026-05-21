@@ -34,9 +34,10 @@ class SubjectRepositoryImpl @Inject constructor(
         subjectId: Int,
         newName: String,
         newRoom: String?,
-        newClassType: SubjectClassType
+        newClassType: SubjectClassType,
+        newDaysOfWeek: String?
     ) {
-        subjectDao.updateSubject(subjectId, newName, newRoom, newClassType)
+        subjectDao.updateSubject(subjectId, newName, newRoom, newClassType, newDaysOfWeek)
     }
 
     override suspend fun deleteSubject(subjectId: Int) {

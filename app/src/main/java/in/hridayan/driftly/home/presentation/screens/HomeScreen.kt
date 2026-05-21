@@ -333,6 +333,7 @@ fun HomeScreen(
                     subject = subjects[index].subject,
                     room = subjects[index].room,
                     classType = subjects[index].classType,
+                    daysOfWeek = subjects[index].daysOfWeek,
                     progress = progress,
                     isTotalCountZero = counts.totalCount == 0,
                     selectedCardsCount = selectedCardsCount,

@@ -45,6 +45,7 @@ fun SubjectCard(
     subject: String,
     room: String? = null,
     classType: SubjectClassType = SubjectClassType.NONE,
+    daysOfWeek: String? = null,
     progress: Float,
     isTotalCountZero: Boolean = false,
     selectedCardsCount: Int = 0,
@@ -91,7 +92,8 @@ fun SubjectCard(
         viewModel.setFieldsForEdit(
             subjectName = subject,
             roomName = room,
-            subjectClassType = classType
+            subjectClassType = classType,
+            daysOfWeekValue = daysOfWeek
         )
     }
 
@@ -152,6 +154,10 @@ fun SubjectCard(
     if (isEditDialogVisible) {
         EditSubjectDialog(
             subjectId = subjectId,
+            subject = subject,
+            room = room,
+            classType = classType,
+            daysOfWeek = daysOfWeek,
             onDismiss = {
                 isLongClicked = false
                 onLongClicked(false)

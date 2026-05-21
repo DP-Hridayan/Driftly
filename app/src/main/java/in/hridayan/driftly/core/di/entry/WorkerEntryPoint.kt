@@ -4,6 +4,7 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
+import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
 import `in`.hridayan.driftly.settings.domain.usecase.CheckUpdateUseCase
 
 @EntryPoint
@@ -11,4 +12,5 @@ import `in`.hridayan.driftly.settings.domain.usecase.CheckUpdateUseCase
 interface WorkerEntryPoint {
     fun checkUpdateUseCase(): CheckUpdateUseCase
     fun attendanceRepository(): AttendanceRepository
+    fun subjectRepository(): SubjectRepository
 }

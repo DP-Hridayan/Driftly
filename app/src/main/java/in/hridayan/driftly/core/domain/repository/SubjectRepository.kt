@@ -15,7 +15,8 @@ interface SubjectRepository {
         subjectId: Int,
         newName: String,
         newRoom: String?,
-        newClassType: SubjectClassType
+        newClassType: SubjectClassType,
+        newDaysOfWeek: String?
     )
 
     suspend fun deleteSubject(subjectId: Int)
