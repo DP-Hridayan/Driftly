@@ -34,8 +34,8 @@
 <text x="460" y="235" text-anchor="start">93%</text>
 <text x="140" y="265" text-anchor="end"><![CDATA[Ukrainian]]></text>
 <rect x="150" y="251" width="300" height="14" fill="#2C2F33" rx="8" ry="8" />
-<rect x="150" y="251" width="258" height="14" fill="#abdf9e" rx="8" ry="8" />
-<text x="460" y="265" text-anchor="start">86%</text>
+<rect x="150" y="251" width="300" height="14" fill="#9ee69d" rx="8" ry="8" />
+<text x="460" y="265" text-anchor="start">100%</text>
 <text x="140" y="295" text-anchor="end"><![CDATA[Chinese Simplified]]></text>
 <rect x="150" y="281" width="300" height="14" fill="#2C2F33" rx="8" ry="8" />
 <rect x="150" y="281" width="150" height="14" fill="#cecda4" rx="8" ry="8" />
