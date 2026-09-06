@@ -144,6 +144,11 @@
     <string name="reset_settings_successful">Reset settings successful</string>
     <string name="reset_to_current_month">Réinitialiser au mois en cours</string>
     <string name="restore">Restore</string>
+    <string name="class_type">Class type</string>
+    <string name="days_of_week">Days of Week</string>
+    <string name="theoretical">Theoretical</string>
+    <string name="practical">Practical</string>
+    <string name="none">None</string>
     <string name="restore_app_data">Restore app data</string>
     <string name="restore_dialog_message">The data in the saved file will override the current data.</string>
     <string name="restore_failed">Restore failed</string>
@@ -180,6 +185,7 @@
     <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>
     <string name="whats_new">Nouveautés !</string>
     <string name="year">Year</string>
+    <string name="no_class_scheduled">No class scheduled for this day</string>
     <string-array name="month_names">
         <item>January</item>
         <item>February</item>
