@@ -11,6 +11,7 @@ import `in`.hridayan.driftly.core.data.database.AttendanceDao
 import `in`.hridayan.driftly.core.data.database.MIGRATION_4_5
 import `in`.hridayan.driftly.core.data.database.MIGRATION_5_6
 import `in`.hridayan.driftly.core.data.database.MIGRATION_6_7
+import `in`.hridayan.driftly.core.data.database.MIGRATION_7_8
 import `in`.hridayan.driftly.core.data.database.MIGRATION_SUBJECT_TABLE_2_3
 import `in`.hridayan.driftly.core.data.database.MIGRATION_SUBJECT_TABLE_3_4
 import `in`.hridayan.driftly.core.data.database.SubjectDao
@@ -35,7 +36,8 @@ object DatabaseModule {
                 MIGRATION_SUBJECT_TABLE_3_4,
                 MIGRATION_4_5,
                 MIGRATION_5_6,
-                MIGRATION_6_7
+                MIGRATION_6_7,
+                MIGRATION_7_8
             )
             .build()
 

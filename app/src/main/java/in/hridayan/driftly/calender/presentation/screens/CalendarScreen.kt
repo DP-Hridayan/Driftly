@@ -42,6 +42,16 @@ import `in`.hridayan.driftly.core.presentation.components.button.BackButton
 import `in`.hridayan.driftly.navigation.CalendarScreen
 import `in`.hridayan.driftly.navigation.LocalNavController
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Archive
+import androidx.compose.material.icons.rounded.Unarchive
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.ui.Alignment
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarScreen(
@@ -111,6 +121,33 @@ fun CalendarScreen(
                     }
                 },
                 navigationIcon = { BackButton() },
+                actions = {
+                    val isArchived = subjectEntity.value?.isArchived ?: false
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        modifier = Modifier.padding(end = 12.dp)
+                    ) {
+                        Text(
+                            text = if (isArchived) stringResource(R.string.archived) else stringResource(R.string.archive),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = if (isArchived) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Switch(
+                            checked = isArchived,
+                            onCheckedChange = {
+                                viewModel.toggleSubjectArchived(subjectId, isArchived)
+                            },
+                            thumbContent = {
+                                Icon(
+                                    imageVector = if (isArchived) Icons.Rounded.Archive else Icons.Rounded.Unarchive,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(SwitchDefaults.IconSize)
+                                )
+                            }
+                        )
+                    }
+                }
             )
         }) { innerPadding ->
 

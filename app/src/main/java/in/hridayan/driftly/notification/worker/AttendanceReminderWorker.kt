@@ -31,6 +31,7 @@ class AttendanceReminderWorker(
             val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
 
             val hasClassToday = subjects.any { subject ->
+                if (subject.isArchived) return@any false
                 val days = subject.daysOfWeek?.split(",")?.mapNotNull { it.trim().toIntOrNull() }
                 days == null || days.isEmpty() || days.contains(today)
             }

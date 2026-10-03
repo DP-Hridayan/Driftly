@@ -10,7 +10,7 @@ import `in`.hridayan.driftly.core.data.model.SubjectNoteEntity
 
 @Database(
     entities = [SubjectEntity::class, AttendanceEntity::class, SubjectNoteEntity::class],
-    version = 7,
+    version = 8,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

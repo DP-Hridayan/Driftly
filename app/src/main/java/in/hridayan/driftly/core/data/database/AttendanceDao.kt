@@ -84,7 +84,7 @@ interface AttendanceDao {
         SELECT 1
         FROM subjects s
         LEFT JOIN attendance a ON s.id = a.subjectId AND a.date = :date
-        WHERE a.subjectId IS NULL OR a.status = :status
+        WHERE (a.subjectId IS NULL OR a.status = :status) AND s.isArchived = 0
     )
     """
     )

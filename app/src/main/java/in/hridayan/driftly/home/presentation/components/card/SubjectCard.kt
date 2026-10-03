@@ -18,6 +18,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,6 +31,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.SubjectCardStyle
 import `in`.hridayan.driftly.core.domain.model.SubjectClassType
 import `in`.hridayan.driftly.core.presentation.components.dialog.ConfirmDeleteDialog
@@ -37,6 +39,7 @@ import `in`.hridayan.driftly.core.presentation.components.haptic.withHaptic
 import `in`.hridayan.driftly.home.presentation.components.dialog.EditSubjectDialog
 import `in`.hridayan.driftly.home.presentation.components.dialog.NoAttendanceDialog
 import `in`.hridayan.driftly.home.presentation.viewmodel.HomeViewModel
+import java.util.Calendar
 
 @Composable
 fun SubjectCard(
@@ -46,6 +49,7 @@ fun SubjectCard(
     room: String? = null,
     classType: SubjectClassType = SubjectClassType.NONE,
     daysOfWeek: String? = null,
+    isArchived: Boolean = false,
     progress: Float,
     isTotalCountZero: Boolean = false,
     selectedCardsCount: Int = 0,
@@ -61,6 +65,30 @@ fun SubjectCard(
     var isDeleteDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isEditDialogVisible by rememberSaveable { mutableStateOf(false) }
     var isNoAttendanceDialogVisible by rememberSaveable { mutableStateOf(false) }
+
+    val isClassScheduledToday = remember(daysOfWeek, isArchived) {
+        if (isArchived || daysOfWeek.isNullOrBlank()) {
+            false
+        } else {
+            val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+            val scheduledDays = daysOfWeek.split(",").mapNotNull { it.trim().toIntOrNull() }
+            scheduledDays.contains(today)
+        }
+    }
+
+    val todayStatus by if (isDemoCard) {
+        remember { mutableStateOf<AttendanceStatus?>(null) }
+    } else {
+        viewModel.getTodayAttendanceStatus(subjectId).collectAsState(initial = null)
+    }
+
+    val onMarkPresent: () -> Unit = withHaptic(HapticFeedbackType.Confirm) {
+        viewModel.onQuickAttendanceClick(subjectId, AttendanceStatus.PRESENT)
+    }
+
+    val onMarkAbsent: () -> Unit = withHaptic(HapticFeedbackType.Confirm) {
+        viewModel.onQuickAttendanceClick(subjectId, AttendanceStatus.ABSENT)
+    }
 
     val handleLongClick = withHaptic(HapticFeedbackType.LongPress) {
         if (!isDemoCard) {
@@ -122,6 +150,11 @@ fun SubjectCard(
                     isLongClicked = isLongClicked,
                     isTotalCountZero = isTotalCountZero,
                     progress = progress,
+                    isArchived = isArchived,
+                    isClassScheduledToday = isClassScheduledToday,
+                    todayStatus = todayStatus,
+                    onMarkPresent = onMarkPresent,
+                    onMarkAbsent = onMarkAbsent,
                     onEditButtonClicked = onEditButtonClicked,
                     onDeleteButtonClicked = onDeleteButtonClicked,
                     onErrorIconClicked = onErrorIconClicked
@@ -135,6 +168,11 @@ fun SubjectCard(
                     isLongClicked = isLongClicked,
                     isTotalCountZero = isTotalCountZero,
                     progress = progress,
+                    isArchived = isArchived,
+                    isClassScheduledToday = isClassScheduledToday,
+                    todayStatus = todayStatus,
+                    onMarkPresent = onMarkPresent,
+                    onMarkAbsent = onMarkAbsent,
                     onEditButtonClicked = onEditButtonClicked,
                     onDeleteButtonClicked = onDeleteButtonClicked,
                     onErrorIconClicked = onErrorIconClicked

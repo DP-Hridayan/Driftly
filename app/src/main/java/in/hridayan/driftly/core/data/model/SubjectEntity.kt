@@ -16,5 +16,7 @@ data class SubjectEntity(
     val room: String? = null,
     @ColumnInfo(name = "classType", defaultValue = "NONE")
     val classType: SubjectClassType = SubjectClassType.NONE,
-    val daysOfWeek: String? = null
+    val daysOfWeek: String? = null,
+    @ColumnInfo(name = "isArchived", defaultValue = "0")
+    val isArchived: Boolean = false
 )

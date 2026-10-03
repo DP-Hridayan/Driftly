@@ -50,3 +50,9 @@ val MIGRATION_6_7 = object : Migration(6, 7) {
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_subject_notes_subjectId` ON `subject_notes` (`subjectId`)")
     }
 }
+
+val MIGRATION_7_8 = object : Migration(7, 8) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE subjects ADD COLUMN isArchived INTEGER NOT NULL DEFAULT 0")
+    }
+}

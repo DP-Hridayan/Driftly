@@ -110,6 +110,12 @@ class CalendarViewModel @Inject constructor(
         _selectedMonthYear.value = YearMonth.now()
     }
 
+    fun toggleSubjectArchived(subjectId: Int, currentIsArchived: Boolean) {
+        viewModelScope.launch {
+            subjectRepository.updateSubjectArchivedStatus(subjectId, !currentIsArchived)
+        }
+    }
+
     private fun loadAttendanceData(subjectId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             attendanceRepository.getAttendanceForSubject(subjectId)

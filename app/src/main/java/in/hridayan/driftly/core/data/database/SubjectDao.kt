@@ -52,4 +52,6 @@ interface SubjectDao {
     @Query("UPDATE subjects SET savedMonth = :month, savedYear = :year WHERE id = :subjectId")
     suspend fun updateSavedMonthYear(subjectId: Int, month: Int, year: Int)
 
+    @Query("UPDATE subjects SET isArchived = :isArchived WHERE id = :subjectId")
+    suspend fun updateSubjectArchivedStatus(subjectId: Int, isArchived: Boolean)
 }

@@ -1,6 +1,8 @@
 <resources>
     <string name="about">About</string>
     <string name="absent">Absent</string>
+    <string name="archive">Archive</string>
+    <string name="archived">Archived</string>
     <string name="add">Add</string>
     <string name="add_subject">Add Subject</string>
     <string name="additional_settings">Additional settings</string>

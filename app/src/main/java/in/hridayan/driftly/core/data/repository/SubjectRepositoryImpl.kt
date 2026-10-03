@@ -60,4 +60,8 @@ class SubjectRepositoryImpl @Inject constructor(
     override suspend fun updateSavedMonthYear(subjectId: Int, month: Int, year: Int) {
         subjectDao.updateSavedMonthYear(subjectId, month, year)
     }
+
+    override suspend fun updateSubjectArchivedStatus(subjectId: Int, isArchived: Boolean) {
+        subjectDao.updateSubjectArchivedStatus(subjectId, isArchived)
+    }
 }
