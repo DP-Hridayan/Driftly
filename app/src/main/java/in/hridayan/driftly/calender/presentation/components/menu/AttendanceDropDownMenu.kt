@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.EditNote
 import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -27,7 +28,8 @@ fun AttendanceDropDownMenu(
     modifier: Modifier = Modifier,
     onStatusChange: (date: String, status: AttendanceStatus?) -> Unit,
     dateString: String,
-    expandedDateState: MutableState<String?>
+    expandedDateState: MutableState<String?>,
+    onAddNote: ((date: String) -> Unit)? = null
 ) {
     DropdownMenu(
         expanded = true,
@@ -106,5 +108,30 @@ fun AttendanceDropDownMenu(
                 expandedDateState.value = null
             }
         )
+        if (onAddNote != null) {
+            DropdownMenuItem(
+                modifier = Modifier
+                    .padding(top = 5.dp)
+                    .clip(MaterialTheme.shapes.extraLarge)
+                    .background(MaterialTheme.colorScheme.tertiaryContainer),
+                text = {
+                    Text(
+                        text = stringResource(R.string.notes),
+                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                    )
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Rounded.EditNote,
+                        contentDescription = stringResource(R.string.notes),
+                        tint = MaterialTheme.colorScheme.onTertiaryContainer
+                    )
+                },
+                onClick = withHaptic {
+                    onAddNote(dateString)
+                    expandedDateState.value = null
+                }
+            )
+        }
     }
 }

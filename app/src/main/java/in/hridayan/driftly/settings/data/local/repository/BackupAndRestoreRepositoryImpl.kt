@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
+import `in`.hridayan.driftly.core.domain.repository.SubjectNoteRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
 import `in`.hridayan.driftly.core.utils.EncryptionHelper
 import `in`.hridayan.driftly.settings.data.local.SettingsKeys
@@ -21,6 +22,7 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
     private val json: Json,
     private val attendanceRepository: AttendanceRepository,
     private val subjectRepository: SubjectRepository,
+    private val subjectNoteRepository: SubjectNoteRepository,
     private val settingsRepository: SettingsRepository,
     @param:ApplicationContext private val context: Context
 ) : BackupAndRestoreRepository {
@@ -75,11 +77,15 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
             if (option == BackupOption.DATABASE_ONLY || option == BackupOption.SETTINGS_AND_DATABASE)
                 subjectRepository.getAllSubjectsOnce() else null
 
+        val notes =
+            if (option == BackupOption.DATABASE_ONLY || option == BackupOption.SETTINGS_AND_DATABASE)
+                subjectNoteRepository.getAllNotesOnce() else null
+
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
 
         val backupTime = java.time.LocalDateTime.now().format(formatter)
 
-        return BackupData(settings, attendance, subjects, backupTime)
+        return BackupData(settings, attendance, subjects, notes, backupTime)
     }
 
     override suspend fun getBackupTimeFromFile(uri: Uri): String? = withContext(Dispatchers.IO) {
@@ -110,6 +116,9 @@ class BackupAndRestoreRepositoryImpl @Inject constructor(
         data.subjects?.let {
             subjectRepository.deleteAllSubjects()
             subjectRepository.insertAllSubjects(it)
+        }
+        data.notes?.let {
+            subjectNoteRepository.insertAllNotes(it)
         }
         data.settings?.let { restoreSettings(it) }
     }

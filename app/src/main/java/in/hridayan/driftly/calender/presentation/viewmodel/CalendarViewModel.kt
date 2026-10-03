@@ -9,10 +9,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.hridayan.driftly.calender.domain.usecase.GetWeekDayLabelsUseCase
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
 import `in`.hridayan.driftly.core.data.model.SubjectEntity
+import `in`.hridayan.driftly.core.data.model.SubjectNoteEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.StreakType
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
+import `in`.hridayan.driftly.core.domain.repository.SubjectNoteRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -32,6 +34,7 @@ import javax.inject.Inject
 class CalendarViewModel @Inject constructor(
     private val attendanceRepository: AttendanceRepository,
     private val subjectRepository: SubjectRepository,
+    private val subjectNoteRepository: SubjectNoteRepository,
     private val getWeekDayLabelsUseCase: GetWeekDayLabelsUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -47,6 +50,12 @@ class CalendarViewModel @Inject constructor(
     private val _streakMap = MutableStateFlow<Map<LocalDate, StreakType>>(emptyMap())
     val streakMapFlow: StateFlow<Map<LocalDate, StreakType>> = _streakMap
 
+    private val _notes = MutableStateFlow<List<SubjectNoteEntity>>(emptyList())
+    val notesFlow: StateFlow<List<SubjectNoteEntity>> = _notes
+
+    private val _datesWithNotes = MutableStateFlow<Set<LocalDate>>(emptySet())
+    val datesWithNotesFlow: StateFlow<Set<LocalDate>> = _datesWithNotes
+
     private val _uiEvent = MutableSharedFlow<CalendarUiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
 
@@ -54,6 +63,7 @@ class CalendarViewModel @Inject constructor(
         savedStateHandle.get<Int>("subjectId")?.also { id ->
             _subjectId.value = id
             loadAttendanceData(id)
+            loadNotesData(id)
         }
     }
 
@@ -114,6 +124,56 @@ class CalendarViewModel @Inject constructor(
 
                     _streakMap.value = calculateStreaks(newMap)
                 }
+        }
+    }
+
+    private fun loadNotesData(subjectId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            subjectNoteRepository.getNotesForSubject(subjectId)
+                .collect { list ->
+                    _notes.value = list
+                    _datesWithNotes.value = list.mapNotNull {
+                        try {
+                            LocalDate.parse(it.date)
+                        } catch (e: Exception) {
+                            null
+                        }
+                    }.toSet()
+                }
+        }
+    }
+
+    fun addNote(subjectId: Int, date: String, note: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (note.isNotBlank()) {
+                subjectNoteRepository.insertNote(
+                    SubjectNoteEntity(
+                        subjectId = subjectId,
+                        date = date,
+                        note = note.trim()
+                    )
+                )
+            }
+        }
+    }
+
+    fun updateNote(note: SubjectNoteEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (note.note.isNotBlank()) {
+                subjectNoteRepository.updateNote(note.copy(note = note.note.trim()))
+            }
+        }
+    }
+
+    fun deleteNote(note: SubjectNoteEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            subjectNoteRepository.deleteNote(note)
+        }
+    }
+
+    fun deleteNoteById(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            subjectNoteRepository.deleteNoteById(id)
         }
     }
 

@@ -17,6 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -28,6 +31,7 @@ import androidx.navigation.toRoute
 import `in`.hridayan.driftly.calender.presentation.components.canvas.CalendarCanvas
 import `in`.hridayan.driftly.R
 import `in`.hridayan.driftly.calender.presentation.components.card.AttendanceCardWithTabs
+import `in`.hridayan.driftly.calender.presentation.components.dialog.AddEditNoteDialog
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarUiEvent
 import `in`.hridayan.driftly.calender.presentation.viewmodel.CalendarViewModel
 import `in`.hridayan.driftly.core.common.LocalSettings
@@ -51,6 +55,7 @@ fun CalendarScreen(
     val classType = args?.classType ?: SubjectClassType.NONE
     val markedDates by viewModel.markedDatesFlow.collectAsState()
     val streakMap by viewModel.streakMapFlow.collectAsState(initial = emptyMap())
+    val datesWithNotes by viewModel.datesWithNotesFlow.collectAsState()
     val subjectEntity = viewModel.getSubjectEntityById(subjectId).collectAsState(initial = null)
     val savedYear = subjectEntity.value?.savedYear
     val savedMonth = subjectEntity.value?.savedMonth
@@ -60,6 +65,7 @@ fun CalendarScreen(
     val shouldRememberMonthYear = LocalSettings.current.rememberCalendarMonthYear
     val listState = rememberLazyListState()
     val noClassScheduledMsg = stringResource(R.string.no_class_scheduled)
+    var noteDialogDate by remember { mutableStateOf<String?>(null) }
 
     val onStatusChange: (String, AttendanceStatus?) -> Unit =
         { date, status ->
@@ -123,7 +129,9 @@ fun CalendarScreen(
                     month = month,
                     markedDates = markedDates,
                     streakMap = streakMap,
+                    datesWithNotes = datesWithNotes,
                     onStatusChange = onStatusChange,
+                    onAddNote = { date -> noteDialogDate = date },
                     onNavigate = { newYear, newMonth ->
                         viewModel.updateMonthYear(newYear, newMonth)
                         viewModel.saveMonthYearForSubject(subjectId)
@@ -144,5 +152,16 @@ fun CalendarScreen(
                 )
             }
         }
+    }
+
+    noteDialogDate?.let { date ->
+        AddEditNoteDialog(
+            initialDate = date,
+            onDismiss = { noteDialogDate = null },
+            onSave = { dateStr, noteText ->
+                viewModel.addNote(subjectId, dateStr, noteText)
+                noteDialogDate = null
+            }
+        )
     }
 }

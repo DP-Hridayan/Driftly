@@ -5,8 +5,10 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import `in`.hridayan.driftly.core.data.repository.AttendanceRepositoryImpl
+import `in`.hridayan.driftly.core.data.repository.SubjectNoteRepositoryImpl
 import `in`.hridayan.driftly.core.data.repository.SubjectRepositoryImpl
 import `in`.hridayan.driftly.core.domain.repository.AttendanceRepository
+import `in`.hridayan.driftly.core.domain.repository.SubjectNoteRepository
 import `in`.hridayan.driftly.core.domain.repository.SubjectRepository
 import `in`.hridayan.driftly.settings.data.local.repository.BackupAndRestoreRepositoryImpl
 import `in`.hridayan.driftly.settings.domain.repository.BackupAndRestoreRepository
@@ -32,4 +34,10 @@ abstract class RepositoryModule {
     abstract fun bindBackupAndRestoreRepository(
         backupAndRestoreRepositoryImpl: BackupAndRestoreRepositoryImpl
     ): BackupAndRestoreRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindSubjectNoteRepository(
+        subjectNoteRepositoryImpl: SubjectNoteRepositoryImpl
+    ): SubjectNoteRepository
 }
