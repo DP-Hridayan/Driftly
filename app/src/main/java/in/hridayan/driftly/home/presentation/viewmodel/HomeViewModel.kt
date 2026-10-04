@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import `in`.hridayan.driftly.core.data.model.AttendanceEntity
 import `in`.hridayan.driftly.core.data.model.SubjectEntity
 import `in`.hridayan.driftly.core.domain.model.AttendanceStatus
 import `in`.hridayan.driftly.core.domain.model.SubjectAttendance
@@ -24,8 +25,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -225,4 +229,32 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    fun getTodayAttendanceStatus(subjectId: Int): Flow<AttendanceStatus?> {
+        val today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+        return attendanceRepository.getAttendanceForSubject(subjectId).map { attendances ->
+            attendances.find { it.date == today }?.status
+        }
+    }
+
+    fun onQuickAttendanceClick(subjectId: Int, targetStatus: AttendanceStatus) {
+        viewModelScope.launch {
+            val today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+            val currentAttendances = attendanceRepository.getAttendanceForSubject(subjectId).first()
+            val existing = currentAttendances.find { it.date == today }
+
+            if (existing != null && existing.status == targetStatus) {
+                attendanceRepository.deleteAttendance(subjectId, today)
+            } else {
+                attendanceRepository.insertAttendance(
+                    AttendanceEntity(
+                        subjectId = subjectId,
+                        date = today,
+                        status = targetStatus
+                    )
+                )
+            }
+        }
+    }
 }
+

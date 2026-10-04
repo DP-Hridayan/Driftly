@@ -32,3 +32,27 @@ val MIGRATION_5_6 = object : Migration(5, 6) {
         db.execSQL("ALTER TABLE subjects ADD COLUMN daysOfWeek TEXT")
     }
 }
+
+val MIGRATION_6_7 = object : Migration(6, 7) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(
+            """
+            CREATE TABLE IF NOT EXISTS `subject_notes` (
+                `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                `subjectId` INTEGER NOT NULL,
+                `date` TEXT NOT NULL,
+                `note` TEXT NOT NULL,
+                `createdAt` INTEGER NOT NULL DEFAULT 0
+            )
+            """.trimIndent()
+        )
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_subject_notes_subjectId_date` ON `subject_notes` (`subjectId`, `date`)")
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_subject_notes_subjectId` ON `subject_notes` (`subjectId`)")
+    }
+}
+
+val MIGRATION_7_8 = object : Migration(7, 8) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE subjects ADD COLUMN isArchived INTEGER NOT NULL DEFAULT 0")
+    }
+}

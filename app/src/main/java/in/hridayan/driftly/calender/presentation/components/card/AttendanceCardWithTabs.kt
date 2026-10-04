@@ -56,7 +56,8 @@ fun AttendanceCardWithTabs(
     val attendanceDataTabs =
         listOf(
             stringResource(R.string.all_months_data),
-            stringResource(R.string.this_month_data)
+            stringResource(R.string.this_month_data),
+            stringResource(R.string.notes)
         )
 
     val pagerState = rememberPagerState(pageCount = { attendanceDataTabs.size })
@@ -119,6 +120,11 @@ fun AttendanceCardWithTabs(
 
                         1 -> ThisMonthView(
                             modifier = Modifier.padding(25.dp),
+                            subjectId = subjectId,
+                        )
+
+                        2 -> SubjectNotesView(
+                            modifier = Modifier.padding(20.dp),
                             subjectId = subjectId,
                         )
                     }

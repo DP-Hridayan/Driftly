@@ -59,7 +59,9 @@ fun CalendarCanvas(
     month: Int,
     markedDates: Map<LocalDate, AttendanceStatus>,
     streakMap: Map<LocalDate, StreakType>,
+    datesWithNotes: Set<LocalDate> = emptySet(),
     onStatusChange: (date: String, status: AttendanceStatus?) -> Unit,
+    onAddNote: ((date: String) -> Unit)? = null,
     onNavigate: (Int, Int) -> Unit,
     onResetMonth: () -> Unit,
 ) {
@@ -228,6 +230,20 @@ fun CalendarCanvas(
                             style = MaterialTheme.typography.titleMedium
                         )
 
+                        if (datesWithNotes.contains(date)) {
+                            Box(
+                                modifier = Modifier
+                                    .align(Alignment.BottomCenter)
+                                    .offset(y = (-3).dp)
+                                    .size(4.dp)
+                                    .clip(CircleShape)
+                                    .background(
+                                        color = if (streakType == StreakType.MIDDLE && showStreakModifier) backgroundColor else MaterialTheme.colorScheme.tertiary,
+                                        shape = CircleShape
+                                    )
+                            )
+                        }
+
                         if (expandedDateState.value == dateString) {
                             AttendanceDropDownMenu(
                                 onStatusChange = { date, status ->
@@ -237,6 +253,7 @@ fun CalendarCanvas(
                                 dateString = dateString,
                                 modifier = Modifier,
                                 expandedDateState = expandedDateState,
+                                onAddNote = onAddNote
                             )
                         }
                     }

@@ -6,14 +6,16 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import `in`.hridayan.driftly.core.data.model.AttendanceEntity
 import `in`.hridayan.driftly.core.data.model.SubjectEntity
+import `in`.hridayan.driftly.core.data.model.SubjectNoteEntity
 
 @Database(
-    entities = [SubjectEntity::class, AttendanceEntity::class],
-    version = 6,
+    entities = [SubjectEntity::class, AttendanceEntity::class, SubjectNoteEntity::class],
+    version = 8,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class SubjectDatabase : RoomDatabase() {
     abstract fun subjectDao(): SubjectDao
     abstract fun attendanceDao(): AttendanceDao
+    abstract fun subjectNoteDao(): SubjectNoteDao
 }

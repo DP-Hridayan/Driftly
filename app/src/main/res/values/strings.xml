@@ -1,6 +1,8 @@
 <resources>
     <string name="about">About</string>
     <string name="absent">Absent</string>
+    <string name="archive">Archive</string>
+    <string name="archived">Archived</string>
     <string name="add">Add</string>
     <string name="add_subject">Add Subject</string>
     <string name="additional_settings">Additional settings</string>
@@ -200,4 +202,14 @@
         <item>November</item>
         <item>December</item>
     </string-array>
+    <string name="notes">Notes</string>
+    <string name="add_note">Add Note</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="delete_note">Delete Note</string>
+    <string name="note_placeholder">Write a note for this date...</string>
+    <string name="no_notes_yet">No notes yet for this subject</string>
+    <string name="save">Save</string>
+    <string name="date">Date</string>
+    <string name="all_notes">All</string>
+    <string name="this_month">This month</string>
 </resources>

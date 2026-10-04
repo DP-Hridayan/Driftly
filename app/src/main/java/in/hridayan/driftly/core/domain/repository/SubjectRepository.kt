@@ -24,4 +24,5 @@ interface SubjectRepository {
     fun getSubjectCount(): Flow<Int>
     fun isSubjectExists(subject: String, classType: SubjectClassType): Flow<Boolean>
     suspend fun updateSavedMonthYear(subjectId: Int, month: Int, year: Int)
+    suspend fun updateSubjectArchivedStatus(subjectId: Int, isArchived: Boolean)
 }
