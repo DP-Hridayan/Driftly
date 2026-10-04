@@ -25,3 +25,16 @@
 -keep class org.slf4j.** { *; }
 -dontwarn org.slf4j.**
 
+# Jetpack Navigation Compose Type Safe Routes & Kotlinx Serialization
+-keepattributes *Annotation*, InnerClasses
+-keep class * implements kotlinx.serialization.KSerializer { *; }
+-keepclassmembers class * {
+    @kotlinx.serialization.SerialName <fields>;
+}
+-keep class in.hridayan.driftly.navigation.** { *; }
+-keep class in.hridayan.driftly.core.domain.model.** { *; }
+-keepclassmembers enum in.hridayan.driftly.core.domain.model.** { *; }
+-keep class in.hridayan.driftly.core.data.model.** { *; }
+-keep class in.hridayan.driftly.settings.domain.model.** { *; }
+
+
