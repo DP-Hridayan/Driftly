@@ -149,6 +149,11 @@
     <string name="reset_settings_successful">تمت إعادة تعيين الإعدادات بنجاح</string>
     <string name="reset_to_current_month">العودة إلى الشهر الحالي</string>
     <string name="restore">إستعادة</string>
+    <string name="class_type">Class type</string>
+    <string name="days_of_week">Days of Week</string>
+    <string name="theoretical">Theoretical</string>
+    <string name="practical">Practical</string>
+    <string name="none">None</string>
     <string name="restore_app_data">إستعادة بيانات التطبيق</string>
     <string name="restore_dialog_message">سيتم استبدال البيانات الحالية بالبيانات الموجودة في الملف المحفوظ.</string>
     <string name="restore_failed">فشلت الاستعادة</string>
@@ -185,6 +190,7 @@
     <string name="warning_github_download">أنت على وشك تنزيل التحديثات مباشرة من GitHub. على عكس التحديثات من متاجر التطبيقات، لا تتم مراجعة هذه التحديثات لأسباب أمنية. هل تريد المتابعة؟</string>
     <string name="whats_new">ما الجديد!</string>
     <string name="year">سنة</string>
+    <string name="no_class_scheduled">No class scheduled for this day</string>
     <string-array name="month_names">
         <item>January</item>
         <item>February</item>
