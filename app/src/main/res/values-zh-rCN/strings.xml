@@ -144,6 +144,11 @@
     <string name="reset_settings_successful">成功重置设置</string>
     <string name="reset_to_current_month">重置为当月</string>
     <string name="restore">恢复</string>
+    <string name="class_type">Class type</string>
+    <string name="days_of_week">Days of Week</string>
+    <string name="theoretical">Theoretical</string>
+    <string name="practical">Practical</string>
+    <string name="none">None</string>
     <string name="restore_app_data">恢复应用数据</string>
     <string name="restore_dialog_message">保存文件中的数据将覆盖当前数据。</string>
     <string name="restore_failed">恢复失败</string>
@@ -180,6 +185,7 @@
     <string name="warning_github_download">You\'re about to download updates directly from GitHub. Unlike updates from app stores, these are not reviewed for security. Do you want to continue?</string>
     <string name="whats_new">更新内容！</string>
     <string name="year">年</string>
+    <string name="no_class_scheduled">No class scheduled for this day</string>
     <string-array name="month_names">
         <item>January</item>
         <item>February</item>
